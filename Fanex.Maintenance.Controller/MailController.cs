@@ -722,6 +722,13 @@ namespace Fanex.Maintenance.Controller
         {
             List<MailConfig> listConfig = _mailServer.GetListConfig(string.Empty);
 
+            bool isCSDUser = IsCSDUser(CurrentSession.UserId);
+
+            if (isCSDUser)
+            {
+                listConfig = listConfig.Where(x => x.AppID == 1).ToList();
+            }
+
             ViewBag.ListMailConfig = listConfig.Select(c => new SelectListItem
             {
                 Text = c.AppName,

@@ -1,6 +1,19 @@
-﻿<nav>
+﻿@{
+    bool isCSDUser = (bool)ViewBag.IsCSDUser;
+}
+<nav>
     <ul class="menu">
         <li class="first"><a href="~/?ref=logo">Home</a></li>
+@if (isCSDUser)
+{
+    <li class="has-kids"><a href="javascript:;">Mail Service</a>
+            <ul>
+                <li>@Html.ActionLink(@ViewResource.Mail_List, "MailList", "Mail")</li>
+            </ul>
+        </li>
+}
+else
+{
         <li class="has-kids"><a href="javascript:void(0);">@ViewResource.AppLogs</a>
             <ul>
                 <li>@Html.ActionLink(ViewResource.AppLogs_ViewLog, string.Empty, "Log")</li>
@@ -32,6 +45,7 @@
                 <li>@Html.ActionLink(ViewResource.Connection, "Connection", "ConnectionString")</li>
                 <li>@Html.ActionLink(ViewResource.AppLogs_ViewLog, "Log", "ConnectionString")</li>
             </ul>
-        </li>
-    </ul>
+        </li>    
+}
+</ul>
 </nav>

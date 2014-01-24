@@ -17,6 +17,8 @@ namespace Fanex.Maintenance.Controller
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
+    using System.Configuration;
+    using System;
 
     /// <summary>
     /// Base controller.
@@ -83,6 +85,7 @@ namespace Fanex.Maintenance.Controller
 
         public PartialViewResult _Menu()
         {
+            ViewBag.IsCSDUser = IsCSDUser(CurrentSession.UserId);
             return PartialView("~/Views/Shared/_Menu.cshtml");
         }
 
@@ -103,6 +106,25 @@ namespace Fanex.Maintenance.Controller
                 JsonRequestBehavior = behavior,
                 MaxJsonLength = int.MaxValue
             };
+        }
+
+        protected bool IsCSDUser(int userId)
+        {
+            string strUserId = ConfigurationManager.AppSettings["CSDUserIds"];
+            if (!string.IsNullOrWhiteSpace(strUserId))
+            {
+                string[] userIds = strUserId.Split(',');
+
+                foreach (var item in userIds)
+                {
+                    if (item == userId.ToString())
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
