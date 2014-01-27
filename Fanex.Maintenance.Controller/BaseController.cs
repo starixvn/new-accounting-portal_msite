@@ -9,6 +9,7 @@
 
 namespace Fanex.Maintenance.Controller
 {
+    using System.Configuration;
     using System.Web.Mvc;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Configuration;
@@ -17,8 +18,6 @@ namespace Fanex.Maintenance.Controller
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
-    using System.Configuration;
-    using System;
 
     /// <summary>
     /// Base controller.
@@ -108,6 +107,11 @@ namespace Fanex.Maintenance.Controller
             };
         }
 
+        /// <summary>
+        /// Check if login user is CSD User.
+        /// </summary>
+        /// <param name="userId">The user ID.</param>
+        /// <returns>True : CSD user, false : not.</returns>
         protected bool IsCSDUser(int userId)
         {
             string strUserId = ConfigurationManager.AppSettings["CSDUserIds"];
