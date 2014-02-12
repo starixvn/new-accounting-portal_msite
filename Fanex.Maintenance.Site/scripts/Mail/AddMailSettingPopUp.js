@@ -2,7 +2,7 @@
 
 "use strict";
 
-var AddMailConfigPopUp = (function ($) {
+var AddMailSettingPopUp = (function ($) {
 
 	return {
 		GetListMailSetting: function (mailSettingId) {
@@ -40,26 +40,27 @@ $(document).ready(function () {
 	$('#btnAddMailSetting').click(function () {
 
 		var server = $('#Server').val();
-		if (server == '') {
-			var tempError = '<div data-valmsg-summary="true" class="validation-summary-errors"><ul><li>The Server field is required.</li></ul></div>';
+		var tempError;
+		if (server === '') {
+			tempError = '<div data-valmsg-summary="true" class="validation-summary-errors"><ul><li>The Server field is required.</li></ul></div>';
 			$('#messageError').html(tempError);
 			return;
 		}
 		var port = $('#Port').val();
-		if (port == '') {
-			var tempError = '<div data-valmsg-summary="true" class="validation-summary-errors"><ul><li>The Port field is required.</li></ul></div>';
+		if (port === '') {
+			tempError = '<div data-valmsg-summary="true" class="validation-summary-errors"><ul><li>The Port field is required.</li></ul></div>';
 			$('#messageError').html(tempError);
 			return;
 		}
 		var username = $('#Username').val();
-		if (username == '') {
-			var tempError = '<div data-valmsg-summary="true" class="validation-summary-errors"><ul><li>The Username field is required.</li></ul></div>';
+		if (username === '') {
+			tempError = '<div data-valmsg-summary="true" class="validation-summary-errors"><ul><li>The Username field is required.</li></ul></div>';
 			$('#messageError').html(tempError);
 			return;
 		}
 		var password = $('#Password').val();
 		var isAutho = $('#IsAuth').attr('checked');
-		if (isAutho == 'checked') {
+		if (isAutho === 'checked') {
 			isAutho = true;
 		}
 		else {
@@ -79,9 +80,8 @@ $(document).ready(function () {
 				NAP.loadingBox.close();
 			},
 			success: function (result) {
-				result = eval(result);
 				if (result != null) {
-					AddMailConfigPopUp.GetListMailSetting(result.SettingID);
+					AddMailSettingPopUp.GetListMailSetting(result.SettingID);
 					NAP.closePopup();
 				}
 			},

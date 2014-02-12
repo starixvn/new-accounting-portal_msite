@@ -20,10 +20,10 @@ var Recheckin = (function ($) {
 				type: "POST",
 				dataType: "json",
 				success: function (result) {
-					if (result == "1") {
+					if (result === "1") {
 						Recheckin.headlineMsgBox.showInfo(Recheckin.kickedOutMsg, { closeBtn: false });
 					}
-					if (result == "-1") {
+					else if (result === "-1") {
 						window.location.href = Recheckin.root + "UserLogin/Common/Offline";
 					}
 				},
@@ -34,13 +34,13 @@ var Recheckin = (function ($) {
 
 		closeBrowser: function () {
 			var index = window;
-			while (index != index.parent) // Jump out
+			while (index !== index.parent) // Jump out
 			{
 				index = index.parent;
 			}
 			index.close();
 		}
-	}
+	};
 
 } (jQuery));
 

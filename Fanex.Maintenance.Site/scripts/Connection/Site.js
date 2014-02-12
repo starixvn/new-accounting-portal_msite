@@ -20,7 +20,7 @@ var Site = (function ($) {
 					NAP.loadingBox.close();
 				},
 				success: function (result) {
-					if (result == 'true') {
+					if (result === 'true') {
 						NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
 						NAP.redirect('ConnectionString/Site');
 					}
@@ -65,14 +65,12 @@ $(document).ready(function () {
 		var siteName = $this.attr('sname');
 		var active = $this.is(':checked'),
 			action = active ? 'activate' : 'deactivate',
-				msg = "Are you sure you want to " + action + " '" + siteName + "' ?";
+			msg = "Are you sure you want to " + action + " '" + siteName + "' ?";
 
 		$this.attr('checked', !active).change();
 
 		NAP.headlineMsgBox.confirm(msg, function () {
-
 			$this.attr('checked', active).change();
-
 			Site.UpdateStatusSite(siteId, active);
 		});
 	});

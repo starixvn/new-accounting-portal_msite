@@ -50,7 +50,6 @@ namespace Fanex.Maintenance.Controller
                 Text = "No Draw",
                 Value = "2"
             });
-
             listDrawFilter.Add(new SelectListItem
             {
                 Text = "No Draw for Turnover Only",

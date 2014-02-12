@@ -25,7 +25,7 @@ var MailList = (function ($) {
 					NAP.loadingBox.close();
 				},
 				success: function (result) {
-					var data = eval(result.ListMail);
+					var data = result.ListMail;
 					var bodyData = [];
 					var count = 1;
 					$.each(data, function (key, value) {
@@ -38,12 +38,12 @@ var MailList = (function ($) {
 						}
 
 						var linkResend = "<a href='#' class='resendmail " + classFail + "' data-mailid='" + value.MailID + "'>Resend</a>";
-						if (value.IsEncrypt || result.HasResend == "0") {
+						if (value.IsEncrypt || result.HasResend === "0") {
 							linkResend = "";
 						}
 
 						var linkViewDetail = value.Subject;
-						if (result.HasViewDetail == "1") {
+						if (result.HasViewDetail === "1") {
 							linkViewDetail = "<a href='#' class='emailMessage' data-mailid='" + value.MailID + "'>" + value.Subject + "</a>";
 						}
 
@@ -60,7 +60,7 @@ var MailList = (function ($) {
 							{ Name: "SendFail", Value: linkSendFail },
 							{ Name: "Resend", Value: linkResend }
 						],
-							CssClass: value.SentSuccess == 0 ? "mailfail" : ""
+							CssClass: value.SentSuccess === 0 ? "mailfail" : ""
 						});
 					});
 
@@ -98,8 +98,8 @@ var MailList = (function ($) {
 			});
 		},
 
-		reRenderAfterPaged: function (page_index, itemsPerPage) {
-			MailList.generateData(itemsPerPage, page_index);
+		reRenderAfterPaged: function (pageIndex, itemsPerPage) {
+			MailList.generateData(itemsPerPage, pageIndex);
 		},
 
 		resend: function (mailId) {

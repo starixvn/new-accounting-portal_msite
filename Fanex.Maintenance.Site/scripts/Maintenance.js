@@ -1,3 +1,5 @@
+/* jshint freeze: false */
+
 "use strict";
 
 var NAP = (function ($) {
@@ -23,12 +25,13 @@ var NAP = (function ($) {
 		},
 		// Handles common error when making ajax request
 		handleAjaxError: function (xhr, status, err) {
-			if (xhr.status == 403) { // unauthorize
+			if (xhr.status === 403) { // unauthorize
 				console.warn(err);
 			} else {
 				console.warn(err);
 			}
 		},
+		/* jshint ignore:start */
 		getIeVersion: function () {
 			var version = -1; // Return value assumes failure.
 
@@ -43,6 +46,7 @@ var NAP = (function ($) {
 
 			return version;
 		},
+		/* jshint ignore:end */
 		agentIs: function (name) {
 			switch (name.toLowerCase()) {
 				case 'ipad':
@@ -62,7 +66,7 @@ var NAP = (function ($) {
 			NAP.dialogMsg.html(msg).dialog({
 				buttons: {
 					OK: function () {
-						if (typeof callback == 'function') {
+						if (typeof callback === 'function') {
 							callback();
 						} else {
 							$(this).dialog('close');
@@ -81,7 +85,7 @@ var NAP = (function ($) {
 			NAP.dialogMsg.html(msg).dialog({
 				buttons: {
 					OK: function () {
-						if (typeof callback == 'function') {
+						if (typeof callback === 'function') {
 							callback();
 						}
 					},
@@ -125,8 +129,7 @@ var NAP = (function ($) {
 		showSuccessMsg: function (msg, url, msec) {
 			var msgWrp = $('.validation-summary-valid');
 
-			msgWrp.addClass('success')
-				.find('li:first').html(NAP.htmlDecode(msg)).show();
+			msgWrp.addClass('success').find('li:first').html(NAP.htmlDecode(msg)).show();
 
 			NAP.showSuccessMsgCountDown(url, msec / 1000);
 		},
@@ -175,10 +178,7 @@ $(document).ready(function () {
 String.prototype.format = function () {
 	var args = arguments;
 	return this.replace(/{(\d+)}/g, function (match, number) {
-		return typeof args[number] != 'undefined'
-		? args[number]
-		: match
-	;
+		return typeof args[number] !== 'undefined' ? args[number] : match;
 	});
 };
 
@@ -187,31 +187,4 @@ Array.prototype.remove = function (from, to) {
 	var rest = this.slice((to || from) + 1 || this.length);
 	this.length = from < 0 ? this.length + from : from;
 	return this.push.apply(this, rest);
-};
-
-// Array Remove All elements matched the criteria
-Array.prototype.removeAll = function (criteria) {
-	var length = this.length;
-
-	for (var i = 0; i < length; i++) {
-		var element = this[i];
-
-		if (criteria(element)) {
-			this.splice(i--, 1);
-			length--;
-		}
-	}
-};
-
-//Replace all
-String.prototype.replaceAll = function (targetString, replaceString) {
-	var strText = this;
-	var intIndexOfMatch = strText.indexOf(targetString);
-
-	while (intIndexOfMatch != -1) {
-		strText = strText.replace(targetString, replaceString);
-		intIndexOfMatch = strText.indexOf(targetString);
-	}
-
-	return (strText);
 };

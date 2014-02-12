@@ -40,7 +40,7 @@ $(document).ready(function () {
 	$('#btnAddConfigPopUp').click(function () {
 
 		var appName = $('#AppName').val();
-		if (appName == '') {
+		if (appName === '') {
 			var tempError = '<div data-valmsg-summary="true" class="validation-summary-errors"><ul><li>The Application Name field is required.</li></ul></div>';
 			$('#messageError').html(tempError);
 			return;

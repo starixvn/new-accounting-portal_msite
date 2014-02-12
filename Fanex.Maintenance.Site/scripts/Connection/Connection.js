@@ -18,9 +18,10 @@ var Connection = (function ($) {
 				success: function (result) {
 					$('#DatabaseId').html("");
 					$.each(result, function (i, database) {
-						$('#DatabaseId').append("<option value='" + database.Id + "' data-serveralias='" + database.ServerAlias + "'>" + database.Name + "</option>");
+						$('#DatabaseId').append("<option value='" + database.Id + "' data-serveralias='" + 
+							database.ServerAlias + "'>" + database.Name + "</option>");
 
-						if (database.id == id) {
+						if (database.id === id) {
 							$('#ServerAlias').val(database.ServerAlias);
 						}
 					});
@@ -46,7 +47,7 @@ var Connection = (function ($) {
 					NAP.loadingBox.close();
 				},
 				success: function (result) {
-					if (result == 'true') {
+					if (result === 'true') {
 						NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
 						NAP.redirect('ConnectionString/Connection');
 					}
@@ -81,7 +82,7 @@ var Connection = (function ($) {
 				}
 			});
 
-			if (connectionIds == "") {
+			if (connectionIds === "") {
 				alert("Select connection");
 				return;
 			}

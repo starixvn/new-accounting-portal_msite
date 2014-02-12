@@ -12,18 +12,15 @@ $(document).ready(function () {
 			dataType: 'html',
 			cache: false,
 			beforeSend: function () {
-				//NAP.loadingBox.show();
 			},
 			complete: function () {
-				//NAP.loadingBox.close();
 			},
 			success: function (result) {
 				if (result.length > 0) {
 					NAP.popup("Create New Mail Setting", result);
 				}
 			},
-			error: function (xhr, status, err) {
-				//NAP.handleAjaxError(xhr, status, err);
+			error: function () {
 			}
 		});
 	}); 

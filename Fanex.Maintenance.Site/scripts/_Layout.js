@@ -1,6 +1,6 @@
 "use strict";
 
-var Layout = (function ($) {
+var Layout = (function () {
 
 	return {
 		body: null

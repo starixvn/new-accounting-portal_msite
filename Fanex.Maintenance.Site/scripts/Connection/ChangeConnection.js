@@ -35,7 +35,7 @@ var ChangeConnection = (function ($) {
 				success: function (result) {
 					if (result) {
 						NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
-						setTimeout("NAP.redirect('ConnectionString/Alias')", 2000);
+						setTimeout(NAP.redirect('ConnectionString/Alias'), 2000);
 					}
 				},
 				error: function (xhr, status, err) {
@@ -43,7 +43,6 @@ var ChangeConnection = (function ($) {
 				}
 			});
 		}
-
 	};
 
 } (jQuery));
@@ -54,7 +53,7 @@ $(document).ready(function () {
 
 	$('#all').click(function () {
 		var isCheck = $(this).attr('checked');
-		if (isCheck == "checked") {
+		if (isCheck === "checked") {
 			ChangeConnection.CheckOrUncheckAll(true);
 		}
 		else {

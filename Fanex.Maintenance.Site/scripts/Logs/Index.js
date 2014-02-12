@@ -35,10 +35,10 @@ var Logs = (function ($) {
 			var isProduction = null;
 			var isMonitored = Logs.ddlStatus.val();
 
-			if (machineId == 'UAT') {
+			if (machineId === 'UAT') {
 				isProduction = false;
 				machineId = 0;
-			} else if (machineId == 'Production') {
+			} else if (machineId === 'Production') {
 				isProduction = true;
 				machineId = 0;
 			}
@@ -72,7 +72,7 @@ var Logs = (function ($) {
 				success: function (result) {
 					NAP.loadingBox.show();
 
-					var data = eval(result.ListLog);
+					var data = result.ListLog;
 					var count = 1;
 					$('#content').html('');
 					$.each(data, function (key, value) {
@@ -82,17 +82,24 @@ var Logs = (function ($) {
 							countMessage = "<br/>(" + value.NumMessage + " Message)";
 						}
 
-						var content = "<tr title='" + value.Message + "'><td>"
-						+ (pageSize * (index - 1) + count++) + "</td><td>"
-						+ "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div>" 
-						+ "<div data-logid='" + value.LogId + "' class='message'>" + Logs.replaceAll('<br>', '', value.Message).substring(0, 300) + "</div>" + "</td><td class='align-center'>"
-						+ "<a class='category-filter' href='#' data-categoryid='" + value.Category.CategoryID + "'>" + value.Category.CategoryName + "</a></td><td class='align-center'>"
-						+ "<a class='severity-filter " + value.Severity + "' href='#'><b>" + value.Severity + "</b></a></td><td class='align-center'>"
-						+ "<a href='#' class='machinetype-filter' data-machinetype='" + value.Machine.IsProduction + "'>" + (value.Machine.IsProduction ? "PRO" : "UAT") 
-						+ "</a> \\ <a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" + value.Machine.MachineName + "</a></td><td class='align-center'>"
-						+ "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") 
-						+ "</span>" + countMessage + "</td><td class='align-center'>"
-						+ value.LogDate + "</td></tr>";
+						var message = Logs.replaceAll('<br>', '', value.Message).substring(0, 300);
+						var environment = value.Machine.IsProduction ? "PRO" : "UAT";
+
+						var content = "<tr title='" + value.Message + "'><td>" +
+							(pageSize * (index - 1) + count++) + "</td><td>" +
+							"<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div>" +
+							"<div data-logid='" + value.LogId + "' class='message'>" + message + "</div>" + "</td><td class='align-center'>" +
+							"<a class='category-filter' href='#' data-categoryid='" + value.Category.CategoryID + "'>" +
+							value.Category.CategoryName + "</a></td><td class='align-center'>" +
+							"<a class='severity-filter " + value.Severity + "' href='#'><b>" + value.Severity + "</b></a></td><td class='align-center'>" +
+							"<a href='#' class='machinetype-filter' data-machinetype='" + value.Machine.IsProduction + "'>" + environment +
+							"</a> \\ <a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" +
+							value.Machine.MachineName + "</a></td><td class='align-center'>" +
+							"<span id='monitoringUser" + value.LogId + "'>" +
+							(value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" +
+							value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") +
+							"</span>" + countMessage + "</td><td class='align-center'>" + 
+							value.LogDate + "</td></tr>";
 
 						$('#content').append(content);
 					});
@@ -131,8 +138,8 @@ var Logs = (function ($) {
 			return str.replace(new RegExp(find, 'g'), replace);
 		},
 
-		reRenderAfterPaged: function (page_index, itemsPerPage) {
-			Logs.generateData(itemsPerPage, page_index);
+		reRenderAfterPaged: function (pageIndex, itemsPerPage) {
+			Logs.generateData(itemsPerPage, pageIndex);
 		},
 		removeLog: function () {
 			var answer = confirm("Are you sure delete logs !");
@@ -147,7 +154,7 @@ var Logs = (function ($) {
 						NAP.loadingBox.close();
 					},
 					success: function (data) {
-						if (data == 0) {
+						if (data === 0) {
 							NAP.headlineMsgBox.showInfo("No log removed !", { closeBtn: false });
 						}
 						else {
@@ -255,7 +262,8 @@ var Logs = (function ($) {
 				success: function (data) {
 					if (data.length > 0) {
 						var uatGroup = $('<optgroup>').attr('label', 'UAT').append($('<option>', { value: 'UAT', text: 'All UAT' }));
-						var productionGroup = $('<optgroup>').attr('label', 'Production').append($('<option>', { value: 'Production', text: 'All Production' }));
+						var productionGroup = $('<optgroup>').attr('label', 'Production')
+							.append($('<option>', { value: 'Production', text: 'All Production' }));
 						var optionItem;
 
 						Logs.ddlMachine.empty();
@@ -342,7 +350,7 @@ var Logs = (function ($) {
 		},
 
 		updateTableHeaders: function () {
-			if ($(".persist-area").val() != undefined) {
+			if ($(".persist-area").val() !== undefined) {
 				var widthspace = $(".persist-area").width();
 
 				$('.floatingHeader').width(widthspace);
@@ -434,7 +442,7 @@ $(document).ready(function () {
 
 	$('.machinetype-filter').live('click', function () {
 		var isProduction = $(this).attr('data-machinetype');
-		var val = isProduction == "true" ? "Production" : "UAT";
+		var val = isProduction === "true" ? "Production" : "UAT";
 		$('#MachineId').select2('val', val);
 		$('#submit').click();
 	});
