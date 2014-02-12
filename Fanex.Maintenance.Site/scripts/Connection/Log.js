@@ -1,81 +1,81 @@
-var Log = function ($) {
+/* global NAP: false */
 
-    return {
-        grid: null,
-        buttonImage: null,
-        form: null,
+"use strict";
 
-        InitDateTimePicker: function () {
-            $("#From").datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                numberOfMonths: 1,
-                dateFormat: "M dd,yy",
-                showOn: "button",
-                buttonImage: Log.buttonImage,
-                buttonText: "From",
-                buttonImageOnly: true,
-                onSelect: function (selectedDate) {
-                }
-            });
+var Log = (function ($) {
 
-            $("#To").datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                numberOfMonths: 1,
-                dateFormat: "M dd,yy",
-                showOn: "button",
-                buttonImage: Log.buttonImage,
-                buttonText: "To",
-                buttonImageOnly: true,
-                onSelect: function (selectedDate) {
-                }
-            });
-        }
-    };
+	return {
+		grid: null,
+		buttonImage: null,
+		form: null,
 
-} (jQuery);
+		InitDateTimePicker: function () {
+			$("#From").datepicker({
+				defaultDate: "+1w",
+				changeMonth: true,
+				numberOfMonths: 1,
+				dateFormat: "M dd,yy",
+				showOn: "button",
+				buttonImage: Log.buttonImage,
+				buttonText: "From",
+				buttonImageOnly: true
+			});
+
+			$("#To").datepicker({
+				defaultDate: "+1w",
+				changeMonth: true,
+				numberOfMonths: 1,
+				dateFormat: "M dd,yy",
+				showOn: "button",
+				buttonImage: Log.buttonImage,
+				buttonText: "To",
+				buttonImageOnly: true
+			});
+		}
+	};
+
+} (jQuery));
 
 $(document).ready(function () {
-    Log.grid = $('.grid');
-    Log.buttonImage = $('#imagePath').val();
-    Log.form = $('form:first');
-    Log.InitDateTimePicker();
+	Log.grid = $('.grid');
+	Log.buttonImage = $('#imagePath').val();
+	Log.form = $('form:first');
+	Log.InitDateTimePicker();
 
-    $('.loginsert').click(function () {
-        var logId = $(this).attr('logid');
+	$('.loginsert').click(function () {
+		var logId = $(this).attr('logid');
 
-        $.ajax({
-            url: NAP.resolveClientUrl("ConnectionString/LogDetail/" + logId),
-            type: 'POST',
-            contentType: 'application/json',
-            dataType: 'html',
-            cache: false,
-            beforeSend: function () {
-                NAP.loadingBox.show();
-            },
-            complete: function () {
-                NAP.loadingBox.close();
-            },
-            success: function (result) {
-                if (result.length > 0) {
-                    NAP.popup("Log detail", result);
-                }
-            },
-            error: function (xhr, status, err) {
-                NAP.handleAjaxError(xhr, status, err);
-            }
-        });
-    });
+		$.ajax({
+			url: NAP.resolveClientUrl("ConnectionString/LogDetail/" + logId),
+			type: 'POST',
+			contentType: 'application/json',
+			dataType: 'html',
+			cache: false,
+			beforeSend: function () {
+				NAP.loadingBox.show();
+			},
+			complete: function () {
+				NAP.loadingBox.close();
+			},
+			success: function (result) {
+				if (result.length > 0) {
+					NAP.popup("Log detail", result);
+				}
+			},
+			error: function (xhr, status, err) {
+				NAP.handleAjaxError(xhr, status, err);
+			}
+		});
+	});
 
-    // shows loading on change page
-    Log.form.submit(function () {
-        NAP.loadingBox.show();
-    });
+	// shows loading on change page
+	Log.form.submit(function () {
+		NAP.loadingBox.show();
+	});
 
-    // changes items/page
-    Log.grid.on('change', '.items-per-page', function () {
-        var $this = $(this),
+	// changes items/page
+	Log.grid.on('change', '.items-per-page', function () {
+		var $this = $(this),
 			pageSize = $this.val(),
 			username = $('#Username').val(),
 			from = $('#From').val(),
@@ -83,7 +83,7 @@ $(document).ready(function () {
 			name = $('#Name').val(),
 			filter = $('#FilterType').val();
 
-        var url = NAP.resolveClientUrl('ConnectionString/Log' +
+		var url = NAP.resolveClientUrl('ConnectionString/Log' +
 			'?name=' + name +
 			'&username=' + username +
 			'&from=' + from +
@@ -91,7 +91,7 @@ $(document).ready(function () {
 			'&FilterType=' + filter +
 			'&pageSize=' + pageSize);
 
-        NAP.loadingBox.show();
-        window.location.replace(url);
-    });
+		NAP.loadingBox.show();
+		window.location.replace(url);
+	});
 });

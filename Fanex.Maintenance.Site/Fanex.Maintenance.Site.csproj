@@ -235,7 +235,6 @@
     <Content Include="scripts\Connection\Log.js" />
     <Content Include="scripts\Connection\Database.js" />
     <Content Include="scripts\Connection\Site.js" />
-    <Content Include="scripts\Connection\CreateAlias.js" />
     <Content Include="scripts\lib\custom-datepicker.js" />
     <Content Include="scripts\lib\jquery.blockUI.js" />
     <Content Include="scripts\lib\jquery.qtip-1.0.0-rc3.min.js" />
