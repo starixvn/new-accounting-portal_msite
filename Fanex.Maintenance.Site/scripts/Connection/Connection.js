@@ -1,171 +1,175 @@
-var Connection = function ($) {
+/* global NAP: false */
 
-    return {
-        grid: null,
-        aliasName: null,
-        aliasId: null,
+"use strict";
 
-        GetDatabaseByAliasName: function (id) {
-            $.ajax({
-                url: NAP.resolveClientUrl("ConnectionString/GetDatabaseByDbServerId"),
-                data: { databaseServerId: id },
-                type: 'GET',
-                cache: false,
-                success: function (result) {
-                    $('#DatabaseId').html("");
-                    $.each(result, function (i, database) {
-                        $('#DatabaseId').append("<option value='" + database.Id + "' data-serveralias='" + database.ServerAlias + "'>" + database.Name + "</option>");
+var Connection = (function ($) {
 
-                        if (database.id == id) {
-                            $('#ServerAlias').val(database.ServerAlias);
-                        }
-                    });
+	return {
+		grid: null,
+		aliasName: null,
+		aliasId: null,
 
-                    Connection.GenerateConnectionName();
-                },
-                error: function (xhr, status, err) {
-                    NAP.handleAjaxError(xhr, status, err);
-                }
-            });
-        },
+		GetDatabaseByAliasName: function (id) {
+			$.ajax({
+				url: NAP.resolveClientUrl("ConnectionString/GetDatabaseByDbServerId"),
+				data: { databaseServerId: id },
+				type: 'GET',
+				cache: false,
+				success: function (result) {
+					$('#DatabaseId').html("");
+					$.each(result, function (i, database) {
+						$('#DatabaseId').append("<option value='" + database.Id + "' data-serveralias='" + database.ServerAlias + "'>" + database.Name + "</option>");
 
-        UpdateStatusConnection: function (connectionid, isActive) {
-            $.ajax({
-                url: NAP.resolveClientUrl("ConnectionString/UpdateStatusConnection"),
-                data: { id: connectionid, isActive: isActive },
-                type: 'POST',
-                cache: false,
-                beforeSend: function () {
-                    NAP.loadingBox.show();
-                },
-                complete: function () {
-                    NAP.loadingBox.close();
-                },
-                success: function (result) {
-                    if (result == 'true') {
-                        NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
-                        NAP.redirect('ConnectionString/Connection');
-                    }
-                },
-                error: function (xhr, status, err) {
-                    NAP.handleAjaxError(xhr, status, err);
-                }
-            });
-        },
+						if (database.id == id) {
+							$('#ServerAlias').val(database.ServerAlias);
+						}
+					});
 
-        GenerateConnectionName: function () {
-            var aliasName = $('#DatabaseId option:selected').attr('data-serveralias');
-            var databaseName = $("#DatabaseId option:selected").text();
-            var loginName = $('#LoginName').val();
+					Connection.GenerateConnectionName();
+				},
+				error: function (xhr, status, err) {
+					NAP.handleAjaxError(xhr, status, err);
+				}
+			});
+		},
 
-            $('#Name').val("");
-            $('#Name').val(aliasName + "." + databaseName + "." + loginName);
-        },
+		UpdateStatusConnection: function (connectionid, isActive) {
+			$.ajax({
+				url: NAP.resolveClientUrl("ConnectionString/UpdateStatusConnection"),
+				data: { id: connectionid, isActive: isActive },
+				type: 'POST',
+				cache: false,
+				beforeSend: function () {
+					NAP.loadingBox.show();
+				},
+				complete: function () {
+					NAP.loadingBox.close();
+				},
+				success: function (result) {
+					if (result == 'true') {
+						NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
+						NAP.redirect('ConnectionString/Connection');
+					}
+				},
+				error: function (xhr, status, err) {
+					NAP.handleAjaxError(xhr, status, err);
+				}
+			});
+		},
 
-        SwitchDbServer: function () {
-            var connectionIds = "";
-            var toDbServerId = $('#ToDbServerId').val();
-            var dbServerName = $('#ToDbServerId option:selected').text();
+		GenerateConnectionName: function () {
+			var aliasName = $('#DatabaseId option:selected').attr('data-serveralias');
+			var databaseName = $("#DatabaseId option:selected").text();
+			var loginName = $('#LoginName').val();
 
-            $('.update-server').each(function (i, item) {
-                var $this = $(this);
-                var isCheck = $this.is(':checked');
-                var id = $this.attr('sid');
+			$('#Name').val("");
+			$('#Name').val(aliasName + "." + databaseName + "." + loginName);
+		},
 
-                if (isCheck) {
-                    connectionIds += id + ",";
-                }
-            });
+		SwitchDbServer: function () {
+			var connectionIds = "";
+			var toDbServerId = $('#ToDbServerId').val();
+			var dbServerName = $('#ToDbServerId option:selected').text();
 
-            if (connectionIds == "") {
-                alert("Select connection");
-                return;
-            }
+			$('.update-server').each(function () {
+				var $this = $(this);
+				var isCheck = $this.is(':checked');
+				var id = $this.attr('sid');
 
-            $.ajax({
-                url: NAP.resolveClientUrl("ConnectionString/SwitchConnectionDbServer"),
-                data: { connectionIds: connectionIds, toDbServerId: toDbServerId },
-                type: 'POST',
-                cache: false,
-                beforeSend: function () {
-                    NAP.loadingBox.show();
-                },
-                complete: function () {
-                    NAP.loadingBox.close();
-                },
-                success: function (result) {
-                    if (result.IsSuccessful) {
-                        NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
-                        NAP.redirect('ConnectionString/Connection?DbServerId=' + toDbServerId);
-                    }
-                    else {
-                        NAP.headlineMsgBox.showInfo("The database server " + dbServerName + " had no database : " + result.Message, { closeBtn: true });
-                    }
-                },
-                error: function (xhr, status, err) {
-                    NAP.handleAjaxError(xhr, status, err);
-                }
-            });
-        }
-    };
+				if (isCheck) {
+					connectionIds += id + ",";
+				}
+			});
 
-} (jQuery);
+			if (connectionIds == "") {
+				alert("Select connection");
+				return;
+			}
+
+			$.ajax({
+				url: NAP.resolveClientUrl("ConnectionString/SwitchConnectionDbServer"),
+				data: { connectionIds: connectionIds, toDbServerId: toDbServerId },
+				type: 'POST',
+				cache: false,
+				beforeSend: function () {
+					NAP.loadingBox.show();
+				},
+				complete: function () {
+					NAP.loadingBox.close();
+				},
+				success: function (result) {
+					if (result.IsSuccessful) {
+						NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
+						NAP.redirect('ConnectionString/Connection?DbServerId=' + toDbServerId);
+					}
+					else {
+						NAP.headlineMsgBox.showInfo("The database server " + dbServerName + " had no database : " + result.Message, { closeBtn: true });
+					}
+				},
+				error: function (xhr, status, err) {
+					NAP.handleAjaxError(xhr, status, err);
+				}
+			});
+		}
+	};
+
+} (jQuery));
 
 $(document).ready(function () {
 
-    Connection.grid = $('.grid');
+	Connection.grid = $('.grid');
 
-    Connection.grid.on('click', 'input[type=checkbox][did]', function (e) {
-        var $this = $(this);
-        var id = $this.attr('did');
-        var name = $this.attr('dname');
-        var active = $this.is(':checked'),
+	Connection.grid.on('click', 'input[type=checkbox][did]', function () {
+		var $this = $(this);
+		var id = $this.attr('did');
+		var name = $this.attr('dname');
+		var active = $this.is(':checked'),
 			action = active ? 'activate' : 'deactivate',
-             msg = "Are you sure you want to " + action + " '" + name + "' ?";
+			msg = "Are you sure you want to " + action + " '" + name + "' ?";
 
-        $this.attr('checked', !active).change();
+		$this.attr('checked', !active).change();
 
-        NAP.headlineMsgBox.confirm(msg, function () {
+		NAP.headlineMsgBox.confirm(msg, function () {
 
-            $this.attr('checked', active).change();
+			$this.attr('checked', active).change();
 
-            Connection.UpdateStatusConnection(id, active);
-        });
-    });
+			Connection.UpdateStatusConnection(id, active);
+		});
+	});
 
-    $('#DbServerId').change(function () {
-        var aliasName = $("#DbServerId").val();
-        Connection.GetDatabaseByAliasName(aliasName);
-    });
+	$('#DbServerId').change(function () {
+		var aliasName = $("#DbServerId").val();
+		Connection.GetDatabaseByAliasName(aliasName);
+	});
 
-    $('#DatabaseId').change(function () {
-        Connection.GenerateConnectionName();
-    });
+	$('#DatabaseId').change(function () {
+		Connection.GenerateConnectionName();
+	});
 
-    $('#LoginName').keyup(function () {
-        Connection.GenerateConnectionName();
-    });
+	$('#LoginName').keyup(function () {
+		Connection.GenerateConnectionName();
+	});
 
-    Connection.grid.on('click', 'input[type=checkbox][name=checkall]', function (e) {
-        var $this = $(this);
-        var isCheck = $this.is(':checked');
-        if (isCheck) {
-            $('.update-server').attr('checked', 'checked');
-        }
-        else {
-            $('.update-server').removeAttr('checked');
-        }
-    });
+	Connection.grid.on('click', 'input[type=checkbox][name=checkall]', function () {
+		var $this = $(this);
+		var isCheck = $this.is(':checked');
+		if (isCheck) {
+			$('.update-server').attr('checked', 'checked');
+		}
+		else {
+			$('.update-server').removeAttr('checked');
+		}
+	});
 
-    $('#btnSwitchServer').click(function () {
-        NAP.headlineMsgBox.confirm("This change will effect all application! Are you sure?", function () {
-            Connection.SwitchDbServer();
-        });
-    });
+	$('#btnSwitchServer').click(function () {
+		NAP.headlineMsgBox.confirm("This change will effect all application! Are you sure?", function () {
+			Connection.SwitchDbServer();
+		});
+	});
 
-    $('#btnSave').click(function () {
-        NAP.headlineMsgBox.confirm("This change will effect all application! Are you sure?", function () {
-            document.forms[0].submit();
-        });
-    });
+	$('#btnSave').click(function () {
+		NAP.headlineMsgBox.confirm("This change will effect all application! Are you sure?", function () {
+			document.forms[0].submit();
+		});
+	});
 });
