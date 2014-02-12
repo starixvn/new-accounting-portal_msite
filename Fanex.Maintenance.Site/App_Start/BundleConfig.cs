@@ -61,8 +61,8 @@ namespace Fanex.Maintenance.Site.App_Start
             bundles.Add(new ScriptBundle("~/scripts/common").Include(
                 "~/scripts/lib/jquery-1.8.0.min.js",
                 "~/scripts/lib/modernizr-2.6.1.js",
-                "~/themes/assets/js/prettify.min.js",
-                "~/themes/assets/js/underscore.min.js",
+                //"~/themes/assets/js/prettify.min.js",
+                //"~/themes/assets/js/underscore.min.js",
                 "~/scripts/lib/jquery-ui-1.8.23.min.js",
                 "~/scripts/lib/jquery.validate.min.js",
                 "~/scripts/lib/jquery.validate.unobtrusive.min.js",
