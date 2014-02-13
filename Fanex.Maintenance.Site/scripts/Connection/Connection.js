@@ -126,7 +126,7 @@ var Connection = (function ($) {
                     NAP.loadingBox.close();
                 },
                 success: function (result) {
-                    if (result == 'true') {
+                    if (result === 'true') {
                         NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
                         NAP.redirect('ConnectionString/ConnectionAssignSite/' + connectionId);
                     }
