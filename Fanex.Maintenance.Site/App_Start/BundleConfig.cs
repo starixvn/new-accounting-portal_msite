@@ -36,15 +36,14 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/themes/assets/css/site.css",
                 "~/scripts/lib/tipsy/tipsy-1.0.0.min.css",
                 "~/scripts/lib/msgbox/msgbox-0.0.1.min.css",
-                "~/scripts/Plugin/notification/jquery.toastmessage.css",
                 "~/scripts/lib/chosen/chosen.css");
 
             bundles.AddAndInclude(
                 "~/css/mail-list",
                 "~/themes/manage/manage.less",
                 "~/themes/manage/RefreshCountDown.less",
-                "~/scripts/Plugin/Fanex.Grid/Fanex.Grid.css",
-                "~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.css");
+                "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css");
 
             bundles.AddAndInclude(
                 "~/css/manage",
@@ -57,26 +56,23 @@ namespace Fanex.Maintenance.Site.App_Start
             bundles.AddAndInclude(
                 "~/css/log",
                 "~/themes/manage/log/manage.less",
-                "~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.css",
-                "~/scripts/Plugin/Select2/select2.css",
-                "~/scripts/Plugin/Select2/select2-custom.css");
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css",
+                "~/scripts/lib/Select2/select2.css",
+                "~/scripts/lib/Select2/select2-custom.css");
 
             // js
             bundles.Add(new ScriptBundle("~/scripts/common").Include(
                 "~/scripts/lib/jquery-1.8.0.min.js",
-                "~/scripts/lib/modernizr-2.6.1.js",
                 "~/scripts/lib/jquery-ui-1.8.23.min.js",
-                "~/scripts/lib/jquery.validate.min.js",
-                "~/scripts/lib/jquery.validate.unobtrusive.min.js",
                 "~/scripts/lib/tipsy/tipsy-1.0.0.min.js",
                 "~/scripts/lib/msgbox/msgbox-0.0.1.min.js",
                 "~/scripts/Maintenance.js",
                 "~/scripts/_Layout.js",
                 "~/scripts/lib/chosen/chosen.jquery.js",
-                "~/scripts/Plugin/Fanex.Grid/Fanex.Grid.js",
-                "~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.js",
-                "~/scripts/Plugin/jquery.cookie.js",
-                "~/scripts/Plugin/RefreshCountDown.js"));
+                "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
+                "~/scripts/lib/jquery.cookie.js",
+                "~/scripts/lib/RefreshCountDown.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/add-mail-config").Include(
                 "~/scripts/Mail/AddMailConfig.js"));
@@ -92,9 +88,9 @@ namespace Fanex.Maintenance.Site.App_Start
 
             bundles.Add(new ScriptBundle("~/scripts/log").Include(
                 "~/scripts/Logs/Index.js",
-                "~/scripts/Plugin/Select2/select2.js",
+                "~/scripts/lib/Select2/select2.js",
                 "~/scripts/lib/custom-datepicker.js",
-                "~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.js"));
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/recheckin").Include(
               "~/Areas/UserLogin/scripts/ReCheckIn.js"));
