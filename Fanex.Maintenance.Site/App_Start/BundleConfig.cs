@@ -41,18 +41,22 @@ namespace Fanex.Maintenance.Site.App_Start
 
             bundles.AddAndInclude(
                 "~/css/mail-list",
-                "~/themes/job/user/manage.less",
-                "~/themes/job/RefreshCountDown.less",
+                "~/themes/manage/manage.less",
+                "~/themes/manage/RefreshCountDown.less",
                 "~/scripts/Plugin/Fanex.Grid/Fanex.Grid.css",
                 "~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.css");
 
             bundles.AddAndInclude(
                 "~/css/manage",
-                "~/themes/job/user/manage.less");
+                "~/themes/manage/manage.less");
+
+            bundles.AddAndInclude(
+                "~/css/database-report",
+                "~/themes/manage/report/dataintegry.less");
 
             bundles.AddAndInclude(
                 "~/css/log",
-                "~/themes/job/log/manage.less",
+                "~/themes/manage/log/manage.less",
                 "~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.css",
                 "~/scripts/Plugin/Select2/select2.css",
                 "~/scripts/Plugin/Select2/select2-custom.css");
@@ -72,14 +76,7 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/scripts/Plugin/Fanex.Grid/Fanex.Grid.js",
                 "~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.js",
                 "~/scripts/Plugin/jquery.cookie.js",
-                "~/scripts/Plugin/RefreshCountDown.js",
-                "~/scripts/lib/jsrender.js"));
-
-            bundles.Add(new ScriptBundle("~/scripts/monitor").Include(
-                "~/scripts/Plugin/notification/jquery.toastmessage.js",
-                "~/scripts/lib/jquery.signalR-1.0.0-rc1.min.js",
-                "~/signalr/hubs",
-                "~/scripts/NotificationHub.js"));
+                "~/scripts/Plugin/RefreshCountDown.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/add-mail-config").Include(
                 "~/scripts/Mail/AddMailConfig.js"));

@@ -6,7 +6,7 @@
     var disable = Model.HasEditPermission ? string.Empty : "disabled";
 }
 @section Head {
-    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/css/manage")
 }
 @section Headline {
     <h1>
