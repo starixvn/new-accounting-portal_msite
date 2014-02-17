@@ -84,7 +84,7 @@ namespace Fanex.Maintenance.Controller
 
         public PartialViewResult _Menu()
         {
-            ViewBag.IsCSDUser = IsCSDUser(CurrentSession.UserId);
+            ViewBag.Menu = CurrentSession.Menu;
             return PartialView("~/Views/Shared/_Menu.cshtml");
         }
 
@@ -105,30 +105,6 @@ namespace Fanex.Maintenance.Controller
                 JsonRequestBehavior = behavior,
                 MaxJsonLength = int.MaxValue
             };
-        }
-
-        /// <summary>
-        /// Check if login user is CSD User.
-        /// </summary>
-        /// <param name="userId">The user ID.</param>
-        /// <returns>True : CSD user, false : not.</returns>
-        protected bool IsCSDUser(int userId)
-        {
-            string strUserId = ConfigurationManager.AppSettings["CSDUserIds"];
-            if (!string.IsNullOrWhiteSpace(strUserId))
-            {
-                string[] userIds = strUserId.Split(',');
-
-                foreach (var item in userIds)
-                {
-                    if (item == userId.ToString())
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
     }
 }

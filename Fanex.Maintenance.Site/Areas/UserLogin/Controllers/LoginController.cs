@@ -171,6 +171,12 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                                     if (userIsActiveOnThisSite)
                                     {
+                                        _currentSession.Menu = _menuItemService.GetByUserAndSiteIncludeGroup(
+                                                                                    user.Id,
+                                                                                    SiteId,
+                                                                                    Environment,
+                                                                                    true) as IList<MenuItem>;
+
                                         return Redirect(FormsAuthentication.DefaultUrl);
                                     }
                                     else
@@ -187,7 +193,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                         return RedirectToAction("Site", "UserSite");
                                     }
 
-                                    // user has acces to one site
+                                    // user has access to one site
                                     var site = siteLevelList.Where(s => s.IsActive).First().Site;
 
                                     var listSiteUrl = _siteService.GetSiteUrlBySiteId(site.Id, this.Environment).Where(u => u.IsActive).ToList();
