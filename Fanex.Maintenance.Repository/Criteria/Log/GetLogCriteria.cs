@@ -43,6 +43,9 @@ namespace Fanex.Maintenance.Repository.Criteria.Log
         [SpParam(Ignored = true)]
         public bool GroupMessage { get; set; }
 
+        [SpParam(Ignored = true)]
+        public bool HasEdit { get; set; }
+
         public override bool IsValid()
         {
             return true;

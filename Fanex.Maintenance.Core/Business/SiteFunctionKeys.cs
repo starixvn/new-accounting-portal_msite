@@ -8,7 +8,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 2/17/2014 8:59:28 AM
+// Lasted generated date: 2/17/2014 12:49:52 PM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
@@ -93,8 +93,12 @@ public static class SiteFunctionKeys
 
     public const string UserOnlineDaily = "UserOnlineDaily";
 
+    public const string ViewAccountingReportMail = "ViewAccountingReportMail";
+
     public const string ViewLog = "ViewLog";
 
     public const string ViewMailDetails = "ViewMailDetails";
+
+    public const string ViewMailReport = "ViewMailReport";
 
 }

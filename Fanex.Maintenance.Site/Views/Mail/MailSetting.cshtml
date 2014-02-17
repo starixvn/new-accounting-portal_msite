@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = ViewResource.Mail_Setting;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var hasEditRight = (bool)ViewBag.HasEdit;
 }
 @section Head {
     @Styles.Render("~/css/manage")
@@ -10,7 +11,10 @@
 @section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
-        @Html.ActionLink("+ Create New", "AddMailSetting", "Mail", null, new { @class = "lnk" })
+        @if (hasEditRight)
+        { 
+            @Html.ActionLink("+ Create New", "AddMailSetting", "Mail", null, new { @class = "lnk" })
+        }
     </h1>
 }
 <table class="grid">
@@ -40,9 +44,12 @@
             <th>
                 @ViewResource.View_Application
             </th>
-            <th>
-                @ViewResource.Edit
-            </th>
+            @if (hasEditRight)
+            { 
+                <th>
+                    @ViewResource.Edit
+                </th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -81,11 +88,14 @@
                         @Html.ActionLink(" ", "MailConfig", new { id = mailItem.SettingID }, new { @class = "icon-link" })
                     </div>
                 </td>
-                <td class="align-center">
-                    <div class="action-wrp">
-                        @Html.ActionLink("Edit", "EditMailSetting", new { id = mailItem.SettingID }, new { @class = "btn-edit" })
-                    </div>
-                </td>
+                @if (hasEditRight)
+                { 
+                    <td class="align-center">
+                        <div class="action-wrp">
+                            @Html.ActionLink("Edit", "EditMailSetting", new { id = mailItem.SettingID }, new { @class = "btn-edit" })
+                        </div>
+                    </td>
+                }
             </tr>
                 }
             }

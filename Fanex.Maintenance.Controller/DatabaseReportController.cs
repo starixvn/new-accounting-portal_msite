@@ -16,6 +16,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.DataValidation.Service.Implement;
     using Fanex.DataValidation.Validation.Implement;
     using Fanex.Maintenance.Repository.Criteria.DatabaseReport;
+    using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
@@ -29,6 +30,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.DataIntegrity, Policy = Constant.Policy.Read)]
         public ActionResult DataIntegrity()
         {
             var validationService = new ValidationService();
@@ -73,6 +75,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="date">Date string.</param>
         /// <returns>Result string.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.DataIntegrity, Policy = Constant.Policy.Read)]
         public string GetDepositIntegrity(int filter = 1, string date = "")
         {
             if (Request.IsAjaxRequest())
@@ -99,6 +102,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="date">Date string.</param>
         /// <returns>Result string.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.DataIntegrity, Policy = Constant.Policy.Read)]
         public string GetCreditIntegrity(int filter = 1, string date = "")
         {
             if (Request.IsAjaxRequest())

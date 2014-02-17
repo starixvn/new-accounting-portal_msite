@@ -71,6 +71,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The search connection view model.</param>
         /// <returns>Connections list view.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Read)]
         public ActionResult Connection(SearchConnectionViewModel model)
         {
             model = model ?? new SearchConnectionViewModel();
@@ -369,6 +370,7 @@ namespace Fanex.Maintenance.Controller
         #region Manage Site
 
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageSite, Policy = Constant.Policy.Read)]
         public ActionResult Site(SearchSiteViewModel model)
         {
             model = model ?? new SearchSiteViewModel();
@@ -497,6 +499,7 @@ namespace Fanex.Maintenance.Controller
         #region Database Server
 
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabaseServer, Policy = Constant.Policy.Read)]
         public ActionResult DatabaseServer(SearchDatabaseServerViewModel model)
         {
             model = model ?? new SearchDatabaseServerViewModel();
@@ -636,6 +639,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The model.</param>
         /// <returns>Database list view.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Read)]
         public ActionResult Database(SearchDatabaseViewModel model)
         {
             model = model ?? new SearchDatabaseViewModel();
@@ -793,6 +797,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The log view model.</param>
         /// <returns>The log view.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ConnectionStringLog, Policy = Constant.Policy.Read)]
         public ActionResult Log(SearchLogViewModel model)
         {
             int totalLogs = 0;

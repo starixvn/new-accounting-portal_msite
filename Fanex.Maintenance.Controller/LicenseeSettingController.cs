@@ -11,6 +11,7 @@ namespace Fanex.Maintenance.Controller
 {
     using System.Web.Mvc;
     using Fanex.Maintenance.Service.Impl.LicenseeSetting;
+    using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
@@ -52,9 +53,11 @@ namespace Fanex.Maintenance.Controller
         #region Action
 
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.LrfDomain, Policy = Constant.Policy.Read)]
         public ActionResult LrfDomain()
         {
             var domains = _licenseeSettingService.GetAll();
+            ViewBag.HasEdit = HasRight(SiteFunctionKeys.LrfDomain, Constant.Policy.Host);
             return View(domains);
         }
 
@@ -64,6 +67,8 @@ namespace Fanex.Maintenance.Controller
             _licenseeSettingService.ActiveDomain(id);
             var domains = _licenseeSettingService.GetAll();
             ViewBag.success = true;
+            ViewBag.HasEdit = HasRight(SiteFunctionKeys.LrfDomain, Constant.Policy.Host);
+
             return View(domains);
         }
 

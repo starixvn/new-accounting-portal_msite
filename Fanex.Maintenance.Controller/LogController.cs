@@ -19,6 +19,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Repository;
     using Fanex.Maintenance.Repository.Criteria.Log;
     using Fanex.Maintenance.Service.Impl.AppLog;
+    using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
@@ -63,6 +64,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ViewLog, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             InitDataView();
@@ -83,6 +85,8 @@ namespace Fanex.Maintenance.Controller
                 Severity = "All"
             };
 
+            criteria.HasEdit = HasRight(SiteFunctionKeys.ViewLog, Constant.Policy.Host);
+
             return View(criteria);
         }
 
@@ -92,6 +96,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="criteria">The criteria.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ViewLog, Policy = Constant.Policy.Read)]
         public ActionResult Index(GetLogCriteria criteria)
         {
             InitDataView();
@@ -124,6 +129,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="id">Log message ID.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ViewLog, Policy = Constant.Policy.Read)]
         public ActionResult GetLogMessage(int id)
         {
             if (Request.IsAjaxRequest())
@@ -143,6 +149,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ViewLog, Policy = Constant.Policy.Host)]
         public ActionResult RemoveLog()
         {
             if (Request.IsAjaxRequest())
@@ -160,6 +167,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="isMonitored">Is monitored or not.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ViewLog, Policy = Constant.Policy.Host)]
         public ActionResult MonitorLog(string logId, bool isMonitored)
         {
             string updatedUsername = string.Empty;
