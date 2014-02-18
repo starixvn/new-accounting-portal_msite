@@ -38,12 +38,12 @@ var MailList = (function ($) {
                         }
 
                         var linkResend = "<a href='#' class='resendmail " + classFail + "' data-mailid='" + value.MailID + "'>Resend</a>";
-                        if (value.IsEncrypt || result.HasResend === 0) {
+                        if (result.HasResend === 0) {
                             linkResend = "";
                         }
 
                         var linkViewDetail = value.Subject;
-                        if (result.HasViewDetail === "1") {
+                        if (result.HasViewDetail === 1) {
                             linkViewDetail = "<a href='#' class='emailMessage' data-mailid='" + value.MailID + "'>" + value.Subject + "</a>";
                         }
 
