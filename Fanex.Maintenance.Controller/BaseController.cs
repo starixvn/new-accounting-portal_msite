@@ -9,6 +9,7 @@
 
 namespace Fanex.Maintenance.Controller
 {
+    using System.Configuration;
     using System.Web.Mvc;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Configuration;
@@ -83,6 +84,7 @@ namespace Fanex.Maintenance.Controller
 
         public PartialViewResult _Menu()
         {
+            ViewBag.Menu = CurrentSession.Menu;
             return PartialView("~/Views/Shared/_Menu.cshtml");
         }
 

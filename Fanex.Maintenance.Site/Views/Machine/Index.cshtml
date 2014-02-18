@@ -3,14 +3,18 @@
 @{
     ViewBag.Title = ViewResource.AppLogs_MangeMachines;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var hasEditRight = (bool)ViewBag.HasEdit;
 }
 @section Head {
-    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/css/manage")
 }
 @section Headline {
     <h1>
         <span class="title">@ViewResource.AppLogs_MangeMachines</span>
-        @Html.ActionLink("+ Create New", "InsertMachine", "Machine", new { @class = "lnk" })
+        @if (hasEditRight)
+        { 
+            @Html.ActionLink("+ Create New", "InsertMachine", "Machine", new { @class = "lnk" })
+        }
     </h1>
 }
 @using (Html.BeginForm())
@@ -44,9 +48,12 @@
             <th class="width-100">
                 @ViewResource.IsProduction
             </th>
-            <th>
-                @ViewResource.Edit
-            </th>
+            @if (hasEditRight)
+            { 
+                <th>
+                    @ViewResource.Edit
+                </th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -69,13 +76,16 @@
                 </td>
                 <td>@(machine.IsProduction ? Html.Raw("<span class='btn-check'/>") : Html.Raw(string.Empty))
                 </td>
-                <td class="align-center">
-                    <div class="action-wrp">
-                        @Html.ActionLink("Machine", "EditMachine", new { id = machine.MachineId }, new { @class = "btn-edit" })
-                    </div>
-                </td>
+                @if (hasEditRight)
+                { 
+                    <td class="align-center">
+                        <div class="action-wrp">
+                            @Html.ActionLink("Machine", "EditMachine", new { id = machine.MachineId }, new { @class = "btn-edit" })
+                        </div>
+                    </td>
+                }
             </tr>
-                    i++;
+                i++;
                 }
             }
             else

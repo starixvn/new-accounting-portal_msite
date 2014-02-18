@@ -1,4 +1,8 @@
-﻿var MailList = function ($) {
+﻿/* global NAP: false */
+
+"use strict";
+
+var MailList = (function ($) {
 
     return {
         generateData: function (pageSize, index) {
@@ -21,7 +25,7 @@
                     NAP.loadingBox.close();
                 },
                 success: function (result) {
-                    var data = eval(result.ListMail);
+                    var data = result.ListMail;
                     var bodyData = [];
                     var count = 1;
                     $.each(data, function (key, value) {
@@ -34,46 +38,44 @@
                         }
 
                         var linkResend = "<a href='#' class='resendmail " + classFail + "' data-mailid='" + value.MailID + "'>Resend</a>";
-                        if (value.IsEncrypt || result.HasResend == "0") {
+                        if (result.HasResend === 0) {
                             linkResend = "";
                         }
 
                         var linkViewDetail = value.Subject;
-                        if (result.HasViewDetail == "1") {
+                        if (result.HasViewDetail === 1) {
                             linkViewDetail = "<a href='#' class='emailMessage' data-mailid='" + value.MailID + "'>" + value.Subject + "</a>";
                         }
 
                         bodyData.push({
                             Columns:
-                        [
-                            { Name: "No", Value: pageSize * (index - 1) + count++ },
-                            { Name: "Subject", Value: linkViewDetail },
-                            { Name: "ApplicationName", Value: '<span title="' + value.Config.Setting.SettingName + '">' + value.Config.AppName + '</span>' },
-                            { Name: "MailTo", Value: value.MailTo.split(',').join('<br/>') },
-                            //                            { Name: "MailCc", Value: "" },
-                            {Name: "CreatedDate", Value: value.MailDate },
-                            { Name: "LatestSendDate", Value: value.MailUpdatedDate },
-                            { Name: "SendSuccess", Value: value.SentSuccess },
-                            { Name: "SendFail", Value: linkSendFail },
-                            { Name: "Resend", Value: linkResend }
-                        ],
-                            CssClass: value.SentSuccess == 0 ? "mailfail" : ""
+						[
+							{ Name: "No", Value: pageSize * (index - 1) + count++ },
+							{ Name: "Subject", Value: linkViewDetail },
+							{ Name: "ApplicationName", Value: '<span title="' + value.Config.Setting.SettingName + '">' + value.Config.AppName + '</span>' },
+							{ Name: "MailTo", Value: value.MailTo.split(',').join('<br/>') },
+							{ Name: "CreatedDate", Value: value.MailDate },
+							{ Name: "LatestSendDate", Value: value.MailUpdatedDate },
+							{ Name: "SendSuccess", Value: value.SentSuccess },
+							{ Name: "SendFail", Value: linkSendFail },
+							{ Name: "Resend", Value: linkResend }
+						],
+                            CssClass: value.SentSuccess === 0 ? "mailfail" : ""
                         });
                     });
 
                     var gridOption = {
                         columns: [
-                            { HeaderText: "#", Width: 35, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Subject", Width: 380, Name: "Subject", HeaderAlign: "center", CellAlign: "left" },
-                            { HeaderText: "Application", Width: 100, Name: "ApplicationName", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Mail To", Width: 250, Name: "MailTo", HeaderAlign: "center", CellAlign: "left" },
-                        //                            { HeaderText: "Mail Cc", Width: 100, Name: "MailCc", HeaderAlign: "center", CellAlign: "left" },
-                            {HeaderText: "Created Date<br/> (GMT -4)", Width: 130, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Latest Send Date<br/> (GMT -4)", Width: 130, Name: "LatestSendDate", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Success", Width: 50, Name: "SendSuccess", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Fail", Width: 40, Name: "SendFail", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Resend", Width: 70, Name: "Resend", HeaderAlign: "center", CellAlign: "center" }
-                        ],
+							{ HeaderText: "#", Width: 35, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+							{ HeaderText: "Subject", Width: 405, Name: "Subject", HeaderAlign: "center", CellAlign: "left" },
+							{ HeaderText: "Application", Width: 125, Name: "ApplicationName", HeaderAlign: "center", CellAlign: "center" },
+							{ HeaderText: "Mail To", Width: 200, Name: "MailTo", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true },
+							{ HeaderText: "Created Date<br/> (GMT -4)", Width: 130, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center" },
+							{ HeaderText: "Latest Send Date<br/> (GMT -4)", Width: 130, Name: "LatestSendDate", HeaderAlign: "center", CellAlign: "center" },
+							{ HeaderText: "Success", Width: 50, Name: "SendSuccess", HeaderAlign: "center", CellAlign: "center" },
+							{ HeaderText: "Fail", Width: 40, Name: "SendFail", HeaderAlign: "center", CellAlign: "center" },
+							{ HeaderText: "Resend", Width: 70, Name: "Resend", HeaderAlign: "center", CellAlign: "center" }
+						],
                         bodyRows: bodyData,
                         showPager: true,
                         customPager: true,
@@ -96,8 +98,8 @@
             });
         },
 
-        reRenderAfterPaged: function (page_index, itemsPerPage, jq) {
-            MailList.generateData(itemsPerPage, page_index);
+        reRenderAfterPaged: function (pageIndex, itemsPerPage) {
+            MailList.generateData(itemsPerPage, pageIndex);
         },
 
         resend: function (mailId) {
@@ -178,7 +180,7 @@
         }
     };
 
-} (jQuery);
+} (jQuery));
 
 $(document).ready(function () {
 

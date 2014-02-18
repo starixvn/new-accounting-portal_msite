@@ -1,37 +1,31 @@
-﻿<nav>
-    <ul class="menu">
-        <li class="first"><a href="~/?ref=logo">Home</a></li>
-        <li class="has-kids"><a href="javascript:void(0);">@ViewResource.AppLogs</a>
-            <ul>
-                <li>@Html.ActionLink(ViewResource.AppLogs_ViewLog, string.Empty, "Log")</li>
-                <li>@Html.ActionLink(ViewResource.AppLogs_MangeMachines, string.Empty, "Machine")</li>
-            </ul>
-        </li>
-        <li class="has-kids"><a href="javascript:;">Mail Service</a>
-            <ul>
-                <li>@Html.ActionLink(@ViewResource.Mail_List, "MailList", "Mail")</li>
-                <li>@Html.ActionLink(@ViewResource.Mail_Setting, "MailSetting", "Mail")</li>
-                <li>@Html.ActionLink(@ViewResource.Mail_Config, "MailConfig", "Mail")</li>
-            </ul>
-        </li>
-        <li class="has-kids"><a href="javascript:;">Database Report</a>
-            <ul>
-                <li>@Html.ActionLink("Data Integrity", "DataIntegrity", "DatabaseReport")</li>
-            </ul>
-        </li>
-        <li class="has-kids"><a href="javascript:;">Licensee Setting</a>
-            <ul>
-                <li>@Html.ActionLink("Lrf Domain", "LrfDomain", "LicenseeSetting")</li>
-            </ul>
-        </li>
-        <li class="first"><a href="javascript:;">Connection String</a>
-            <ul>
-                <li>@Html.ActionLink(ViewResource.Site, "Site", "ConnectionString")</li>
-                <li>@Html.ActionLink(ViewResource.DatabaseServer, "DatabaseServer", "ConnectionString")</li>
-                <li>@Html.ActionLink(ViewResource.Database, "Database", "ConnectionString")</li>
-                <li>@Html.ActionLink(ViewResource.Connection, "Connection", "ConnectionString")</li>
-                <li>@Html.ActionLink(ViewResource.AppLogs_ViewLog, "Log", "ConnectionString")</li>
-            </ul>
-        </li>
-    </ul>
+﻿@using Fanex.NAP.Core.Model
+@{
+    var menuItemList = ViewBag.Menu != null ? ViewBag.Menu as List<MenuItem> : new List<MenuItem>();
+    var lvl0MenuItemList = menuItemList.Where(m => m.Parent == null).OrderBy(m => m.DisplayOrder).ToList();
+}
+<nav>
+	<ul class="menu">
+@for (int i = 0; i < lvl0MenuItemList.Count; i++)
+{
+    var menuItem = lvl0MenuItemList[i];
+    var lvl1MenuItemList = menuItemList.Where(x => x.Parent != null && x.Parent.Id == menuItem.Id)
+        .OrderBy(x => x.DisplayOrder).ToList();
+
+    if (lvl1MenuItemList.Any())
+    {
+		<li mid="@menuItem.Id" class="has-kids"><a href="javascript:;">@menuItem.Name</a>
+			<ul>
+		@foreach (var subMenuItem in lvl1MenuItemList)
+  {
+				<li mid="@subMenuItem.Id"><a href="@Url.Content(subMenuItem.GetValidUrl())">@subMenuItem.Name</a></li>
+  }
+			</ul>
+		</li>
+    }
+    else
+    {
+		<li mid="@menuItem.Id"><a href="@Url.Content(menuItem.GetValidUrl())">@menuItem.Name</a></li>
+    }
+}
+	</ul>
 </nav>

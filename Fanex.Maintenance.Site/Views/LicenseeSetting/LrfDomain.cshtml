@@ -5,16 +5,16 @@
     ViewBag.Title = "Lrf Domain";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var success = false;
-    if(ViewBag.success != null && ViewBag.success == true)
+    if (ViewBag.success != null && ViewBag.success == true)
     { success = true; }
-    
+    var hasEditRight = (bool)ViewBag.HasEdit;
 }
 @section Head {
     @Styles.Render("~/css/log")
 }
 @section Headline {
     <h1>
-        <span class="title">@ViewBag.Title</span> 
+        <span class="title">@ViewBag.Title</span>
     </h1>
 }
 @section scripts
@@ -29,8 +29,7 @@
             });
         });
     </script>
-
-    @if(success)
+    @if (success)
     {
         ViewBag.success = false;
         success = false;
@@ -39,11 +38,10 @@
         </script>
         
     }
-    
 }
 @using (Html.BeginForm())
 {
-<section id="filter-bar" style="width: 98%">
+    <section id="filter-bar" style="width: 98%">
         <div class="filter-form">
             <div class="filter-row">
                 <div class="lbl-field width-auto">
@@ -55,8 +53,15 @@
     {
         foreach (var item in Model)
         { 
-                                    <li>
+                                    <li>                                    
+                                    @if (hasEditRight)
+                                    { 
                                     @Html.RadioButton("Id", item.Id, item.IsActive, new { @id = "domain-" + item.Id })
+                                    }
+                                    else
+                                    {
+                                        @Html.RadioButton("Id", item.Id, item.IsActive, new { @id = "domain-" + item.Id, @disabled = "disabled" })
+                                    }
                                     @item.DomainName
                                     <br />
                                     </li>
@@ -64,9 +69,12 @@
     }
                             <li>
                             <br />
+                            @if (hasEditRight)
+                            { 
                                 <div class="submit">
                                     <input id="btnSubmit" type="submit" value="Submit" />
                                 </div>
+                            }
                             </li>
                          }
                      </ul>

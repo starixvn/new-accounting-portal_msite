@@ -66,6 +66,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="appId">Application ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ViewMailReport, Policy = Constant.Policy.Read)]
         public ActionResult MailList(int appId = 0)
         {
             InitPageSize();
@@ -98,6 +99,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="size">Number of items.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ViewMailReport, Policy = Constant.Policy.Read)]
         public ActionResult MailList(string from, string to, int applicationID = 0, int mailStatus = 0, int size = 10)
         {
             InitPageSize();
@@ -134,9 +136,11 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Read)]
         public ActionResult MailSetting()
         {
             List<MailSetting> listMailSetting = this._mailServer.GetListSetting();
+            ViewBag.HasEdit = HasRight(SiteFunctionKeys.SmtpServers, Constant.Policy.Host);
 
             return View(listMailSetting);
         }
@@ -146,6 +150,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Host)]
         public ActionResult AddMailSetting()
         {
             return View(new MailSettingViewModel());
@@ -157,6 +162,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">Mail setting view model.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Host)]
         public ActionResult AddMailSetting(MailSettingViewModel model)
         {
             ViewBag.Success = false;
@@ -189,6 +195,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="id">Setting ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Host)]
         public ActionResult EditMailSetting(int id)
         {
             MailSetting mailSetting = _mailServer.GetSetting(id);
@@ -203,6 +210,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">Mail setting view model.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Host)]
         public ActionResult EditMailSetting(MailSettingViewModel model)
         {
             ViewBag.Success = false;
@@ -237,7 +245,7 @@ namespace Fanex.Maintenance.Controller
 
             List<MailConfig> listMailConfig = _mailServer.GetListConfig(serverIp);
 
-            ViewBag.Policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ApplicationManagement);
+            ViewBag.HasEdit = HasRight(SiteFunctionKeys.ApplicationManagement, Constant.Policy.Host);
 
             return View(listMailConfig);
         }
@@ -255,7 +263,7 @@ namespace Fanex.Maintenance.Controller
 
             List<MailConfig> listMailConfig = this._mailServer.GetListConfig(serverIp);
 
-            ViewBag.Policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ApplicationManagement);
+            ViewBag.HasEdit = HasRight(SiteFunctionKeys.ApplicationManagement, Constant.Policy.Host);
 
             return View(listMailConfig);
         }
@@ -328,9 +336,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Edit mail config.
+        /// Edit mail configuration.
         /// </summary>
-        /// <param name="model">Mail config view model.</param>
+        /// <param name="model">Mail configuration view model.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
@@ -721,6 +729,12 @@ namespace Fanex.Maintenance.Controller
         private void InitDataMailConfig(int appId = 0)
         {
             List<MailConfig> listConfig = _mailServer.GetListConfig(string.Empty);
+
+            var hasPermission = HasRight(SiteFunctionKeys.ViewAccountingReportMail, Constant.Policy.Read);
+            if (hasPermission)
+            {
+                listConfig = listConfig.Where(x => x.AppID == 1).ToList();
+            }
 
             ViewBag.ListMailConfig = listConfig.Select(c => new SelectListItem
             {

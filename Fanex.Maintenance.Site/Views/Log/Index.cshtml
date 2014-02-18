@@ -4,20 +4,24 @@
 @{
     ViewBag.Title = ViewResource.AppLogs_ViewLog;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    IEnumerable<Log> listLog = (IEnumerable<Log>)ViewBag.ListLog;
+    IEnumerable<Log> listLog = (IEnumerable<Log>)ViewBag.ListLog;    
 }
 @section Head {
     @Styles.Render("~/css/log")
 }
 @section Headline {
     <h1>
-        <span class="title">@ViewBag.Title</span> <a href="#" id="btnRemoveLog" class="lnk">
-            Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString()) </a>
+        <span class="title">@ViewBag.Title</span>
+        @if (Model.HasEdit)
+        {
+            <a href="#" id="btnRemoveLog" class="lnk">Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString())
+            </a>
+        }
     </h1>
 }
 @using (Html.BeginForm())
 {  
-    <section id="filter-bar" style="width: 98%">
+    <section id="filter-bar" style="width: 98%" ng-controller="logController">
         <div class="filter-form">
             <div class="filter-row">
                 <div class="lbl-field width-auto">
@@ -87,7 +91,11 @@
                     Machine
                 </th>
                 <th class="width-100">
-                    <input type="checkbox" id="chbMonitorAll" /><lable for="chbMonitorAll">Handled By</lable>
+                    @if (Model.HasEdit)
+                    { 
+                        <input type="checkbox" id="chbMonitorAll" />
+                    }
+                    <lable for="chbMonitorAll">Handled By</lable>
                 </th>
                 <th class="width-100">
                     Time (GMT+7)
@@ -99,6 +107,7 @@
     </table>
 }
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
+@Html.Hidden("HasEdit", Model.HasEdit ? 1 : 0)
 @section Foot {
     @Scripts.Render("~/scripts/log")
 }

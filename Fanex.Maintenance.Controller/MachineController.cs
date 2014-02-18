@@ -17,6 +17,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Repository;
     using Fanex.Maintenance.Repository.Criteria.Log;
     using Fanex.Maintenance.Service.Impl.AppLog;
+    using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
@@ -56,11 +57,14 @@ namespace Fanex.Maintenance.Controller
         /// <param name="machineType">Machine type.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageServers, Policy = Constant.Policy.Read)]
         public ActionResult Index(bool? machineType = null)
         {
             var machines = _machineService.GetByType(machineType);
             ViewBag.Machines = machines;
             ViewBag.MachineType = machineType;
+            ViewBag.HasEdit = HasRight(SiteFunctionKeys.ManageServers, Constant.Policy.Host);
+
             InitMachineTypes();
 
             return View(machines);
@@ -72,6 +76,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="criteria">The criteria.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageServers, Policy = Constant.Policy.Read)]
         public ActionResult Index(GetMachinesByTypeCriteria criteria)
         {
             return Index(criteria.MachineType);
@@ -83,6 +88,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="id">Machine ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageServers, Policy = Constant.Policy.Host)]
         public ActionResult EditMachine(int id)
         {
             var machine = _machineService.GetMachine(id);
@@ -95,6 +101,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="machine">The machine.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageServers, Policy = Constant.Policy.Host)]
         public ActionResult EditMachine(Machine machine)
         {
             if (ModelState.IsValid)
@@ -110,6 +117,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageServers, Policy = Constant.Policy.Host)]
         public ActionResult InsertMachine()
         {
             var machine = new Machine
@@ -126,6 +134,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="machine">The machine.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageServers, Policy = Constant.Policy.Host)]
         public ActionResult InsertMachine(Machine machine)
         {
             if (ModelState.IsValid)

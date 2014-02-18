@@ -8,7 +8,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 12/17/2013 5:27:13 PM
+// Lasted generated date: 2/17/2014 12:49:52 PM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
@@ -31,6 +31,8 @@ public static class SiteFunctionKeys
 
     public const string ConnectionManagement = "ConnectionManagement";
 
+    public const string ConnectionStringLog = "ConnectionStringLog";
+
     public const string DatabaseReport = "DatabaseReport";
 
     public const string DatabaseServer = "DatabaseServer";
@@ -39,7 +41,11 @@ public static class SiteFunctionKeys
 
     public const string EncryptApplicationEmail = "EncryptApplicationEmail";
 
+    public const string LicenseeSetting = "LicenseeSetting";
+
     public const string LogManagement = "LogManagement";
+
+    public const string LrfDomain = "LrfDomain";
 
     public const string MailFunction = "MailFunction";
 
@@ -56,6 +62,8 @@ public static class SiteFunctionKeys
     public const string ManageGroup = "ManageGroup";
 
     public const string ManageMenu = "ManageMenu";
+
+    public const string ManageServers = "ManageServers";
 
     public const string ManageSite = "ManageSite";
 
@@ -85,8 +93,12 @@ public static class SiteFunctionKeys
 
     public const string UserOnlineDaily = "UserOnlineDaily";
 
+    public const string ViewAccountingReportMail = "ViewAccountingReportMail";
+
     public const string ViewLog = "ViewLog";
 
     public const string ViewMailDetails = "ViewMailDetails";
+
+    public const string ViewMailReport = "ViewMailReport";
 
 }
