@@ -310,7 +310,6 @@
     <Content Include="scripts\lib\Select2\select2.css" />
     <Content Include="scripts\lib\Select2\select2.js" />
     <Content Include="scripts\lib\Select2\select2.png" />
-    <Content Include="scripts\_Layout.js" />
     <Content Include="themes\assets\css\font-awesome-ie7.css" />
     <Content Include="themes\assets\css\font-awesome.css" />
     <Content Include="themes\assets\css\prettify.css" />

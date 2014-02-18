@@ -67,7 +67,6 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/scripts/lib/tipsy/tipsy-1.0.0.min.js",
                 "~/scripts/lib/msgbox/msgbox-0.0.1.min.js",
                 "~/scripts/Maintenance.js",
-                "~/scripts/_Layout.js",
                 "~/scripts/lib/chosen/chosen.jquery.js",
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
