@@ -67,9 +67,9 @@ var MailList = (function ($) {
                     var gridOption = {
                         columns: [
 							{ HeaderText: "#", Width: 35, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-							{ HeaderText: "Subject", Width: 380, Name: "Subject", HeaderAlign: "center", CellAlign: "left" },
-							{ HeaderText: "Application", Width: 100, Name: "ApplicationName", HeaderAlign: "center", CellAlign: "center" },
-							{ HeaderText: "Mail To", Width: 250, Name: "MailTo", HeaderAlign: "center", CellAlign: "left" },
+							{ HeaderText: "Subject", Width: 405, Name: "Subject", HeaderAlign: "center", CellAlign: "left" },
+							{ HeaderText: "Application", Width: 125, Name: "ApplicationName", HeaderAlign: "center", CellAlign: "center" },
+							{ HeaderText: "Mail To", Width: 200, Name: "MailTo", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true },
 							{ HeaderText: "Created Date<br/> (GMT -4)", Width: 130, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center" },
 							{ HeaderText: "Latest Send Date<br/> (GMT -4)", Width: 130, Name: "LatestSendDate", HeaderAlign: "center", CellAlign: "center" },
 							{ HeaderText: "Success", Width: 50, Name: "SendSuccess", HeaderAlign: "center", CellAlign: "center" },
