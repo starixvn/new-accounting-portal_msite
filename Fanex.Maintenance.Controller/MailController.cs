@@ -730,11 +730,15 @@ namespace Fanex.Maintenance.Controller
         {
             List<MailConfig> listConfig = _mailServer.GetListConfig(string.Empty);
 
-            var hasPermission = HasRight(SiteFunctionKeys.ViewAccountingReportMail, Constant.Policy.Read);
-            if (hasPermission)
+            var hasPermissionViewOnlyAccounting = HasRight(SiteFunctionKeys.ViewAccountingReportMail, Constant.Policy.Read)
+                && CurrentSession.Level == (int)Constant.Level.User;
+
+            if (hasPermissionViewOnlyAccounting)
             {
                 listConfig = listConfig.Where(x => x.AppID == 1).ToList();
             }
+
+            ViewBag.HasViewOnlyAccounting = hasPermissionViewOnlyAccounting;
 
             ViewBag.ListMailConfig = listConfig.Select(c => new SelectListItem
             {
