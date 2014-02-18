@@ -10,5 +10,5 @@ var Layout = (function () {
 
 $(document).ready(function () {
 	Layout.body = $('body');
-	setTimeout(Layout.body.fadeIn, 200);
+	setTimeout('Layout.body.fadeIn', 200);
 });
