@@ -171,7 +171,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                                     if (userIsActiveOnThisSite)
                                     {
-                                        _currentSession.Menu = _menuItemService.GetByUserAndSiteIncludeGroup(
+                                        _currentSession.MenuItemList = _menuItemService.GetByUserAndSiteIncludeGroup(
                                                                                     user.Id,
                                                                                     SiteId,
                                                                                     Environment,
@@ -307,7 +307,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <param name="user">User object.</param>
         private void CreateUserMenu(User user)
         {
-            _currentSession.Menu = (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(
+            _currentSession.MenuItemList = (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(
                                                                                     user.Id,
                                                                                     SiteId,
                                                                                     Environment,

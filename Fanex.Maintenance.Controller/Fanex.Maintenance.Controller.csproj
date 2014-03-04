@@ -34,23 +34,23 @@
     <Reference Include="Fanex.Caching">
       <HintPath>..\_Dependencies\Fanex\Fanex.Caching.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.ConnectionString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
+    <Reference Include="Fanex.ConnectionString">
+      <HintPath>..\_Dependencies\Fanex\Fanex.ConnectionString.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.ConnectionString.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.Core.dll</HintPath>
+    <Reference Include="Fanex.ConnectionString.Core">
+      <HintPath>..\_Dependencies\Fanex\Fanex.ConnectionString.Core.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.DataValidation">
-      <HintPath>..\_Dependencies\Others\Fanex.DataValidation.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex\Fanex.DataValidation.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient">
       <HintPath>..\_Dependencies\MailService\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core">
-      <HintPath>..\_Dependencies\Others\Fanex.NAP.Core.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex\Fanex.NAP.Core.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Framework">
-      <HintPath>..\_Dependencies\Others\Fanex.NAP.Framework.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
     <Reference Include="MvcPager, Version=1.5.0.28157, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\_Dependencies\Others\MvcPager.dll</HintPath>

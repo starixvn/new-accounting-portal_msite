@@ -84,7 +84,7 @@ namespace Fanex.Maintenance.Controller
 
         public PartialViewResult _Menu()
         {
-            ViewBag.Menu = CurrentSession.Menu;
+            ViewBag.Menu = CurrentSession.MenuItemList;
             return PartialView("~/Views/Shared/_Menu.cshtml");
         }
 

@@ -31,14 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fanex.ConnectionString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
+    <Reference Include="Fanex.ConnectionString">
+      <HintPath>..\_Dependencies\Fanex\Fanex.ConnectionString.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core">
-      <HintPath>..\_Dependencies\Others\Fanex.NAP.Core.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex\Fanex.NAP.Core.dll</HintPath>
     </Reference>
-    <Reference Include="MvcPager, Version=1.5.0.28157, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MvcPager">
       <HintPath>..\_Dependencies\Others\MvcPager.dll</HintPath>
     </Reference>
     <Reference Include="System" />

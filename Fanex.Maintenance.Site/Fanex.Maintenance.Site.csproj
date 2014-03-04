@@ -64,8 +64,8 @@
     <Reference Include="Fanex.ConnectionString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.ConnectionString.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.Core.dll</HintPath>
+    <Reference Include="Fanex.ConnectionString.Core">
+      <HintPath>..\_Dependencies\Fanex\Fanex.ConnectionString.Core.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Data">
       <HintPath>..\_Dependencies\Fanex\Fanex.Data.dll</HintPath>
