@@ -57,6 +57,7 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
         /// <summary>
         /// Create log service.
         /// </summary>
+        /// <param name="showLogTimeZone">Show log time zone.</param>
         /// <returns>Log service object.</returns>
         public static LogService Create(int showLogTimeZone = 0)
         {
