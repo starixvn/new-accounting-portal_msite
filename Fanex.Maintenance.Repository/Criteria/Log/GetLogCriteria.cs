@@ -40,6 +40,8 @@ namespace Fanex.Maintenance.Repository.Criteria.Log
 
         public int TotalRows { get; set; }
 
+        public int ToGMT { get; set; }
+
         [SpParam(Ignored = true)]
         public bool GroupMessage { get; set; }
 

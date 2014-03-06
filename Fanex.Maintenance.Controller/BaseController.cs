@@ -9,6 +9,7 @@
 
 namespace Fanex.Maintenance.Controller
 {
+    using System;
     using System.Configuration;
     using System.Web.Mvc;
     using Fanex.NAP.Core.Business;
@@ -25,18 +26,13 @@ namespace Fanex.Maintenance.Controller
     public class BaseController : Controller
     {
         protected readonly string Environment = NapSettings.Settings.Environment;
-
         protected readonly int SiteId = NapSettings.Settings.SiteId;
-
         protected readonly CurrentContext CurrentContext;
-
         protected readonly IServiceContext ServiceContext;
-
         protected readonly CurrentSession CurrentSession;
-
         private readonly IUserService _userService;
-
         private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
+        private int _showLogTimeZone = 7;
 
         public BaseController()
         {
@@ -55,6 +51,15 @@ namespace Fanex.Maintenance.Controller
             };
 
             _userService = new UserService { ServiceContext = ServiceContext };
+
+            try
+            {
+                _showLogTimeZone = Convert.ToInt32(ConfigurationManager.AppSettings["GMTShowLog"]);
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.Log.Error(ex.Message);
+            }
         }
 
         /// <summary>
@@ -66,6 +71,14 @@ namespace Fanex.Maintenance.Controller
             get
             {
                 return _issiteLogin;
+            }
+        }
+
+        public int ShowLogTimeZone
+        {
+            get
+            {
+                return _showLogTimeZone;
             }
         }
 

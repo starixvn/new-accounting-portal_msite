@@ -5,7 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Edward.Nguyen" date="2012.9.20">Created</change>
-//   <change who="Ricky.Nguyen" date="2012.10.16">Stylecop</change>
+//   <change who="Ricky.Nguyen" date="2012.10.16">Style cop</change>
 //   <change who="Jason.Ly" date="2013.8.7">Modify Get Logs</change>
 // </history>
 
@@ -51,7 +51,7 @@ namespace Fanex.Maintenance.Controller
 
         public LogController(LogService logService, LogCategoryService categoryService)
         {
-            _logService = logService ?? LogService.Create();
+            _logService = logService ?? LogService.Create(ShowLogTimeZone);
             _categoryService = categoryService ?? LogCategoryService.Create();
         }
 
@@ -82,7 +82,8 @@ namespace Fanex.Maintenance.Controller
                 To = DateTime.Now,
                 Page = 0,
                 Size = 10,
-                Severity = "All"
+                Severity = "All",
+                ToGMT = ShowLogTimeZone
             };
 
             criteria.HasEdit = HasRight(SiteFunctionKeys.ViewLog, Constant.Policy.Host);

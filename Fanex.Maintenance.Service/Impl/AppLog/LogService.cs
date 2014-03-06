@@ -40,7 +40,9 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
 
         private int _size;
 
-        private LogService()
+        private int _showLogTimeZone;
+
+        private LogService(int showLogTimeZone = 0)
         {
             _categoryId = 0;
             _severity = "All";
@@ -49,15 +51,16 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
             _dateTo = DateTime.Now.AddDays(-1);
             _page = 0;
             _size = 100;
+            _showLogTimeZone = showLogTimeZone;
         }
 
         /// <summary>
         /// Create log service.
         /// </summary>
         /// <returns>Log service object.</returns>
-        public static LogService Create()
+        public static LogService Create(int showLogTimeZone = 0)
         {
-            return new LogService();
+            return new LogService(showLogTimeZone);
         }
 
         /// <summary>
@@ -143,7 +146,7 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
 
             return this;
         }
-        
+
         /// <summary>
         /// Get message detail.
         /// </summary>
@@ -174,7 +177,8 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
                 Severity = this._severity,
                 MachineId = this._machineId,
                 IsProduction = this._isProduction,
-                IsMonitored = this._isMonitored
+                IsMonitored = this._isMonitored,
+                ToGMT = _showLogTimeZone
             };
 
             var list = _logRepository.GetLog(ref criteria);

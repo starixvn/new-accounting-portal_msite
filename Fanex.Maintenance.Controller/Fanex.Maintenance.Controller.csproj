@@ -43,6 +43,9 @@
     <Reference Include="Fanex.DataValidation">
       <HintPath>..\_Dependencies\Fanex\Fanex.DataValidation.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\_Dependencies\Fanex\Fanex.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient">
       <HintPath>..\_Dependencies\MailService\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
