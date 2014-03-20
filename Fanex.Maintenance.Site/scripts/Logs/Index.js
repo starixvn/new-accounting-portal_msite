@@ -459,5 +459,5 @@ $(document).ready(function () {
         $('#submit').click();
     });
 
-    Logs.generateData(50, 0);
+//    Logs.generateData(50, 0);
 });
