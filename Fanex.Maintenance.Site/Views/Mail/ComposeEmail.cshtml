@@ -26,7 +26,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.AppID)
+                @Html.Label(ViewResource.Application_Name)
             </div>
             <div class="edit-field">
                 @Html.DropDownListFor(m => m.AppID, (List<SelectListItem>)ViewBag.ListMailConfig)
@@ -34,7 +34,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.MailFrom)
+                @Html.Label(ViewResource.MailFrom)
             </div>
             <div class="edit-field">
                 @Html.TextBoxFor(m => m.MailFrom)
@@ -42,7 +42,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.MailTo)
+                @Html.Label(ViewResource.Mail_To)
             </div>
             <div class="edit-field">
                 @Html.TextBoxFor(m => m.MailTo)
@@ -50,7 +50,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.MailCc)
+                @Html.Label(ViewResource.Mail_Cc)
             </div>
             <div class="edit-field">
                 @Html.TextBoxFor(m => m.MailCc)
@@ -58,7 +58,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.MailBcc)
+                @Html.Label(ViewResource.Mail_Bcc)
             </div>
             <div class="edit-field">
                 @Html.TextBoxFor(m => m.MailBcc)
@@ -90,7 +90,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.FileAttachments)
+                @Html.Label(ViewResource.FileAttachment)
             </div>
             <div class="edit-field">
                 @Html.TextBoxFor(m => m.FileAttachments)
@@ -98,7 +98,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.IsEncrypt)
+                @Html.Label(ViewResource.IsEncrypt)
             </div>
             <div class="edit-field">
                 @Html.CheckBoxFor(m => m.IsEncrypt)

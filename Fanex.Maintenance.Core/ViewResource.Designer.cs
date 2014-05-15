@@ -727,6 +727,15 @@ namespace Fanex.Maintenance.Repository {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File Attachment.
+        /// </summary>
+        public static string FileAttachment {
+            get {
+                return ResourceManager.GetString("FileAttachment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter.
         /// </summary>
         public static string Filter {
