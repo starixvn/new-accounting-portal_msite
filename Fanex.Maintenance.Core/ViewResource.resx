@@ -843,4 +843,7 @@
   <data name="SwitchConnection" xml:space="preserve">
     <value>Switch Connection</value>
   </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
 </root>

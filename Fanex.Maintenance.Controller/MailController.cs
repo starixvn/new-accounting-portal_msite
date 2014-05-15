@@ -12,7 +12,9 @@ namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.MailDeliver.Model;
@@ -452,6 +454,71 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion MailFunction
+
+        #region Compose Email
+
+        [HttpGet]
+        public ActionResult ComposeEmail()
+        {
+            InitDataMailConfig();
+            return View(new MailRecord());
+        }
+
+        /// <summary>
+        /// Composes the email.
+        /// </summary>
+        /// <param name="mailRecord">The mail record.</param>
+        /// <returns>Return view.</returns>
+        [HttpPost]
+        public ActionResult ComposeEmail(MailRecord mailRecord)
+        {
+            InitDataMailConfig();
+
+            ConfigurationManager.AppSettings["app_mail_id"] = mailRecord.AppID.ToString();
+
+            if (!string.IsNullOrWhiteSpace(mailRecord.FileAttachments))
+            {
+                string extension = Path.GetExtension(mailRecord.FileAttachments);
+                var fileExtension = new FileExtentions();
+
+                switch (extension.ToLower())
+                {
+                    case ".xls":
+                        fileExtension = FileExtentions.MS_EXCEL;
+                        break;
+                    case ".doc":
+                        fileExtension = FileExtentions.MS_DOC;
+                        break;
+                    case ".jpg":
+                        fileExtension = FileExtentions.IMG_JPG;
+                        break;
+                    case ".gif":
+                        fileExtension = FileExtentions.IMG_GIF;
+                        break;
+                    case ".png":
+                        fileExtension = FileExtentions.IMG_PNG;
+                        break;
+                    case ".pdf":
+                        fileExtension = FileExtentions.PDF;
+                        break;
+                    default:
+                        fileExtension = FileExtentions.TEXT;
+                        break;
+                }
+
+                mailRecord.Attachments = new List<MailAttachment>();
+                var attachment = new Fanex.MailDeliver.Model.MailAttachment(mailRecord.FileAttachments, fileExtension);
+                mailRecord.Attachments.Add(attachment);
+            }
+
+            using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
+            {
+                client.SendMail(mailRecord);
+            }
+
+            return View(mailRecord);
+        }
+        #endregion
 
         #endregion Action
 
