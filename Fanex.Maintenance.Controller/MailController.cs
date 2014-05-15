@@ -458,6 +458,7 @@ namespace Fanex.Maintenance.Controller
         #region Compose Email
 
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ComposeEmail, Policy = Constant.Policy.Read)]
         public ActionResult ComposeEmail()
         {
             InitDataMailConfig();
@@ -470,6 +471,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="mailRecord">The mail record.</param>
         /// <returns>Return view.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ComposeEmail, Policy = Constant.Policy.Read)]
         public ActionResult ComposeEmail(MailRecord mailRecord)
         {
             InitDataMailConfig();

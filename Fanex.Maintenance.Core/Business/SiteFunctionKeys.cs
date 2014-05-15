@@ -8,7 +8,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 2/17/2014 12:49:52 PM
+// Lasted generated date: 5/15/2014 3:34:21 PM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
@@ -28,6 +28,8 @@ public static class SiteFunctionKeys
     public const string AssignFunctionToUser = "AssignFunctionToUser";
 
     public const string AssignSiteToUser = "AssignSiteToUser";
+
+    public const string ComposeEmail = "ComposeEmail";
 
     public const string ConnectionManagement = "ConnectionManagement";
 
