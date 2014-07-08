@@ -227,7 +227,13 @@
     <Content Include="Areas\UserLogin\themes\login.css" />
     <Content Include="Global.asax" />
     <Content Include="images\calendar.gif" />
+    <Content Include="images\Play.png" />
+    <Content Include="images\Play_disable.png" />
+    <Content Include="images\ReRun.png" />
+    <Content Include="images\ReRun_disable.png" />
     <Content Include="images\sprite_v.png" />
+    <Content Include="images\Stop.png" />
+    <Content Include="images\Stop_disable.png" />
     <Content Include="scripts\Connection\Connection.js" />
     <Content Include="scripts\Connection\ChangeConnection.js" />
     <Content Include="scripts\Connection\AliasDatabase.js" />
@@ -258,6 +264,18 @@
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.js" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.min.css" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.min.js" />
+    <Content Include="scripts\lib\XMLEditor\css\main.css" />
+    <Content Include="scripts\lib\XMLEditor\img\icons.png" />
+    <Content Include="scripts\lib\XMLEditor\img\liveXmlEdit.png" />
+    <Content Include="scripts\lib\XMLEditor\img\treeview-default-line.gif" />
+    <Content Include="scripts\lib\XMLEditor\img\treeview-default.gif" />
+    <Content Include="scripts\lib\XMLEditor\js\ext\GLR\css\GLR.messenger.css" />
+    <Content Include="scripts\lib\XMLEditor\js\ext\GLR\GLR.js" />
+    <Content Include="scripts\lib\XMLEditor\js\ext\GLR\GLR.messenger.js" />
+    <Content Include="scripts\lib\XMLEditor\js\ext\jquery-1.4.js" />
+    <Content Include="scripts\lib\XMLEditor\js\ext\jquery-color.js" />
+    <Content Include="scripts\lib\XMLEditor\js\ext\jquery.js" />
+    <Content Include="scripts\lib\XMLEditor\js\loc\xmlEditor.js" />
     <Content Include="scripts\Logs\Index.js" />
     <Content Include="scripts\Mail\AddMailSettingPopUp.js" />
     <Content Include="scripts\Mail\AddMailFunction.js" />
@@ -309,6 +327,7 @@
     <Content Include="scripts\lib\Select2\select2.css" />
     <Content Include="scripts\lib\Select2\select2.js" />
     <Content Include="scripts\lib\Select2\select2.png" />
+    <Content Include="scripts\ServiceMonitoring\ServiceMonitoring.js" />
     <Content Include="themes\assets\css\font-awesome-ie7.css" />
     <Content Include="themes\assets\css\font-awesome.css" />
     <Content Include="themes\assets\css\prettify.css" />
@@ -596,6 +615,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Mail\ComposeEmail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ServiceMonitoringCache\8\" />
+    <Folder Include="ServiceMonitoringCache\9541447\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ServiceMonitoring\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ServiceMonitoring\XMLEditor.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

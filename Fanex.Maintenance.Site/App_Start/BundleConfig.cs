@@ -60,6 +60,18 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/scripts/lib/Select2/select2.css",
                 "~/scripts/lib/Select2/select2-custom.css");
 
+            bundles.AddAndInclude(
+                "~/css/service-monitoring",
+                "~/themes/manage/log/manage.less",
+                "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css");
+
+            bundles.AddAndInclude(
+                "~/css/xml-editor",
+                "~/themes/jquery-ui/XMLEditor/smoothness/jquery-ui-1.8.23.css",
+                "~/scripts/lib/XMLEditor/css/main.css",
+                "~/scripts/lib/XMLEditor/js/ext/GLR/css/GLR.messenger.css");
+
             // js
             bundles.Add(new ScriptBundle("~/scripts/common").Include(
                 "~/scripts/lib/jquery-1.8.0.min.js",
@@ -108,6 +120,18 @@ namespace Fanex.Maintenance.Site.App_Start
 
             bundles.Add(new ScriptBundle("~/scripts/connectionstring-connection").Include(
                 "~/scripts/Connection/Connection.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/service-monitoring").Include(
+                "~/scripts/ServiceMonitoring/ServiceMonitoring.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/xml-editor").Include(
+                "~/scripts/lib/jquery-1.8.0.min.js",
+                "~/scripts/lib/jquery-ui-1.8.23.min.js",
+                "~/scripts/lib/msgbox/msgbox-0.0.1.min.js",
+                "~/scripts/Maintenance.js",
+                "~/scripts/lib/XMLEditor/js/loc/xmlEditor.js",
+                "~/scripts/lib/XMLEditor/js/ext/GLR/GLR.js",
+                "~/scripts/lib/XMLEditor/js/ext/GLR/GLR.messenger.js"));
 
             bundles.FileSetOrderList.Clear();
         }

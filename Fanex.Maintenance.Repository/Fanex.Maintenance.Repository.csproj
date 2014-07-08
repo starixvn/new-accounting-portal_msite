@@ -47,6 +47,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -65,17 +67,26 @@
     <Compile Include="Criteria\MailService\MailSettingViewModel.cs" />
     <Compile Include="Criteria\Misc\LogExecSpCriteria.cs" />
     <Compile Include="Criteria\Misc\ResultCriteria.cs" />
+    <Compile Include="Criteria\ServiceMonitoring\ServiceMonitoringCriteria.cs" />
     <Compile Include="Impl\BaseRepository.cs" />
     <Compile Include="Impl\AppLog\LogRepository.cs" />
     <Compile Include="Impl\LicenseeSetting\LicenseeSettingRepository.cs" />
     <Compile Include="Impl\AppLog\MachineRepository.cs" />
+    <Compile Include="Impl\ServiceMonitoring\UserManagementRepository.cs" />
+    <Compile Include="Impl\ServiceMonitoring\ServiceManagementRepository.cs" />
     <Compile Include="Interface\LicenseeSetting\ILicenseeSettingRepository.cs" />
+    <Compile Include="Interface\ServiceMonitoring\IServiceManagementRepository.cs" />
+    <Compile Include="Interface\ServiceMonitoring\IUserManagementRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj">
       <Project>{60BC3FA8-DF7C-4024-B469-4ED110420143}</Project>
       <Name>Fanex.Maintenance.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.ServiceManagement\Fanex.ServiceManagement.csproj">
+      <Project>{1F903078-36B9-40AE-9FF2-67F7DC5E058B}</Project>
+      <Name>Fanex.ServiceManagement</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

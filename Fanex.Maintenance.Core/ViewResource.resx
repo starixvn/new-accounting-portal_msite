@@ -849,4 +849,10 @@
   <data name="FileAttachment" xml:space="preserve">
     <value>File Attachment</value>
   </data>
+  <data name="ServiceMonitoring" xml:space="preserve">
+    <value>Service Monitoring</value>
+  </data>
+  <data name="ServiceName" xml:space="preserve">
+    <value>Service Name</value>
+  </data>
 </root>

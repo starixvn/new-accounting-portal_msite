@@ -37,7 +37,9 @@
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\_Dependencies\Fanex\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Impl\AppLog\LogCategoryService.cs" />
@@ -45,10 +47,14 @@
     <Compile Include="Impl\LicenseeSetting\LicenseeSettingService.cs" />
     <Compile Include="Impl\AppLog\MachineService.cs" />
     <Compile Include="Impl\Mail\MailService.cs" />
+    <Compile Include="Impl\ServiceMonitoring\UserManagement.cs" />
+    <Compile Include="Impl\ServiceMonitoring\ServiceManagement.cs" />
     <Compile Include="Interface\LicenseeSetting\ILicenseeSettingService.cs" />
     <Compile Include="Interface\AppLog\ILogCategoryService.cs" />
     <Compile Include="Interface\AppLog\ILogService.cs" />
     <Compile Include="Interface\Mail\IMailService.cs" />
+    <Compile Include="Interface\ServiceMonitoring\IServiceManagement.cs" />
+    <Compile Include="Interface\ServiceMonitoring\IUserManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +65,10 @@
     <ProjectReference Include="..\Fanex.Maintenance.Repository\Fanex.Maintenance.Repository.csproj">
       <Project>{8858DC31-A292-4388-8E07-9B2E345A3FE6}</Project>
       <Name>Fanex.Maintenance.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.ServiceManagement\Fanex.ServiceManagement.csproj">
+      <Project>{1F903078-36B9-40AE-9FF2-67F7DC5E058B}</Project>
+      <Name>Fanex.ServiceManagement</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
