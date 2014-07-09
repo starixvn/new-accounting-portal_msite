@@ -11,9 +11,15 @@ namespace Fanex.Maintenance.Repository.Interface.ServiceMonitoring
 
     public interface IUserManagementRepository
     {
+        List<NetworkLogin> GetListServerIP(int userID);
+
         List<NetworkLogin> GetListServer(int userID);
 
         void UpdateListServer(int userID, List<NetworkLogin> serverList);
+
+        NetworkLogin GetNetworkLoginByIP(int userID, string ip);
+
+        void UpdateNetworkLoginByIP(int userID, string ip, string userName, string password);
 
         List<string> GetListFavouriteServices(int userID);
 

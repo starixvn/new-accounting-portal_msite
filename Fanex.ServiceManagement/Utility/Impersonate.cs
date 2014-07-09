@@ -13,10 +13,12 @@ namespace Fanex.ServiceManagement.Utility
     using System.Web;
     using System.Security.Principal;
     using System.Runtime.InteropServices;
+    using Fanex.Logging;
 
     /// <summary>
     /// Impersonate class.
     /// </summary>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("T4", "1.0.0.0")]
     public class Impersonate
     {
 
@@ -88,6 +90,7 @@ namespace Fanex.ServiceManagement.Utility
                         {
                             CloseHandle(token);
                             CloseHandle(tokenDuplicate);
+                            LogService.Debug("Impersonate successful with user \"" + this.userName + "\"");
                             return true;
                         }
                     }
@@ -97,6 +100,7 @@ namespace Fanex.ServiceManagement.Utility
                 CloseHandle(token);
             if (tokenDuplicate != IntPtr.Zero)
                 CloseHandle(tokenDuplicate);
+            LogService.Debug("Impersonate unsuccessful with user \"" + this.userName + "\"");
             return false;
         }
 

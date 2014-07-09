@@ -14,8 +14,6 @@
 </head>
 <body>
 <input id="IP" type=hidden value="@Model.IP" />
-<input id="UserName" type=hidden value="@Model.UserName" />
-<input id="Password" type=hidden value="@Model.Password" />
 <input id="ServiceName" type=hidden value="@Model.ServiceName" />
 <input id="ConfigFileName" type=hidden value="@Model.ConfigFileName" />
     <input id="XMLString" type=hidden value="@ViewBag.xmlstring" />
@@ -42,8 +40,6 @@
                     dataType: 'json',
                     data: {
                         IP: $('#IP').val(),
-                        UserName: $('#UserName').val(),
-                        Password: $('#Password').val(),
                         ServiceName: $('#ServiceName').val(),
                         ConfigFileName: $('#ConfigFileName').val(),
                         FileText: xmlEditor.getXmlAsString()

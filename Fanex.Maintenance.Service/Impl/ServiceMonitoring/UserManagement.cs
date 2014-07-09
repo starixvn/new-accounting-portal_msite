@@ -24,6 +24,11 @@ namespace Fanex.Maintenance.Service.Impl.ServiceMonitoring
             this._userManagement = new UserManagementRepository();
         }
 
+        public List<NetworkLogin> GetListServerIP(int userID)
+        {
+            return this._userManagement.GetListServerIP(userID);
+        }
+
         public List<NetworkLogin> GetListServer(int userID)
         {
             return this._userManagement.GetListServer(userID);
@@ -32,6 +37,21 @@ namespace Fanex.Maintenance.Service.Impl.ServiceMonitoring
         public void UpdateListServer(int userID, List<NetworkLogin> serverList)
         {
             this._userManagement.UpdateListServer(userID, serverList);
+        }
+
+        public NetworkLogin GetNetworkLoginByIP(int userID, string ip)
+        {
+            return this._userManagement.GetNetworkLoginByIP(userID, ip);
+        }
+
+        public void UpdateNetworkLoginByIP(int userID, NetworkLogin networkLogin)
+        {
+            this.UpdateNetworkLoginByIP(userID, networkLogin.IP, networkLogin.UserName, networkLogin.Password);
+        }
+
+        public void UpdateNetworkLoginByIP(int userID, string ip, string userName, string password)
+        {
+            this._userManagement.UpdateNetworkLoginByIP(userID, ip, userName, password);
         }
 
         public List<string> GetListFavouriteServices(int userID)

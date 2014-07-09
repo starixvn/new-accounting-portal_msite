@@ -13,6 +13,7 @@ namespace Fanex.Maintenance.Service.Impl.ServiceMonitoring
     using System.ServiceProcess;
     using Fanex.Maintenance.Repository.Impl.ServiceMonitoring;
     using Fanex.Maintenance.Repository.Interface.ServiceMonitoring;
+    using Fanex.Maintenance.Service.Interface.ServiceMonitoring;
     using Fanex.ServiceManagement.Model;
 
     /// <summary>
@@ -22,9 +23,16 @@ namespace Fanex.Maintenance.Service.Impl.ServiceMonitoring
     {
         private IServiceManagementRepository _serviceManagementRepository;
 
-        public ServiceManagement(string ip, string username, string password)
+        private IUserManagement _userManagement;
+
+        public ServiceManagement(int userID, string ip)
         {
-            this._serviceManagementRepository = new ServiceManagementRepository(ip, username, password);
+            this._userManagement = new UserManagement();
+            var networkLogin = this._userManagement.GetNetworkLoginByIP(userID, ip);
+            this._serviceManagementRepository = new ServiceManagementRepository(
+                ip,
+                networkLogin == null ? string.Empty : networkLogin.UserName,
+                networkLogin == null ? string.Empty : networkLogin.Password);
         }
 
         public ServiceManagement(NetworkLogin networkLogin)
@@ -59,9 +67,9 @@ namespace Fanex.Maintenance.Service.Impl.ServiceMonitoring
                     if (service.Name.ToLower().Contains(serviceName.ToLower()))
                     {
                         if (status == 0
-                            || (status == (int)ServiceControllerStatus.Running 
+                            || (status == (int)ServiceControllerStatus.Running
                                 && (service.Status == ServiceControllerStatus.Running.ToString() || service.Status == ServiceControllerStatus.StartPending.ToString()))
-                            || (status == (int)ServiceControllerStatus.Stopped 
+                            || (status == (int)ServiceControllerStatus.Stopped
                                 && (service.Status == ServiceControllerStatus.Stopped.ToString() || service.Status == ServiceControllerStatus.StopPending.ToString())))
                         {
                             result.Add(service);

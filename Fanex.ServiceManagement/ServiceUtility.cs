@@ -17,6 +17,7 @@ namespace Fanex.ServiceManagement
     using System.Net;
     using System.ServiceProcess;
     using System.Text.RegularExpressions;
+    using Fanex.Logging;
     using Fanex.ServiceManagement.Model;
     using Fanex.ServiceManagement.Utility;
 
@@ -148,15 +149,9 @@ namespace Fanex.ServiceManagement
         /// <param name="service">The service.</param>
         public void StartService(ServiceController service)
         {
-            try
+            if (service == null || service.Status == ServiceControllerStatus.Running || service.Status == ServiceControllerStatus.StartPending)
             {
-                if (service == null || service.Status == ServiceControllerStatus.Running || service.Status == ServiceControllerStatus.StartPending)
-                {
-                    return;
-                }
-            }
-            catch
-            {
+                LogService.Debug(service.ServiceName + " is null.");
                 return;
             }
 
@@ -172,6 +167,7 @@ namespace Fanex.ServiceManagement
                     // Cannot complete action (there is some error in service's code)
                     // Write log or do S.T
                     // Now Do nothing
+                    LogService.Debug(service.ServiceName + " cannot be started.");
                 }
 
                 if (!this._isSelfConnect)
@@ -187,21 +183,16 @@ namespace Fanex.ServiceManagement
         /// <param name="service">The service.</param>
         public void StopService(ServiceController service)
         {
-            try
+            if (service == null || service.Status == ServiceControllerStatus.Stopped || service.Status == ServiceControllerStatus.StopPending)
             {
-                if (service == null || service.Status == ServiceControllerStatus.Stopped || service.Status == ServiceControllerStatus.StopPending)
-                {
-                    return;
-                }
-            }
-            catch
-            {
+                LogService.Error(service.ServiceName + " is null.");
                 return;
             }
 
             if (this._isSelfConnect || this._impersonate.impersonateValidUser())
             {
                 service.Stop();
+                LogService.Debug(service.ServiceName + " is stoping.");
                 try
                 {
                     service.WaitForStatus(ServiceControllerStatus.Stopped, this._pendingTime);
@@ -211,6 +202,7 @@ namespace Fanex.ServiceManagement
                     // Cannot complete action
                     // Write log or do S.T
                     // Now Do nothing
+                    LogService.Error(service.ServiceName + " cannot be stopped.");
                 }
 
                 if (!this._isSelfConnect)
@@ -250,6 +242,7 @@ namespace Fanex.ServiceManagement
                 catch (FileNotFoundException)
                 {
                     // File not exists
+                    LogService.Error("File " + servicePath + " is not existed");
                 }
             }
             else
@@ -268,6 +261,7 @@ namespace Fanex.ServiceManagement
                     catch (FileNotFoundException)
                     {
                         // File not exists
+                        LogService.Error("File " + servicePath + " is not existed");
                     }
                 }
             }
@@ -299,6 +293,7 @@ namespace Fanex.ServiceManagement
                 catch (FileNotFoundException)
                 {
                     // File not exists
+                    LogService.Error("File " + servicePath + " is not existed");
                 }
             }
             else
@@ -317,6 +312,7 @@ namespace Fanex.ServiceManagement
                     catch (FileNotFoundException)
                     {
                         // File not exists
+                        LogService.Error("File " + servicePath + " is not existed");
                     }
                 }
             }
@@ -346,6 +342,7 @@ namespace Fanex.ServiceManagement
                 catch (FileNotFoundException)
                 {
                     // File not exists
+                    LogService.Error("File " + fullPath + " is not existed");
                     return false;
                 }
             }
@@ -362,6 +359,7 @@ namespace Fanex.ServiceManagement
                     catch (FileNotFoundException)
                     {
                         // File not exists
+                        LogService.Error("File " + fullPath + " is not existed");
                         return false;
                     }
                 }
@@ -398,7 +396,7 @@ namespace Fanex.ServiceManagement
         private bool IsLocalIpAddress(string host)
         {
             try
-            { 
+            {
                 // get host IP addresses
                 IPAddress[] hostIPs = Dns.GetHostAddresses(host);
 
@@ -419,13 +417,13 @@ namespace Fanex.ServiceManagement
                     {
                         if (hostIP.Equals(localIP))
                         {
-                            return true; 
+                            return true;
                         }
                     }
                 }
             }
-            catch 
-            { 
+            catch
+            {
             }
 
             return false;

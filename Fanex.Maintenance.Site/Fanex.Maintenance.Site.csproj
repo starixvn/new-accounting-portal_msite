@@ -486,7 +486,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\UserLogin\Views\Common\Error.cshtml" />
@@ -617,8 +619,7 @@
     <Content Include="Views\Mail\ComposeEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ServiceMonitoringCache\8\" />
-    <Folder Include="ServiceMonitoringCache\9541447\" />
+    <Folder Include="ServiceMonitoringCache\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ServiceMonitoring\Index.cshtml" />

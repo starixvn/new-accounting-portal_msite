@@ -16,10 +16,6 @@ namespace Fanex.Maintenance.Repository.Criteria.ServiceMonitoring
     {
         public string IP { get; set; }
 
-        public string UserName { get; set; }
-
-        public string Password { get; set; }
-
         public string ServiceName { get; set; }
 
         public int Status { get; set; }

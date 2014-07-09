@@ -41,11 +41,6 @@ namespace Fanex.Maintenance.Controller
             return View("~/Views/ServiceMonitoring/Index.cshtml");
         }
 
-        public bool TestConnection(NetworkLogin networkLogin)
-        {
-            return new ServiceManagement(networkLogin).TestConnection();
-        }
-
         /// <summary>
         /// Gets the services.
         /// </summary>
@@ -55,7 +50,7 @@ namespace Fanex.Maintenance.Controller
         [NapAuth(FunctionKey = SiteFunctionKeys.ServiceMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult GetServices(ServiceMonitoringCriteria criteria)
         {
-            ServiceManagement serviceManagement = new ServiceManagement(criteria.IP, criteria.UserName, criteria.Password);
+            ServiceManagement serviceManagement = new ServiceManagement(CurrentSession.UserId, criteria.IP);
             Response.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
             Response.Cache.SetMaxAge(new TimeSpan(0));
             var listServices = serviceManagement.GetServices(criteria.ServiceName, criteria.Status);
@@ -73,19 +68,31 @@ namespace Fanex.Maintenance.Controller
             return Json(listServices);
         }
 
+        /// <summary>
+        /// Server login.
+        /// </summary>
+        /// <param name="networkLogin">The network login.</param>
+        /// <returns>JSON result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ServiceMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult ServerLogin(NetworkLogin networkLogin)
         {
             ServiceManagement serviceManagement = new ServiceManagement(networkLogin);
-            return Json(serviceManagement.TestConnection());
+            var result = serviceManagement.TestConnection();
+            if (result)
+            {
+                UserManagement userManagement = new UserManagement();
+                userManagement.UpdateNetworkLoginByIP(CurrentSession.UserId, networkLogin);
+            }
+
+            return Json(result);
         }
 
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ServiceMonitoring, Policy = Constant.Policy.Host)]
         public void StartService(ServiceMonitoringCriteria criteria)
         {
-            ServiceManagement serviceManagement = new ServiceManagement(criteria.IP, criteria.UserName, criteria.Password);
+            ServiceManagement serviceManagement = new ServiceManagement(CurrentSession.UserId, criteria.IP);
             serviceManagement.StartService(criteria.ServiceName);
         }
 
@@ -93,7 +100,7 @@ namespace Fanex.Maintenance.Controller
         [NapAuth(FunctionKey = SiteFunctionKeys.ServiceMonitoring, Policy = Constant.Policy.Host)]
         public void StopService(ServiceMonitoringCriteria criteria)
         {
-            ServiceManagement serviceManagement = new ServiceManagement(criteria.IP, criteria.UserName, criteria.Password);
+            ServiceManagement serviceManagement = new ServiceManagement(CurrentSession.UserId, criteria.IP);
             serviceManagement.StopService(criteria.ServiceName);
         }
 
@@ -101,7 +108,7 @@ namespace Fanex.Maintenance.Controller
         [NapAuth(FunctionKey = SiteFunctionKeys.ServiceMonitoring, Policy = Constant.Policy.Host)]
         public void RestartService(ServiceMonitoringCriteria criteria)
         {
-            ServiceManagement serviceManagement = new ServiceManagement(criteria.IP, criteria.UserName, criteria.Password);
+            ServiceManagement serviceManagement = new ServiceManagement(CurrentSession.UserId, criteria.IP);
             serviceManagement.RestartService(criteria.ServiceName);
         }
 
@@ -109,14 +116,14 @@ namespace Fanex.Maintenance.Controller
         [NapAuth(FunctionKey = SiteFunctionKeys.ServiceMonitoring, Policy = Constant.Policy.Host)]
         public ActionResult GetServiceConfigs(ServiceMonitoringCriteria criteria)
         {
-            ServiceManagement serviceManagement = new ServiceManagement(criteria.IP, criteria.UserName, criteria.Password);
+            ServiceManagement serviceManagement = new ServiceManagement(CurrentSession.UserId, criteria.IP);
             return Json(serviceManagement.GetServiceConfigs(criteria.ServiceName));
         }
 
         [NapAuth(FunctionKey = SiteFunctionKeys.ServiceMonitoring, Policy = Constant.Policy.Host)]
         public ActionResult EditServiceConfigFile(ServiceMonitoringCriteria criteria)
         {
-            ServiceManagement serviceManagement = new ServiceManagement(criteria.IP, criteria.UserName, criteria.Password);
+            ServiceManagement serviceManagement = new ServiceManagement(CurrentSession.UserId, criteria.IP);
             ViewBag.xmlstring = serviceManagement.GetServiceConfigFile(criteria.ServiceName, criteria.ConfigFileName);
             return View("~/Views/ServiceMonitoring/XMLEditor.cshtml", criteria);
         }
@@ -126,24 +133,24 @@ namespace Fanex.Maintenance.Controller
         [ValidateInput(false)]
         public ActionResult SaveServiceConfigFile(ServiceMonitoringCriteria criteria)
         {
-            ServiceManagement serviceManagement = new ServiceManagement(criteria.IP, criteria.UserName, criteria.Password);
+            ServiceManagement serviceManagement = new ServiceManagement(CurrentSession.UserId, criteria.IP);
             return Json(serviceManagement.SaveServiceConfigFile(criteria.ServiceName, criteria.ConfigFileName, criteria.FileText));
         }
 
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ServiceMonitoring, Policy = Constant.Policy.Host)]
-        public ActionResult GetListServer()
+        public ActionResult GetListServerIP()
         {
             UserManagement userManagement = new UserManagement();
-            return Json(userManagement.GetListServer(CurrentSession.UserId));
+            return Json(userManagement.GetListServerIP(CurrentSession.UserId));
         }
 
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ServiceMonitoring, Policy = Constant.Policy.Host)]
-        public void UpdateListServer(List<NetworkLogin> serverList)
+        public void UpdateNetworkLoginByIP(NetworkLogin networkLogin)
         {
             UserManagement userManagement = new UserManagement();
-            userManagement.UpdateListServer(CurrentSession.UserId, serverList);
+            userManagement.UpdateNetworkLoginByIP(CurrentSession.UserId, networkLogin);
         }
 
         [HttpPost]

@@ -124,6 +124,7 @@ namespace Fanex.ServiceManagement.Utility
     /// <summary>
     /// Net Resource.
     /// </summary>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("T4", "1.0.0.0")]
     [StructLayout(LayoutKind.Sequential)]
     public class NetResource
     {
@@ -171,6 +172,7 @@ namespace Fanex.ServiceManagement.Utility
     /// <summary>
     /// Network Connection.
     /// </summary>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("T4", "1.0.0.0")]
     public class NetworkConnection : IDisposable
     {
         string _networkName;

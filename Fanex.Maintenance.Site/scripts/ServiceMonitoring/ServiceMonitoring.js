@@ -24,12 +24,10 @@ var ServiceMonitoring = function () {
         Password: $('#Password')
     };
 
-    var ServerList = [];
-
     self.Init = function () {
         self.BindingEvents();
-        self.GetListServer();
-        timeInterval = window.setInterval(function () { return self.AutoRefresh(); }, 5000);
+        self.GetListServerIP();
+
         DOMElements.AddServerDialog.dialog({
             autoOpen: false,
             width: 370,
@@ -59,7 +57,7 @@ var ServiceMonitoring = function () {
             modal: true,
             width: 'auto'
         });
-    }
+    };
 
     self.BindingEvents = function () {
         DOMElements.Submit.click(function () {
@@ -72,7 +70,7 @@ var ServiceMonitoring = function () {
 
         DOMElements.ServiceName.keypress(function (e) {
             var code = (e.keyCode ? e.keyCode : e.which);
-            if (code == 13) { //Enter keycode                        
+            if (code === 13) { //Enter keycode                        
                 e.preventDefault();
                 self.Submit(false);
             }
@@ -82,7 +80,7 @@ var ServiceMonitoring = function () {
     self.AddServer = function () {
         DOMElements.ErrorServerLogin.hide();
         DOMElements.AddServerDialog.dialog('open');
-    }
+    };
 
     self.ServerLogin = function () {
         $.ajax({
@@ -101,14 +99,8 @@ var ServiceMonitoring = function () {
             complete: function () {
             },
             success: function (data) {
-                if (data == true) {
-                    var serverElement = {
-                        IP: DOMElements.ServerIP.val(),
-                        UserName: DOMElements.UserName.val(),
-                        Password: DOMElements.Password.val()
-                    };
-
-                    self.RefreshServer(serverElement);
+                if (data === true) {
+                    self.GetListServerIP();
                     DOMElements.AddServerDialog.dialog('close');
                     NAP.loadingBox.close();
                 }
@@ -120,114 +112,78 @@ var ServiceMonitoring = function () {
                 DOMElements.ErrorServerLogin.show();
             }
         });
-    }
+    };
 
-    self.GetListServer = function () {
+    self.GetListServerIP = function () {
         $.ajax({
-            url: NAP.resolveClientUrl("ServiceMonitoring/GetListServer"),
+            url: NAP.resolveClientUrl("ServiceMonitoring/GetListServerIP"),
             type: 'POST',
-            dataType: 'JSON',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
             data: null,
             cache: false,
             beforeSend: function () {
                 NAP.loadingBox.show();
             },
             complete: function () {
+                NAP.loadingBox.close();
             },
             success: function (data) {
-                ServerList = data;
-                self.RenderServerDropDownList();
-                NAP.loadingBox.close();
+                if (data !== null && data.length !== 0) {
+                    DOMElements.Server.empty();
+                    self.RenderServerDropDownList(data);
+                }
             },
             error: function () {
                 DOMElements.ErrorServerLogin.show();
             }
         });
-    }
-
-    self.RefreshServer = function (serverElement) {
-        ServerList = $.grep(ServerList, function (value) {
-            return value.IP != serverElement.IP;
-        });
-
-        ServerList.push(serverElement);
-        self.UpdateListServer();
-        self.RenderServerDropDownList();
-    }
-
-    self.UpdateListServer = function () {
-        $.ajax({
-            url: NAP.resolveClientUrl("ServiceMonitoring/UpdateListServer"),
-            type: 'POST',
-            dataType: 'josn',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify({ 'serverList': ServerList }),
-            cache: false,
-            beforeSend: function () {
-                NAP.loadingBox.show();
-            },
-            complete: function () {
-                NAP.loadingBox.close();
-            },
-            success: function (data) {
-            },
-            error: function () {
-                DOMElements.ErrorServerLogin.show();
-            }
-        });
-    }
+    };
 
     self.Relogin = function () {
-        var serverElement = $.grep(ServerList, function (value) {
-            return value.IP == DOMElements.Server.val();
-        });
-
+        DOMElements.ServerIP.val(DOMElements.Server.val());
         self.AddServer();
-        DOMElements.ServerIP.val(serverElement[0].IP);
-        DOMElements.UserName.val(serverElement[0].UserName);
-        DOMElements.Password.val(serverElement[0].Password);
+    };
 
-    }
-
-    self.RenderServerDropDownList = function () {
+    self.RenderServerDropDownList = function (ipList) {
         DOMElements.Server.find('option').remove();
-        for (var i = 0; i < ServerList.length; i++) {
-            DOMElements.Server.append('<option value="' + ServerList[i].IP + '">' + ServerList[i].IP + '</option>');
+        for (var i = 0; i < ipList.length; i++) {
+            DOMElements.Server.append('<option value="' + ipList[i].IP + '">' + ipList[i].IP + '</option>');
         }
-    }
+    };
 
     self.Submit = function (isBackGround) {
-        if (isBackGround == false) {
+        if (isBackGround === false) {
             NAP.loadingBox.show();
         }
-
-        var serverElement = $.grep(ServerList, function (value) {
-            return value.IP == DOMElements.Server.val();
-        });
 
         $.ajax({
             url: NAP.resolveClientUrl("ServiceMonitoring/GetServices"),
             type: 'POST',
             dataType: 'json',
             data: {
-                IP: serverElement[0].IP,
-                UserName: serverElement[0].UserName,
-                Password: serverElement[0].Password,
+                IP: DOMElements.Server.val(),
                 ServiceName: DOMElements.ServiceName.val(),
                 Status: DOMElements.Status.val()
             },
-            cache: true,
-            ifModified: true,
+            cache: isBackGround,
+            ifModified: isBackGround,
             beforeSend: function () {
             },
             complete: function () {
             },
             success: function (data, textStatus, jqXHR) {
-                if (jqXHR.status !== 304) {
-                    if (isBackGround == true) {
+                timeInterval = window.setInterval(function () { return self.AutoRefresh(); }, 5000);
+                if (isBackGround === true) {
+                    if (jqXHR.status !== 304) {
                         NAP.loadingBox.show();
+                        self.RenderServicesGrid(data);
                     }
-
+                }
+                else {
+                    DOMElements.EditConfigGrid.empty();
+                    DOMElements.EditConfigGridContainer.hide();
+                    NAP.loadingBox.show();
                     self.RenderServicesGrid(data);
                 }
 
@@ -244,21 +200,20 @@ var ServiceMonitoring = function () {
         for (var i = 0; i < data.length; i++) {
             var StartCommand = "<a href='javascript:serviceMonitoring.StartService(\"" + data[i].Name + "\")'>" +
                 "<img src='" + NAP.resolveClientUrl("images/Play.png") + "' height='25' width='25' title='Start Service' /></a>";
-            var StartCommandDisable = "<img src='" + NAP.resolveClientUrl("images/Play_disable.png") + "' height='25' width='25' title='Start Service Disabled' />";
+            //            var StartCommandDisable = "<img src='" + NAP.resolveClientUrl("images/Play_disable.png") + "' height='25' width='25' title='Start Service Disabled' />";
 
             var StopCommand = "<a href='javascript:serviceMonitoring.StopService(\"" + data[i].Name + "\")'>" +
                 "<img src='" + NAP.resolveClientUrl("images/Stop.png") + "' height='25' width='25' title='Stop Service' /></a>";
-            var StopCommandDisable = "<img src='" + NAP.resolveClientUrl("images/Stop_disable.png") + "' height='25' width='25' title='Stop Service Disabled' />";
+            //            var StopCommandDisable = "<img src='" + NAP.resolveClientUrl("images/Stop_disable.png") + "' height='25' width='25' title='Stop Service Disabled' />";
 
-            var RestartCommand = "<a href='javascript:serviceMonitoring.RestartService(\"" + data[i].Name + "\")'>" +
-                "<img src='" + NAP.resolveClientUrl("images/Rerun.png") + "' height='25' width='25' title='Restart Service' /></a>";
-            var RestartCommandDisable = "<img src='" + NAP.resolveClientUrl("images/ReRun_disable.png") + "' height='25' width='25' title='Restart Service Disabled' />";
-
-            var AddFavorite = "";
+            //            var RestartCommand = "<a href='javascript:serviceMonitoring.RestartService(\"" + data[i].Name + "\")'>" +
+            //                "<img src='" + NAP.resolveClientUrl("images/Rerun.png") + "' height='25' width='25' title='Restart Service' /></a>";
+            //            var RestartCommandDisable = "<img src='" + NAP.resolveClientUrl("images/ReRun_disable.png") + "' height='25' width='25' title='Restart Service Disabled' />";
+            //            var AddFavorite = "";
 
             data[i].EditConfig = "<a href='javascript:serviceMonitoring.GetServiceConfigs(\"" + data[i].Name + "\")'>Edit</a>";
             data[i].Action = "";
-            if (data[i].Status == 'Running' || data[i].Status == 'StartPending') {
+            if (data[i].Status === 'Running' || data[i].Status === 'StartPending') {
                 data[i].Action += StopCommand;
             }
             else {
@@ -324,18 +279,12 @@ var ServiceMonitoring = function () {
 
     self.StartService = function (serviceName) {
         NAP.loadingBox.show();
-        var serverElement = $.grep(ServerList, function (value) {
-            return value.IP == DOMElements.Server.val();
-        });
-
         $.ajax({
             url: NAP.resolveClientUrl("ServiceMonitoring/StartService"),
             type: 'POST',
             dataType: 'json',
             data: {
-                IP: serverElement[0].IP,
-                UserName: serverElement[0].UserName,
-                Password: serverElement[0].Password,
+                IP: DOMElements.Server.val(),
                 ServiceName: serviceName,
                 Status: ''
             },
@@ -352,22 +301,16 @@ var ServiceMonitoring = function () {
                 NAP.loadingBox.close();
             }
         });
-    }
+    };
 
     self.StopService = function (serviceName) {
         NAP.loadingBox.show();
-        var serverElement = $.grep(ServerList, function (value) {
-            return value.IP == DOMElements.Server.val();
-        });
-
         $.ajax({
             url: NAP.resolveClientUrl("ServiceMonitoring/StopService"),
             type: 'POST',
             dataType: 'json',
             data: {
-                IP: serverElement[0].IP,
-                UserName: serverElement[0].UserName,
-                Password: serverElement[0].Password,
+                IP: DOMElements.Server.val(),
                 ServiceName: serviceName,
                 Status: ''
             },
@@ -384,22 +327,16 @@ var ServiceMonitoring = function () {
                 NAP.loadingBox.close();
             }
         });
-    }
+    };
 
     self.RestartService = function (serviceName) {
         NAP.loadingBox.show();
-        var serverElement = $.grep(ServerList, function (value) {
-            return value.IP == DOMElements.Server.val();
-        });
-
         $.ajax({
             url: NAP.resolveClientUrl("ServiceMonitoring/RestartService"),
             type: 'POST',
             dataType: 'json',
             data: {
-                IP: serverElement[0].IP,
-                UserName: serverElement[0].UserName,
-                Password: serverElement[0].Password,
+                IP: DOMElements.Server.val(),
                 ServiceName: serviceName,
                 Status: ''
             },
@@ -416,22 +353,16 @@ var ServiceMonitoring = function () {
                 NAP.loadingBox.close();
             }
         });
-    }
+    };
 
     self.GetServiceConfigs = function (serviceName) {
         NAP.loadingBox.show();
-        var serverElement = $.grep(ServerList, function (value) {
-            return value.IP == DOMElements.Server.val();
-        });
-
         $.ajax({
             url: NAP.resolveClientUrl("ServiceMonitoring/GetServiceConfigs"),
             type: 'POST',
             dataType: 'json',
             data: {
-                IP: serverElement[0].IP,
-                UserName: serverElement[0].UserName,
-                Password: serverElement[0].Password,
+                IP: DOMElements.Server.val(),
                 ServiceName: serviceName,
                 Status: ''
             },
@@ -449,7 +380,7 @@ var ServiceMonitoring = function () {
                 alert('error');
             }
         });
-    }
+    };
 
     self.RenderServiceConfigsGrid = function (serviceName, data) {
         var bodyData = [];
@@ -480,38 +411,33 @@ var ServiceMonitoring = function () {
         DOMElements.EditConfigGrid.fanexGrid(gridOptions);
         DOMElements.GridContainer.hide();
         DOMElements.EditConfigGridContainer.show();
-    }
+    };
 
     self.BackToServiceGrid = function () {
         DOMElements.EditConfigGrid.empty();
         DOMElements.EditConfigGridContainer.hide();
         DOMElements.GridContainer.show();
-    }
+    };
 
     self.EditConfigs = function (fileName, serviceName) {
         NAP.loadingBox.show();
-        var serverElement = $.grep(ServerList, function (value) {
-            return value.IP == DOMElements.Server.val();
-        });
-
         DOMElements.EditConfigDialog.empty();
         DOMElements.EditConfigDialog.append("<iframe src='" +
             NAP.resolveClientUrl("ServiceMonitoring/EditServiceConfigFile") +
-            "?IP=" + serverElement[0].IP +
-            "&UserName=" + serverElement[0].UserName +
-            "&Password=" + serverElement[0].Password +
+            "?IP=" + DOMElements.Server.val() +
             "&ServiceName=" + serviceName +
             "&ConfigFileName=" + fileName + "' style='width: 1000px; height: 600px'></iframe>");
         NAP.loadingBox.close();
         DOMElements.EditConfigDialog.dialog('open');
-    }
+    };
 
     self.AutoRefresh = function () {
-        if (DOMElements.Grid.is(':visible') == true) {
+        window.clearInterval(timeInterval);
+        if (DOMElements.Grid.is(':visible') === true) {
             self.Submit(true);
         }
-    }
-}
+    };
+};
 
 $(document).ready(function () {
     serviceMonitoring = new ServiceMonitoring();
