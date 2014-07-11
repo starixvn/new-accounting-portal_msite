@@ -518,6 +518,8 @@ namespace Fanex.Maintenance.Controller
                 client.SendMail(mailRecord);
             }
 
+            ViewBag.Success = true;
+
             return View(mailRecord);
         }
         #endregion

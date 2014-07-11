@@ -128,11 +128,11 @@
     </script>
     @if (success)
     {
-        string dialogMsg = string.Format(ViewResource.AddSuccessMsg, ViewResource.Mail_Setting + " '" + Model.Subject, 5);
+        string dialogMsg = string.Format(ViewResource.Send_Success);
 
         <script type="text/javascript">
             $(function () {
-                NAP.showSuccessMsg('@dialogMsg', 'Mail/MailSetting', 6000);
+                NAP.showSuccessMsg('@dialogMsg', 'Mail/MailList', 6000);
             });
 
         </script>
