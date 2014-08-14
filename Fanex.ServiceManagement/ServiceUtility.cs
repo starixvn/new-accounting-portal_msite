@@ -376,7 +376,7 @@ namespace Fanex.ServiceManagement
             ConnectionOptions conn = new ConnectionOptions();
             conn.Username = this._userName;
             conn.Password = this._password;
-            ManagementScope scope = new ManagementScope("\\\\" + (this._isSelfConnect ? "." : this._ip) + "\\root\\CIMV2", this._isSelfConnect ? null : conn);
+            ManagementScope scope = new ManagementScope("\\\\" + (this._isSelfConnect ? "." : this._ip) + "\\root\\default", this._isSelfConnect ? null : conn);
             var registry = new ManagementClass(scope, new ManagementPath("StdRegProv"), null);
 
             // Returns a specific value for a specified key
