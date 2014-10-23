@@ -8,7 +8,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 5/15/2014 3:34:21 PM
+// Lasted generated date: 10/23/2014 10:42:21 AM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
@@ -35,6 +35,10 @@ public static class SiteFunctionKeys
 
     public const string ConnectionStringLog = "ConnectionStringLog";
 
+    public const string CreateFunctionMail = "CreateFunctionMail";
+
+    public const string CreateScheduleMail = "CreateScheduleMail";
+
     public const string DatabaseReport = "DatabaseReport";
 
     public const string DatabaseServer = "DatabaseServer";
@@ -51,6 +55,8 @@ public static class SiteFunctionKeys
 
     public const string MailFunction = "MailFunction";
 
+    public const string MailManagement = "MailManagement";
+
     public const string MailService = "MailService";
 
     public const string ManageConnection = "ManageConnection";
@@ -65,6 +71,8 @@ public static class SiteFunctionKeys
 
     public const string ManageMenu = "ManageMenu";
 
+    public const string ManageRecipient = "ManageRecipient";
+
     public const string ManageServers = "ManageServers";
 
     public const string ManageSite = "ManageSite";
@@ -76,6 +84,12 @@ public static class SiteFunctionKeys
     public const string Report = "Report";
 
     public const string ResendMail = "ResendMail";
+
+    public const string ScheduleConfig = "ScheduleConfig";
+
+    public const string ScheduleMailReport = "ScheduleMailReport";
+
+    public const string ServiceMonitoring = "ServiceMonitoring";
 
     public const string SmtpServers = "SmtpServers";
 
@@ -97,12 +111,12 @@ public static class SiteFunctionKeys
 
     public const string ViewAccountingReportMail = "ViewAccountingReportMail";
 
+    public const string ViewAccountingServiceReportMail = "ViewAccountingServiceReportMail";
+
     public const string ViewLog = "ViewLog";
 
     public const string ViewMailDetails = "ViewMailDetails";
 
     public const string ViewMailReport = "ViewMailReport";
-
-    public const string ServiceMonitoring = "ServiceMonitoring";
 
 }

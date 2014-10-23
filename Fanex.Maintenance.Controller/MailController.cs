@@ -800,16 +800,32 @@ namespace Fanex.Maintenance.Controller
         private void InitDataMailConfig(int appId = 0)
         {
             List<MailConfig> listConfig = _mailServer.GetListConfig(string.Empty);
+            var listConfigPermission = new List<MailConfig>();
 
-            var hasPermissionViewOnlyAccounting = HasRight(SiteFunctionKeys.ViewAccountingReportMail, Constant.Policy.Read)
-                && CurrentSession.Level == (int)Constant.Level.User;
+            var configPermission = ConfigurationManager.AppSettings["MailPermission:Application"];
+            var applicationPermissions = configPermission.Split(';');
 
-            if (hasPermissionViewOnlyAccounting)
+            foreach (var itemApplicationPermission in applicationPermissions)
             {
-                listConfig = listConfig.Where(x => x.AppID == 1).ToList();
+                var permission = itemApplicationPermission.Split(':');
+                var functionKey = permission[0];
+                var appliationId = int.Parse(permission[1]);
+
+                var hasPermission = HasRight(functionKey, Constant.Policy.Read)
+                    && CurrentSession.Level == (int)Constant.Level.User;
+
+                if (hasPermission)
+                {
+                    listConfigPermission.AddRange(listConfig.Where(x => x.AppID == appliationId));
+                }
             }
 
-            ViewBag.HasViewOnlyAccounting = hasPermissionViewOnlyAccounting;
+            if (listConfigPermission.Any())
+            {
+                listConfig = listConfigPermission;
+            }
+
+            ViewBag.HasLimitedConfigPermission = listConfigPermission.Any();
 
             ViewBag.ListMailConfig = listConfig.Select(c => new SelectListItem
             {

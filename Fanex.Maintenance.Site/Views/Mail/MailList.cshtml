@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = ViewResource.Mail_List;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var hasPermissionViewOnlyAccounting = (bool)ViewBag.HasViewOnlyAccounting;
+    var hasLimitedConfigPermission = (bool)ViewBag.HasLimitedConfigPermission;
 }
 @section Head {
     @Styles.Render("~/css/mail-list")
@@ -21,7 +21,7 @@
                 @Html.Label("Application")
             </div>
             <div class="edit-field">
-            @if (hasPermissionViewOnlyAccounting)
+            @if (hasLimitedConfigPermission)
             { 
                 @Html.DropDownList("ApplicationID", (List<SelectListItem>)ViewBag.ListMailConfig)
             }
