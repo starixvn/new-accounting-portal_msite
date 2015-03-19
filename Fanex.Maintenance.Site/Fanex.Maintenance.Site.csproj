@@ -52,8 +52,14 @@
     <Reference Include="BundleTransformer.Core">
       <HintPath>..\packages\BundleTransformer.Core.1.7.27\lib\net40\BundleTransformer.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\_Dependencies\MailStation\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="dotless.Core">
       <HintPath>..\packages\dotless.1.3.0.5\lib\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\_Dependencies\MailStation\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Caching">
       <HintPath>..\_Dependencies\Fanex\Fanex.Caching.dll</HintPath>
@@ -76,6 +82,16 @@
     <Reference Include="Fanex.MailDeliver.MailClient, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\MailService\Fanex.MailDeliver.MailClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.MailDelivery.Admin">
+      <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Admin.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.MailDelivery.Client">
+      <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.MailDelivery.MailStation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.MailStation.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\_Dependencies\Fanex\Fanex.NAP.Core.dll</HintPath>
@@ -115,6 +131,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\_Dependencies\MailStation\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\_Dependencies\MailStation\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="SPSRemoting">
       <HintPath>..\_Dependencies\Others\SPSRemoting.dll</HintPath>
@@ -193,6 +215,8 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\BundleExtensions.cs" />
+    <Compile Include="App_Start\MailStationBundles.cs" />
+    <Compile Include="Areas\MailStation\MailStationAreaRegistration.cs" />
     <Compile Include="Areas\UserLogin\Controllers\BaseController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\LoginController.cs" />
@@ -209,12 +233,29 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="App_Data\ConnectionStringSpName.xml" />
+    <Content Include="App_Data\DBMMS.bodb_MMS.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\mSiteSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\NAPCommonSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\MailStation\MailGroup\CreateMailGroup\Scripts\CreateMailGroup.js" />
+    <Content Include="Areas\MailStation\MailGroup\ManageMailGroup\Scripts\ManageMailGroup.js" />
+    <Content Include="Areas\MailStation\MailGroup\ManageMailGroup\Styles\Images\trigger.png" />
+    <Content Include="Areas\MailStation\MailGroup\UpdateMailGroup\Scripts\UpdateMailGroup.js" />
+    <Content Include="Areas\MailStation\ManageMail\CreateMail\Scripts\CreateMailController.js" />
+    <Content Include="Areas\MailStation\ManageMail\ManageMail\Scripts\MailManageController.js" />
+    <Content Include="Areas\MailStation\ManageMail\ManageMail\Styles\Images\trigger.png" />
+    <Content Include="Areas\MailStation\ManageMail\UpdateMail\Scripts\UpdateMailController.js" />
+    <Content Include="Areas\MailStation\ManageRecipient\CreateRecipient\Scripts\CreateRecipientController.js" />
+    <Content Include="Areas\MailStation\ManageRecipient\ManageRecipient\Scripts\ManageRecipientController.js" />
+    <Content Include="Areas\MailStation\ManageRecipient\UpdateRecipient\Scripts\UpdateRecipientController.js" />
+    <Content Include="Areas\MailStation\Report\MailDetail\Scripts\MailDetailController.js" />
+    <Content Include="Areas\MailStation\Report\MailLog\Scripts\MailLogController.js" />
+    <Content Include="Areas\MailStation\Report\MailReport\Scripts\MailReportController.js" />
     <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />
     <Content Include="Areas\UserLogin\scripts\Plugin\jquery-1.6.2.js" />
     <Content Include="Areas\UserLogin\scripts\ReCheckIn.js" />
@@ -242,7 +283,13 @@
     <Content Include="scripts\Connection\Log.js" />
     <Content Include="scripts\Connection\Database.js" />
     <Content Include="scripts\Connection\Site.js" />
+    <Content Include="scripts\lib\ContextMenu\ContextMenuController.js" />
+    <Content Include="scripts\lib\Countdown\CountdownController.js" />
+    <Content Include="scripts\lib\Countdown\Images\countdownCheck.png" />
+    <Content Include="scripts\lib\Countdown\Images\dropdown.png" />
+    <Content Include="scripts\lib\Countdown\Images\refresh.png" />
     <Content Include="scripts\lib\custom-datepicker.js" />
+    <Content Include="scripts\lib\InputCombobox\jquery.combobox-ext.js" />
     <Content Include="scripts\lib\jquery.blockUI.js" />
     <Content Include="scripts\lib\chosen\chosen-sprite.png" />
     <Content Include="scripts\lib\chosen\chosen.css" />
@@ -252,6 +299,9 @@
     <Content Include="scripts\lib\chosen\chosen.proto.min.js" />
     <Content Include="scripts\lib\jquery-1.8.0.min.js" />
     <Content Include="scripts\lib\jquery-ui-1.8.23.min.js" />
+    <Content Include="scripts\lib\MagicSuggest\css\bootstrap.min.css" />
+    <Content Include="scripts\lib\MagicSuggest\css\magicsuggest-min.css" />
+    <Content Include="scripts\lib\MagicSuggest\js\magicsuggest-min.js" />
     <Content Include="scripts\lib\msgbox\images\alert.png" />
     <Content Include="scripts\lib\msgbox\images\btn-close.png" />
     <Content Include="scripts\lib\msgbox\images\confirm.png" />
@@ -262,6 +312,22 @@
     <Content Include="scripts\lib\msgbox\msgbox-0.0.1.js" />
     <Content Include="scripts\lib\msgbox\msgbox-0.0.1.min.css" />
     <Content Include="scripts\lib\msgbox\msgbox-0.0.1.min.js" />
+    <Content Include="scripts\lib\MultipleSelect\images\BottomLine.png" />
+    <Content Include="scripts\lib\MultipleSelect\images\FirstNodeSpan.png" />
+    <Content Include="scripts\lib\MultipleSelect\images\MiddleLine.png" />
+    <Content Include="scripts\lib\MultipleSelect\images\NodeSpan.png" />
+    <Content Include="scripts\lib\MultipleSelect\images\PlusMinus.png" />
+    <Content Include="scripts\lib\MultipleSelect\images\sprites.png" />
+    <Content Include="scripts\lib\MultipleSelect\images\TopLine.png" />
+    <Content Include="scripts\lib\MultipleSelect\images\ui-icons_2e83ff_256x240-1.png" />
+    <Content Include="scripts\lib\MultipleSelect\images\ui-icons_2e83ff_256x240-2.png" />
+    <Content Include="scripts\lib\MultipleSelect\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\lib\MultipleSelect\jquery.multiselect.css" />
+    <Content Include="scripts\lib\MultipleSelect\jquery.multiselect.js" />
+    <Content Include="scripts\lib\NexCron\css\NexCron.css" />
+    <Content Include="scripts\lib\NexCron\images\calendar.gif" />
+    <Content Include="scripts\lib\NexCron\js\NexCron.js" />
+    <Content Include="scripts\lib\Popup\dialogbox.js" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.css" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.js" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.min.css" />
@@ -629,6 +695,39 @@
   <ItemGroup>
     <Content Include="Views\ServiceMonitoring\XMLEditor.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\MailStation\MailGroup\CreateMailGroup\Index.cshtml" />
+    <None Include="Areas\MailStation\MailGroup\CreateMailGroup\Styles\CreateMailGroup.less" />
+    <Content Include="Areas\MailStation\MailGroup\ManageMailGroup\Index.cshtml" />
+    <None Include="Areas\MailStation\MailGroup\ManageMailGroup\Styles\ManageMailGroup.less" />
+    <Content Include="Areas\MailStation\MailGroup\UpdateMailGroup\Index.cshtml" />
+    <None Include="Areas\MailStation\MailGroup\UpdateMailGroup\Styles\UpdateMailGroup.less" />
+    <Content Include="Areas\MailStation\ManageMail\CreateMail\Index.cshtml" />
+    <None Include="Areas\MailStation\ManageMail\CreateMail\Styles\CreateMail.less" />
+    <Content Include="Areas\MailStation\ManageMail\ManageMail\Index.cshtml" />
+    <None Include="Areas\MailStation\ManageMail\ManageMail\Styles\ManageMail.less" />
+    <Content Include="Areas\MailStation\ManageMail\UpdateMail\Index.cshtml" />
+    <None Include="Areas\MailStation\ManageMail\UpdateMail\Styles\UpdateMail.less" />
+    <Content Include="Areas\MailStation\ManageRecipient\CreateRecipient\Index.cshtml" />
+    <None Include="Areas\MailStation\ManageRecipient\CreateRecipient\Styles\CreateRecipient.less" />
+    <Content Include="Areas\MailStation\ManageRecipient\ManageRecipient\Index.cshtml" />
+    <None Include="Areas\MailStation\ManageRecipient\ManageRecipient\Styles\ManageRecipient.less" />
+    <Content Include="Areas\MailStation\ManageRecipient\UpdateRecipient\Index.cshtml" />
+    <None Include="Areas\MailStation\ManageRecipient\UpdateRecipient\Styles\UpdateRecipient.less" />
+    <Content Include="Areas\MailStation\Report\MailDetail\Index.cshtml" />
+    <None Include="Areas\MailStation\Report\MailDetail\Styles\MailDetail.less" />
+    <Content Include="Areas\MailStation\Report\MailLog\Index.cshtml" />
+    <None Include="Areas\MailStation\Report\MailLog\Styles\MailLog.less" />
+    <Content Include="Areas\MailStation\Report\MailReport\Index.cshtml" />
+    <None Include="Areas\MailStation\Report\MailReport\Styles\MailReport.less" />
+    <Content Include="Areas\MailStation\Web.config" />
+    <None Include="scripts\lib\Countdown\CountDown.less" />
+    <None Include="scripts\lib\InputCombobox\colors.less" />
+    <None Include="scripts\lib\InputCombobox\common.less" />
+    <None Include="scripts\lib\InputCombobox\fonts.less" />
+    <None Include="scripts\lib\InputCombobox\fonts\YanoneKaffeesatz.woff" />
+    <None Include="scripts\lib\InputCombobox\jquery.combobox-ext.less" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -645,7 +744,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>51518</DevelopmentServerPort>
+          <DevelopmentServerPort>56146</DevelopmentServerPort>
           <DevelopmentServerVPath>/mSite</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
