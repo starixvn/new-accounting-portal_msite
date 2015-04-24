@@ -58,7 +58,8 @@
     <Reference Include="dotless.Core">
       <HintPath>..\packages\dotless.1.3.0.5\lib\dotless.Core.dll</HintPath>
     </Reference>
-    <Reference Include="EasyNetQ">
+    <Reference Include="EasyNetQ, Version=0.47.10.380, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\MailStation\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Caching">
@@ -136,7 +137,8 @@
     <Reference Include="Quartz">
       <HintPath>..\_Dependencies\MailStation\Quartz.dll</HintPath>
     </Reference>
-    <Reference Include="RabbitMQ.Client">
+    <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\MailStation\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="SPSRemoting">

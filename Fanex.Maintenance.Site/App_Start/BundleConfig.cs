@@ -154,7 +154,7 @@ namespace Fanex.Maintenance.Site.App_Start
         public static void RegisterFanexGridBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/scripts/fanexgridscripts").Include(
-                "~/scripts/lib/Fanex.Grid/moment.js",
+                "~/scripts/lib/Fanex.Grid/moment.min.js",
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js"));
             bundles.AddAndInclude(
