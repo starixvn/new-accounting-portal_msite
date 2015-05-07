@@ -176,7 +176,7 @@ var MailReportController = function () {
             headerColumnHeight: 29,
             bodyRowHeight: 30,
             showPager: true,
-            timeZone: "-04:00",
+            timeZone: viewResources.TimeZone,
             customPager: true,
             pagerOption: {
                 itemsPerPage: sharedScriptManager.cachedData.defaultItemsPerPage,

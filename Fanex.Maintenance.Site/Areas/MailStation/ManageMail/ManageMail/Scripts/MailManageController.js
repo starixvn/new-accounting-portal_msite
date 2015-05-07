@@ -200,6 +200,7 @@ var MailManageController = function () {
             showDistinctRow: false,
             showHighlightRow: true,
             showPager: true,
+            timeZone: viewResources.TimeZone,
             gridExpandHeight: 350,
             pagerOption: {
                 itemsPerPage: sharedScriptManager.cachedData.defaultItemsPerPage,

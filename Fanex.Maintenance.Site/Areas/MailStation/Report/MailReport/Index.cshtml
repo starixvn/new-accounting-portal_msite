@@ -99,7 +99,9 @@
             Sent: '@Labels.Sent',
             Data_not_ready: '@Labels.Data_not_ready',
             Failed: '@Labels.Failed',
-            Abort: '@Labels.Abort'
+            Abort: '@Labels.Abort',
+
+            TimeZone: '@(Fanex.NAP.Core.Configuration.NapSettings.Settings.Environment == "UAT" ? "-04:00" : "-03:00")'
         };
     </script>
 }
