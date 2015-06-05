@@ -83,6 +83,8 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
                 "~/scripts/lib/jquery.cookie.js",
+                "~/scripts/lib/Fanex.Grid/moment.min.js",
+                "~/scripts/lib/moment/moment-timezone-with-data.js",
                 "~/scripts/lib/RefreshCountDown.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/add-mail-config").Include(
@@ -135,7 +137,7 @@ namespace Fanex.Maintenance.Site.App_Start
 
             RegisterSharedBundles(bundles);
             RegisterFanexGridBundles(bundles);
-            RegisterInputComboboxBundles(bundles);
+             RegisterInputComboboxBundles(bundles);
             MailStationBundles.RegisterAllBundles(bundles);
             bundles.FileSetOrderList.Clear();
         }
@@ -154,7 +156,6 @@ namespace Fanex.Maintenance.Site.App_Start
         public static void RegisterFanexGridBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/scripts/fanexgridscripts").Include(
-                "~/scripts/lib/Fanex.Grid/moment.min.js",
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js"));
             bundles.AddAndInclude(
