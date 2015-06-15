@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Repository.Criteria.MailService
     using System.ComponentModel.DataAnnotations;
     using Fanex.MailDeliver.Model;
     using Fanex.Maintenance.Repository;
-
+    using Fanex.Common;
     /// <summary>
     /// The mail setting view model.
     /// </summary>
@@ -29,12 +29,12 @@ namespace Fanex.Maintenance.Repository.Criteria.MailService
             this.Server = mailSetting.Server;
             this.Port = mailSetting.Port;
             this.Username = mailSetting.Username;
-            this.Password = mailSetting.Password;
+            this.Password = !string.IsNullOrWhiteSpace(mailSetting.Password) ? Cryptography.CfsEnCrypt(mailSetting.Password) : string.Empty;
             this.IsAuth = mailSetting.IsAuth;
         }
-        
+
         public int SettingId { get; set; }
-                
+
         [Display(Name = "Setting_Name", ResourceType = typeof(ViewResource))]
         [StringLength(50, MinimumLength = 2,
             ErrorMessageResourceName = "InputLengthValidationMsg",
