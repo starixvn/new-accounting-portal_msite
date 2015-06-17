@@ -204,7 +204,7 @@ var MailManageController = function () {
             var endIndex = ((page_index + 1) * itemsPerPage);
             var currentBodyRows = cacheObject.bodyData.slice(startIndex, endIndex);
             gridOptions.bodyRows = currentBodyRows;
-            DOMElements.gridContainer.fanexGrid(gridOptions);
+            DOMElements.gridContainer.fanexGrid(gridOptions); 
             self.bindGridEvent();
             return false;
         };
@@ -264,7 +264,7 @@ var MailManageController = function () {
             self.runNow(mailIndex, function () {
                 setTimeout(function () {
                     NAP.headlineMsgBox.close();
-                    self.getMailList();
+                    // self.getMailList();
                 }, sharedScriptManager.cachedData.alertSuccessTime);
             });
         });
