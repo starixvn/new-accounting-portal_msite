@@ -772,6 +772,7 @@
     <None Include="scripts\lib\InputCombobox\jquery.combobox-ext.less" />
     <None Include="themes\shared\contextmenu.less" />
     <None Include="themes\shared\formedit.less" />
+    <Content Include="Views\Shared\_LayoutWithTimer.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
