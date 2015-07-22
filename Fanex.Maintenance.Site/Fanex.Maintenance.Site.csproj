@@ -734,29 +734,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\MailStation\MailGroup\CreateMailGroup\Index.cshtml" />
-    <None Include="Areas\MailStation\MailGroup\CreateMailGroup\Styles\CreateMailGroup.less" />
+    <Content Include="Areas\MailStation\MailGroup\CreateMailGroup\Styles\CreateMailGroup.less" />
     <Content Include="Areas\MailStation\MailGroup\ManageMailGroup\Index.cshtml" />
-    <None Include="Areas\MailStation\MailGroup\ManageMailGroup\Styles\ManageMailGroup.less" />
+    <Content Include="Areas\MailStation\MailGroup\ManageMailGroup\Styles\ManageMailGroup.less" />
     <Content Include="Areas\MailStation\MailGroup\UpdateMailGroup\Index.cshtml" />
-    <None Include="Areas\MailStation\MailGroup\UpdateMailGroup\Styles\UpdateMailGroup.less" />
+    <Content Include="Areas\MailStation\MailGroup\UpdateMailGroup\Styles\UpdateMailGroup.less" />
     <Content Include="Areas\MailStation\ManageMail\CreateMail\Index.cshtml" />
-    <None Include="Areas\MailStation\ManageMail\CreateMail\Styles\CreateMail.less" />
+    <Content Include="Areas\MailStation\ManageMail\CreateMail\Styles\CreateMail.less" />
     <Content Include="Areas\MailStation\ManageMail\ManageMail\Index.cshtml" />
-    <None Include="Areas\MailStation\ManageMail\ManageMail\Styles\ManageMail.less" />
+    <Content Include="Areas\MailStation\ManageMail\ManageMail\Styles\ManageMail.less" />
     <Content Include="Areas\MailStation\ManageMail\UpdateMail\Index.cshtml" />
-    <None Include="Areas\MailStation\ManageMail\UpdateMail\Styles\UpdateMail.less" />
+    <Content Include="Areas\MailStation\ManageMail\UpdateMail\Styles\UpdateMail.less" />
     <Content Include="Areas\MailStation\ManageRecipient\CreateRecipient\Index.cshtml" />
-    <None Include="Areas\MailStation\ManageRecipient\CreateRecipient\Styles\CreateRecipient.less" />
+    <Content Include="Areas\MailStation\ManageRecipient\CreateRecipient\Styles\CreateRecipient.less" />
     <Content Include="Areas\MailStation\ManageRecipient\ManageRecipient\Index.cshtml" />
-    <None Include="Areas\MailStation\ManageRecipient\ManageRecipient\Styles\ManageRecipient.less" />
+    <Content Include="Areas\MailStation\ManageRecipient\ManageRecipient\Styles\ManageRecipient.less" />
     <Content Include="Areas\MailStation\ManageRecipient\UpdateRecipient\Index.cshtml" />
-    <None Include="Areas\MailStation\ManageRecipient\UpdateRecipient\Styles\UpdateRecipient.less" />
+    <Content Include="Areas\MailStation\ManageRecipient\UpdateRecipient\Styles\UpdateRecipient.less" />
     <Content Include="Areas\MailStation\Report\MailDetail\Index.cshtml" />
-    <None Include="Areas\MailStation\Report\MailDetail\Styles\MailDetail.less" />
+    <Content Include="Areas\MailStation\Report\MailDetail\Styles\MailDetail.less" />
     <Content Include="Areas\MailStation\Report\MailLog\Index.cshtml" />
-    <None Include="Areas\MailStation\Report\MailLog\Styles\MailLog.less" />
+    <Content Include="Areas\MailStation\Report\MailLog\Styles\MailLog.less" />
     <Content Include="Areas\MailStation\Report\MailReport\Index.cshtml" />
-    <None Include="Areas\MailStation\Report\MailReport\Styles\MailReport.less" />
+    <Content Include="Areas\MailStation\Report\MailReport\Styles\MailReport.less" />
     <Content Include="Areas\MailStation\Web.config" />
     <Content Include="Web.local.config">
       <SubType>Designer</SubType>
