@@ -764,7 +764,7 @@
     <Content Include="WebConnectionString.local.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="scripts\lib\Countdown\CountDown.less" />
+    <Content Include="scripts\lib\Countdown\CountDown.less" />
     <None Include="scripts\lib\InputCombobox\colors.less" />
     <None Include="scripts\lib\InputCombobox\common.less" />
     <None Include="scripts\lib\InputCombobox\fonts.less" />
