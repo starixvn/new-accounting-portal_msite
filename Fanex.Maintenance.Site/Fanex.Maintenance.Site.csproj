@@ -758,6 +758,12 @@
     <Content Include="Areas\MailStation\Report\MailReport\Index.cshtml" />
     <None Include="Areas\MailStation\Report\MailReport\Styles\MailReport.less" />
     <Content Include="Areas\MailStation\Web.config" />
+    <Content Include="Web.local.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WebConnectionString.local.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="scripts\lib\Countdown\CountDown.less" />
     <None Include="scripts\lib\InputCombobox\colors.less" />
     <None Include="scripts\lib\InputCombobox\common.less" />
