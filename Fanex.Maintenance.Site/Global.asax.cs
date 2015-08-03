@@ -48,6 +48,12 @@ namespace Fanex.Maintenance.Site
             // Logging
             Exception ex = Server.GetLastError().GetBaseException();
 
+            // Don't write log for HTTP exception
+            if (ex is HttpException)
+            {
+                return;
+            }
+
             if (!Request.IsLocal)
             {
                 // Remove sensitive log data
