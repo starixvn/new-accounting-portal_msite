@@ -771,6 +771,12 @@
     <Content Include="WebConnectionString.pro.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="WebConnectionString.uat.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.uat.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="scripts\lib\InputCombobox\colors.less" />
     <None Include="scripts\lib\InputCombobox\common.less" />
     <None Include="scripts\lib\InputCombobox\fonts.less" />
