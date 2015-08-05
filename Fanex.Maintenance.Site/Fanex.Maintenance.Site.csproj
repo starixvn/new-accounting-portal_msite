@@ -328,7 +328,6 @@
     <Content Include="scripts\lib\MagicSuggest\css\bootstrap.min.css" />
     <Content Include="scripts\lib\MagicSuggest\css\magicsuggest-min.css" />
     <Content Include="scripts\lib\MagicSuggest\js\magicsuggest-min.js" />
-    <Content Include="scripts\lib\moment\moment-timezone-with-data.js" />
     <Content Include="scripts\lib\msgbox\images\alert.png" />
     <Content Include="scripts\lib\msgbox\images\btn-close.png" />
     <Content Include="scripts\lib\msgbox\images\confirm.png" />
