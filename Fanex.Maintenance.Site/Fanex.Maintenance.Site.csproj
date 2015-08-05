@@ -306,6 +306,15 @@
     <Content Include="scripts\lib\Countdown\Images\dropdown.png" />
     <Content Include="scripts\lib\Countdown\Images\refresh.png" />
     <Content Include="scripts\lib\custom-datepicker.js" />
+    <Content Include="scripts\lib\Fanex.Grid\Language\Fanex.Gird.Lang.en-US.js" />
+    <Content Include="scripts\lib\Fanex.Grid\Language\Fanex.Gird.Lang.ja-JP.js" />
+    <Content Include="scripts\lib\Fanex.Grid\Language\Fanex.Gird.Lang.ko-KR.js" />
+    <Content Include="scripts\lib\Fanex.Grid\Language\Fanex.Gird.Lang.th-TH.js" />
+    <Content Include="scripts\lib\Fanex.Grid\Language\Fanex.Gird.Lang.vi-VN.js" />
+    <Content Include="scripts\lib\Fanex.Grid\Language\Fanex.Gird.Lang.zh-CN.js" />
+    <Content Include="scripts\lib\Fanex.Grid\Language\Fanex.Gird.Lang.zh-TW.js" />
+    <Content Include="scripts\lib\Fanex.Grid\moment.min.js" />
+    <Content Include="scripts\lib\Fanex.Grid\numeral.min.js" />
     <Content Include="scripts\lib\InputCombobox\jquery.combobox-ext.js" />
     <Content Include="scripts\lib\jquery.blockUI.js" />
     <Content Include="scripts\lib\chosen\chosen-sprite.png" />
@@ -319,6 +328,7 @@
     <Content Include="scripts\lib\MagicSuggest\css\bootstrap.min.css" />
     <Content Include="scripts\lib\MagicSuggest\css\magicsuggest-min.css" />
     <Content Include="scripts\lib\MagicSuggest\js\magicsuggest-min.js" />
+    <Content Include="scripts\lib\moment\moment-timezone-with-data.js" />
     <Content Include="scripts\lib\msgbox\images\alert.png" />
     <Content Include="scripts\lib\msgbox\images\btn-close.png" />
     <Content Include="scripts\lib\msgbox\images\confirm.png" />
@@ -778,6 +788,7 @@
     <Content Include="Web.uat.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="scripts\lib\Fanex.Grid\Fanex.Grid.less" />
     <None Include="scripts\lib\InputCombobox\colors.less" />
     <None Include="scripts\lib\InputCombobox\common.less" />
     <None Include="scripts\lib\InputCombobox\fonts.less" />
