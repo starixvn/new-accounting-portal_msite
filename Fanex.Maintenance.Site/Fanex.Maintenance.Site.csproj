@@ -793,8 +793,8 @@
     <None Include="scripts\lib\InputCombobox\fonts.less" />
     <None Include="scripts\lib\InputCombobox\fonts\YanoneKaffeesatz.woff" />
     <None Include="scripts\lib\InputCombobox\jquery.combobox-ext.less" />
-    <None Include="themes\shared\contextmenu.less" />
-    <None Include="themes\shared\formedit.less" />
+    <Content Include="themes\shared\contextmenu.less" />
+    <Content Include="themes\shared\formedit.less" />
     <Content Include="Views\Shared\_LayoutWithTimer.cshtml" />
   </ItemGroup>
   <PropertyGroup>
