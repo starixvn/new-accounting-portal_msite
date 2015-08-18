@@ -183,8 +183,6 @@ var Logs = (function ($) {
             var $this = $(this);
             var isMonitored = $this.is(':checked');
 
-            $this.prop('checked', !isMonitored).change();
-
             NAP.headlineMsgBox.confirm('Are you sure that this log is being handled', function () {
                 var logId = $this.attr('data-logIds');
                 if (logId == "null") {
@@ -218,8 +216,6 @@ var Logs = (function ($) {
         monitorAllLog: function () {
             var $this = $(this);
             var isMonitored = $this.is(':checked');
-
-            $this.prop('checked', !isMonitored).change();
 
             NAP.headlineMsgBox.confirm('Are you sure that these logs are being handled', function () {
                 var logids = "";
