@@ -16,12 +16,12 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using System.Web.Mvc;
     using System.Web.Security;
     using Fanex.Common;
-    using Fanex.NAP.Core.Criteria.User;
-    using Fanex.NAP.Core.Model;
+    using Fanex.NAP.Core.Models;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
+    using Fanex.NAP.Core.Models.ParameterObject;
 
     /// <summary>
     /// SSO controller.
@@ -32,7 +32,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         private readonly int _timeExipration = 30;
         private IUserService _userService;
-        private IMenuItemService _menuItemService;
+        private ISecurityService _securityService;
         private ICurrentSession _currentSession;
 
         #endregion members
@@ -46,11 +46,11 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         public SSOController(
             IUserService userService,
-            IMenuItemService menuItemService,
+            ISecurityService securityService,
             ICurrentSession currentSession)
         {
             _userService = userService ?? new UserService();
-            _menuItemService = menuItemService ?? new MenuItemService();
+            _securityService = securityService ?? new SecurityService();
             _currentSession = currentSession ?? new CurrentSession();
         }
 
@@ -71,14 +71,14 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             userId = Cryptography.CfsDeCrypt(userId.Replace(" ", "+"));
             onuserId = Cryptography.CfsDeCrypt(onuserId.Replace(" ", "+"));
             time = Cryptography.CfsDeCrypt(time.Replace(" ", "+"));
-            string currentTime = _userService.UserSSOGetTime();
+            string currentTime = _securityService.GetTime();
 
             var expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(time);
 
             if (expiration.TotalSeconds <= _timeExipration)
             {
                 // SSO check-in
-                var criteria = new UserSSOCheckInUserCriteria
+                var criteria = new SSOLoginParameter
                 {
                     UserId = Convert.ToInt32(userId),
                     SiteId = SiteId,
@@ -93,22 +93,22 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                     Platform = CurrentContext.Platform
                 };
 
-                _userService.UserSSOCheckIn(ref criteria);
+                var onlineUserId = _securityService.SSOLogin(criteria);
 
                 if (criteria.OnUserId != 0)
                 {
-                    var user = _userService.GetById(criteria.UserId) as User;
+                    var user = _userService.Get(criteria.UserId) as User;
 
                     // saves user session & auth info
                     _currentSession.UserId = user.Id;
                     _currentSession.Username = user.Username;
-                    _currentSession.OnUserId = criteria.OnUserId;
+                    _currentSession.OnUserId = onlineUserId;
                     _currentSession.SessionId = Session.SessionID.ToString();
-                    _currentSession.Level = _userService.GetUserSiteLevel(user.Id, this.SiteId);
+                    _currentSession.Level = _userService.GetUserLevel(user.Id, this.SiteId);
 
                     if (this.SiteId != 0)
                     {
-                        _currentSession.MenuItemList = _menuItemService.GetByUserAndSiteIncludeGroup(
+                        _currentSession.MenuItemList = _userService.GetMenuItem(
                                                                                 user.Id,
                                                                                 SiteId,
                                                                                 Environment,
@@ -132,7 +132,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <param name="user">Current login user.</param>
         private void CreateAuthInfo(User user)
         {
-            var currentDomain = CurrentContext.GetCurrentDomain();
+            var currentDomain = CurrentContext.CurrentDomain;
 
             var authInfo = new AuthInfo();
 

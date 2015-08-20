@@ -8,7 +8,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 10/23/2014 10:42:21 AM
+// Lasted generated date: 8/20/2015 10:59:17 AM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
@@ -35,10 +35,6 @@ public static class SiteFunctionKeys
 
     public const string ConnectionStringLog = "ConnectionStringLog";
 
-    public const string CreateFunctionMail = "CreateFunctionMail";
-
-    public const string CreateScheduleMail = "CreateScheduleMail";
-
     public const string DatabaseReport = "DatabaseReport";
 
     public const string DatabaseServer = "DatabaseServer";
@@ -55,9 +51,9 @@ public static class SiteFunctionKeys
 
     public const string MailFunction = "MailFunction";
 
-    public const string MailManagement = "MailManagement";
-
     public const string MailService = "MailService";
+
+    public const string MailStation = "MailStation";
 
     public const string ManageConnection = "ManageConnection";
 
@@ -69,9 +65,15 @@ public static class SiteFunctionKeys
 
     public const string ManageGroup = "ManageGroup";
 
+    public const string ManageMail = "ManageMail";
+
+    public const string ManageMailGroup = "ManageMailGroup";
+
     public const string ManageMenu = "ManageMenu";
 
     public const string ManageRecipient = "ManageRecipient";
+
+    public const string ManageReport = "ManageReport";
 
     public const string ManageServers = "ManageServers";
 
@@ -84,10 +86,6 @@ public static class SiteFunctionKeys
     public const string Report = "Report";
 
     public const string ResendMail = "ResendMail";
-
-    public const string ScheduleConfig = "ScheduleConfig";
-
-    public const string ScheduleMailReport = "ScheduleMailReport";
 
     public const string ServiceMonitoring = "ServiceMonitoring";
 
@@ -110,8 +108,6 @@ public static class SiteFunctionKeys
     public const string UserOnlineDaily = "UserOnlineDaily";
 
     public const string ViewAccountingReportMail = "ViewAccountingReportMail";
-
-    public const string ViewAccountingServiceReportMail = "ViewAccountingServiceReportMail";
 
     public const string ViewLog = "ViewLog";
 

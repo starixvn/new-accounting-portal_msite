@@ -9,7 +9,7 @@
 
 namespace Fanex.Maintenance.Repository.Criteria.Log
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get all machines criteria.

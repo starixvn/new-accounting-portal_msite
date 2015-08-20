@@ -19,6 +19,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
+    using Fanex.NAP.Core.Context;
 
     /// <summary>
     /// Base controller.
@@ -28,7 +29,6 @@ namespace Fanex.Maintenance.Controller
         protected readonly string Environment = NapSettings.Settings.Environment;
         protected readonly int SiteId = NapSettings.Settings.SiteId;
         protected readonly CurrentContext CurrentContext;
-        protected readonly IServiceContext ServiceContext;
         protected readonly CurrentSession CurrentSession;
         private readonly IUserService _userService;
         private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
@@ -39,18 +39,12 @@ namespace Fanex.Maintenance.Controller
             CurrentContext = new CurrentContext();
             CurrentSession = new CurrentSession();
 
-            ServiceContext = new ServiceContext
-            {
-                UserId = this.CurrentSession.UserId,
-                Ip = this.CurrentContext.IP
-            };
-
             ViewFlags = new ViewFlags
             {
                 IsReCheckin = NapSettings.Settings.EnableReCheckIn
             };
 
-            _userService = new UserService { ServiceContext = ServiceContext };
+            _userService = new UserService();
 
             try
             {
@@ -103,7 +97,7 @@ namespace Fanex.Maintenance.Controller
 
         public bool HasRight(string functionKey, Constant.Policy policy)
         {
-            int functionPolicy = _userService.GetUserSiteFunctionKeyPolicy(CurrentSession.UserId, this.SiteId, functionKey);
+            int functionPolicy = _userService.GetPermission(CurrentSession.UserId, this.SiteId, functionKey);
 
             return functionPolicy >= (int)policy;
         }

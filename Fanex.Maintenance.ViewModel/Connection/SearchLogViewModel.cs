@@ -14,7 +14,7 @@ namespace Fanex.Maintenance.ViewModel.Connection
     using System.Xml.Linq;
     using Fanex.ConnectionString.Domain;
     using Fanex.ConnectionString.Model;
-    using Fanex.NAP.Core.Helpers;
+    using Fanex.Maintenance.Core.Helpers;
 
     /// <summary>
     /// The search log view model.

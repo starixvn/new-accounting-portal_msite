@@ -13,6 +13,7 @@ namespace Fanex.Maintenance.Repository.Criteria.MailService
     using Fanex.Common;
     using Fanex.MailDeliver.Model;
     using Fanex.Maintenance.Repository;
+    using Fanex.Maintenance.Core;
     
     /// <summary>
     /// The mail setting view model.

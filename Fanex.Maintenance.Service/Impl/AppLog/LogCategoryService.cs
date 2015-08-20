@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
     using System.Collections.Generic;
     using Fanex.Maintenance.Core.Model;
     using Fanex.Maintenance.Repository.Criteria.Log;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Log category service.

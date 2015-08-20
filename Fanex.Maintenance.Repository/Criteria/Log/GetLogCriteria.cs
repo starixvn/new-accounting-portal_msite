@@ -11,7 +11,7 @@ namespace Fanex.Maintenance.Repository.Criteria.Log
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get log criteria.

@@ -10,7 +10,7 @@
 namespace Fanex.Maintenance.Repository.Criteria.Log
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Insert criteria.

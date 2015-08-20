@@ -9,7 +9,7 @@
 
 namespace Fanex.Maintenance.Repository.Criteria.Misc
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Result criteria.

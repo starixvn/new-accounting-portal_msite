@@ -9,7 +9,7 @@
 
 namespace Fanex.Maintenance.Repository.Criteria.LrfDomain
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get All LRF Domain Criteria.

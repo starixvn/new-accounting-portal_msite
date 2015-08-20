@@ -20,13 +20,13 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.Common.Extensions;
     using Fanex.Logging;
     using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Core.Criteria.User;
-    using Fanex.NAP.Core.Model;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
+    using Fanex.NAP.Core.Models;
+    using Fanex.NAP.Core.Models.ParameterObject;
 
     /// <summary>
     /// Login controller.
@@ -38,9 +38,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         private IUserService _userService;
         private IGroupService _groupService;
         private ISiteService _siteService;
-        private IMenuItemService _menuItemService;
         private ICurrentSession _currentSession;
         private IMaintenanceService _maintenanceService;
+        private ISecurityService _securityService;
 
         #endregion members
 
@@ -55,16 +55,16 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             IUserService userService,
             IGroupService groupService,
             ISiteService siteService,
-            IMenuItemService menuItemService,
             ICurrentSession currentSession,
-            IMaintenanceService maintenanceService)
+            IMaintenanceService maintenanceService,
+            ISecurityService securityService)
         {
             _userService = userService ?? new UserService();
             _groupService = groupService ?? new GroupService();
             _siteService = siteService ?? new SiteService();
-            _menuItemService = menuItemService ?? new MenuItemService();
             _currentSession = currentSession ?? new CurrentSession();
             _maintenanceService = maintenanceService ?? new MaintenanceService();
+            _securityService = securityService ?? new SecurityService();
         }
 
         #endregion ctors
@@ -78,7 +78,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var maintenanceInfo = _maintenanceService.GetDowntimeInfo();
+            var maintenanceInfo = _maintenanceService.GetDowntime();
 
             if (!NapSettings.Settings.IsNapHub && !this.IsSiteLogin)
             {
@@ -107,7 +107,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         {
             if (!username.IsNullOrTrimEmpty() && !password.IsNullOrTrimEmpty())
             {
-                var user = _userService.GetByUsername(username.Trim()) as User;
+                var user = _userService.Get(username.Trim()) as User;
 
                 try
                 {
@@ -117,13 +117,13 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                         if (password == user.Password)
                         {
-                            var group = user.Group == null ? null : _groupService.GetById(user.Group.Id);
-                            var siteLevelList = _siteService.GetSiteLevelByUser(user.Id, Environment); // gets all sites of logging-in user
+                            var group = user.Group == null ? null : _groupService.Get(user.Group.Id);
+                            var siteLevelList = _userService.GetSiteLevel(user.Id, Environment);
 
                             if ((group == null || group.IsActive) && siteLevelList.Where(x => x.IsActive).Any())
                             {
                                 // check-in user
-                                var criteria = new UserCheckInUserCriteria
+                                var criteria = new LoginParameter
                                 {
                                     UserId = user.Id,
                                     SiteId = this.SiteId,
@@ -136,13 +136,13 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                     Platform = CurrentContext.Platform
                                 };
 
-                                _userService.UserCheckIn(ref criteria);
+                                var onlineUserId = _securityService.Login(criteria);
 
                                 // saves user session
-                                _currentSession.Level = _userService.GetUserSiteLevel(user.Id, this.SiteId);
+                                _currentSession.Level = _userService.GetUserLevel(user.Id, this.SiteId);
                                 _currentSession.UserId = user.Id;
                                 _currentSession.Username = username;
-                                _currentSession.OnUserId = criteria.OnUserId;
+                                _currentSession.OnUserId = onlineUserId;
                                 _currentSession.SessionId = Session.SessionID.ToString();
 
                                 // current site is not NAP Hub
@@ -171,7 +171,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                                     if (userIsActiveOnThisSite)
                                     {
-                                        _currentSession.MenuItemList = _menuItemService.GetByUserAndSiteIncludeGroup(
+                                        _currentSession.MenuItemList = _userService.GetMenuItem(
                                                                                     user.Id,
                                                                                     SiteId,
                                                                                     Environment,
@@ -196,7 +196,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                     // user has access to one site
                                     var site = siteLevelList.Where(s => s.IsActive).First().Site;
 
-                                    var listSiteUrl = _siteService.GetSiteUrlBySiteId(site.Id, this.Environment).Where(u => u.IsActive).ToList();
+                                    var listSiteUrl = _siteService.GetUrlById(site.Id, this.Environment).Where(u => u.IsActive).ToList();
 
                                     if (listSiteUrl.Count() > 1)
                                     {
@@ -272,7 +272,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         [HttpPost]
         public ActionResult ReCheckLogin()
         {
-            var maintenanceInfo = _maintenanceService.GetDowntimeInfo();
+            var maintenanceInfo = _maintenanceService.GetDowntime();
 
             if (maintenanceInfo.IsDowntime)
             {
@@ -282,7 +282,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             // check if not nap hub
             if (this.SiteId != 0)
             {
-                var siteStatus = _siteService.GetStatusById(this.SiteId);
+                var siteStatus = _siteService.IsActivated(this.SiteId);
 
                 if (!siteStatus)
                 {
@@ -290,11 +290,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                 }
             }
 
-            UserReCheckInUserCriteria criteria = new UserReCheckInUserCriteria();
-            criteria.OnUserId = Convert.ToInt32(_currentSession.OnUserId);
-            _userService.ReUserCheckIn(ref criteria);
+            var isKickedOut = _securityService.ReCheckIn(Convert.ToInt32(_currentSession.OnUserId));
 
-            return Json(criteria.IsKickedOut ? "1" : "0");
+            return Json(isKickedOut ? "1" : "0");
         }
 
         #endregion re check in
@@ -307,7 +305,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <param name="user">User object.</param>
         private void CreateUserMenu(User user)
         {
-            _currentSession.MenuItemList = (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(
+            _currentSession.MenuItemList = (IList<MenuItem>)_userService.GetMenuItem(
                                                                                     user.Id,
                                                                                     SiteId,
                                                                                     Environment,
@@ -320,7 +318,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <param name="user">User object.</param>
         private void CreateAuthInfo(User user)
         {
-            var currentDomain = CurrentContext.GetCurrentDomain();
+            var currentDomain = CurrentContext.CurrentDomain;
 
             var authInfo = new AuthInfo();
 
@@ -354,10 +352,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// </summary>
         private void DoSignOut()
         {
-            _userService.UserLogOut(new LogOutUserCriteria
-            {
-                OnUserId = _currentSession.OnUserId
-            });
+            _securityService.Logout(_currentSession.OnUserId);
             FormsAuthentication.SignOut();
             Response.Cookies.Clear();
             _currentSession.ClearAll();

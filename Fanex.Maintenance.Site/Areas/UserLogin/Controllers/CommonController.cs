@@ -37,7 +37,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <returns>Action result.</returns>
         public ActionResult Offline()
         {
-            var downTime = _maintenanceService.GetDowntimeInfo();
+            var downTime = _maintenanceService.GetDowntime();
 
             if (!downTime.IsDowntime)
             {

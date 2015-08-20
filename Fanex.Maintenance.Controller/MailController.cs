@@ -683,8 +683,8 @@ namespace Fanex.Maintenance.Controller
                 .WithStatus(status)
                 .GetListMailByDate(ref totalRows);
 
-            var policyViewDetail = _userService.GetUserSiteFunctionKeyPolicy(CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ViewMailDetails);
-            var policyResend = _userService.GetUserSiteFunctionKeyPolicy(CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ResendMail);
+            var policyViewDetail = _userService.GetPermission(CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ViewMailDetails);
+            var policyResend = _userService.GetPermission(CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ResendMail);
 
             return Json(new
             {

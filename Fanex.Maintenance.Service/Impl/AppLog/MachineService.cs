@@ -13,7 +13,7 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
     using Fanex.Maintenance.Core.Model;
     using Fanex.Maintenance.Repository.Criteria.Log;
     using Fanex.Maintenance.Repository.Impl.AppLog;
-    using Fanex.NAP.Framework.Command;
+    using Fanex.NAP.Core.Command;
 
     /// <summary>
     /// Machine Service.

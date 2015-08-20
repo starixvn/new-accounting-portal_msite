@@ -19,10 +19,9 @@ namespace Fanex.Maintenance.Controller
     using Fanex.ConnectionString.Model;
     using Fanex.Maintenance.ViewModel.Connection;
     using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Helpers;
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.Framework.Command;
+    using Fanex.NAP.Core.Command;
 
     /// <summary>
     /// Connection string controller.
@@ -54,11 +53,11 @@ namespace Fanex.Maintenance.Controller
             ILogService logServer,
             IDatabaseService aliasDatabaseService)
         {
-            _databaseServerService = databaseServerService ?? new DatabaseServerService { ServiceContext = ServiceContext };
-            _siteService = siteService ?? new SiteService { ServiceContext = ServiceContext };
-            _connectionService = connectionService ?? new ConnectionService { ServiceContext = ServiceContext };
-            _logService = logServer ?? new LogService { ServiceContext = ServiceContext };
-            _databaseService = aliasDatabaseService ?? new DatabaseService { ServiceContext = ServiceContext };
+            _databaseServerService = databaseServerService ?? new DatabaseServerService();
+            _siteService = siteService ?? new SiteService();
+            _connectionService = connectionService ?? new ConnectionService();
+            _logService = logServer ?? new LogService();
+            _databaseService = aliasDatabaseService ?? new DatabaseService();
         }
 
         #endregion Ctor
