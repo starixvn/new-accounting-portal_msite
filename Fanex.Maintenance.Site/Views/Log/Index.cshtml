@@ -24,40 +24,41 @@
     <section id="filter-bar" style="width: 98%" ng-controller="logController">
         <div class="filter-form">
             <div class="filter-row">
-                <div class="lbl-field width-auto">
+                <div class="lbl-field width-60">
                     @Html.LabelFor(m => m.CategoryId, ViewResource.Category)
                 </div>
-                <div class="edit-field width-180">
-                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, new { @class = "width-180" })
+                <div class="edit-field width-220">
+                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, new { @class = "width-220" })
                 </div>
-                <div class="lbl-field width-80">
-                    @Html.LabelFor(m => m.MachineId, ViewResource.Machine)
-                </div>
-                <div class="edit-field width-180">
-                    <select id="MachineId" name="MachineId" class="width-180">
-                    </select>
-                </div>
-                <div class="lbl-field width-80">
-                    @Html.LabelFor(m => m.Severity, ViewResource.Severity)
-                </div>
-                <div class="edit-field width-100">
-                    @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity, new { @class = "width-100" })
-                </div>
-            </div>
-            <div class="filter-row">
                 <div class="lbl-field width-60">
                     @Html.LabelFor(m => m.From, ViewResource.From)
                 </div>
-                <div class="edit-field width-180">
-                    @Html.TextBox("From", Model.From.ToString("MMM dd,yyyy"), new { @style = "width:137px;margin-right:5px;", @autocomplete = "off" })
+                <div class="edit-field width-120">
+                    @Html.TextBox("From", Model.From.ToString("MMM dd,yyyy"), new { @style = "width:77px;margin-right:5px;", @autocomplete = "off" })
                 </div>
-                <div class="lbl-field width-80">
+                <div class="lbl-field width-40">
                     @Html.LabelFor(m => m.To, ViewResource.To)
                 </div>
-                <div class="edit-field width-180">
-                    @Html.TextBox("To", Model.To.ToString("MMM dd,yyyy"), new { @style = "width:137px;margin-right:5px;", @autocomplete = "off" })
+                <div class="edit-field width-120">
+                    @Html.TextBox("To", Model.To.ToString("MMM dd,yyyy"), new { @style = "width:77px;margin-right:5px;", @autocomplete = "off" })
                 </div>
-                <div class="lbl-field width-80">
+                
+            </div>
+            <div class="filter-row">
+                <div class="lbl-field width-60">
+                    @Html.LabelFor(m => m.MachineId, ViewResource.Machine)
+                </div>
+                <div class="edit-field width-220">
+                    <select id="MachineId" name="MachineId" class="width-220">
+                    </select>
+                </div>
+                <div class="lbl-field width-60">
+                    @Html.LabelFor(m => m.Severity, ViewResource.Severity)
+                </div>
+                <div class="edit-field width-120">
+                    @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity, new { @class = "width-100" })
+                </div>
+                <div class="lbl-field width-40">
                     @Html.LabelFor(m => m.IsMonitored, ViewResource.Status)
                 </div>
                 <div class="edit-field width-120">

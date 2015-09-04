@@ -20,14 +20,14 @@
             <div class="lbl-field width-auto">
                 @Html.Label("Application")
             </div>
-            <div class="edit-field">
+            <div class="edit-field width-180">
             @if (hasLimitedConfigPermission)
             { 
-                @Html.DropDownList("ApplicationID", (List<SelectListItem>)ViewBag.ListMailConfig)
+                @Html.DropDownList("ApplicationID", (List<SelectListItem>)ViewBag.ListMailConfig, new { @class = "width-180" })
             }
             else
             { 
-                    @Html.DropDownList("ApplicationID", (List<SelectListItem>)ViewBag.ListMailConfig, "All")
+                @Html.DropDownList("ApplicationID", (List<SelectListItem>)ViewBag.ListMailConfig, "All", new { @class = "width-180" })
             }
             </div>
             <div class="lbl-field width-auto">
@@ -39,14 +39,14 @@
             <div class="lbl-field width-auto">
                 @Html.Label("From")
             </div>
-            <div class="edit-field">
-                @Html.TextBox("From", string.Empty, new { @style = "width:90px;margin-right:5px;" })
+            <div class="edit-field width-120">
+                @Html.TextBox("From", string.Empty, new { @style = "width:77px;margin-right:5px;" })
             </div>
             <div class="lbl-field width-auto">
                 @Html.Label("To")
             </div>
-            <div class="edit-field">
-                @Html.TextBox("To", string.Empty, new { @style = "width:90px;margin-right:5px;" })
+            <div class="edit-field width-120">
+                @Html.TextBox("To", string.Empty, new { @style = "width:77px;margin-right:5px;" })
             </div>
             <div class="submit">
                 <input type="button" value="Submit" id="submit" />

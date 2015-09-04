@@ -769,7 +769,7 @@
     <value>Machine</value>
   </data>
   <data name="LogStatus_Monitored" xml:space="preserve">
-    <value>Handlded</value>
+    <value>Handled</value>
   </data>
   <data name="LogStatus_Unmonitored" xml:space="preserve">
     <value>Unhandled</value>
