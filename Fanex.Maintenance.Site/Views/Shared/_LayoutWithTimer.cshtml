@@ -116,6 +116,7 @@
 
             $('#date').html(date.format('dddd, MMMM DD, YYYY'));
         }
+
         function time() {
             var time = moment(new Date()).zone(serverTimeZone);
             var hours = time.hours();
@@ -128,9 +129,10 @@
 
             //time = hours + ":" + minutes + ":" + seconds;
 
+            $('#date').html(time.format('dddd, MMMM DD, YYYY'));
             $('#time').html(time.format('HH:mm:ss (GT Z)').replace('GT', 'GMT'));
         }
 
     });
-    
+    $.cookie.json = true;
 </script>
