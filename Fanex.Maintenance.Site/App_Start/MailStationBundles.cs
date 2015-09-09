@@ -46,21 +46,21 @@
 
         private static void RegisterNexCron(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/scripts/lib/NexCron/js").Include(
+            bundles.Add(new ScriptBundle("~/scripts/NexCron/js").Include(
                 "~/scripts/lib/NexCron/js/NexCron.js"));
 
             bundles.AddAndInclude(
-                "~/scripts/lib/NexCron/css",
+                "~/scripts/NexCron/css",
                 "~/scripts/lib/NexCron/css/NexCron.css");
         }
 
         private static void RegisterMagicSuggest(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/scripts/lib/MagicSuggest/js").Include(
+            bundles.Add(new ScriptBundle("~/scripts/MagicSuggest/js").Include(
                 "~/scripts/lib/MagicSuggest/js/magicsuggest-min.js"));
 
             bundles.AddAndInclude(
-                "~/scripts/lib/MagicSuggest/css",
+                "~/scripts/MagicSuggest/css",
                 "~/scripts/lib/MagicSuggest/css/bootstrap.min.css",
                 "~/scripts/lib/MagicSuggest/css/magicsuggest-min.css");
         }
