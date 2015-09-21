@@ -99,13 +99,14 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
         /// <param name="isMonitored">Monitored or not.</param>
         /// <param name="severity">Severity level.</param>
         /// <returns>Log service object.</returns>
-        public LogService With(int? categoryId, int? machineId, bool? isProduction, bool? isMonitored, string severity)
+        public LogService With(int? categoryId, int? machineId, bool? isProduction, bool? isMonitored, string severity, int timeZone)
         {
             this._categoryId = categoryId;
             this._machineId = machineId;
             this._severity = severity;
             this._isProduction = isProduction;
             this._isMonitored = isMonitored;
+            this._showLogTimeZone = timeZone;
 
             return this;
         }

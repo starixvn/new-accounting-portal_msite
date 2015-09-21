@@ -42,7 +42,12 @@
                 <div class="edit-field width-120">
                     @Html.TextBox("To", Model.To.ToString("MMM dd,yyyy"), new { @style = "width:77px;margin-right:5px;", @autocomplete = "off" })
                 </div>
-                
+                <div class="lbl-field width-70">
+                    @Html.LabelFor(m => m.ToGMT, ViewResource.TimeZone)
+                </div>
+                <div class="edit-field width-120">
+                    @Html.DropDownListFor(m => m.ToGMT, (List<SelectListItem>)ViewBag.ListTimeZone, new { @class = "width-80" })
+                </div>
             </div>
             <div class="filter-row">
                 <div class="lbl-field width-60">
@@ -99,7 +104,7 @@
                     <lable for="chbMonitorAll">Handled By</lable>
                 </th>
                 <th class="width-100">
-                    Time (GMT @(Model.ToGMT > 0 ? "+" + Model.ToGMT.ToString() : Model.ToGMT.ToString()))
+                    <span id="timeZone">Time (GMT @(Model.ToGMT > 0 ? "+" + Model.ToGMT.ToString() : Model.ToGMT.ToString()))</span>
                 </th>
             </tr>
         </thead>

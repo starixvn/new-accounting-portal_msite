@@ -111,7 +111,8 @@ namespace Fanex.Maintenance.Controller
                 criteria.MachineId,
                 criteria.IsProduction,
                 criteria.IsMonitored,
-                criteria.Severity)
+                criteria.Severity,
+                criteria.ToGMT)
                 .From(criteria.From)
                 .To(criteria.To)
                 .WithPagination(criteria.Page, criteria.Size)
@@ -278,6 +279,7 @@ namespace Fanex.Maintenance.Controller
         {
             ////Init Serverity
             List<SelectListItem> list = new List<SelectListItem>();
+
             list.Add(new SelectListItem
             {
                 Text = ViewResource.All,
@@ -312,12 +314,39 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
+        /// Initialize Timezone data.
+        /// </summary>
+        private void InitTimeZone()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            list.Add(new SelectListItem
+            {
+                Text = "GMT-4",
+                Value = "-4"
+            });
+            list.Add(new SelectListItem
+            {
+                Text = "GMT+7",
+                Value = "7"
+            });
+            list.Add(new SelectListItem
+            {
+                Text = "GMT+8",
+                Value = "8"
+            });
+
+            ViewBag.ListTimeZone = list;
+        }
+
+        /// <summary>
         /// Initialize data for View.
         /// </summary>
         private void InitDataView()
         {
             InitSeverities();
             InitLogStatus();
+            InitTimeZone();
 
             // Default selection for drop-down
             SelectListItem defaultSelection = new SelectListItem
