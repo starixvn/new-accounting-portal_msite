@@ -172,7 +172,7 @@ var MailReportController = function () {
         headerColumns.push({ HeaderText: viewResources.Mail_Name, Width: 340, Name: "ColMailName", HeaderAlign: "center", CellAlign: "left" });
         headerColumns.push({ HeaderText: viewResources.Site, Width: 150, Name: "ColSite", HeaderAlign: "center", CellAlign: "left" });
         headerColumns.push({ HeaderText: viewResources.Scheduled_Time, Width: 150, Name: "ColScheduledTime", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
-        headerColumns.push({ HeaderText: viewResources.Last_Sent, Width: 150, Name: "ColLastSent", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
+        headerColumns.push({ HeaderText: viewResources.Last_Run, Width: 150, Name: "ColLastSent", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
         headerColumns.push({ HeaderText: viewResources.Status, Width: 120, Name: "ColStatus", HeaderAlign: "center", CellAlign: "center" });
         if (viewResources.hasEditRight) {
             headerColumns.push({ HeaderText: viewResources.Action, Width: 120, Name: "ColAction", HeaderAlign: "center", CellAlign: "center" });
@@ -243,7 +243,7 @@ var MailReportController = function () {
             var mailIndex = ' mail-index="' + mail.MailTaskId + '"';
             switch (mail.Status) {
                 case self.Enums.TaskStatus.Running:
-                    return '<input type="submit" value="Abort" class="button-abort"' + mailIndex + '>';
+                    return '<input type="submit" value="Aborted" class="button-abort"' + mailIndex + '>';
                 case self.Enums.TaskStatus.DataNotReady:
                 case self.Enums.TaskStatus.Sent:
                 case self.Enums.TaskStatus.Failed:
