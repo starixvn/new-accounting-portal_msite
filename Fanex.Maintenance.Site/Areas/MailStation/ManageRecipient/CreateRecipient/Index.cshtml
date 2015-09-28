@@ -9,9 +9,9 @@
     Layout = "~/Views/Shared/_LayoutWithTimer.cshtml";  
 }
 @section Head {
-    @Styles.Render("~/themes/sharedstyles")
-    @Styles.Render("~/scripts/inputcomboboxstyles")
-    @Styles.Render("~/Areas/MailStation/CreateRecipient/CreateRecipientStyles")
+    @Styles.Render("~/css/manage")
+    <link href="~/themes/shared/formedit.less" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/MailStation/ManageRecipient/CreateRecipient/Styles/CreateRecipient.less" rel="stylesheet" type="text/css" />
 }
 @section Headline {
     <h1>
@@ -98,7 +98,8 @@
 </section>
 @section Foot {
     @Scripts.Render("~/scripts/sharedscripts")
-    @Scripts.Render("~/Areas/MailStation/CreateRecipient/CreateRecipientScripts")
+    <script src="~/scripts/lib/ContextMenu/ContextMenuController.js" type="text/javascript" ></script>
+    <script src="~/Areas/MailStation/ManageRecipient/CreateRecipient/Scripts/CreateRecipientController.js" type="text/javascript" ></script>
     <script type="text/javascript">
         var viewResources = {
             Confirm_CancelInsertRecipient: '@Labels.Confirm_CancelInsertRecipient',

@@ -222,7 +222,6 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\BundleExtensions.cs" />
-    <Compile Include="App_Start\MailStationBundles.cs" />
     <Compile Include="Areas\MailStation\MailStationAreaRegistration.cs" />
     <Compile Include="Areas\UserLogin\Controllers\BaseController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
@@ -790,11 +789,11 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="scripts\lib\Fanex.Grid\Fanex.Grid.less" />
-    <None Include="scripts\lib\InputCombobox\colors.less" />
-    <None Include="scripts\lib\InputCombobox\common.less" />
-    <None Include="scripts\lib\InputCombobox\fonts.less" />
-    <None Include="scripts\lib\InputCombobox\fonts\YanoneKaffeesatz.woff" />
-    <None Include="scripts\lib\InputCombobox\jquery.combobox-ext.less" />
+    <Content Include="scripts\lib\InputCombobox\colors.less" />
+    <Content Include="scripts\lib\InputCombobox\common.less" />
+    <Content Include="scripts\lib\InputCombobox\fonts.less" />
+    <Content Include="scripts\lib\InputCombobox\fonts\YanoneKaffeesatz.woff" />
+    <Content Include="scripts\lib\InputCombobox\jquery.combobox-ext.less" />
     <Content Include="themes\shared\contextmenu.less" />
     <Content Include="themes\shared\formedit.less" />
     <Content Include="Views\Shared\_LayoutWithTimer.cshtml" />

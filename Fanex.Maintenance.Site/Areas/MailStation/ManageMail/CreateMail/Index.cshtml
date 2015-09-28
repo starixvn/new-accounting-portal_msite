@@ -9,11 +9,13 @@
     Layout = "~/Views/Shared/_LayoutWithTimer.cshtml";  
 }
 @section Head {
-    @Styles.Render("~/scripts/MagicSuggest/css")
-    @Styles.Render("~/themes/sharedstyles")
-    @Styles.Render("~/scripts/inputcomboboxstyles")
-    @Styles.Render("~/Areas/MailStation/ManageMail/CreateMail/CreateMailStyles")
-    @Styles.Render("~/scripts/NexCron/css")
+    @Styles.Render("~/css/manage")
+    <link href="~/scripts/lib/MagicSuggest/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/lib/MagicSuggest/css/magicsuggest-min.css" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/lib/InputCombobox/jquery.combobox-ext.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/shared/formedit.less" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/MailStation/ManageMail/CreateMail/Styles/CreateMail.less" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/lib/NexCron/css/NexCron.css" rel="stylesheet" type="text/css" />
 }
 @section Headline {
     <h1>
@@ -134,10 +136,11 @@
 </section>
 @section Foot {
     @Scripts.Render("~/scripts/sharedscripts")
-    @Scripts.Render("~/scripts/inputcomboboxscripts")
-    @Scripts.Render("~/Areas/MailStation/ManageMail/CreateMail/CreateMailScripts")
-    @Scripts.Render("~/scripts/NexCron/js")
-    @Scripts.Render("~/scripts/MagicSuggest/js")
+    <script src="~/scripts/lib/InputCombobox/jquery.combobox-ext.js" type="text/javascript" ></script>
+    <script src="~/scripts/lib/custom-datepicker.js" type="text/javascript" ></script>
+    <script src="~/Areas/MailStation/ManageMail/CreateMail/Scripts/CreateMailController.js" type="text/javascript" ></script>
+    <script src="~/scripts/lib/NexCron/js/NexCron.js" type="text/javascript" ></script>
+    <script src="~/scripts/lib/MagicSuggest/js/magicsuggest-min.js" type="text/javascript" ></script>
     <script type="text/javascript">
         var viewResources = {
             AddMailGroupSuccessMsg: '@MailStationResources.AddMailGroupSuccessMsg',

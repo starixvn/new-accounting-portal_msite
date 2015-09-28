@@ -8,8 +8,10 @@
     Layout = "~/Views/Shared/_LayoutWithTimer.cshtml";  
 }
 @section Head {
+    @Styles.Render("~/css/manage")
     @Styles.Render("~/themes/sharedstyles")
-    @Styles.Render("~/Areas/MailStation/MailGroup/UpdateMailGroupStyles")
+    <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/MailStation/MailGroup/UpdateMailGroup/Styles/UpdateMailGroup.less" rel="stylesheet" type="text/css" />
 }
 @section Headline {
     <h1>
@@ -62,7 +64,8 @@
 </section>
 @section Foot {
     @Scripts.Render("~/scripts/sharedscripts")
-    @Scripts.Render("~/Areas/MailStation/MailGroup/UpdateMailGroupScripts")
+    <script src="~/scripts/lib/ContextMenu/ContextMenuController.js" type="text/javascript" ></script>
+    <script src="~/Areas/MailStation/MailGroup/UpdateMailGroup/Scripts/UpdateMailGroup.js" type="text/javascript" ></script>
     <script type="text/javascript">
         var viewResources = {
             UpdateMailGroupSuccessMsg: '@string.Format(ViewResource.UpSuccessMsg, "Mail Group", 5)',
