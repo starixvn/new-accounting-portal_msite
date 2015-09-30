@@ -105,6 +105,9 @@ namespace Fanex.Maintenance.Controller
 
             var totalRows = 0;
 
+            DateTime from = criteria.From.AddHours(-1 * criteria.ToGMT);
+            DateTime to = criteria.To.AddDays(1).AddSeconds(-1).AddHours(-1 * criteria.ToGMT);
+
             ////Get logs by date
             IEnumerable<Log> listLogs = _logService.With(
                 criteria.CategoryId,
@@ -113,8 +116,8 @@ namespace Fanex.Maintenance.Controller
                 criteria.IsMonitored,
                 criteria.Severity,
                 criteria.ToGMT)
-                .From(criteria.From)
-                .To(criteria.To)
+                .From(from)
+                .To(to)
                 .WithPagination(criteria.Page, criteria.Size)
                 .GetLogs(ref totalRows);
 
