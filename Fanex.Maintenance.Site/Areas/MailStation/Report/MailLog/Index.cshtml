@@ -16,9 +16,9 @@
 <!--<![endif]-->
 <head>
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/themes/sharedstyles")
+    @Styles.Render("~/css/manage")
     @Styles.Render("~/themes/fanexgridstyles")
-    @Styles.Render("~/Areas/MailStation/Report/MailLog/MailLogStyles")
+    <link href="~/Areas/MailStation/Report/MailLog/Styles/MailLog.less" rel="stylesheet" type="text/css" />
 </head>
 <body id="body">
     <div id="mail-log-container" class="mail-log-container">
@@ -28,7 +28,7 @@
     @Scripts.Render("~/scripts/common")
     @Scripts.Render("~/scripts/sharedscripts")
     @Scripts.Render("~/scripts/fanexgridscripts")
-    @Scripts.Render("~/Areas/MailStation/Report/MailLog/MailLogScripts")
+    <script src="~/Areas/MailStation/Report/MailLog/Scripts/MailLogController.js" type="text/javascript" ></script>
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~")';
         var mailLog= @Html.Raw(mailLog); 

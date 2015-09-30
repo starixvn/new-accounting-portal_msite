@@ -12,10 +12,11 @@
     var recipient = JsonConvert.SerializeObject(Model);
 }
 @section Head {
-    @Styles.Render("~/themes/sharedstyles")
+    @Styles.Render("~/css/manage")
     @Styles.Render("~/themes/fanexgridstyles")
-    @Styles.Render("~/scripts/lib/MultipleSelect/css")
-    @Styles.Render("~/Areas/MailStation/ManageMail/ManageMail/ManageMailStyles")
+    <link href="~/scripts/lib/MultipleSelect/jquery.multiselect.css" rel="stylesheet" type="text/css" />
+    <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/MailStation/ManageMail/ManageMail/Styles/ManageMail.less" rel="stylesheet" type="text/css" />
 }
 @section Headline {
     <h1>
@@ -91,8 +92,9 @@
 @section Foot {
     @Scripts.Render("~/scripts/sharedscripts")
     @Scripts.Render("~/scripts/fanexgridscripts")
-    @Scripts.Render("~/scripts/lib/MultipleSelect/js")
-    @Scripts.Render("~/Areas/MailStation/ManageMail/ManageMail/ManageMailScripts")
+    <script src="~/scripts/lib/MultipleSelect/jquery.multiselect.js" type="text/javascript" ></script>
+    <script src="~/scripts/lib/ContextMenu/ContextMenuController.js" type="text/javascript" ></script>
+    <script src="~/Areas/MailStation/ManageMail/ManageMail/Scripts/MailManageController.js" type="text/javascript" ></script>
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~")';
         var recipient= @Html.Raw(recipient); 

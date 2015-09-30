@@ -9,6 +9,7 @@
     var hasEditRight = PermissionService.HasHostPermission(MailDeliveryFunctionKeys.ManageRecipient);
 }
 @section Head {
+    @Styles.Render("~/css/manage")
     @Styles.Render("~/themes/sharedstyles")
     @Styles.Render("~/themes/fanexgridstyles")
     @Styles.Render("~/Areas/MailStation/ManageRecipient/ManageRecipientStyles")
