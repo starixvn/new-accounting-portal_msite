@@ -275,7 +275,7 @@ var Logs = (function ($) {
 					if (data.length > 0) {
 						var uatGroup = $('<optgroup>').attr('label', 'UAT').append($('<option>', { value: 'UAT', text: 'All UAT' }));
 						var productionGroup = $('<optgroup>').attr('label', 'Production')
-							.append($('<option>', { value: 'Production', text: 'All Production' }));
+							.append($('<option>', { value: 'Production', text: 'All Production', selected: 'selected' }));
 						var optionItem;
 
 						Logs.ddlMachine.empty();
