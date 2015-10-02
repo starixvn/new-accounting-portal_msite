@@ -192,72 +192,78 @@ var Logs = (function ($) {
 		monitorLog: function () {
 			var $this = $(this);
 			var isMonitored = $this.is(':checked');
+			var isCancel = true;
 
-			NAP.headlineMsgBox.confirm('Are you sure that this log is being handled', function () {
-				var logId = $this.attr('data-logIds');
-				if (logId == "null") {
-					logId = $this.attr('data-logId');
-				}
-
-				$.ajax({
-					type: "POST",
-					url: "Log/MonitorLog",
-					data: { logId: logId, isMonitored: isMonitored },
-					beforeSend: function () {
-						NAP.loadingBox.show();
-					},
-					complete: function () {
-						NAP.loadingBox.close();
-					},
-					success: function (data) {
-						var monitoringUser = $('#monitoringUser' + logId);
-
-						if (monitoringUser) {
-							monitoringUser.replaceWith('<span>' + data + '</span>');
-						}
-					},
-					error: function (xhr, status, err) {
-						NAP.handleAjaxError(xhr, status, err);
+			if (isMonitored) {
+				NAP.headlineMsgBox.confirm('Are you sure that this log is being handled', function () {
+					isCancel = false;
+					var logId = $this.attr('data-logIds');
+					if (logId == "null") {
+						logId = $this.attr('data-logId');
 					}
-				});
-			}, { model: true, closeBtn: false, position: ['top:420', 'center'] });
+
+					$.ajax({
+						type: "POST",
+						url: "Log/MonitorLog",
+						data: { logId: logId, isMonitored: isMonitored },
+						beforeSend: function () {
+							NAP.loadingBox.show();
+						},
+						complete: function () {
+							NAP.loadingBox.close();
+						},
+						success: function (data) {
+							var monitoringUser = $('#monitoringUser' + logId);
+
+							if (monitoringUser) {
+								monitoringUser.replaceWith('<span>' + data + '</span>');
+							}
+						},
+						error: function (xhr, status, err) {
+							NAP.handleAjaxError(xhr, status, err);
+						}
+					});
+				}, { model: true, closeBtn: false, position: ['top:420', 'center'] });
+			}
 		},
 
 		monitorAllLog: function () {
 			var $this = $(this);
 			var isMonitored = $this.is(':checked');
 
-			NAP.headlineMsgBox.confirm('Are you sure that these logs are being handled', function () {
-				var logids = "";
-				$('.monitored').each(function () {
-					logids += $(this).attr('data-logid') + ",";
-				});
+			if (isMonitored) {
+				NAP.headlineMsgBox.confirm('Are you sure that these logs are being handled', function () {
+					var logids = "";
+					$('.monitored').each(function () {
+						logids += $(this).attr('data-logid') + ",";
+					});
 
-				$.ajax({
-					type: "POST",
-					url: "Log/MonitorLog",
-					data: { logId: logids, isMonitored: isMonitored },
-					beforeSend: function () {
-						NAP.loadingBox.show();
-					},
-					complete: function () {
-						NAP.loadingBox.close();
-					},
-					success: function (data) {
-						$('.monitored').each(function () {
-							var logId = $(this).attr('data-logid');
-							var monitoringUser = $('#monitoringUser' + logId);
+					$.ajax({
+						type: "POST",
+						url: "Log/MonitorLog",
+						data: { logId: logids, isMonitored: isMonitored },
+						beforeSend: function () {
+							NAP.loadingBox.show();
+						},
+						complete: function () {
+							NAP.loadingBox.close();
+						},
+						success: function (data) {
+							$('.monitored').each(function () {
+								var logId = $(this).attr('data-logid');
+								var monitoringUser = $('#monitoringUser' + logId);
 
-							if (monitoringUser) {
-								monitoringUser.replaceWith('<span>' + data + '</span>');
-							}
-						});
-					},
-					error: function (xhr, status, err) {
-						NAP.handleAjaxError(xhr, status, err);
-					}
-				});
-			}, { model: true, closeBtn: false, position: ['top:420', 'center'] });
+								if (monitoringUser) {
+									monitoringUser.replaceWith('<span>' + data + '</span>');
+								}
+							});
+						},
+						error: function (xhr, status, err) {
+							NAP.handleAjaxError(xhr, status, err);
+						}
+					});
+				}, { model: true, closeBtn: false, position: ['top:420', 'center'] });
+			}
 		},
 
 		getMachinesByType: function (machineType) {
