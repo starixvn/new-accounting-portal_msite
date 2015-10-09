@@ -100,10 +100,11 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/scripts/Mail/AddMailFunction.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/log").Include(
-                "~/scripts/Logs/Index.js",
                 "~/scripts/lib/Select2/select2.js",
+                "~/scripts/lib/Momentjs/moment.js",
                 "~/scripts/lib/custom-datepicker.js",
-                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js"));
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
+                "~/scripts/Logs/Index.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/recheckin").Include(
               "~/Areas/UserLogin/scripts/ReCheckIn.js"));

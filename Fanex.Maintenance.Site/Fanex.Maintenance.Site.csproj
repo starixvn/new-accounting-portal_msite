@@ -329,6 +329,8 @@
     <Content Include="scripts\lib\MagicSuggest\css\bootstrap.min.css" />
     <Content Include="scripts\lib\MagicSuggest\css\magicsuggest-min.css" />
     <Content Include="scripts\lib\MagicSuggest\js\magicsuggest-min.js" />
+    <Content Include="scripts\lib\Momentjs\moment.js" />
+    <Content Include="scripts\lib\Momentjs\moment.min.js" />
     <Content Include="scripts\lib\msgbox\images\alert.png" />
     <Content Include="scripts\lib\msgbox\images\btn-close.png" />
     <Content Include="scripts\lib\msgbox\images\confirm.png" />
@@ -813,9 +815,9 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
+          <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>56146</DevelopmentServerPort>
-          <DevelopmentServerVPath>/mSite</DevelopmentServerVPath>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
