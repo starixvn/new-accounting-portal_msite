@@ -23,6 +23,8 @@ namespace Fanex.Maintenance.Repository.Criteria.Log
 
         public short Timezone { get; set; }
 
+        public string MachineIP { get; set; }
+
         public override string GetSettingKey()
         {
             return "Logging_InsertMachine";

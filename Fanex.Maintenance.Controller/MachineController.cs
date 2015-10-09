@@ -106,7 +106,7 @@ namespace Fanex.Maintenance.Controller
         {
             if (ModelState.IsValid)
             {
-                ViewBag.Success = _machineService.UpdateMachine(machine.MachineId, machine.IsProduction, machine.TimeZone);
+                ViewBag.Success = _machineService.UpdateMachine(machine.MachineId, machine.IsProduction, machine.TimeZone, machine.MachineIP);
             }
 
             return View(machine);
@@ -139,7 +139,7 @@ namespace Fanex.Maintenance.Controller
         {
             if (ModelState.IsValid)
             {
-                ViewBag.Success = _machineService.InsertMachine(machine.MachineName, machine.IsProduction, machine.TimeZone);
+                ViewBag.Success = _machineService.InsertMachine(machine.MachineName, machine.IsProduction, machine.TimeZone, machine.MachineIP);
             }
 
             return View(machine);

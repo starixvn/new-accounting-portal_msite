@@ -83,13 +83,14 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
         /// <param name="machineType">Machine type.</param>
         /// <param name="timeZone">Machine time zone.</param>
         /// <returns>Command result.</returns>
-        public CommandResult InsertMachine(string machineName, bool machineType, short timeZone)
+        public CommandResult InsertMachine(string machineName, bool machineType, short timeZone, string machineIP)
         {
             InsertMachineCriteria criteria = new InsertMachineCriteria
             {
                 MachineName = machineName,
                 IsProduction = machineType,
-                Timezone = timeZone
+                Timezone = timeZone,
+                MachineIP = machineIP
             };
 
             return _machineRepository.InsertMachine(criteria);
@@ -102,13 +103,14 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
         /// <param name="machineType">Machine type.</param>
         /// <param name="timeZone">Machine time zone.</param>
         /// <returns>Command result.</returns>
-        public CommandResult UpdateMachine(int machineId, bool machineType, short timeZone)
+        public CommandResult UpdateMachine(int machineId, bool machineType, short timeZone, string machineIP)
         {
             UpdateMachineCriteria criteria = new UpdateMachineCriteria
             {
                 MachineId = machineId,
                 IsProduction = machineType,
-                Timezone = timeZone
+                Timezone = timeZone,
+                MachineIP = machineIP
             };
 
             return _machineRepository.UpdateMachine(criteria);

@@ -92,9 +92,7 @@ var Logs = (function ($) {
                         var message = Logs.replaceAll('<br>', '', value.Message).substring(0, 300);
                         var environment = value.Machine.IsProduction ? "PRO" : "UAT";
 
-                        
-
-                        var convertedTimeAgo = moment(value.LogDate + ' ' + timeZoneValue + ':00').fromNow();
+                        var convertedTimeAgo = Logs.buildLogTime(timeZoneValue, value.LogDate);
 
                         var content = "<tr title='" + value.Message + "'><td>" +
                             (pageSize * (index - 1) + count++) + "</td><td>" +
@@ -105,12 +103,16 @@ var Logs = (function ($) {
                             "<a class='severity-filter " + value.Severity + "' href='#'><b>" + value.Severity + "</b></a></td><td class='align-center'>" +
                             "<a href='#' class='machinetype-filter' data-machinetype='" + value.Machine.IsProduction + "'>" + environment +
                             "</a> \\ <a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" +
-                            value.Machine.MachineName + "</a></td><td class='align-center'>" +
+                            value.Machine.MachineName + (value.Machine.MachineIP ? ' - ' + value.Machine.MachineIP : '') + "</a>"
+                            +"</td><td class='align-center'>" +
                             "<span id='monitoringUser" + value.LogId + "'>" +
                             (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" +
                             value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") +
-                            "</span>" + countMessage + "</td><td class='align-center' title='" + value.LogDate + "'>" +
-                            convertedTimeAgo + "</td></tr>";
+                            "</span>" + countMessage + "</td>"
+                                + "<td class='align-center' title='" + value.LogDate + "'>"
+                                    + convertedTimeAgo
+                                + "</td>" +
+                            +"</tr>";
 
                         $('#content').append(content);
                     });
@@ -148,6 +150,13 @@ var Logs = (function ($) {
                     NAP.handleAjaxError(xhr, status, err);
                 }
             });
+        },
+
+        buildLogTime: function (timeZoneValue, logDate) {
+            var fromNowTime = moment(logDate + ' ' + timeZoneValue + ':00').fromNow();
+
+            return fromNowTime
+            + "<div class='log-occur-date'>" + logDate + "</div>";
         },
 
         replaceAll: function (find, replace, str) {
@@ -279,16 +288,16 @@ var Logs = (function ($) {
                 },
                 success: function (data) {
                     if (data.length > 0) {
-                        var uatGroup = $('<optgroup>').attr('label', 'UAT').append($('<option>', { value: 'UAT', text: 'All UAT' }));
-                        var productionGroup = $('<optgroup>').attr('label', 'Production')
-                            .append($('<option>', { value: 'Production', text: 'All Production', selected: 'selected' }));
+                        var uatGroup = $('<optgroup>').attr('label', 'UAT Servers').append($('<option>', { value: 'UAT', text: 'All UAT Servers' }));
+                        var productionGroup = $('<optgroup>').attr('label', 'PROD Servers')
+                            .append($('<option>', { value: 'Production', text: 'All PROD Servers', selected: 'selected' }));
                         var optionItem;
 
                         Logs.ddlMachine.empty();
                         Logs.ddlMachine.append($('<option>', { value: '0', text: 'All' }));
 
                         $.each(data, function (key, value) {
-                            optionItem = $('<option>', { value: value.MachineId, text: value.MachineName });
+                            optionItem = $('<option>', { value: value.MachineId, text: (value.MachineName + (value.MachineIP ? ' - ' + value.MachineIP : '')) });
                             if (value.IsProduction) {
                                 productionGroup.append(optionItem);
                             } else {

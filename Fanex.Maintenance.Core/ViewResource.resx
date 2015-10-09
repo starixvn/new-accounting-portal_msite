@@ -855,4 +855,7 @@
   <data name="ServiceName" xml:space="preserve">
     <value>Service Name</value>
   </data>
+  <data name="Machine_IP" xml:space="preserve">
+    <value>Machine IP</value>
+  </data>
 </root>

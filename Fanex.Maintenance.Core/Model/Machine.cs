@@ -25,5 +25,7 @@ namespace Fanex.Maintenance.Core.Model
 
         [Range(-12, 12)]
         public short TimeZone { get; set; }
+
+        public string MachineIP { get; set; }
     }
 }
