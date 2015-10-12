@@ -38,7 +38,8 @@ var MailManageController = function () {
             DOMElements.MailName.val(cookie.MailName);
             DOMElements.SiteId.val(cookie.SiteId);
             DOMElements.TriggerType.val(cookie.TriggerType);
-            DOMElements.Emails.val(cookie.Emails);
+            if (DOMElements.Emails.val() === "")
+                DOMElements.Emails.val(cookie.Emails);
             DOMElements.IsActive.val(cookie.IsActive);
         }
     };
