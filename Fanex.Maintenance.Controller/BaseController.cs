@@ -14,12 +14,11 @@ namespace Fanex.Maintenance.Controller
     using System.Web.Mvc;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Configuration;
+    using Fanex.NAP.Core.Context;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web;
-    using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
-    using Fanex.NAP.Core.Context;
 
     /// <summary>
     /// Base controller.

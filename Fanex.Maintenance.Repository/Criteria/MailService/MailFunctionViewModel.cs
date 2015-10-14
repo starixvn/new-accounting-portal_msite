@@ -10,9 +10,8 @@
 namespace Fanex.Maintenance.Repository.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
-    using Fanex.Maintenance.Repository;
-    using MailDeliver.Model;
     using Fanex.Maintenance.Core;
+    using MailDeliver.Model;
 
     /// <summary>
     /// The mail function view model class.

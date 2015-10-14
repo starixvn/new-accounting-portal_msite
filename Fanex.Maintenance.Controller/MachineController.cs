@@ -13,13 +13,12 @@ namespace Fanex.Maintenance.Controller
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.Maintenance.Core;
     using Fanex.Maintenance.Core.Model;
-    using Fanex.Maintenance.Repository;
     using Fanex.Maintenance.Repository.Criteria.Log;
     using Fanex.Maintenance.Service.Impl.AppLog;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.Maintenance.Core;
 
     /// <summary>
     /// Machine Controller.

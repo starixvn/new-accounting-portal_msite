@@ -20,13 +20,13 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.Common.Extensions;
     using Fanex.Logging;
     using Fanex.NAP.Core.Configuration;
+    using Fanex.NAP.Core.Models;
+    using Fanex.NAP.Core.Models.ParameterObject;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
-    using Fanex.NAP.Core.Models;
-    using Fanex.NAP.Core.Models.ParameterObject;
 
     /// <summary>
     /// Login controller.

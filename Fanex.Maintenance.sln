@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.Site", "Fanex.Maintenance.Site\Fanex.Maintenance.Site.csproj", "{D4312B0D-CC74-4AA1-979A-AF26702808A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.Core", "Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj", "{60BC3FA8-DF7C-4024-B469-4ED110420143}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0CF3D4F1-7F6A-4D7E-936C-4991B2BF3451}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.Repository", "Fanex.Maintenance.Repository\Fanex.Maintenance.Repository.csproj", "{8858DC31-A292-4388-8E07-9B2E345A3FE6}"
 EndProject
@@ -24,7 +26,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.ServiceManagement", "Fanex.ServiceManagement\Fanex.ServiceManagement.csproj", "{1F903078-36B9-40AE-9FF2-67F7DC5E058B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.Core", "..\new-accounting-portal\nap-client\Fanex.NAP.ApiClient\Fanex.NAP.Core.csproj", "{BBBEBE10-B8D5-4945-9A14-AFA514ACD492}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{428E8F66-5A76-46AA-A9CC-7CB4810AC29F}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,16 +113,6 @@ Global
 		{1F903078-36B9-40AE-9FF2-67F7DC5E058B}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{1F903078-36B9-40AE-9FF2-67F7DC5E058B}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{1F903078-36B9-40AE-9FF2-67F7DC5E058B}.Release|x86.ActiveCfg = Release|Any CPU
-		{BBBEBE10-B8D5-4945-9A14-AFA514ACD492}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBBEBE10-B8D5-4945-9A14-AFA514ACD492}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBBEBE10-B8D5-4945-9A14-AFA514ACD492}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{BBBEBE10-B8D5-4945-9A14-AFA514ACD492}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{BBBEBE10-B8D5-4945-9A14-AFA514ACD492}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BBBEBE10-B8D5-4945-9A14-AFA514ACD492}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBBEBE10-B8D5-4945-9A14-AFA514ACD492}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBBEBE10-B8D5-4945-9A14-AFA514ACD492}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{BBBEBE10-B8D5-4945-9A14-AFA514ACD492}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
-		{BBBEBE10-B8D5-4945-9A14-AFA514ACD492}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

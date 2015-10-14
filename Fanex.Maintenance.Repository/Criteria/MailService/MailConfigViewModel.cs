@@ -10,9 +10,8 @@
 namespace Fanex.Maintenance.Repository.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
-    using Fanex.Maintenance.Repository;
-    using MailDeliver.Model;
     using Fanex.Maintenance.Core;
+    using MailDeliver.Model;
 
     /// <summary>
     /// The mail config view model class.
@@ -32,7 +31,7 @@ namespace Fanex.Maintenance.Repository.Criteria.MailService
             this.MailFrom = string.IsNullOrEmpty(mailSetting.MailFrom) ? mailSetting.Setting.Username : mailSetting.MailFrom;
             this.IsEncrypt = mailSetting.IsEncrypt;
         }
-        
+
         public int AppId { get; set; }
 
         [Required]

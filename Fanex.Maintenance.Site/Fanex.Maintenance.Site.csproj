@@ -71,8 +71,9 @@
     <Reference Include="Fanex.Caching">
       <HintPath>..\_Dependencies\Fanex\Fanex.Caching.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Common">
-      <HintPath>..\_Dependencies\Fanex\Fanex.Common.dll</HintPath>
+    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.ConnectionString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
@@ -101,6 +102,10 @@
     <Reference Include="Fanex.MailDelivery.MailStation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.MailStation.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.NAP.Core.Client.1.0.0.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="IBCFile">
       <HintPath>..\_Dependencies\Others\IBCFile.dll</HintPath>
@@ -708,10 +713,6 @@
     <Content Include="Views\ConnectionString\LogAction\LogAction405.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\new-accounting-portal\nap-client\Fanex.NAP.ApiClient\Fanex.NAP.Core.csproj">
-      <Project>{bbbebe10-b8d5-4945-9a14-afa514acd492}</Project>
-      <Name>Fanex.NAP.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
       <Project>{E7173CDD-8ECB-4FB6-B585-41BFE941745E}</Project>
       <Name>Fanex.Maintenance.Controller</Name>

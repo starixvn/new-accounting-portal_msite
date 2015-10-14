@@ -10,9 +10,9 @@
 namespace Fanex.Maintenance.Service.Impl.AppLog
 {
     using System.Collections.Generic;
+    using Fanex.Data.Repository;
     using Fanex.Maintenance.Core.Model;
     using Fanex.Maintenance.Repository.Criteria.Log;
-    using Fanex.Data.Repository;
 
     /// <summary>
     /// Log category service.
