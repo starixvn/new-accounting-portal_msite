@@ -97,10 +97,6 @@
     <Reference Include="Fanex.MailDelivery.Client">
       <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.MailDelivery.MailStation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.MailStation.dll</HintPath>
-    </Reference>
     <Reference Include="Fanex.NAP.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.NAP.Core.Client.1.0.0.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
@@ -618,7 +614,9 @@
     <Content Include="Areas\UserLogin\Views\Common\Unauthorize.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\UserLogin\themes\fonts\Abel.woff" />
@@ -711,6 +709,10 @@
     <Content Include="Views\ConnectionString\LogAction\LogAction405.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.MailDelivery.MailStation\Fanex.MailDelivery.MailStation.csproj">
+      <Project>{108C1D8A-CAE1-46DA-B951-60E1FC67EF12}</Project>
+      <Name>Fanex.MailDelivery.MailStation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
       <Project>{E7173CDD-8ECB-4FB6-B585-41BFE941745E}</Project>
       <Name>Fanex.Maintenance.Controller</Name>
