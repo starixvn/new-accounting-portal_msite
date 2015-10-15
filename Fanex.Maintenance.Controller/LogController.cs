@@ -14,6 +14,7 @@ namespace Fanex.Maintenance.Controller
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Web;
     using System.Web.Mvc;
     using Fanex.Maintenance.Core.Model;
     using Fanex.Maintenance.Repository;
@@ -120,6 +121,17 @@ namespace Fanex.Maintenance.Controller
                 .To(to)
                 .WithPagination(criteria.Page, criteria.Size)
                 .GetLogs(ref totalRows);
+
+            if (listLogs.Any())
+            {
+                listLogs = listLogs.Select<Log, Log>(log =>
+                {
+                    log.Message = HttpUtility.HtmlEncode(log.Message);
+                    log.FormattedMessage = HttpUtility.HtmlEncode(log.FormattedMessage);
+
+                    return log;
+                });
+            }
 
             return Json(new
             {
