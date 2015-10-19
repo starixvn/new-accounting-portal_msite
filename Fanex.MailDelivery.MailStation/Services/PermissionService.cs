@@ -13,7 +13,7 @@ namespace Fanex.MailDelivery.MailStation.Services
     using System.Collections.Generic;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Core.Model.ValueObject;
+    using Fanex.NAP.Core.Models.ValueObject;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Session;
@@ -23,41 +23,16 @@ namespace Fanex.MailDelivery.MailStation.Services
     /// </summary>
     public class PermissionService
     {
-        private static IFunctionService _functionService;
+        private static ICurrentSession _currentSession;
 
         private static IUserService _userService;
-
-        private static ICurrentSession _currentSession;
 
         private static Dictionary<string, int> _roleAccess;
 
         static PermissionService()
         {
             _userService = new UserService();
-            _functionService = new FunctionService();
             _currentSession = new CurrentSession();
-        }
-
-        /// <summary>
-        /// GetRollAccess: get permission to access with each menu item of current user login.
-        /// </summary>
-        /// <param name="currentFunctions">The current functions.</param>
-        /// <returns>
-        /// Roll Access.
-        /// </returns>
-        public static Dictionary<string, int> GetRoleAccess(IEnumerable<FunctionPolicy> currentFunctions)
-        {
-            Dictionary<string, int> roleAccess = new Dictionary<string, int>();
-
-            foreach (FunctionPolicy functionPolicy in currentFunctions)
-            {
-                if (functionPolicy.Policy >= (int)Constant.Policy.Read)
-                {
-                    roleAccess.Add(functionPolicy.Function.Key, functionPolicy.Policy);
-                }
-            }
-
-            return roleAccess;
         }
 
         /// <summary>
@@ -69,42 +44,21 @@ namespace Fanex.MailDelivery.MailStation.Services
         /// </returns>
         public static bool HasReadPermission(string functionName)
         {
-            UpdateRoleAccess();
-            return _roleAccess != null &&
-                   _roleAccess.ContainsKey(functionName) &&
-                   _roleAccess[functionName] == (int)Constant.Policy.Read;
+            return HasPermission(functionName);
         }
 
         public static bool HasHostPermission(string functionName)
         {
-            UpdateRoleAccess();
-            return _roleAccess != null &&
-                   _roleAccess.ContainsKey(functionName) &&
-                   _roleAccess[functionName] == (int)Constant.Policy.Host;
+            return HasPermission(functionName, Constant.Policy.Host);
         }
 
-        public static bool HasPermission(string functionName)
+        public static bool HasPermission(string functionName, Constant.Policy functionPolicy = Constant.Policy.Read)
         {
-            UpdateRoleAccess();
-            return _roleAccess != null &&
-                   _roleAccess.ContainsKey(functionName) &&
-                   _roleAccess[functionName] >= (int)Constant.Policy.Read;
-        }
-
-        /// <summary>
-        /// Updates the role access.
-        /// </summary>
-        private static void UpdateRoleAccess()
-        {
-            if (_currentSession == null)
-            {
-                return;
-            }
-
-            _roleAccess = GetRoleAccess(_functionService.GetByUserAndSiteIncludeGroup(
+            return _userService.IsHavingPermission(
                 _currentSession.UserId,
                 NapSettings.Settings.SiteId,
-                NapSettings.Settings.Environment));
+                functionName,
+                functionPolicy);
         }
     }
 }

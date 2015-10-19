@@ -8,8 +8,8 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using Fanex.Data.Repository;
     using Fanex.MailDelivery.MailStation.Models;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// Get all log category criteria.
@@ -43,7 +43,7 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
                 this.Interval = model.Interval;
                 this.Description = model.Description;
             }
-            else 
+            else
             {
                 this.TriggerType = 1;
             }

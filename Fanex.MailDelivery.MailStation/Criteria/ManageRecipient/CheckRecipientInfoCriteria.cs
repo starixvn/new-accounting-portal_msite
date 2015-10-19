@@ -9,7 +9,7 @@
 
 namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Check Recipient Information Criteria.

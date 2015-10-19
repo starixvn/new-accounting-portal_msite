@@ -15,11 +15,11 @@ namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
     using Fanex.Data;
     using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
     using Fanex.MailDelivery.MailStation.Models;
-    using Fanex.NAP.Core.Criteria.Misc;
-    using Fanex.NAP.Core.Domain;
+    using Fanex.NAP.Core.Command;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
-    using Fanex.NAP.Framework.Command;
+    using Fanex.NAP.Core.Models;
+    using Fanex.MailDelivery.MailStation.Criteria;
 
     /// <summary>
     /// Mail Recipient Service.
@@ -114,9 +114,9 @@ namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The recipient information.</returns>
-        public IUser CheckRecipient(CheckRecipientInfoCriteria criteria)
+        public User CheckRecipient(CheckRecipientInfoCriteria criteria)
         {
-            return _userService.GetByUsername(criteria.Username);
+            return _userService.Get(criteria.Username);
         }
     }
 }

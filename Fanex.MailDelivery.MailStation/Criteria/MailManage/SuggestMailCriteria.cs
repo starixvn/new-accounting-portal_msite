@@ -10,7 +10,7 @@
 
 namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Suggest Mail Criteria.

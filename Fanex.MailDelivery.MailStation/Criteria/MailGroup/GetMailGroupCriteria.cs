@@ -6,7 +6,7 @@
 
 namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get all log category criteria.

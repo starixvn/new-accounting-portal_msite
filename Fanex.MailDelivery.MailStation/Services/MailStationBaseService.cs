@@ -6,14 +6,14 @@
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.Data;
+    using Fanex.Data.Repository;
     using Fanex.MailDelivery.Client.Models;
     using Fanex.MailDelivery.MailStation.Constants;
+    using Fanex.MailDelivery.MailStation.Criteria;
     using Fanex.MailDelivery.MailStation.Criteria.MailManage;
     using Fanex.MailDelivery.MailStation.Criteria.MailReport;
     using Fanex.MailDelivery.MailStation.Models;
-    using Fanex.NAP.Core.Criteria.Misc;
-    using Fanex.NAP.Framework.Command;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.NAP.Core.Command;
 
     /// <summary>
     /// Mail Station Base Service.

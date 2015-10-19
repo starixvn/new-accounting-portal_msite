@@ -1,6 +1,6 @@
 ﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get all log category criteria.

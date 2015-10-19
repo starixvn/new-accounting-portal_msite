@@ -20,11 +20,11 @@ namespace Fanex.MailDelivery.MailStation.Services.MailReport
     using Fanex.MailDelivery.Admin.Handlers;
     using Fanex.MailDelivery.Client.Enumerations;
     using Fanex.MailDelivery.Client.Models;
+    using Fanex.MailDelivery.MailStation.Criteria;
     using Fanex.MailDelivery.MailStation.Criteria.MailReport;
     using Fanex.MailDelivery.MailStation.Models;
     using Fanex.Maintenance.Service.Impl.Mail;
     using Fanex.Maintenance.Service.Interface.Mail;
-    using Fanex.NAP.Core.Criteria.Misc;
     using Quartz;
     using Quartz.Spi;
 

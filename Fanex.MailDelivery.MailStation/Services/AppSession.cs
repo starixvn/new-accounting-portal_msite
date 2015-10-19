@@ -10,9 +10,7 @@
 
 namespace Fanex.MailDelivery.MailStation.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using Fanex.NAP.Core.Model;
+    using Fanex.NAP.Core.Models;
 
     /// <summary>
     /// Application Session.

@@ -9,8 +9,7 @@
     using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
     using Fanex.MailDelivery.MailStation.Criteria.MailManage;
     using Fanex.MailDelivery.MailStation.Criteria.MailReport;
-    using Fanex.MailDelivery.MailStation.Models;
-    using Fanex.NAP.Framework.Command;
+    using Fanex.NAP.Core.Command;
     using MailModel = Fanex.MailDelivery.MailStation.Models.MailModel;
 
     /// <summary>

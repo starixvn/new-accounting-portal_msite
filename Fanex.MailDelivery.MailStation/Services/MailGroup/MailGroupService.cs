@@ -14,7 +14,7 @@ namespace Fanex.MailDelivery.MailStation.Services.MailGroup
     using Fanex.Data;
     using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
     using Fanex.MailDelivery.MailStation.Models;
-    using Fanex.NAP.Framework.Command;
+    using Fanex.NAP.Core.Command;
 
     /// <summary>
     /// Mail Report Service.
