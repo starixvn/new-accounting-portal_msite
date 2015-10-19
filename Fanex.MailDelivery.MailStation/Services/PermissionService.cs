@@ -27,8 +27,6 @@ namespace Fanex.MailDelivery.MailStation.Services
 
         private static IUserService _userService;
 
-        private static Dictionary<string, int> _roleAccess;
-
         static PermissionService()
         {
             _userService = new UserService();
