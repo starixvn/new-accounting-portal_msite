@@ -272,27 +272,24 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         [HttpPost]
         public ActionResult ReCheckLogin()
         {
-            var maintenanceInfo = _maintenanceService.GetDowntime();
-
-            if (maintenanceInfo.IsDowntime)
+            var recheckInResult = _securityService.ReCheckIn(_currentSession.OnUserId, this.SiteId);
+            var result = "2";
+            switch (recheckInResult)
             {
-                return Json("-1");
+                case 0: //// Result OK
+                    result = "0";
+                    break;
+
+                case 1: //// Downtime
+                    result = "-1";
+                    break;
+
+                case 2: //// Kicked out
+                    result = "1";
+                    break;
             }
 
-            // check if not nap hub
-            if (this.SiteId != 0)
-            {
-                var siteStatus = _siteService.IsActivated(this.SiteId);
-
-                if (!siteStatus)
-                {
-                    return Json("1");
-                }
-            }
-
-            var isKickedOut = _securityService.ReCheckIn(Convert.ToInt32(_currentSession.OnUserId));
-
-            return Json(isKickedOut ? "1" : "0");
+            return Json(result);
         }
 
         #endregion re check in
