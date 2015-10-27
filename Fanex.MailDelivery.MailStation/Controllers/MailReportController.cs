@@ -32,6 +32,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             _mailReportService = _mailReportService ?? new MailReportService();
         }
 
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 3)]
         public ActionResult Index()
         {
             ViewBag.ListStatus = _mailReportService.TaskStatus();
@@ -40,7 +41,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             return View("~/Areas/MailStation/Report/MailReport/Index.cshtml");
         }
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 3)]
         public ActionResult MailReport(MailReportCriteria criteria)
         {
             return Json(_mailReportService.MailReport(criteria));

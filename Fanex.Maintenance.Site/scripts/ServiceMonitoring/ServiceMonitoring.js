@@ -1,4 +1,6 @@
-﻿"use strict";
+﻿/* global NAP: false */
+
+"use strict";
 var serviceMonitoring;
 var timeInterval;
 var isRefreshOnChange;

@@ -46,14 +46,6 @@ namespace Fanex.Maintenance.Site
         protected void Application_Error(object sender, EventArgs e)
         {
             // Logging
-            Exception ex = Server.GetLastError().GetBaseException();
-
-            // Don't write log for HTTP exception
-            if (ex is HttpException)
-            {
-                return;
-            }
-
             if (!Request.IsLocal)
             {
                 // Remove sensitive log data
@@ -73,22 +65,41 @@ namespace Fanex.Maintenance.Site
                     }
                 }
 
+                Exception ex = Server.GetLastError().GetBaseException();
+
+                // Don't write log for HTTP exception
+                if (ex is HttpException)
+                {
+                    return;
+                }
+
                 // Get base exception data
                 string message = ex.Message +
                     "\r\nType: " + ex.GetType().ToString() +
                     "\r\nSource: " + ex.Source +
                     "\r\nDomain: " + HttpContext.Current.Request.Headers["Host"] +
+                    "\r\nRequest URL: " + HttpContext.Current.Request.Url.AbsolutePath +
                     "\r\nForm Variable: " + formVariable +
                     "\r\nQuery String: " + Request.QueryString.ToString() +
                     "\r\nTarget Site: " + ex.TargetSite +
                     "\r\nStack Trace: " + ex.StackTrace;
 
                 // Get additional exception data
-                if (ex is SqlException)
+                SqlException sqlException = ex as SqlException;
+
+                if (sqlException == null)
                 {
-                    message += "\r\nProcedure: " + ((SqlException)ex).Procedure +
-                        "\r\nLine Number: " + ((SqlException)ex).LineNumber +
-                        "\r\nServer: " + ((SqlException)ex).Server;
+                    if (ex.InnerException != null)
+                    {
+                        sqlException = ex.InnerException as SqlException;
+                    }
+                }
+
+                if (sqlException != null)
+                {
+                    message += "\r\nProcedure: " + sqlException.Procedure +
+                        "\r\nLine Number: " + sqlException.LineNumber +
+                        "\r\nServer: " + sqlException.Server;
                 }
 
                 LogService.Error(message);

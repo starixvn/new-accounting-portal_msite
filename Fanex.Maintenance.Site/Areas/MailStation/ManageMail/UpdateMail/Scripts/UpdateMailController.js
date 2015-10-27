@@ -1,4 +1,7 @@
-﻿/// <reference path="../../../../../scripts/ShareScripts/SharedScriptManager.js" />
+﻿/* global sharedScriptManager: false */
+/* global viewResources: false */
+
+/// <reference path="../../../../../scripts/ShareScripts/SharedScriptManager.js" />
 $(document).ready(function () {
     updateMailController.initPage();
 });

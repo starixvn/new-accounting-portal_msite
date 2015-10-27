@@ -1,4 +1,6 @@
-﻿"use strict";
+﻿/* global NAP: false */
+
+"use strict";
 /* jshint camelcase: false,
 unused: vars */
 var sharedScriptManager;

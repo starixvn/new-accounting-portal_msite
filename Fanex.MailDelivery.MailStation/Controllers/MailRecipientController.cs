@@ -31,7 +31,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             _manageRecipientService = _manageRecipientService ?? new ManageRecipientService();
         }
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 3)]
         public ActionResult Index()
         {
             ViewBag.ListStatus = _manageRecipientService.Status(true);
@@ -46,7 +46,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             return View("~/Areas/MailStation/ManageRecipient/CreateRecipient/Index.cshtml");
         }
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 3)]
         public ActionResult RecipientList(RecipientListCriteria criteria)
         {
             return Json(_manageRecipientService.RecipientList(criteria));

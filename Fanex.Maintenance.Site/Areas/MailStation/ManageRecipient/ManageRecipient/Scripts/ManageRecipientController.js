@@ -1,4 +1,8 @@
-﻿$(document).ready(function () {
+﻿/* global NAP: false */
+/* global sharedScriptManager: false */
+/* global viewResources: false */
+
+$(document).ready(function () {
     manageRecipientController.initPage();
 });
 

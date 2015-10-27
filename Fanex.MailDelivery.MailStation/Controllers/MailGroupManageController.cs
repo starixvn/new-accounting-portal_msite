@@ -31,7 +31,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             this._mailGroupService = this._mailGroupService ?? new MailGroupService();
         }
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 3)]
         public ActionResult Index(GetMailGroupCriteria criteria)
         {
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
@@ -60,7 +60,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             return Json(this._mailGroupService.CreateMailGroup(criteria));
         }
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 3)]
         public JsonResult MailGroupList(GetMailGroupCriteria criteria)
         {
             return Json(this._mailGroupService.GetMailGroup(criteria));

@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿/* global viewResources: false */
+
+$(document).ready(function () {
     mailLogController.initPage();
 });
 

@@ -64,9 +64,6 @@
     <Reference Include="Fanex.MailDeliver.MailClient">
       <HintPath>..\_Dependencies\MailService\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Maintenance.Service">
-      <HintPath>..\_Dependencies\mSite\Fanex.Maintenance.Service.dll</HintPath>
-    </Reference>
     <Reference Include="Fanex.NAP.Core, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.NAP.Core.Client.1.0.0.3\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
@@ -201,6 +198,10 @@
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
       <Project>{E7173CDD-8ECB-4FB6-B585-41BFE941745E}</Project>
       <Name>Fanex.Maintenance.Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Maintenance.Service\Fanex.Maintenance.Service.csproj">
+      <Project>{6F5C23B0-7EB0-4020-9664-5F904BB99BBC}</Project>
+      <Name>Fanex.Maintenance.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Maintenance.Service\Fanex.Maintenance.Service.csproj">
       <Project>{6F5C23B0-7EB0-4020-9664-5F904BB99BBC}</Project>
