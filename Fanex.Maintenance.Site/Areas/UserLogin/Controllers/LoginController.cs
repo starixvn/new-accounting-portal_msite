@@ -355,7 +355,11 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// </summary>
         private void DoSignOut()
         {
-            _securityService.Logout(_currentSession.OnUserId);
+            if (_currentSession != null && _currentSession.OnUserId != 0)
+            {
+                _securityService.Logout(_currentSession.OnUserId);
+            }
+
             FormsAuthentication.SignOut();
             Response.Cookies.Clear();
             _currentSession.ClearAll();
