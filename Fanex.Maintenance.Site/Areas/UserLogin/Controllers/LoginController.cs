@@ -272,6 +272,12 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         [HttpPost]
         public ActionResult ReCheckLogin()
         {
+            string kickOutResult = "1";
+            if (_currentSession == null || _currentSession.OnUserId == 0)
+            {
+                return Json(kickOutResult);
+            }
+
             var recheckInResult = _securityService.ReCheckIn(_currentSession.OnUserId, this.SiteId);
             var result = "2";
             switch (recheckInResult)
@@ -285,7 +291,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                     break;
 
                 case 2: //// Kicked out
-                    result = "1";
+                    result = kickOutResult;
                     break;
             }
 
