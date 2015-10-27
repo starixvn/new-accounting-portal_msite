@@ -29,7 +29,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
     {
         private MailManageService _mailManageService;
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 5)]
         public ActionResult Index(GetMailListCriteria criteria)
         {
             _mailManageService = new MailManageService();
@@ -105,7 +105,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             return Json(_mailManageService.CreateMail(criteria), JsonRequestBehavior.AllowGet);
         }
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 5)]
         public ActionResult MailList(GetMailListCriteria criteria)
         {
             _mailManageService = new MailManageService();
