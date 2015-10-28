@@ -96,11 +96,6 @@ namespace Fanex.Maintenance.Controller
 
         public bool HasRight(string functionKey, Constant.Policy policy)
         {
-            if (CurrentSession.UserId == 0)
-            {
-                return false;
-            }
-
             int functionPolicy = _userService.GetPermission(CurrentSession.UserId, this.SiteId, functionKey);
 
             return functionPolicy >= (int)policy;
