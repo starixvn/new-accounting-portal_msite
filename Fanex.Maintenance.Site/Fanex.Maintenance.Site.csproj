@@ -238,16 +238,40 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="App_Data\ConnectionStringSpName.xml">
+    <Content Include="App_Data\LOCAL\ConnectionStringSpName.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\DBMMS.bodb_MMS.bodbAdminNet.xml">
+    <Content Include="App_Data\LOCAL\DBMMS.bodb_MMS.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\mSiteSpNames.xml">
+    <Content Include="App_Data\LOCAL\mSiteSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\NAPCommonSpNames.xml">
+    <Content Include="App_Data\LOCAL\NAPCommonSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\PRO\ConnectionStringSpName.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\PRO\DBMMS.bodb_MMS.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\PRO\mSiteSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\PRO\NAPCommonSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\UAT\ConnectionStringSpName.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\UAT\DBMMS.bodb_MMS.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\UAT\mSiteSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\UAT\NAPCommonSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\MailStation\MailGroup\CreateMailGroup\Scripts\CreateMailGroup.js" />
@@ -778,23 +802,23 @@
     <Content Include="Areas\MailStation\Report\MailReport\Styles\MailReport.less" />
     <Content Include="Areas\MailStation\Web.config" />
     <Content Include="Web.local.config">
-      <SubType>Designer</SubType>
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="WebConnectionString.local.config">
-      <SubType>Designer</SubType>
+      <DependentUpon>WebConnectionString.config</DependentUpon>
     </Content>
     <Content Include="scripts\lib\Countdown\CountDown.less" />
     <Content Include="Web.pro.config">
-      <SubType>Designer</SubType>
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="WebConnectionString.pro.config">
-      <SubType>Designer</SubType>
+      <DependentUpon>WebConnectionString.config</DependentUpon>
     </Content>
     <Content Include="WebConnectionString.uat.config">
-      <SubType>Designer</SubType>
+      <DependentUpon>WebConnectionString.config</DependentUpon>
     </Content>
     <Content Include="Web.uat.config">
-      <SubType>Designer</SubType>
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.backupMNL.config">
       <SubType>Designer</SubType>
