@@ -816,6 +816,7 @@
     </Content>
     <Content Include="WebConnectionString.uat.config">
       <DependentUpon>WebConnectionString.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.uat.config">
       <DependentUpon>Web.config</DependentUpon>

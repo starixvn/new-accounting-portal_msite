@@ -90,7 +90,7 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
                 MachineName = machineName,
                 IsProduction = machineType,
                 Timezone = timeZone,
-                MachineIP = machineIP
+                MachineIP = machineIP ?? string.Empty
             };
 
             return _machineRepository.InsertMachine(criteria);
@@ -110,7 +110,7 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
                 MachineId = machineId,
                 IsProduction = machineType,
                 Timezone = timeZone,
-                MachineIP = machineIP
+                MachineIP = machineIP ?? string.Empty
             };
 
             return _machineRepository.UpdateMachine(criteria);
