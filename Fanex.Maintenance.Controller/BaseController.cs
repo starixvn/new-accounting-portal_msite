@@ -45,14 +45,7 @@ namespace Fanex.Maintenance.Controller
 
             _userService = new UserService();
 
-            try
-            {
-                _showLogTimeZone = Convert.ToInt32(ConfigurationManager.AppSettings["GMTShowLog"]);
-            }
-            catch (Exception ex)
-            {
-                Logging.Logger.Log.Error(ex.Message);
-            }
+            _showLogTimeZone = Convert.ToInt32(ConfigurationManager.AppSettings["GMTShowLog"]);
         }
 
         /// <summary>

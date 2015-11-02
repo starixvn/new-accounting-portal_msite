@@ -78,13 +78,13 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var maintenanceInfo = _maintenanceService.GetDowntime();
-
-            if (!NapSettings.Settings.IsNapHub && !this.IsSiteLogin)
+            if (!NapSettings.Settings.IsNapHub && !this.EnableDirectLogin)
             {
                 // if login-directly feature is disabled then redirect users to NAP Hub
                 return Redirect(NapSettings.Settings.HubUrl);
             }
+
+            var maintenanceInfo = _maintenanceService.GetDowntime();
 
             if (maintenanceInfo.IsDowntime)
             {
@@ -105,119 +105,65 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         [ValidateInput(false)]
         public ActionResult Index(string username, string password)
         {
-            if (!username.IsNullOrTrimEmpty() && !password.IsNullOrTrimEmpty())
+            if (this.EnableDirectLogin)
             {
-                var user = _userService.Get(username.Trim()) as User;
-
-                try
+                if (!username.IsNullOrTrimEmpty() && !password.IsNullOrTrimEmpty())
                 {
+                    var user = _userService.Get(username.Trim()) as User;
+
                     if (user != null)
                     {
                         password = Cryptography.CfsEnCode(password);
 
                         if (password == user.Password)
                         {
-                            var group = user.Group == null ? null : _groupService.Get(user.Group.Id);
                             var siteLevelList = _userService.GetSiteLevel(user.Id, Environment);
 
-                            if ((group == null || group.IsActive) && siteLevelList.Where(x => x.IsActive).Any())
+                            if (siteLevelList.Where(x => x.Site.Id == this.SiteId).Any())
                             {
-                                // check-in user
-                                var criteria = new LoginParameter
+                                var group = user.Group == null ? null : _groupService.Get(user.Group.Id);
+
+                                if ((group == null || group.IsActive)
+                                    && siteLevelList.Where(x => x.Site.Id == this.SiteId && x.IsActive).Any())
                                 {
-                                    UserId = user.Id,
-                                    SiteId = this.SiteId,
-                                    NetSessionId = Session.SessionID,
-                                    Ip = CurrentContext.IP,
-                                    LoginDate = DateTime.Now,
-                                    BrowserName = CurrentContext.BrowserName,
-                                    CountryCode = CurrentContext.CountryCode,
-                                    Domain = CurrentContext.DomainName,
-                                    Platform = CurrentContext.Platform
-                                };
+                                    // check-in user
+                                    var criteria = new LoginParameter
+                                    {
+                                        UserId = user.Id,
+                                        SiteId = this.SiteId,
+                                        NetSessionId = Session.SessionID,
+                                        Ip = CurrentContext.IP,
+                                        LoginDate = DateTime.Now,
+                                        BrowserName = CurrentContext.BrowserName,
+                                        CountryCode = CurrentContext.CountryCode,
+                                        Domain = CurrentContext.DomainName,
+                                        Platform = CurrentContext.Platform
+                                    };
 
-                                var onlineUserId = _securityService.Login(criteria);
+                                    var onlineUserId = _securityService.Login(criteria);
 
-                                // saves user session
-                                _currentSession.Level = _userService.GetUserLevel(user.Id, this.SiteId);
-                                _currentSession.UserId = user.Id;
-                                _currentSession.Username = username;
-                                _currentSession.OnUserId = onlineUserId;
-                                _currentSession.SessionId = Session.SessionID.ToString();
+                                    int level = siteLevelList.Where(x => x.Site.Id == this.SiteId).FirstOrDefault().Level;
 
-                                // current site is not NAP Hub
-                                if (this.SiteId != 0)
-                                {
+                                    // saves user session
+                                    _currentSession.Level = level;
+                                    _currentSession.UserId = user.Id;
+                                    _currentSession.Username = username;
+                                    _currentSession.OnUserId = onlineUserId;
+                                    _currentSession.SessionId = Session.SessionID.ToString();
+
                                     CreateUserMenu(user);
-                                }
+                                    CreateAuthInfo(user);
 
-                                CreateAuthInfo(user);
-
-                                // redirects user
-
-                                // if the user login directly, not through NAP Hub
-                                if (this.IsSiteLogin)
-                                {
-                                    // checks if logging-in user is active on this site
-                                    bool userIsActiveOnThisSite = false;
-
-                                    foreach (var siteLevel in siteLevelList)
-                                    {
-                                        if (siteLevel.Site.Id == this.SiteId && siteLevel.IsActive)
-                                        {
-                                            userIsActiveOnThisSite = true;
-                                        }
-                                    }
-
-                                    if (userIsActiveOnThisSite)
-                                    {
-                                        _currentSession.MenuItemList = _userService.GetMenuItem(
-                                                                                    user.Id,
-                                                                                    SiteId,
-                                                                                    Environment,
-                                                                                    true) as IList<MenuItem>;
-
-                                        return Redirect(FormsAuthentication.DefaultUrl);
-                                    }
-                                    else
-                                    {
-                                        DoSignOut();
-                                        ViewBag.Message = ViewResources.Your_account_was_suspended;
-                                    }
+                                    return Redirect(FormsAuthentication.DefaultUrl);
                                 }
                                 else
                                 {
-                                    // user has access to multiple sites
-                                    if (siteLevelList.Where(s => s.IsActive).Count() > 1)
-                                    {
-                                        return RedirectToAction("Site", "UserSite");
-                                    }
-
-                                    // user has access to one site
-                                    var site = siteLevelList.Where(s => s.IsActive).First().Site;
-
-                                    var listSiteUrl = _siteService.GetUrlById(site.Id, this.Environment).Where(u => u.IsActive).ToList();
-
-                                    if (listSiteUrl.Count() > 1)
-                                    {
-                                        return RedirectToAction("Site", "UserSite");
-                                    }
-
-                                    return RedirectToAction("Forward", "UserSite", new { id = listSiteUrl.First().SiteUrlId });
+                                    ViewBag.Message = ViewResources.Your_account_was_suspended;
                                 }
                             }
                             else
                             {
-                                // user account was suspended on all sites
-                                if (siteLevelList.Count() > 0)
-                                {
-                                    ViewBag.Message = ViewResources.Your_account_was_suspended;
-                                }
-                                else
-                                {
-                                    // logging-in user belongs to no site
-                                    ViewBag.Message = ViewResources.You_have_no_authorization;
-                                }
+                                ViewBag.Message = ViewResources.You_have_no_authorization;
                             }
                         }
                         else
@@ -232,15 +178,14 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                         ViewBag.Message = ViewResources.Invalid_Username_or_Password;
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    LogService.Error(ex.Message, ex);
-                    throw;
+                    ViewBag.Message = ViewResources.Invalid_Username_or_Password;
                 }
             }
             else
             {
-                ViewBag.Message = "Invalid input!";
+                ViewBag.Message = ViewResources.You_have_no_authorization;
             }
 
             return View();
@@ -256,7 +201,14 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <returns>Action result.</returns>
         public ActionResult LogOut()
         {
-            DoSignOut();
+            if (_currentSession != null && _currentSession.OnUserId != 0)
+            {
+                _securityService.Logout(_currentSession.OnUserId);
+            }
+
+            FormsAuthentication.SignOut();
+            Response.Cookies.Clear();
+            _currentSession.ClearAll();
 
             return Redirect(FormsAuthentication.LoginUrl);
         }
@@ -349,20 +301,5 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         }
 
         #endregion helpers
-
-        /// <summary>
-        /// User sign out.
-        /// </summary>
-        private void DoSignOut()
-        {
-            if (_currentSession != null && _currentSession.OnUserId != 0)
-            {
-                _securityService.Logout(_currentSession.OnUserId);
-            }
-
-            FormsAuthentication.SignOut();
-            Response.Cookies.Clear();
-            _currentSession.ClearAll();
-        }
     }
 }
