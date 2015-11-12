@@ -95,7 +95,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                 var onlineUserId = _securityService.SSOLogin(criteria);
 
-                if (criteria.OnUserId != 0)
+                if (onlineUserId != 0)
                 {
                     var user = _userService.Get(criteria.UserId) as User;
 
