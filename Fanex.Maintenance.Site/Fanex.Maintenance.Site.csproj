@@ -810,6 +810,7 @@
     <Content Include="scripts\lib\Countdown\CountDown.less" />
     <Content Include="Web.pro.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="WebConnectionString.pro.config">
       <DependentUpon>WebConnectionString.config</DependentUpon>
