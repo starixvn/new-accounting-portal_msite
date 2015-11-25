@@ -2,45 +2,48 @@
 
 var Recheckin = (function ($) {
 
-	return {
-		time: null,
-		root: null,
-		headlineMsgBox: null,
-		kickedOutMsg: null,
+    return {
+        time: null,
+        root: null,
+        headlineMsgBox: null,
+        kickedOutMsg: null,
 
-		init: function () {
-			Recheckin.time = 5000;
-			Recheckin.root = location.protocol + '//' + location.host + $('#NapAdminRoot').val();
-			Recheckin.kickedOutMsg = 'You have logged in from another session or your login session has expired!';
-		},
+        init: function () {
+            Recheckin.time = 15000;
+            Recheckin.root = location.protocol + '//' + location.host + $('#NapAdminRoot').val();
+            Recheckin.kickedOutMsg = 'You have logged in from another session or your login session has expired!';
+        },
 
-		reCheckin: function () {
-			$.ajax({
-				url: Recheckin.root + "UserLogin/Login/ReCheckLogin",
-				type: "POST",
-				dataType: "json",
-				success: function (result) {
-					if (result === "1") {
-						Recheckin.headlineMsgBox.showInfo(Recheckin.kickedOutMsg, { closeBtn: false });
-					}
-					else if (result === "-1") {
-						window.location.href = Recheckin.root + "UserLogin/Common/Offline";
-					}
-				},
-				error: function () {
-				}
-			});
-		},
+        reCheckin: function () {
+            $.ajax({
+                url: Recheckin.root + "UserLogin/Login/ReCheckLogin",
+                type: "POST",
+                dataType: "json",
+                success: function (result) {
+                    if (result === "1") {
+                        Recheckin.headlineMsgBox.showInfo(Recheckin.kickedOutMsg, { closeBtn: false });
+                    }
+                    else if (result === "-1") {
+                        window.location.href = Recheckin.root + "UserLogin/Common/Offline";
+                    }
+                },
+                error: function (error) {
+                    if (error.status === 500) {
+                        Recheckin.headlineMsgBox.showInfo(Recheckin.kickedOutMsg, { closeBtn: false });
+                    }
+                }
+            });
+        },
 
-		closeBrowser: function () {
-			var index = window;
-			while (index !== index.parent) // Jump out
-			{
-				index = index.parent;
-			}
-			index.close();
-		}
-	};
+        closeBrowser: function () {
+            var index = window;
+            while (index !== index.parent) // Jump out
+            {
+                index = index.parent;
+            }
+            index.close();
+        }
+    };
 
 } (jQuery));
 
