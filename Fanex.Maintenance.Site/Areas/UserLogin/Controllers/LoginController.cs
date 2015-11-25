@@ -39,7 +39,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         private IGroupService _groupService;
         private ISiteService _siteService;
         private ICurrentSession _currentSession;
-        private IMaintenanceService _maintenanceService;
+        private ONEbook.UM.Services.IMaintenanceService _maintenanceService;
         private ISecurityService _securityService;
 
         #endregion members
@@ -56,14 +56,14 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             IGroupService groupService,
             ISiteService siteService,
             ICurrentSession currentSession,
-            IMaintenanceService maintenanceService,
+            ONEbook.UM.Services.IMaintenanceService maintenanceService,
             ISecurityService securityService)
         {
             _userService = userService ?? new UserService();
             _groupService = groupService ?? new GroupService();
             _siteService = siteService ?? new SiteService();
             _currentSession = currentSession ?? new CurrentSession();
-            _maintenanceService = maintenanceService ?? new MaintenanceService();
+            _maintenanceService = maintenanceService ?? new ONEbook.UM.Services.Impl.MaintenanceService();
             _securityService = securityService ?? new SecurityService();
         }
 
@@ -84,9 +84,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                 return Redirect(NapSettings.Settings.HubUrl);
             }
 
-            var maintenanceInfo = _maintenanceService.GetDowntime();
+            var isUM = _maintenanceService.IsUnderMaintenanceOnLoginPage();
 
-            if (maintenanceInfo.IsDowntime)
+            if (isUM)
             {
                 return RedirectToAction("Offline", "Common");
             }
@@ -231,16 +231,19 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                 return Json(kickOutResult);
             }
 
+            var isPassUM = _maintenanceService.IsPassUnderMaintenance();
+
+            if (!isPassUM)
+            {
+                return Json("-1");
+            }
+
             var recheckInResult = _securityService.ReCheckIn(_currentSession.OnUserId, this.SiteId);
             var result = "2";
             switch (recheckInResult)
             {
                 case 0: //// Result OK
                     result = "0";
-                    break;
-
-                case 1: //// Downtime
-                    result = "-1";
                     break;
 
                 case 2: //// Kicked out
