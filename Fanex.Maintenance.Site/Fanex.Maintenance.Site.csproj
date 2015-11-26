@@ -238,6 +238,18 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="App_Data\SIT\ConnectionStringSpName.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\SIT\DBMMS.bodb_MMS.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\SIT\mSiteSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\SIT\NAPCommonSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\LOCAL\ConnectionStringSpName.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -824,9 +836,19 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.backupMNL.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+	<Content Include="Web.sit.config">
+      <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="WebConnectionString.backupMNL.config">
+      <DependentUpon>WebConnectionString.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+	<Content Include="WebConnectionString.sit.config">
+      <DependentUpon>WebConnectionString.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
     <None Include="scripts\lib\Fanex.Grid\Fanex.Grid.less" />
