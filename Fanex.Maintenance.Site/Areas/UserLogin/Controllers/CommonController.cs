@@ -21,16 +21,16 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     /// </summary>
     public class CommonController : Controller
     {
-        private readonly IUMControlAdapter _umControlAdapter;
+        private readonly IUMControlAdapter _underMaintenanceControlAdapter;
 
         public CommonController()
             : this(null)
         {
         }
 
-        public CommonController(IUMControlAdapter umControlAdapter)
+        public CommonController(IUMControlAdapter underMaintenanceControlAdapter)
         {
-            _umControlAdapter = umControlAdapter ?? new UMControlAdapter();
+            _underMaintenanceControlAdapter = underMaintenanceControlAdapter ?? new UMControlAdapter();
         }
 
         /// <summary>
@@ -39,9 +39,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <returns>Action result.</returns>
         public ActionResult Offline()
         {
-            var downTime = _umControlAdapter.;
+            var downTime = _underMaintenanceControlAdapter.GetUnderMaintenanceTime();
 
-            if (!downTime.IsDowntime)
+            if (!downTime.IsUnderMaintenanceTime)
             {
                 FormsAuthentication.RedirectToLoginPage();
             }
