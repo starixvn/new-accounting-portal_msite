@@ -84,7 +84,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                 return Redirect(NapSettings.Settings.HubUrl);
             }
 
-            var isUM = _maintenanceService.IsUnderMaintenanceOnLoginPage();
+            var isUM = _maintenanceService.IsUnderMaintenance();
 
             if (isUM)
             {
@@ -225,7 +225,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         [HttpPost]
         public ActionResult ReCheckLogin()
         {
-            string kickOutResult = "1";
+            var kickOutResult = "1";
             if (_currentSession == null || _currentSession.OnUserId == 0)
             {
                 return Json(kickOutResult);
@@ -239,17 +239,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             }
 
             var recheckInResult = _securityService.ReCheckIn(_currentSession.OnUserId, this.SiteId);
-            var result = "2";
-            switch (recheckInResult)
-            {
-                case 0: //// Result OK
-                    result = "0";
-                    break;
-
-                case 2: //// Kicked out
-                    result = kickOutResult;
-                    break;
-            }
+            var result = recheckInResult == 0 ? "0" : kickOutResult;
 
             return Json(result);
         }

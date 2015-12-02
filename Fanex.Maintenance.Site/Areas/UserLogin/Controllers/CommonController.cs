@@ -21,16 +21,16 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     /// </summary>
     public class CommonController : Controller
     {
-        private readonly IUMControlAdapter _underMaintenanceControlAdapter;
+        private ONEbook.UM.Services.IMaintenanceService _maintenanceService;
 
         public CommonController()
             : this(null)
         {
         }
 
-        public CommonController(IUMControlAdapter underMaintenanceControlAdapter)
+        public CommonController(ONEbook.UM.Services.IMaintenanceService maintenanceService)
         {
-            _underMaintenanceControlAdapter = underMaintenanceControlAdapter ?? new UMControlAdapter();
+            _maintenanceService = maintenanceService ?? new ONEbook.UM.Services.Impl.MaintenanceService();
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <returns>Action result.</returns>
         public ActionResult Offline()
         {
-            var downTime = _underMaintenanceControlAdapter.GetUnderMaintenanceTime();
+            var downTime = _maintenanceService.GetUnderMaintenanceTime();
 
             if (!downTime.IsUnderMaintenanceTime)
             {
