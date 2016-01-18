@@ -101,8 +101,9 @@
       <HintPath>..\packages\Fanex.NAP.Core.Client.1.0.0.5\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="IBCFile">
-      <HintPath>..\_Dependencies\Others\IBCFile.dll</HintPath>
+    <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -146,8 +147,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\MailStation\RabbitMQ.Client.dll</HintPath>
     </Reference>
-    <Reference Include="SPSRemoting">
-      <HintPath>..\_Dependencies\Others\SPSRemoting.dll</HintPath>
+    <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -211,8 +213,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="UMControllerLibrary">
-      <HintPath>..\_Dependencies\Others\UMControllerLibrary.dll</HintPath>
+    <Reference Include="UMControllerLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UMControllerLibrary.1.0.0.1\lib\net40\UMControllerLibrary.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
       <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
@@ -839,7 +842,7 @@
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-	<Content Include="Web.sit.config">
+    <Content Include="Web.sit.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
@@ -847,7 +850,7 @@
       <DependentUpon>WebConnectionString.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-	<Content Include="WebConnectionString.sit.config">
+    <Content Include="WebConnectionString.sit.config">
       <DependentUpon>WebConnectionString.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
