@@ -208,6 +208,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
             FormsAuthentication.SignOut();
             Response.Cookies.Clear();
+            Session.Abandon();
             _currentSession.ClearAll();
 
             return Redirect(FormsAuthentication.LoginUrl);
