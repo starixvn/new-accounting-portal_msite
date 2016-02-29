@@ -238,10 +238,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                 return Json("-1");
             }
 
-            var recheckInResult = _securityService.ReCheckIn(_currentSession.OnUserId, this.SiteId);
-            var result = recheckInResult == 0 ? "0" : kickOutResult;
-
-            return Json(result);
+            return Json("0");
         }
 
         #endregion re check in
