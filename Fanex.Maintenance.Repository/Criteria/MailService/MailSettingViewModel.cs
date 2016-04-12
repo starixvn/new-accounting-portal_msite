@@ -37,7 +37,7 @@ namespace Fanex.Maintenance.Repository.Criteria.MailService
         public int SettingId { get; set; }
 
         [Display(Name = "Setting_Name", ResourceType = typeof(ViewResource))]
-        [StringLength(50, MinimumLength = 2,
+        [StringLength(100, MinimumLength = 2,
             ErrorMessageResourceName = "InputLengthValidationMsg",
             ErrorMessageResourceType = typeof(ViewResource))]
         public string SettingName { get; set; }
