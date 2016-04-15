@@ -18,7 +18,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using System.Web.Security;
     using Fanex.Common;
     using Fanex.Common.Extensions;
-    using Fanex.Logging;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Models;
     using Fanex.NAP.Core.Models.ParameterObject;
@@ -27,6 +26,8 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
+    using ONEbook.UM.Services;
+    using ONEbook.UM.Services.Impl;
 
     /// <summary>
     /// Login controller.
@@ -39,7 +40,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         private IGroupService _groupService;
         private ISiteService _siteService;
         private ICurrentSession _currentSession;
-        private ONEbook.UM.Services.IMaintenanceService _maintenanceService;
+        private IMaintenanceService _maintenanceService;
         private ISecurityService _securityService;
 
         #endregion members
@@ -56,14 +57,14 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             IGroupService groupService,
             ISiteService siteService,
             ICurrentSession currentSession,
-            ONEbook.UM.Services.IMaintenanceService maintenanceService,
+            IMaintenanceService maintenanceService,
             ISecurityService securityService)
         {
             _userService = userService ?? new UserService();
             _groupService = groupService ?? new GroupService();
             _siteService = siteService ?? new SiteService();
             _currentSession = currentSession ?? new CurrentSession();
-            _maintenanceService = maintenanceService ?? new ONEbook.UM.Services.Impl.MaintenanceService();
+            _maintenanceService = maintenanceService ?? new MaintenanceService();
             _securityService = securityService ?? new SecurityService();
         }
 
