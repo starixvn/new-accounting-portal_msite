@@ -100,7 +100,7 @@
       <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Client.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.Client.1.1.0.1-beta\lib\net40\Fanex.NAP.Core.dll</HintPath>
+      <HintPath>..\packages\Fanex.NAP.Core.Client.1.1.0.3-beta\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -153,10 +153,6 @@
     <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\MailStation\RabbitMQ.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net4\RestSharp.dll</HintPath>

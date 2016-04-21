@@ -39,7 +39,7 @@
       <HintPath>..\_Dependencies\Fanex\Fanex.ConnectionString.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.Client.1.1.0.0-beta\lib\net40\Fanex.NAP.Core.dll</HintPath>
+      <HintPath>..\packages\Fanex.NAP.Core.Client.1.1.0.3-beta\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvcPager, Version=1.5.0.28157, Culture=neutral, processorArchitecture=MSIL">
