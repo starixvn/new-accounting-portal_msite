@@ -11,6 +11,7 @@ namespace Fanex.Maintenance.Site
 {
     using System;
     using System.Data.SqlClient;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
@@ -30,7 +31,7 @@ namespace Fanex.Maintenance.Site
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            
+
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
@@ -43,6 +44,7 @@ namespace Fanex.Maintenance.Site
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         protected void Application_Error(object sender, EventArgs e)
         {
             // Logging
