@@ -59,7 +59,7 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
                 {
                     foreach (var categoryName in _removedLogCategories)
                     {
-                        if (logCategory.CategoryName.ToLower().StartsWith(categoryName))
+                        if (logCategory.CategoryName.ToLower().Contains(categoryName))
                         {
                             return false;
                         }
