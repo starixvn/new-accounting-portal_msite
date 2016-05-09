@@ -11,6 +11,8 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using Core.Helpers;
     using Fanex.Maintenance.Core.Model;
     using Fanex.Maintenance.Repository.Criteria.Log;
     using Fanex.Maintenance.Repository.Impl.AppLog;
@@ -185,7 +187,22 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
 
             var list = _logRepository.GetLog(ref criteria);
 
-            totalRows = criteria.TotalRows;
+            var alphaLogMessages = list.Where(logMessage =>
+            {
+                foreach (var categoryName in AlphaCategoryHelper.AlphaCategories)
+                {
+                    if (logMessage.Category.CategoryName.ToLower().Contains(categoryName))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
+
+            list = list.Except(alphaLogMessages);
+
+            totalRows = criteria.TotalRows - alphaLogMessages.Count();
 
             return list;
         }

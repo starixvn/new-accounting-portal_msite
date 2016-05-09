@@ -10,8 +10,8 @@
 namespace Fanex.Maintenance.Service.Impl.AppLog
 {
     using System.Collections.Generic;
-    using System.Configuration;
     using System.Linq;
+    using Core.Helpers;
     using Fanex.Data.Repository;
     using Fanex.Maintenance.Core.Model;
     using Fanex.Maintenance.Repository.Criteria.Log;
@@ -21,20 +21,7 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
     /// </summary>
     public class LogCategoryService
     {
-        private static IEnumerable<string> _removedLogCategories;
         private readonly ReadonlyRepository<LogCategory> _categoryRepository = new ReadonlyRepository<LogCategory>();
-
-        private LogCategoryService()
-        {
-            if (_removedLogCategories == null)
-            {
-                var removedLogCategories = ConfigurationManager.AppSettings["RemovedLogCategories"];
-                if (!string.IsNullOrEmpty(removedLogCategories))
-                {
-                    _removedLogCategories = removedLogCategories.ToLower().Split(',');
-                }
-            }
-        }
 
         /// <summary>
         /// Create log category service.
@@ -57,7 +44,7 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
                 .Fetch(criteria)
                 .Where(logCategory =>
                 {
-                    foreach (var categoryName in _removedLogCategories)
+                    foreach (var categoryName in AlphaCategoryHelper.AlphaCategories)
                     {
                         if (logCategory.CategoryName.ToLower().Contains(categoryName))
                         {
