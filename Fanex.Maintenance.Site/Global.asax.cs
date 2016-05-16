@@ -19,7 +19,7 @@ namespace Fanex.Maintenance.Site
     using Fanex.Data.Configuration;
     using Fanex.Logging;
     using Fanex.Maintenance.Site.App_Start;
-
+    using ONEbook.UM.Filters;
     /// <summary>
     /// Note: For instructions on enabling IIS6 or IIS7 classic mode, visit http://go.microsoft.com/?LinkId=9394801 .
     /// </summary>
@@ -37,6 +37,8 @@ namespace Fanex.Maintenance.Site
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             DbSettingProviderManager.Current.Start();
+
+            GlobalFilters.Filters.Add(new CheckUMFilter());
         }
 
         /// <summary>
