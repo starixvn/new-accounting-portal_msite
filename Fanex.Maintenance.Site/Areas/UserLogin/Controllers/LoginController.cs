@@ -232,9 +232,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                 return Json(kickOutResult);
             }
 
-            var isPassUM = _maintenanceService.IsPassUnderMaintenance();
+            var isUnderMaintenance = _maintenanceService.IsUnderMaintenance();
 
-            if (!isPassUM)
+            if (isUnderMaintenance)
             {
                 return Json("-1");
             }
