@@ -656,12 +656,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -724,6 +718,15 @@
     <Content Include="Views\Mail\AddMailSettingPopUp.cshtml" />
     <Content Include="Views\Mail\GetMessage.cshtml" />
     <Content Include="Views\DatabaseReport\DataIntegrity.cshtml" />
+    <Content Include="Web.backupMNL.config">
+      <DependentUpon>Web.local.config</DependentUpon>
+    </Content>
+    <Content Include="Web.pro.config">
+      <DependentUpon>Web.local.config</DependentUpon>
+    </Content>
+    <Content Include="Web.sit.config">
+      <DependentUpon>Web.local.config</DependentUpon>
+    </Content>
     <Content Include="WebConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
@@ -765,6 +768,9 @@
     <Content Include="Views\ConnectionString\LogAction\LogAction403.cshtml" />
     <Content Include="Views\ConnectionString\LogAction\LogAction404.cshtml" />
     <Content Include="Views\ConnectionString\LogAction\LogAction405.cshtml" />
+    <Content Include="Web.uat.config">
+      <DependentUpon>Web.local.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.MailDelivery.MailStation\Fanex.MailDelivery.MailStation.csproj">
@@ -835,34 +841,15 @@
     <Content Include="Areas\MailStation\Report\MailReport\Index.cshtml" />
     <Content Include="Areas\MailStation\Report\MailReport\Styles\MailReport.less" />
     <Content Include="Areas\MailStation\Web.config" />
-    <Content Include="Web.local.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="WebConnectionString.local.config">
       <DependentUpon>WebConnectionString.config</DependentUpon>
     </Content>
     <Content Include="scripts\lib\Countdown\CountDown.less" />
-    <Content Include="Web.pro.config">
-      <DependentUpon>Web.config</DependentUpon>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="WebConnectionString.pro.config">
       <DependentUpon>WebConnectionString.config</DependentUpon>
     </Content>
     <Content Include="WebConnectionString.uat.config">
       <DependentUpon>WebConnectionString.config</DependentUpon>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.uat.config">
-      <DependentUpon>Web.config</DependentUpon>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.backupMNL.config">
-      <DependentUpon>Web.config</DependentUpon>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.sit.config">
-      <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="WebConnectionString.backupMNL.config">
@@ -882,6 +869,13 @@
     <Content Include="themes\shared\contextmenu.less" />
     <Content Include="themes\shared\formedit.less" />
     <Content Include="Views\Shared\_LayoutWithTimer.cshtml" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.local.config" />
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
