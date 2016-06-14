@@ -17,9 +17,8 @@ namespace Fanex.Maintenance.Controller
     using Fanex.NAP.Core.Web.Attribute;
     using AutoMail.Licensee.DataValidation.Service.Implement;
     using System.Web.Mvc;
-    using AutoMail.Licensee.DataValidation.Validation.Implement;/// <summary>
-                                                                /// Database report controller.
-                                                                /// </summary>
+    using AutoMail.Licensee.DataValidation.Validation.Implement;
+
     [NapSuperAuth]
     public class DatabaseReportController : BaseController
     {
