@@ -858,4 +858,16 @@
   <data name="Machine_IP" xml:space="preserve">
     <value>Machine IP</value>
   </data>
+  <data name="NotificationTesting" xml:space="preserve">
+    <value>Notification Testing</value>
+  </data>
+  <data name="Environment" xml:space="preserve">
+    <value>Environment</value>
+  </data>
+  <data name="Environment_UAT" xml:space="preserve">
+    <value>UAT</value>
+  </data>
+  <data name="Environment_Production" xml:space="preserve">
+    <value>Production</value>
+  </data>
 </root>

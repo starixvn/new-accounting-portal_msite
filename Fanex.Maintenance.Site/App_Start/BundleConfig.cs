@@ -136,6 +136,9 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/scripts/lib/XMLEditor/js/ext/GLR/GLR.js",
                 "~/scripts/lib/XMLEditor/js/ext/GLR/GLR.messenger.js"));
 
+            bundles.Add(new ScriptBundle("~/scripts/notification-testing").Include(
+                "~/scripts/NotificationTesting/NotificationTesting.js"));
+
             RegisterSharedBundles(bundles);
             RegisterFanexGridBundles(bundles);
             bundles.FileSetOrderList.Clear();

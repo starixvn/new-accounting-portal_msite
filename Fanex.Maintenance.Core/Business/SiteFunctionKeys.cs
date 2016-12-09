@@ -8,7 +8,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 8/20/2015 10:59:17 AM
+// Lasted generated date: 12/8/2016 5:40:06 PM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
@@ -82,6 +82,8 @@ public static class SiteFunctionKeys
     public const string ManageUser = "ManageUser";
 
     public const string MonitorServers = "MonitorServers";
+
+    public const string NotificationTesting = "NotificationTesting";
 
     public const string Report = "Report";
 

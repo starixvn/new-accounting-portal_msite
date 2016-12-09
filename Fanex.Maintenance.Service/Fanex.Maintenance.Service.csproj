@@ -49,8 +49,12 @@
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\_Dependencies\Fanex\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NotificationServiceLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ONEbook.NotificationService.1.0.5\lib\NotificationServiceLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -64,6 +68,7 @@
     <Compile Include="Impl\LicenseeSetting\LicenseeSettingService.cs" />
     <Compile Include="Impl\AppLog\MachineService.cs" />
     <Compile Include="Impl\Mail\MailService.cs" />
+    <Compile Include="Impl\NotificationService.cs" />
     <Compile Include="Impl\ServiceMonitoring\UserManagement.cs" />
     <Compile Include="Impl\ServiceMonitoring\ServiceManagement.cs" />
     <Compile Include="Interface\LicenseeSetting\ILicenseeSettingService.cs" />
