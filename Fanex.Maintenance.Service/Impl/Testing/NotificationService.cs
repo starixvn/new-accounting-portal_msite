@@ -7,87 +7,62 @@
     using Interface.Testing;
     using ONEbook.NotificationService;
 
-    public class NotificationService: INotificationService
+    public class NotificationService : INotificationService
     {
-        private string emailSuccess = "The email is sent successfully at " + DateTime.Now.ToString();
-        private string emailUnSuccess = "The email is sent unsuccessfully at " + DateTime.Now.ToString();
-        private string messageSuccess = "The message is sent successfully at " + DateTime.Now.ToString();
-        private string messageUnSuccess = "The message is sent unsuccessfully at " + DateTime.Now.ToString();
+        private readonly string _emailSuccess = "The email is sent successfully at " + DateTime.Now;
+        private readonly string _emailUnSuccess = "The email is sent unsuccessfully at " + DateTime.Now;
+        private readonly string _messageSuccess = "The message is sent successfully at " + DateTime.Now;
+        private readonly string _messageUnSuccess = "The message is sent unsuccessfully at " + DateTime.Now;
 
         public MessageModel Query(QueryModel model)
         {
-            var setting = InitSetting();
+            var setting = ConfigurationManager.GetSection("LetstalkNotificationSetting") as Setting;
             var hasMailing = SendEmailByNotificationAPI(setting, model);
             var hasMessage = SendMessageByNotificationAPI(setting, model);
 
             return new MessageModel
             {
-                Email = hasMailing == true ? emailSuccess : emailUnSuccess,
-                Message = hasMessage == true ? messageSuccess : messageUnSuccess,
+                Email = hasMailing ? _emailSuccess : _emailUnSuccess,
+                Message = hasMessage ? _messageSuccess : _messageUnSuccess,
                 EmailSuccess = hasMailing,
                 MessageSuccess = hasMessage
             };
         }
 
-        public Setting InitSetting()
-        {
-            return ConfigurationManager.GetSection("LetstalkNotificationSetting") as Setting;
-        }
-
         public bool SendEmailByNotificationAPI(Setting setting, QueryModel model)
         {
-            bool result = false;
-            var targetNameMaiing = model.IsPro == true ? setting.TargetNameMailing : setting.TargetNameMailing1;
+            var targetNameMaiing = model.IsPro ? setting.TargetNameMailing : setting.TargetNameMailing1;
+            var targetName = targetNameMaiing + "?" + setting.ITALLMail;
+            string[] serverUrls = { setting.NotificationService1, setting.NotificationService2 };
 
-            try
-            {
-                string targetName = targetNameMaiing + "?" + setting.ITALLMail;
-                string[] serverUrls = new string[] { setting.NotificationService1, setting.NotificationService2 };
-                Notification.Initialize(serverUrls, setting.AuthenticationKey);
-
-                var emailContent = model.Message + " at " + DateTime.Now.ToString();
-                var contents = new Dictionary<string, string>()
+            var emailContent = model.Message + " at " + DateTime.Now;
+            var contents = new Dictionary<string, string>()
                 {
                     { "Mail.Subject", "Testing" },
                     { "Email", emailContent }
                 };
 
-                result = Notification.Send(targetName, contents, null, null);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            Notification.Initialize(serverUrls, setting.AuthenticationKey);
 
-            return result;
+            return Notification.Send(targetName, contents);
         }
 
         public bool SendMessageByNotificationAPI(Setting setting, QueryModel model)
         {
-            bool result = false;
-            var targetNameAlert = model.IsPro == true ? setting.TargetNameAlert : setting.TargetNameAlert1;
+            var targetNameAlert = model.IsPro ? setting.TargetNameAlert : setting.TargetNameAlert1;
+            var targetName = targetNameAlert + "?" + setting.ITALLAlert;
+            string[] serverUrls = { setting.NotificationService1, setting.NotificationService2 };
 
-            try
-            {
-                string targetName = targetNameAlert + "?" + setting.ITALLAlert;
-                string[] serverUrls = new string[] { setting.NotificationService1, setting.NotificationService2 };
-                Notification.Initialize(serverUrls, setting.AuthenticationKey);
+            var contentMessage = model.Message + " at " + DateTime.Now;
+            var contents = new Dictionary<string, string>()
+                {
+                    { "Push.Subject", "Testing" },
+                    { "Letstalk",  contentMessage }
+                };
 
-                var contentMessage = model.Message + " at " + DateTime.Now.ToString();
-                var contents = new Dictionary<string, string>()
-                     {
-                         { "Push.Subject",  "Testing" },
-                         { "Letstalk",  contentMessage }
-                     };
+            Notification.Initialize(serverUrls, setting.AuthenticationKey);
 
-                result = Notification.Send(targetName, contents, null, null);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return result;
+            return Notification.Send(targetName, contents);
         }
     }
 }
