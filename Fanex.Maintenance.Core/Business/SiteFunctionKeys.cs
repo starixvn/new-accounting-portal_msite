@@ -8,7 +8,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 12/8/2016 5:40:06 PM
+// Lasted generated date: 12/9/2016 12:48:54 PM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
@@ -83,11 +83,11 @@ public static class SiteFunctionKeys
 
     public const string MonitorServers = "MonitorServers";
 
-    public const string NotificationTesting = "NotificationTesting";
-
     public const string Report = "Report";
 
     public const string ResendMail = "ResendMail";
+
+    public const string Risk_ControlLetstalkNotification = "Risk_ControlLetstalkNotification";
 
     public const string ServiceMonitoring = "ServiceMonitoring";
 
@@ -102,6 +102,8 @@ public static class SiteFunctionKeys
     public const string SwitchConnection = "SwitchConnection";
 
     public const string SystemConfiguration = "SystemConfiguration";
+
+    public const string Testing = "Testing";
 
     public const string UserOnline = "UserOnline";
 

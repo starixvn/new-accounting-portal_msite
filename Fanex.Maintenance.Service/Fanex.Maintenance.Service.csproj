@@ -68,7 +68,7 @@
     <Compile Include="Impl\LicenseeSetting\LicenseeSettingService.cs" />
     <Compile Include="Impl\AppLog\MachineService.cs" />
     <Compile Include="Impl\Mail\MailService.cs" />
-    <Compile Include="Impl\NotificationService.cs" />
+    <Compile Include="Impl\Testing\NotificationService.cs" />
     <Compile Include="Impl\ServiceMonitoring\UserManagement.cs" />
     <Compile Include="Impl\ServiceMonitoring\ServiceManagement.cs" />
     <Compile Include="Interface\LicenseeSetting\ILicenseeSettingService.cs" />
@@ -77,6 +77,7 @@
     <Compile Include="Interface\Mail\IMailService.cs" />
     <Compile Include="Interface\ServiceMonitoring\IServiceManagement.cs" />
     <Compile Include="Interface\ServiceMonitoring\IUserManagement.cs" />
+    <Compile Include="Interface\Testing\INotificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

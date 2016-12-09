@@ -1,6 +1,4 @@
-﻿'use strict';
-
-(function () {
+﻿(function () {
     'use strict';
 
     var _tables = {
@@ -8,7 +6,7 @@
         notify: null,
         message: null,
         btnSubmit: null
-    };
+    }
 
     function initPage() {
         cachedDOMElements();
@@ -29,23 +27,24 @@
     }
 
     function updateData() {
-        var isPro = $("input[name=env]:checked").val();
-        $.ajax({
-            type: 'POST',
-            url: window.rootUrl + 'NotificationTesting/Query',
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
-            async: false,
-            data: JSON.stringify({
-                Message: _tables.message[0].value,
-                IsPro: isPro === "production" ? true : false
-            }),
-            success: function success(result) {
-                generateEmail(result);
-                generateMessage(result);
-            },
-            error: function error(xhr) {}
-        });
+        var isPro = ($("input[name=env]:checked").val());
+            $.ajax({
+                type: 'POST',
+                url: window.rootUrl + 'Testing/LetstalkNotification_Query',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                async: false,
+                data: JSON.stringify({
+                    Message: _tables.message[0].value,
+                    IsPro: isPro === "production" ? true : false
+                }),
+                success: function (result) {
+                    generateEmail(result);
+                    generateMessage(result);
+                },
+                error: function (xhr) {
+                }
+            });
     }
 
     function generateEmail(result) {
@@ -54,7 +53,8 @@
 
             document.getElementById("notify-email").className = "success";
             document.getElementById("notify-email").innerHTML = result.Email;
-        } else {
+        }
+        else {
 
             document.getElementById("notify-email").className = "unsuccess";
             document.getElementById("notify-email").innerHTML = result.Email;
@@ -66,12 +66,13 @@
         if (result.MessageSuccess) {
             document.getElementById("notify-msg").className = "success";
             document.getElementById("notify-msg").innerHTML = result.Message;
-        } else {
+        }
+        else {
             document.getElementById("notify-msg").className = "unsuccess";
             document.getElementById("notify-msg").innerHTML = result.Message;
         }
     }
-
+    
     initPage();
-})();
 
+})();

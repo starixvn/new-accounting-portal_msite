@@ -63,9 +63,9 @@
     <Compile Include="Model\LogCategory.cs" />
     <Compile Include="Model\LrfDomain.cs" />
     <Compile Include="Model\Machine.cs" />
-    <Compile Include="Model\NotificationTesting\MessageModel.cs" />
-    <Compile Include="Model\NotificationTesting\QueryModel.cs" />
-    <Compile Include="Model\NotificationTesting\Setting.cs" />
+    <Compile Include="Model\LetstalkNotification\MessageModel.cs" />
+    <Compile Include="Model\LetstalkNotification\QueryModel.cs" />
+    <Compile Include="Model\LetstalkNotification\Setting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewResource.Designer.cs">
       <DependentUpon>ViewResource.resx</DependentUpon>

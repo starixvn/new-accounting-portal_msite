@@ -1,12 +1,13 @@
-﻿namespace Fanex.Maintenance.Service.Impl
+﻿namespace Fanex.Maintenance.Service.Impl.Testing
 {
     using System;
     using System.Collections.Generic;
     using System.Configuration;
-    using Core.Model.NotificationTesting;
+    using Core.Model.LetstalkNotification;
+    using Interface.Testing;
     using ONEbook.NotificationService;
 
-    public class NotificationService
+    public class NotificationService: INotificationService
     {
         private string emailSuccess = "The email is sent successfully at " + DateTime.Now.ToString();
         private string emailUnSuccess = "The email is sent unsuccessfully at " + DateTime.Now.ToString();
@@ -30,7 +31,7 @@
 
         public Setting InitSetting()
         {
-            return ConfigurationManager.GetSection("NotificationTestingSetting") as Setting;
+            return ConfigurationManager.GetSection("LetstalkNotificationSetting") as Setting;
         }
 
         public bool SendEmailByNotificationAPI(Setting setting, QueryModel model)

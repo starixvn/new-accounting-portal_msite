@@ -1483,15 +1483,6 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notification Testing.
-        /// </summary>
-        public static string NotificationTesting {
-            get {
-                return ResourceManager.GetString("NotificationTesting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Obsolete.
         /// </summary>
         public static string Obsolete {
@@ -1614,6 +1605,15 @@ namespace Fanex.Maintenance.Core {
         public static string Retries_Attempted {
             get {
                 return ResourceManager.GetString("Retries_Attempted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Risk &amp; Control Letstalk Notification.
+        /// </summary>
+        public static string LetstalkNotification {
+            get {
+                return ResourceManager.GetString("LetstalkNotification", resourceCulture);
             }
         }
         

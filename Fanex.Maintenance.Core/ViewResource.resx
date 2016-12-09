@@ -858,8 +858,8 @@
   <data name="Machine_IP" xml:space="preserve">
     <value>Machine IP</value>
   </data>
-  <data name="NotificationTesting" xml:space="preserve">
-    <value>Notification Testing</value>
+  <data name="LetstalkNotification" xml:space="preserve">
+    <value>Risk &amp; Control Letstalk Notification</value>
   </data>
   <data name="Environment" xml:space="preserve">
     <value>Environment</value>

@@ -482,10 +482,10 @@
     <Content Include="scripts\lib\Select2\select2.css" />
     <Content Include="scripts\lib\Select2\select2.js" />
     <Content Include="scripts\lib\Select2\select2.png" />
-    <Content Include="scripts\NotificationTesting\NotificationTesting.es5.js" />
-    <Content Include="scripts\NotificationTesting\NotificationTesting.es5.min.js" />
-    <Content Include="scripts\NotificationTesting\NotificationTesting.js" />
-    <Content Include="scripts\NotificationTesting\NotificationTesting.min.js" />
+    <Content Include="scripts\LetstalkNotification\LetstalkNotification.es5.js" />
+    <Content Include="scripts\LetstalkNotification\LetstalkNotification.es5.min.js" />
+    <Content Include="scripts\LetstalkNotification\LetstalkNotification.js" />
+    <Content Include="scripts\LetstalkNotification\LetstalkNotification.min.js" />
     <Content Include="scripts\ServiceMonitoring\ServiceMonitoring.js" />
     <Content Include="scripts\ShareScripts\SharedScriptManager.js" />
     <Content Include="themes\assets\css\font-awesome-ie7.css" />
@@ -881,7 +881,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\NotificationTesting\Index.cshtml" />
+    <Content Include="Views\Testing\LetstalkNotification.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

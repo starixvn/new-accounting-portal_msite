@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Core.Model.NotificationTesting
+﻿namespace Fanex.Maintenance.Core.Model.LetstalkNotification
 {
     public class QueryModel
     {

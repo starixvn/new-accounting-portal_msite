@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = ViewResource.NotificationTesting;
+    ViewBag.Title = ViewResource.LetstalkNotification;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head{
@@ -11,7 +11,7 @@
         <span class="title">@ViewBag.Title</span>
     </h1>
 }
-<div id="filter-bar" class="filter-bar notification-testing">
+<div id="filter-bar" class="filter-bar letstalk-notification">
     <div class="filter-form">
         <div class="filter-row">
             <div class="filter-cell">
@@ -39,4 +39,4 @@
 </div>
 <script type="text/javascript">window.rootUrl = '@Url.Content("~")'</script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-@Scripts.Render("~/scripts/notification-testing")
+@Scripts.Render("~/scripts/letstalk-notification")
