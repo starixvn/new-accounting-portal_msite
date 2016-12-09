@@ -10,14 +10,14 @@
     public class NotificationTestingController : BaseController
     {
         [HttpGet]
-        [NapAuth(FunctionKey = SiteFunctionKeys.NotificationTesting, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.NotificationTesting, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        [NapAuth(FunctionKey = SiteFunctionKeys.NotificationTesting, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.NotificationTesting, Policy = Constant.Policy.Read)]
         public ActionResult Query(QueryModel queryModel)
         {
             var notificationService = new NotificationService();
