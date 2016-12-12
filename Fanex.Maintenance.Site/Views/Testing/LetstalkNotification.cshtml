@@ -4,6 +4,7 @@
 }
 @section Head{
     @Styles.Render("~/css/manage")
+    @Styles.Render("~/css/letstalk-notification")
 }
 @section HeadLine
 {
@@ -11,25 +12,23 @@
         <span class="title">@ViewBag.Title</span>
     </h1>
 }
-<div id="filter-bar" class="filter-bar letstalk-notification">
+<div id="filter-bar" class="letstalk-notification">
     <div class="filter-form">
-        <div class="filter-row">
-            <div class="filter-cell">
-                <div class="lbl-field col_3 align-right">@ViewResource.Message</div>
-                <div class="edit-field col_6">
-                    <input type="text" class="scrollabletextbox" id="message" value="" placeholder="Input your message" />
-                </div>
+        <div class="filter-cell">
+            <div class="lbl-field lt-label">@ViewResource.Message</div>
+            <div class="edit-field lt-content">
+                <input type="text" class="scrollabletextbox" id="message" value="" placeholder="Input your message" />
             </div>
-            <div class="filter-select">
-                <div class="lbl-field col_3 align-right">@ViewResource.Environment</div>
-                <div class="edit-field col_3" id="filter-select">
-                    <input type="radio" id="production" class="env" name="env" value="production" checked> @ViewResource.Environment_Production<br>
-                    <input type="radio" id="uAT" class="env" name="env" value="uAT"> @ViewResource.Environment_UAT<br>
-                </div>
+        </div>
+        <div class="filter-select">
+            <div class="lbl-field lt-label">@ViewResource.Environment</div>
+            <div class="edit-field lt-select" id="filter-select">
+                <input type="radio" id="production" class="env" name="env" value="production" checked> @ViewResource.Environment_Production<br>
+                <input type="radio" id="uAT" class="env" name="env" value="UAT"> @ViewResource.Environment_UAT<br>
             </div>
-            <div class="submit">
-                <input id="btnSubmit" name="btnSave" type="submit" value="Submit">
-            </div>
+        </div>
+        <div class="submit">
+            <input id="btnSubmit" name="btnSave" type="submit" value="Submit">
         </div>
     </div>
     <div class="filter-notify">
@@ -38,5 +37,6 @@
     </div>
 </div>
 <script type="text/javascript">window.rootUrl = '@Url.Content("~")'</script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-@Scripts.Render("~/scripts/letstalk-notification")
+@section scripts {
+    @Scripts.Render("~/scripts/letstalk-notification")
+}

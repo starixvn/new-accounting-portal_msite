@@ -50,6 +50,10 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/themes/manage/manage.less");
 
             bundles.AddAndInclude(
+                "~/css/letstalk-notification",
+                "~/themes/manage/LetstalkNotification.less");
+
+            bundles.AddAndInclude(
                 "~/css/database-report",
                 "~/themes/manage/report/dataintegry.less");
 
