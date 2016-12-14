@@ -14,9 +14,15 @@ var ManageRecipientController = function () {
         self.getRecipientList();
         contextMenuController.bindContextMenuEvents();
     };
+
     self.cachedData = {
         searchParams: null
     };
+
+    var cacheObject = {
+        bodyData: null
+    };
+
     var DOMElements = {
         emails: null
     };
@@ -123,23 +129,41 @@ var ManageRecipientController = function () {
             headerColumns.push({ HeaderText: viewResources.Action, Width: 50, Name: "ColAction", HeaderAlign: "center", CellAlign: "center" });
         }
 
+        var reRenderAfterPaged = function (page_index, itemsPerPage, jq) {
+            gridOptions.pagerOption.itemsPerPage = itemsPerPage;
+            gridOptions.pagerOption.currentPage = page_index;
+            var startIndex = (page_index * itemsPerPage);
+            var endIndex = ((page_index + 1) * itemsPerPage);
+            var currentBodyRows = cacheObject.bodyData.slice(startIndex, endIndex);
+            gridOptions.bodyRows = currentBodyRows;
+            $("#recipient-list").fanexGrid(gridOptions);
+            self.bindGridEvent();
+            return false;
+        };
+
+        cacheObject.bodyData = bodyData;
+        var startIndex = 0;
+        var currentBodyRows = cacheObject.bodyData.slice(0, sharedScriptManager.cachedData.defaultItemsPerPage);
         var gridOptions = {
             columns: headerColumns,
             showTitle: false,
-            bodyRows: bodyData,
+            bodyRows: currentBodyRows,
             showDistinctRow: false,
             showHighlightRow: true,
             headerColumnHeight: 29,
             bodyRowHeight: 30,
             gridExpandHeight: 350,
             showPager: true,
+            customPager: true,
             pagerOption: {
                 itemsPerPage: sharedScriptManager.cachedData.defaultItemsPerPage,
                 currentPage: 0,
                 itemsPerPageArray: sharedScriptManager.cachedData.pagingOptions,
-                totalItem: 800
+                totalItem: cacheObject.bodyData.length,
+                pagerSelectCallBack: reRenderAfterPaged
             }
         };
+
         $("#recipient-list").removeClass("display-none").fanexGrid(gridOptions);
         self.bindGridEvent();
     };

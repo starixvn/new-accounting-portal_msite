@@ -1,4 +1,4 @@
-﻿﻿// --------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------
 // <copyright file="ManageRecipientService.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -9,17 +9,17 @@
 
 namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
 {
+    using Fanex.Data;
+    using Fanex.MailDelivery.MailStation.Criteria;
+    using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
+    using Fanex.MailDelivery.MailStation.Models;
+    using Fanex.NAP.Core.Models;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Service.Interface;
+    using NAP.Core.Command;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using Fanex.Data;
-    using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
-    using Fanex.MailDelivery.MailStation.Models;
-    using Fanex.NAP.Core.Command;
-    using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Core.Service.Interface;
-    using Fanex.NAP.Core.Models;
-    using Fanex.MailDelivery.MailStation.Criteria;
 
     /// <summary>
     /// Mail Recipient Service.

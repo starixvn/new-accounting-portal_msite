@@ -1,8 +1,4 @@
-﻿/* global NAP: false */
-/* global sharedScriptManager: false */
-/* global viewResources: false */
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     insertMailController.initPage();
 });
 
@@ -167,7 +163,7 @@ var InsertMailController = function () {
                     var day = repeaton[i];
                     if (parseInt(day) > 28) {
                         $('#nexcron-repeat-on-day').addClass('nexcron-validation-error');
-                        sharedScriptManager.createValidationSummary(['Date should not be greated than 28.'], false);
+                        sharedScriptManager.createValidationSummary(['Date should not be greater than 28.'], false);
                         return false;
                     }
                 }
@@ -216,7 +212,7 @@ var InsertMailController = function () {
             IsActive: DOMElements.IsActive.is(':checked'),
             StartOn: cronResult.StartOn,
             EndOn: cronResult.EndOn,
-            Attemp: cronResult.Attemp,
+            Attempt: cronResult.Attempt,
             Interval: cronResult.Interval,
             Description: DOMElements.Description.val()
         };
@@ -278,4 +274,4 @@ var InsertMailController = function () {
     };
 };
 
-var insertMailController = new InsertMailController(); 
+var insertMailController = new InsertMailController();

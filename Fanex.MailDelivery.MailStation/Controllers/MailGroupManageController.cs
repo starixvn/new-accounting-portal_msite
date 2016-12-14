@@ -1,21 +1,15 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="MailGroupManageController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis" date="2012.12.07">Created</change>
-// </history>
-
-namespace Fanex.MailDelivery.MailStation.Controllers
+﻿namespace Fanex.MailDelivery.MailStation.Controllers
 {
     using System.Web.Mvc;
+    using Criteria.MailGroup;
+    using Extensions;
+    using Fanex.MailDelivery.Admin.Messaging;
+    using Fanex.MailDelivery.Admin.Messaging.ManageGroup;
+    using Fanex.MailDelivery.Admin.Services.Group;
     using Fanex.MailDelivery.MailStation.Constants;
-    using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
-    using Fanex.MailDelivery.MailStation.Extensions;
-    using Fanex.MailDelivery.MailStation.Services.MailGroup;
     using Fanex.Maintenance.Controller;
     using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Command;
     using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
@@ -24,14 +18,14 @@ namespace Fanex.MailDelivery.MailStation.Controllers
     [NapSuperAuth]
     public class MailGroupManageController : BaseController
     {
-        private MailGroupService _mailGroupService;
+        private readonly IGroupService _groupService;
 
         public MailGroupManageController()
         {
-            this._mailGroupService = this._mailGroupService ?? new MailGroupService();
+            _groupService = new GroupService();
         }
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 3)]
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
         public ActionResult Index(GetMailGroupCriteria criteria)
         {
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
@@ -57,19 +51,53 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
         public JsonResult CreateMailGroup(CreateMailGroupCriteria criteria)
         {
-            return Json(this._mailGroupService.CreateMailGroup(criteria));
+            CreateGroupRequest request = new CreateGroupRequest
+            {
+                Name = criteria.MailGroupName,
+                Description = criteria.Description
+            };
+
+            ResultResponse response = _groupService.CreateGroup(request);
+
+            CommandResult commandResult = new CommandResult
+            {
+                Code = response.ErrCode,
+                Message = response.ErrMsg
+            };
+
+            return Json(commandResult);
         }
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 3)]
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
         public JsonResult MailGroupList(GetMailGroupCriteria criteria)
         {
-            return Json(this._mailGroupService.GetMailGroup(criteria));
+            GetGroupListRequest request = new GetGroupListRequest
+            {
+                Name = criteria.MailGroupName
+            };
+
+            GetGroupListResponse response = _groupService.GetGroupList(request);
+
+            return Json(response.GroupModels);
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
         public ActionResult DeleteMailGroup(DeleteMailGroupCriteria criteria)
         {
-            return Json(this._mailGroupService.DeleteMailGroup(criteria));
+            DeleteGroupRequest request = new DeleteGroupRequest
+            {
+                Id = criteria.MailGroupId,
+            };
+
+            ResultResponse response = _groupService.DeleteGroup(request);
+
+            CommandResult commandResult = new CommandResult
+            {
+                Code = response.ErrCode,
+                Message = response.ErrMsg
+            };
+
+            return Json(commandResult);
         }
 
         /// <summary>
@@ -80,13 +108,19 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
         public ActionResult UpdateMailGroupView(GetMailGroupByIdCriteria criteria)
         {
-            var mailGroup = this._mailGroupService.GetMailGroupByID(criteria);
-            var model = new UpdateMailGroupCriteria();
-            if (mailGroup != null)
+            GetMailGroupByIdRequest request = new GetMailGroupByIdRequest
             {
-                model.MailGroupId = mailGroup.MailGroupId;
-                model.MailGroupName = mailGroup.MailGroupName;
-                model.Description = mailGroup.Description;
+                Id = criteria.MailGroupId
+            };
+
+            GetMailGroupByIdResponse response = _groupService.GetMailGroupById(request);
+
+            var model = new UpdateMailGroupCriteria();
+            if (response != null)
+            {
+                model.MailGroupId = response.GroupModel.MailGroupId;
+                model.MailGroupName = response.GroupModel.MailGroupName;
+                model.Description = response.GroupModel.Description;
             }
 
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
@@ -97,13 +131,35 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
         public JsonResult UpdateMailGroup(UpdateMailGroupCriteria criteria)
         {
-            return Json(this._mailGroupService.UpdateMailGroup(criteria));
+            UpdateGroupRequest request = new UpdateGroupRequest
+            {
+                Id = criteria.MailGroupId,
+                Name = criteria.MailGroupName,
+                Description = criteria.Description
+            };
+
+            ResultResponse response = _groupService.UpdateGroup(request);
+
+            CommandResult commandResult = new CommandResult
+            {
+                Code = response.ErrCode,
+                Message = response.ErrMsg
+            };
+
+            return Json(commandResult);
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
         public ActionResult ViewRelevantMail(int mailGroupId)
         {
             return RedirectToAction("Index", "MailManage", new { MailGroupId = mailGroupId });
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _groupService.Dispose();
+
+            base.Dispose(disposing);
         }
     }
 }

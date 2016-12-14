@@ -161,7 +161,7 @@ var UpdateMailController = function () {
         $('.input-validation-error').removeClass('input-validation-error');
         $('.nexcron-validation-error').removeClass('nexcron-validation-error');
         $('.magic-suggest-error').removeClass('magic-suggest-error');
-        if (DOMElements.MailName.val() === '') {
+        if ($.trim(DOMElements.MailName.val()) === '') {
             DOMElements.MailName.addClass('input-validation-error');
             sharedScriptManager.createValidationSummary(['Mail Name cannot be empty.'], false);
             return false;
@@ -189,7 +189,7 @@ var UpdateMailController = function () {
                     var day = repeaton[i];
                     if (parseInt(day) > 28) {
                         $('#nexcron-repeat-on-day').addClass('nexcron-validation-error');
-                        sharedScriptManager.createValidationSummary(['Date should not be greated than 28.'], false);
+                        sharedScriptManager.createValidationSummary(['Date should not be greater than 28.'], false);
                         return false;
                     }
                 }

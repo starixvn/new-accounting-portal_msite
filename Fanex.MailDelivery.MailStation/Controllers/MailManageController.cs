@@ -9,16 +9,21 @@
 
 namespace Fanex.MailDelivery.MailStation.Controllers
 {
+    using System.Collections.Generic;
     using System.Web.Mvc;
+    using Fanex.MailDelivery.Admin.Services.Job;
+    using Fanex.MailDelivery.Admin.Services.JobOperation;
+    using Fanex.MailDelivery.Admin.Services.Mail;
+    using Fanex.MailDelivery.Core.Models.Mails;
     using Fanex.MailDelivery.MailStation.Constants;
     using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
     using Fanex.MailDelivery.MailStation.Criteria.MailManage;
     using Fanex.MailDelivery.MailStation.Extensions;
-    using Fanex.MailDelivery.MailStation.Models;
     using Fanex.MailDelivery.MailStation.Resources;
-    using Fanex.MailDelivery.MailStation.Services.ManageMail;
+    using Fanex.MailDelivery.MailStation.Services;
     using Fanex.Maintenance.Controller;
     using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Command;
     using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
@@ -29,34 +34,36 @@ namespace Fanex.MailDelivery.MailStation.Controllers
     {
         private MailManageService _mailManageService;
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 3)]
+        public MailManageController()
+        {
+            _mailManageService = new MailManageService(new MailService(), new JobService(), new JobOperationService());
+        }
+
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
         public ActionResult Index(GetMailListCriteria criteria)
         {
-            _mailManageService = new MailManageService();
             ViewBag.ListMailGroup = _mailManageService.MailGroups();
             ViewBag.ListSite = _mailManageService.Sites();
             ViewBag.ListStatus = _mailManageService.Status();
             ViewBag.ListTriggerType = _mailManageService.Trigger();
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
+            ViewBag.IsUseCookie = string.IsNullOrEmpty(criteria.Emails) && string.IsNullOrEmpty(criteria.MailGroupId);
             return View("~/Areas/MailStation/ManageMail/ManageMail/Index.cshtml", criteria);
         }
 
         public JsonResult Sites()
         {
-            _mailManageService = new MailManageService();
             return Json(_mailManageService.Sites());
         }
 
         public JsonResult MailGroups(bool hasAllElement = true)
         {
-            _mailManageService = new MailManageService();
             return Json(_mailManageService.MailGroups(hasAllElement));
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public JsonResult AddMailGroup(CreateMailGroupCriteria criteria)
         {
-            _mailManageService = new MailManageService();
             return Json(_mailManageService.CreateMailGroup(criteria));
         }
 
@@ -66,20 +73,21 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         /// <param name="criteria">The criteria.</param>
         /// <returns>Create Mail View.</returns>
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
-        public ActionResult CreateMailView(ReadMailByIdCriteria criteria)
+        public ActionResult CreateMailView(GetMailByIdCriteria criteria)
         {
-            _mailManageService = new MailManageService();
             ViewBag.ListMailGroup = _mailManageService.MailGroups(false);
             ViewBag.ListSite = _mailManageService.Sites(false);
             ViewBag.ListTriggerType = _mailManageService.Trigger(false);
-            MailModel mail = _mailManageService.MailByID(criteria);
-            if (mail != null)
+
+            MailModel mailModel = _mailManageService.MailById(criteria);
+
+            if (mailModel != null)
             {
-                mail.MailName += Labels.CopyPrefix;
+                mailModel.MailName += Labels.CopyPrefix;
             }
 
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
-            CreateMailCriteria model = new CreateMailCriteria(mail);
+            CreateMailCriteria model = new CreateMailCriteria(mailModel);
             return View("~/Areas/MailStation/ManageMail/CreateMail/Index.cshtml", model);
         }
 
@@ -101,34 +109,33 @@ namespace Fanex.MailDelivery.MailStation.Controllers
                 criteria.EndOn = criteria.EndOn.Value.ToUniversalTime();
             }
 
-            _mailManageService = new MailManageService();
             return Json(_mailManageService.CreateMail(criteria), JsonRequestBehavior.AllowGet);
         }
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 3)]
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
         public ActionResult MailList(GetMailListCriteria criteria)
         {
-            _mailManageService = new MailManageService();
-            var result = _mailManageService.MailList(criteria);
+            IList<MailModel> result = _mailManageService.MailList(criteria);
             return Json(result);
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public ActionResult DeleteMail(DeleteMailCriteria criteria)
         {
-            _mailManageService = new MailManageService();
-            return Json(_mailManageService.DeleteMail(criteria));
+            CommandResult commandResult = _mailManageService.DeleteMail(criteria);
+            return Json(commandResult);
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
-        public ActionResult UpdateMailView(ReadMailByIdCriteria criteria)
+        public ActionResult UpdateMailView(GetMailByIdCriteria criteria)
         {
-            _mailManageService = new MailManageService();
             ViewBag.ListMailGroup = _mailManageService.MailGroups(false);
             ViewBag.ListSite = _mailManageService.Sites(false);
             ViewBag.ListTriggerType = _mailManageService.Trigger(false);
-            MailModel mail = _mailManageService.MailByID(criteria);
-            UpdateMailCriteria model = new UpdateMailCriteria(mail);
+
+            MailModel mailModel = _mailManageService.MailById(criteria);
+
+            UpdateMailCriteria model = new UpdateMailCriteria(mailModel);
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
             return View("~/Areas/MailStation/ManageMail/UpdateMail/Index.cshtml", model);
         }
@@ -137,22 +144,27 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public JsonResult UpdateMail(UpdateMailCriteria criteria)
         {
-            _mailManageService = new MailManageService();
-            return Json(_mailManageService.UpdateMail(criteria), JsonRequestBehavior.AllowGet);
+            CommandResult commandResult = _mailManageService.UpdateMail(criteria);
+            return Json(commandResult, JsonRequestBehavior.AllowGet);
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
         public JsonResult SuggestMail(SuggestMailCriteria criteria)
         {
-            _mailManageService = new MailManageService();
             return Json(_mailManageService.SuggestMails(criteria), JsonRequestBehavior.AllowGet);
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public void RunNow(int mailId)
         {
-            _mailManageService = new MailManageService();
-            _mailManageService.RunJobImmediately(mailId);
+            _mailManageService.RunNow(mailId);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _mailManageService.Dispose();
+
+            base.Dispose(disposing);
         }
     }
 }
