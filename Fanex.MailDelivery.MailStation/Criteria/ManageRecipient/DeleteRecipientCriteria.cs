@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="DeleteRecipientCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Andy.Nguyen" date="2015.03.30">Created</change>
-// </history>
-
-namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
+﻿namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
 {
     using Fanex.Data.Repository;
 

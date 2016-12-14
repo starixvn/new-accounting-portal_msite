@@ -1,8 +1,4 @@
-﻿/* global NAP: false */
-/* global sharedScriptManager: false */
-/* global viewResources: false */
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     editRecipientController.initPage();
 });
 
@@ -32,9 +28,9 @@ var EditRecipientController = function () {
     self.cacheDOMElements = function () {
         DOMElements.RecipientID = $('#RecipientId');
         DOMElements.RecipientName = $('#RecipientName');
-        DOMElements.EmailID1 = $('#EmailID1');
-        DOMElements.EmailID2 = $('#EmailID2');
-        DOMElements.EmailID3 = $('#EmailID3');
+        DOMElements.EmailID1 = $('#EmailId1');
+        DOMElements.EmailID2 = $('#EmailId2');
+        DOMElements.EmailID3 = $('#EmailId3');
         DOMElements.Email1 = $('#Email1');
         DOMElements.Email2 = $('#Email2');
         DOMElements.Email3 = $('#Email3');

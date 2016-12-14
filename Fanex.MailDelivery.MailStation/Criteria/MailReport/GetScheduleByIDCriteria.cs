@@ -2,9 +2,6 @@
 {
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Get all log category criteria.
-    /// </summary>
     public class GetScheduleByIdCriteria : CriteriaBase
     {
         public int MailId { get; set; }

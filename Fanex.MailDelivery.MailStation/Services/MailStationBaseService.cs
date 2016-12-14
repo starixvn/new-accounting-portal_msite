@@ -1,19 +1,19 @@
 ﻿namespace Fanex.MailDelivery.MailStation.Services
 {
+    using Criteria.MailManage;
+    using Criteria.MailReport;
+    using Fanex.Data;
+    using Fanex.Data.Repository;
+    using Fanex.MailDelivery.Core.Models;
+    using Fanex.MailDelivery.MailStation.Constants;
+    using Fanex.MailDelivery.MailStation.Criteria;
+    using Fanex.MailDelivery.MailStation.Models;
+    using NAP.Core.Command;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Fanex.Data;
-    using Fanex.Data.Repository;
-    using Fanex.MailDelivery.Client.Models;
-    using Fanex.MailDelivery.MailStation.Constants;
-    using Fanex.MailDelivery.MailStation.Criteria;
-    using Fanex.MailDelivery.MailStation.Criteria.MailManage;
-    using Fanex.MailDelivery.MailStation.Criteria.MailReport;
-    using Fanex.MailDelivery.MailStation.Models;
-    using Fanex.NAP.Core.Command;
 
     /// <summary>
     /// Mail Station Base Service.
@@ -85,7 +85,7 @@
                 return MailStationConstants.AllItem.Union(MailStationConstants.TaskStatus).ToList();
             }
 
-            return MailStationConstants.AllItem;
+            return MailStationConstants.TaskStatus;
         }
 
         public List<SelectListItemExtra> Trigger(bool hasAllElement = true)

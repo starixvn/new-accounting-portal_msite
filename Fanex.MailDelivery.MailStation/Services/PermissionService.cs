@@ -10,10 +10,8 @@
 
 namespace Fanex.MailDelivery.MailStation.Services
 {
-    using System.Collections.Generic;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Core.Models.ValueObject;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Session;

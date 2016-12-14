@@ -186,7 +186,7 @@ var MailReportController = function () {
         var gridOptions = {
             columns: headerColumns,
             showTitle: false,
-            bodyRows: self.cachedData.bodyRows,
+            bodyRows: self.cachedData.bodyRows.slice(0, sharedScriptManager.cachedData.defaultItemsPerPage),
             showDistinctRow: false,
             showHighlightRow: true,
             gridExpandHeight: 350,

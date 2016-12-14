@@ -1,43 +1,43 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="MailReportService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Nguyen" date="2014.10.03">Created</change>
-// </history>
-
-namespace Fanex.MailDelivery.MailStation.Services.MailReport
+﻿namespace Fanex.MailDelivery.MailStation.Services
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
+    using Criteria;
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.MailDeliver.Model;
-    using Fanex.MailDelivery.Admin.Handlers;
-    using Fanex.MailDelivery.Client.Enumerations;
-    using Fanex.MailDelivery.Client.Models;
-    using Fanex.MailDelivery.MailStation.Criteria;
+    using Fanex.MailDelivery.Admin.Services.Job;
+    using Fanex.MailDelivery.Admin.Services.JobOperation;
+    using Fanex.MailDelivery.Core.Messaging.Job;
+    using Fanex.MailDelivery.Core.Models;
     using Fanex.MailDelivery.MailStation.Criteria.MailReport;
     using Fanex.MailDelivery.MailStation.Models;
     using Fanex.Maintenance.Service.Impl.Mail;
     using Fanex.Maintenance.Service.Interface.Mail;
     using Quartz;
     using Quartz.Spi;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// Mail Report Service.
     /// </summary>
-    public class MailReportService : MailStationBaseService
+    public class MailReportService : MailStationBaseService, IDisposable
     {
-        private IMailService _mailServer;
+        private IMailService _mailService;
+
+        private IJobService _jobService;
+
+        private IJobOperationService _jobOperationService;
 
         public MailReportService()
         {
-            _mailServer = _mailServer ?? MailService.Create();
+            _mailService = _mailService ?? MailService.Create();
+
+            _jobService = new JobService();
+
+            _jobOperationService = new JobOperationService();
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Fanex.MailDelivery.MailStation.Services.MailReport
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The mail report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public List<MailTaskModel> MailReport(MailReportCriteria criteria)
         {
             int oldStatus = criteria.Status;
@@ -130,7 +130,7 @@ namespace Fanex.MailDelivery.MailStation.Services.MailReport
         {
             try
             {
-                return _mailServer.GetMail(criteria.MailId);
+                return _mailService.GetMail(criteria.MailId);
             }
             catch (Exception ex)
             {
@@ -159,45 +159,46 @@ namespace Fanex.MailDelivery.MailStation.Services.MailReport
         /// <param name="criteria">The criteria.</param>
         public void RetrySendMail(RetrySendMailCriteria criteria)
         {
-            MailAdminHandler.Start();
             MailTaskModel mailTask = this.GetMailTaskByID(new GetMailTaskByIdCriteria() { MailTaskId = criteria.TaskId });
             Schedule schedule = this.GetScheduleByMailId(new GetScheduleByIdCriteria() { MailId = mailTask.MailId });
             schedule.TaskId = mailTask.MailTaskId;
-            MailAdminHandler.PublishRetryJobMessage(schedule);
-            MailAdminHandler.Stop();
+
+            _jobOperationService.Retry(schedule);
         }
 
-        public void AbortJob(int taskID)
+        public void AbortJob(int taskId)
         {
-            MailAdminHandler.Start();
-            MailAdminHandler.PublishAbortJobMessage(taskID);
-            MailAdminHandler.Stop();
+            AbortJobRequest request = new AbortJobRequest
+            {
+                TaskId = taskId,
+            };
+
+            _jobOperationService.AbortJob(request);
         }
 
         public void RetryMissingJob(RetryMissingTaskCriteria criteria)
         {
             // Add Missing Task to DB first.
-            int mailTaskID;
+            int mailTaskId;
             Hashtable hash = criteria.GetSpParams();
             hash = (new ResultCriteria()).AddSpParams(hash);
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.ExecuteNonQuery(hash);
-                mailTaskID = Converter.ToInt(db.GetParameterValue("MailTaskID"));
+                mailTaskId = Converter.ToInt(db.GetParameterValue("MailTaskID"));
             }
 
-            MailAdminHandler.Start();
-            MailTaskModel mailTask = this.GetMailTaskByID(new GetMailTaskByIdCriteria() { MailTaskId = mailTaskID });
+            MailTaskModel mailTask = this.GetMailTaskByID(new GetMailTaskByIdCriteria() { MailTaskId = mailTaskId });
             Schedule schedule = this.GetScheduleByMailId(new GetScheduleByIdCriteria() { MailId = mailTask.MailId });
             schedule.CurrentFireTime = criteria.ScheduledTime;
-            schedule.TaskId = mailTaskID;
-            MailAdminHandler.PublishRetryJobMessage(schedule);
-            MailAdminHandler.Stop();
+            schedule.TaskId = mailTaskId;
+
+            _jobOperationService.Retry(schedule);
         }
 
         /// <summary>
         /// Get maximum date time.
-        /// </summary>
+        /// </summary>javascript:;
         /// <param name="date1">The date1.</param>
         /// <param name="date2">The date2.</param>
         /// <returns>The max date.</returns>
@@ -231,6 +232,18 @@ namespace Fanex.MailDelivery.MailStation.Services.MailReport
             {
                 return date1;
             }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            _jobService.Dispose();
+            _jobOperationService.Dispose();
         }
     }
 }

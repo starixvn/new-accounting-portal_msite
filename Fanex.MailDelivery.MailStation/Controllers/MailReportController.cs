@@ -13,8 +13,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
     using Fanex.MailDelivery.MailStation.Constants;
     using Fanex.MailDelivery.MailStation.Criteria.MailReport;
     using Fanex.MailDelivery.MailStation.Extensions;
-    using Fanex.MailDelivery.MailStation.Services.MailReport;
-    using Fanex.MailDelivery.MailStation.Services.ManageMail;
+    using Fanex.MailDelivery.MailStation.Services;
     using Fanex.Maintenance.Controller;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
@@ -32,7 +31,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             _mailReportService = _mailReportService ?? new MailReportService();
         }
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 3)]
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             ViewBag.ListStatus = _mailReportService.TaskStatus();
@@ -41,17 +40,23 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             return View("~/Areas/MailStation/Report/MailReport/Index.cshtml");
         }
 
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read, PermissionCache = true, CacheDuration = 3)]
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
         public ActionResult MailReport(MailReportCriteria criteria)
         {
+            // MailAdminService.Start();
+            // GetReportListRequest request = new GetReportListRequest
+            // {
+            //     MailName = criteria.MailName,
+            //     SiteId = criteria.SiteId,
+            //     FromDate = criteria.FromDate,
+            //     ToDate = criteria.ToDate,
+            //     Status = criteria.Status
+            // };
+               
+            // GetReportListResponse response = MailAdminService.GetReportList(request);
+               
+            // MailAdminService.Stop();
             return Json(_mailReportService.MailReport(criteria));
-        }
-
-        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Host)]
-        public ActionResult RetrySendMail(RetrySendMailCriteria criteria)
-        {
-            _mailReportService.RetrySendMail(criteria);
-            return new EmptyResult();
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
@@ -76,6 +81,13 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         public void AbortTask(int taskId)
         {
             _mailReportService.AbortJob(taskId);
+        }
+
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
+        public ActionResult RetrySendMail(RetrySendMailCriteria criteria)
+        {
+            _mailReportService.RetrySendMail(criteria);
+            return new EmptyResult();
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Host)]

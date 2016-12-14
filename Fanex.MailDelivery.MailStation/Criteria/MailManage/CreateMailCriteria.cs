@@ -1,15 +1,9 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="CreateMailCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
+﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
+    using Fanex.Data.Repository;
+    using Fanex.MailDelivery.Core.Models.Mails;
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Fanex.Data.Repository;
-    using Fanex.MailDelivery.MailStation.Models;
 
     /// <summary>
     /// Get all log category criteria.
@@ -43,7 +37,7 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
                 this.Interval = model.Interval;
                 this.Description = model.Description;
             }
-            else
+            else 
             {
                 this.TriggerType = 1;
             }

@@ -7,6 +7,7 @@ $(document).ready(function () {
 });
 
 var MailManageController = function () {
+    var queryParams = '${person}';
     var self = this;
     var DOMElements = {
         MailName: null,
@@ -37,14 +38,16 @@ var MailManageController = function () {
     self.initPage = function () {
         self.cacheDOMElements();
         self.renderMailGroupFilter();
-        var cookie = $.cookie('MailManage');
-        if (cookie) {
-            DOMElements.MailName.val(cookie.MailName);
-            DOMElements.SiteId.val(cookie.SiteId);
-            DOMElements.TriggerType.val(cookie.TriggerType);
-            if (DOMElements.Emails.val() === "")
-                DOMElements.Emails.val(cookie.Emails);
-            DOMElements.IsActive.val(cookie.IsActive);
+        if (isUseCookie == true) {
+            var cookie = $.cookie('MailManage');
+            if (cookie) {
+                DOMElements.MailName.val(cookie.MailName);
+                DOMElements.SiteId.val(cookie.SiteId);
+                DOMElements.TriggerType.val(cookie.TriggerType);
+                if (DOMElements.Emails.val() === "")
+                    DOMElements.Emails.val(cookie.Emails);
+                DOMElements.IsActive.val(cookie.IsActive);
+            }
         }
     };
 
@@ -82,7 +85,7 @@ var MailManageController = function () {
             function (result) {
                 var cookie = $.cookie('MailManage');
                 var mailGroupID = parseInt(DOMElements.MailGroupId.val());
-                if (cookie) {
+                if (mailGroupID == undefined && mailGroupID == '' && cookie) {
                     mailGroupID = cookie.MailGroupId;
                 }
 
@@ -191,7 +194,7 @@ var MailManageController = function () {
                 });
                 rowColumns.push({
                     Name: "ColRunNow",
-                    Value: mail.TriggerType == 1 ? '<input type="submit" value="Run Now" class="button-run-now"' + mailIndex + '>' : ''
+                    Value: (mail.TriggerType == 1 && mail.IsActive && mail.IsClientOnline) ? '<input type="submit" value="Run Now" class="button-run-now"' + mailIndex + '>' : ''
                 });
             }
 

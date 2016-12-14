@@ -14,6 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,12 +37,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\MailStation\Common.Logging.dll</HintPath>
+      <HintPath>..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\MailStation\Common.Logging.Core.dll</HintPath>
+      <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyNetQ, Version=0.50.1.392, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyNetQ.0.50.1.392\lib\net40\EasyNetQ.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
@@ -50,19 +56,21 @@
       <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.Logging">
-      <HintPath>..\_Dependencies\Fanex\Fanex.Logging.dll</HintPath>
+    <Reference Include="Fanex.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Logging.1.0.0.0\lib\net40\Fanex.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Fanex.MailDeliver.MailClient, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.MailDelivery.Admin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Admin.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.Admin.1.0.1.1\lib\net40\Fanex.MailDelivery.Admin.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.MailDelivery.Client, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Fanex.MailDeliver.MailClient">
-      <HintPath>..\_Dependencies\MailService\Fanex.MailDeliver.MailClient.dll</HintPath>
+    <Reference Include="Fanex.MailDelivery.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.Admin.1.0.1.1\lib\net40\Fanex.MailDelivery.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.NAP.Core, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.NAP.Core.Client.1.1.0.4\lib\net40\Fanex.NAP.Core.dll</HintPath>
@@ -74,6 +82,10 @@
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Data.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Logging.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -88,17 +100,46 @@
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Quartz, Version=2.3.3.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\MailStation\Quartz.dll</HintPath>
+      <HintPath>..\packages\Quartz.2.3.3\lib\net40\Quartz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.5.6.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.3.5.6\lib\net40\RabbitMQ.Client.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
@@ -120,7 +161,7 @@
     <Compile Include="Criteria\MailGroup\DeleteMailGroupCriteria.cs" />
     <Compile Include="Criteria\MailGroup\UpdateMailGroupCriteria.cs" />
     <Compile Include="Criteria\MailManage\DeleteMailCriteria.cs" />
-    <Compile Include="Criteria\MailManage\ReadMailByIDCriteria.cs" />
+    <Compile Include="Criteria\MailManage\GetMailByIdCriteria.cs" />
     <Compile Include="Criteria\MailManage\UpdateMailCriteria.cs" />
     <Compile Include="Criteria\MailManage\CreateMailCriteria.cs" />
     <Compile Include="Criteria\MailGroup\CreateMailGroupCriteria.cs" />
@@ -151,7 +192,6 @@
     <Compile Include="Criteria\MailManage\GetAllMailGroupCriteria.cs" />
     <Compile Include="Criteria\MailManage\GetAllSiteCriteria.cs" />
     <Compile Include="Models\MailLogModel.cs" />
-    <Compile Include="Models\MailModel.cs" />
     <Compile Include="Models\RecipientModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
@@ -164,15 +204,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MailStationResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\MailGroup\MailGroupService.cs" />
+    <Compile Include="Services\MailGroupService.cs" />
+    <Compile Include="Services\MailManageService.cs" />
+    <Compile Include="Services\MailReportService.cs" />
     <Compile Include="Services\MailStationBaseService.cs">
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Services\AppSession.cs" />
     <Compile Include="Services\LoggingHandler.cs" />
-    <Compile Include="Services\ManageRecipient\ManageRecipientService.cs" />
-    <Compile Include="Services\MailReport\MailReportService.cs" />
-    <Compile Include="Services\ManageMail\MailManageService.cs" />
+    <Compile Include="Services\ManageRecipientService.cs" />
     <Compile Include="Services\PermissionService.cs" />
     <Compile Include="Services\SessionManager.cs" />
   </ItemGroup>
@@ -189,19 +229,18 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
+    <None Include="app.config" />
+    <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
-      <Project>{E7173CDD-8ECB-4FB6-B585-41BFE941745E}</Project>
+      <Project>{e7173cdd-8ecb-4fb6-b585-41bfe941745e}</Project>
       <Name>Fanex.Maintenance.Controller</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.Maintenance.Service\Fanex.Maintenance.Service.csproj">
-      <Project>{6F5C23B0-7EB0-4020-9664-5F904BB99BBC}</Project>
-      <Name>Fanex.Maintenance.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Maintenance.Service\Fanex.Maintenance.Service.csproj">
       <Project>{6F5C23B0-7EB0-4020-9664-5F904BB99BBC}</Project>
@@ -209,6 +248,13 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

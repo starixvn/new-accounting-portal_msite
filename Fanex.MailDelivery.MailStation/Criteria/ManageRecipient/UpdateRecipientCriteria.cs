@@ -1,14 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="UpdateRecipientCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Nguyen" date="2014.10.03">Created</change>
-//   <change who="Andy.Nguyen" date="2015.04.01">Update Email IDs param.</change>
-// </history>
-
-namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
+﻿namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
 {
     using Fanex.Data.Repository;
 
