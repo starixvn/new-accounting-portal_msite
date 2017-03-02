@@ -724,15 +724,6 @@
     <Content Include="Views\Mail\AddMailSettingPopUp.cshtml" />
     <Content Include="Views\Mail\GetMessage.cshtml" />
     <Content Include="Views\DatabaseReport\DataIntegrity.cshtml" />
-    <Content Include="Web.backupMNL.config">
-      <DependentUpon>Web.local.config</DependentUpon>
-    </Content>
-    <Content Include="Web.pro.config">
-      <DependentUpon>Web.local.config</DependentUpon>
-    </Content>
-    <Content Include="Web.sit.config">
-      <DependentUpon>Web.local.config</DependentUpon>
-    </Content>
     <Content Include="WebConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
@@ -774,10 +765,6 @@
     <Content Include="Views\ConnectionString\LogAction\LogAction403.cshtml" />
     <Content Include="Views\ConnectionString\LogAction\LogAction404.cshtml" />
     <Content Include="Views\ConnectionString\LogAction\LogAction405.cshtml" />
-    <Content Include="Web.uat.config">
-      <DependentUpon>Web.local.config</DependentUpon>
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.MailDelivery.MailStation\Fanex.MailDelivery.MailStation.csproj">
@@ -885,6 +872,10 @@
     </Content>
     <Content Include="Views\Testing\LetstalkNotification.cshtml" />
     <Content Include="themes\manage\LetstalkNotification.less" />
+    <Content Include="Web.backupMNL.config" />
+    <Content Include="Web.pro.config" />
+    <Content Include="Web.sit.config" />
+    <Content Include="Web.uat.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
