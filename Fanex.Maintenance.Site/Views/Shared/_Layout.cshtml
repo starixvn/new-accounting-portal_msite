@@ -25,7 +25,8 @@
         <div class="user-info">
             <div class="greeting">
                 <h2>
-                    Howdy, @HttpContext.Current.User.Identity.Name</h2>
+                    Howdy, @HttpContext.Current.User.Identity.Name
+                </h2>
                 <ul>
                     <li>@Html.ActionLink("Sign Out", "LogOut", "Login", new { Area = "UserLogin" }, new { })</li>
                 </ul>

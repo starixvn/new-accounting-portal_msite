@@ -3,7 +3,6 @@
 "use strict";
 
 var Logs = (function ($) {
-
     return {
         ddlCategory: null,
         ddlMachine: null,
@@ -83,7 +82,6 @@ var Logs = (function ($) {
                     var count = 1;
                     $('#content').html('');
                     $.each(data, function (key, value) {
-
                         var countMessage = "";
                         if (value.NumMessage > 0) {
                             countMessage = "<br/>(" + value.NumMessage + " Message)";
@@ -104,7 +102,7 @@ var Logs = (function ($) {
                             "<a href='#' class='machinetype-filter' data-machinetype='" + value.Machine.IsProduction + "'>" + environment +
                             "</a> \\ <a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" +
                             value.Machine.MachineName + (value.Machine.MachineIP ? ' - ' + value.Machine.MachineIP : '') + "</a>"
-                            +"</td><td class='align-center'>" +
+                            + "</td><td class='align-center'>" +
                             "<span id='monitoringUser" + value.LogId + "'>" +
                             (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" +
                             value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") +
@@ -333,31 +331,34 @@ var Logs = (function ($) {
             Logs.btnSubmit.live('click', function () {
                 Logs.generateData(50, 0);
             });
-            Logs.dpkFrom.datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                numberOfMonths: 1,
-                dateFormat: "M dd,yy",
-                showOn: "button",
-                buttonImage: $('#imagePath').val(),
-                buttonText: "From",
-                buttonImageOnly: true
-            }).datepicker('init', '#From');
 
-            Logs.dpkTo.datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                numberOfMonths: 1,
+            var setDefaultDateTime = function (date, GMT) {
+                Logs.dpkFrom.val(moment(date).utcOffset('+0' + GMT + ':00').format("MMM DD,YYYY HH:mm"));
+                Logs.dpkTo.val(moment(date).utcOffset('+0' + GMT + ':00').format("MMM DD,YYYY HH:mm"));
+            }
+
+            setDefaultDateTime(new Date(), 7);
+            Logs.dpkFrom.datetimepicker({
                 dateFormat: "M dd,yy",
-                showOn: "button",
-                buttonImage: $('#imagePath').val(),
-                buttonText: "From",
-                buttonImageOnly: true
-            }).datepicker('init', '#To');
+                timeFormat: 'HH:mm',
+                controlType: 'select',
+                oneLine: true,
+            });
+
+            Logs.dpkTo.datetimepicker({
+                dateFormat: "M dd,yy",
+                timeFormat: 'HH:mm',
+                controlType: 'select',
+                oneLine: true,
+            });
+
+            Logs.ddlTimeZone.on("change", function () {
+                var toGMT = $(this).val();
+                setDefaultDateTime(new Date(), toGMT);
+            })
         },
 
         initFreeHeader: function () {
-
             var clonedHeaderRow;
             $(".persist-area").each(function () {
                 clonedHeaderRow = $(".persist-header", this);
@@ -422,8 +423,7 @@ var Logs = (function ($) {
             }
         }
     };
-
-} (jQuery));
+}(jQuery));
 
 $(document).ready(function () {
     Logs.init();
@@ -479,6 +479,4 @@ $(document).ready(function () {
         $('#Severity').val(severity);
         $('#submit').click();
     });
-
-//    Logs.generateData(50, 0);
 });

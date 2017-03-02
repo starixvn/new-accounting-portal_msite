@@ -62,6 +62,7 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/themes/manage/log/manage.less",
                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css",
                 "~/scripts/lib/Select2/select2.css",
+                "~/scripts/lib/DatetimePicker/jquery.datetimepicker.css",
                 "~/scripts/lib/Select2/select2-custom.css");
 
             bundles.AddAndInclude(
@@ -108,6 +109,7 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/scripts/lib/Momentjs/moment.js",
                 "~/scripts/lib/custom-datepicker.js",
                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
+                "~/scripts/lib/DatetimePicker/jquery.datetimepicker.js",
                 "~/scripts/Logs/Index.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/recheckin").Include(

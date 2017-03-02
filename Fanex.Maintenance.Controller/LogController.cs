@@ -107,7 +107,7 @@ namespace Fanex.Maintenance.Controller
             var totalRows = 0;
 
             DateTime from = criteria.From.AddHours(-1 * criteria.ToGMT);
-            DateTime to = criteria.To.AddDays(1).AddSeconds(-1).AddHours(-1 * criteria.ToGMT);
+            DateTime to = criteria.To.AddMinutes(1).AddSeconds(-1).AddHours(-1 * criteria.ToGMT);
 
             ////Get logs by date
             IEnumerable<Log> listLogs = _logService.With(

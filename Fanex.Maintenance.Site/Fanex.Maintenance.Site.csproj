@@ -367,6 +367,8 @@
     <Content Include="scripts\lib\Countdown\Images\dropdown.png" />
     <Content Include="scripts\lib\Countdown\Images\refresh.png" />
     <Content Include="scripts\lib\custom-datepicker.js" />
+    <Content Include="scripts\lib\DatetimePicker\jquery.datetimepicker.css" />
+    <Content Include="scripts\lib\DatetimePicker\jquery.datetimepicker.js" />
     <Content Include="scripts\lib\Fanex.Grid\Language\Fanex.Gird.Lang.en-US.js" />
     <Content Include="scripts\lib\Fanex.Grid\Language\Fanex.Gird.Lang.ja-JP.js" />
     <Content Include="scripts\lib\Fanex.Grid\Language\Fanex.Gird.Lang.ko-KR.js" />
