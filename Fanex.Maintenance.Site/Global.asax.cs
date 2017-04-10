@@ -20,6 +20,7 @@ namespace Fanex.Maintenance.Site
     using Fanex.Logging;
     using Fanex.Maintenance.Site.App_Start;
     using ONEbook.UM.Filters;
+
     /// <summary>
     /// Note: For instructions on enabling IIS6 or IIS7 classic mode, visit http://go.microsoft.com/?LinkId=9394801 .
     /// </summary>
@@ -46,7 +47,7 @@ namespace Fanex.Maintenance.Site
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event arguments.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         protected void Application_Error(object sender, EventArgs e)
         {
             // Logging

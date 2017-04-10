@@ -333,8 +333,8 @@ var Logs = (function ($) {
             });
 
             var setDefaultDateTime = function (date, GMT) {
-                Logs.dpkFrom.val(moment(date).utcOffset('+0' + GMT + ':00').format("MMM DD,YYYY HH:mm"));
-                Logs.dpkTo.val(moment(date).utcOffset('+0' + GMT + ':00').format("MMM DD,YYYY HH:mm"));
+                Logs.dpkFrom.val(moment(date).utcOffset('+0' + GMT + ':00').format("MMM DD,YYYY 00:00"));
+                Logs.dpkTo.val(moment(date).utcOffset('+0' + GMT + ':00').format("MMM DD,YYYY 23:59"));
             }
 
             setDefaultDateTime(new Date(), 7);
