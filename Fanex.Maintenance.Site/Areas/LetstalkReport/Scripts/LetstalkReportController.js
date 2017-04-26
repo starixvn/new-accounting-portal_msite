@@ -135,9 +135,10 @@ var LetstalkReportController = function () {
         });
 
         $('.resendLetstalk').live('click', function () {
-            if (confirm("Resend this email ?")) {
-                var letstalkId = $(this).attr("data-letstak-id");
-                var isMessage = $(this).attr("data-letstak-ismessage") == 'true';
+            var letstalkId = $(this).attr("data-letstak-id");
+            var isMessage = $(this).attr("data-letstak-ismessage") == 'true';
+            var messageConfirm = isMessage ? "Resend this message ?" : "Resend this email";
+            if (confirm(messageConfirm)) {
                 self.reSend(letstalkId, isMessage);
             }
         });
