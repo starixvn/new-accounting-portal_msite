@@ -1,7 +1,7 @@
-﻿using Fanex.Letstalk.Notification.Params;
+﻿using System.Web.Mvc;
+using Fanex.Letstalk.Notification.Params;
 using Fanex.Letstalk.Notification.Services;
 using Fanex.Maintenance.Controller;
-using System.Web.Mvc;
 
 namespace Fanex.Letstalk.Notification.Controllers
 {
@@ -11,7 +11,6 @@ namespace Fanex.Letstalk.Notification.Controllers
 
         public LetstalkReportController() : this(null)
         {
-
         }
 
         public LetstalkReportController(ILetstalkReportRestClientService service)

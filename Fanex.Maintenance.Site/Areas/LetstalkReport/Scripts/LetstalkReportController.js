@@ -78,8 +78,7 @@ var LetstalkReportController = function () {
             var dataRow = result[i];
             var rowColumns = [];
 
-            var linkResend = parseInt(dataRow.SendFail) >= 1 ?
-                "<a href='#' class='resendLetstalk' data-letstak-id='" + dataRow.Id + "' data-letstak-ismessage='" + dataRow.IsMessage + "'>Resend</a>" : "";
+            var linkResend = "<a href='#' class='resendLetstalk' data-letstak-id='" + dataRow.Id + "' data-letstak-ismessage='" + dataRow.IsMessage + "'>Resend</a>";
 
             rowColumns.push({ Name: "TargetName", Value: dataRow.TargetName });
             rowColumns.push({ Name: "Subject", Value: dataRow.Subject });

@@ -1,6 +1,6 @@
-﻿using Fanex.Letstalk.Notification.Model;
+﻿using System.Collections.Generic;
+using Fanex.Letstalk.Notification.Model;
 using Fanex.Letstalk.Notification.Params;
-using System.Collections.Generic;
 
 namespace Fanex.Letstalk.Notification.Services
 {
@@ -10,7 +10,6 @@ namespace Fanex.Letstalk.Notification.Services
 
         public LetstalkReportRestClientService() : this(null)
         {
-
         }
 
         public LetstalkReportRestClientService(IHttpClientService clientService)

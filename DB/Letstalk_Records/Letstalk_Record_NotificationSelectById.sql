@@ -28,6 +28,6 @@ AS
          WHERE Id = @id;
      END;
 GO
-GRANT EXECUTE ON [dbo].[Letstalk_Record_NotificationSelect] TO [bodbAdminNet];
+GRANT EXECUTE ON [dbo].[Letstalk_Record_NotificationSelectById] TO [bodbAdminNet];
 GO
-GRANT VIEW DEFINITION ON [dbo].[Letstalk_Record_NotificationSelect] TO [vnteam];
+GRANT VIEW DEFINITION ON [dbo].[Letstalk_Record_NotificationSelectById] TO [vnteam];

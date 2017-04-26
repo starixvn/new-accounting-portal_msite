@@ -12,12 +12,12 @@ namespace Fanex.Maintenance.Controller
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Web.Mvc;
+    using AutoMail.Licensee.DataValidation.Service.Implement;
+    using AutoMail.Licensee.DataValidation.Validation.Implement;
     using Fanex.Maintenance.Repository.Criteria.DatabaseReport;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-    using AutoMail.Licensee.DataValidation.Service.Implement;
-    using System.Web.Mvc;
-    using AutoMail.Licensee.DataValidation.Validation.Implement;
 
     [NapSuperAuth]
     public class DatabaseReportController : BaseController
