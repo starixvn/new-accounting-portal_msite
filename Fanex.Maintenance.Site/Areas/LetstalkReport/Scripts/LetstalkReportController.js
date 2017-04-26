@@ -64,7 +64,7 @@ var LetstalkReportController = function () {
         self.cachedData.getReportParams = getReportParams;
         $.cookie('MailReport', getReportParams);
         sharedScriptManager.callAjax(self,
-            window.rootUrl + "LetstalkReport/LetstalkReport/GetReport",
+            window.rootUrl + "LetstalkNotification/LetstalkReport/GetReport",
             getReportParams,
             self.renderReport,
             null,
@@ -151,7 +151,7 @@ var LetstalkReportController = function () {
         };
 
         sharedScriptManager.blockUI();
-        var url = isMessage ? window.rootUrl + "LetstalkReport/LetstalkReport/ResendMessage" : window.rootUrl + "LetstalkReport/LetstalkReport/ReSendMail";
+        var url = isMessage ? window.rootUrl + "LetstalkNotification/LetstalkReport/ResendMessage" : window.rootUrl + "LetstalkNotification/LetstalkReport/ReSendMail";
 
         self.cachedData.resendParams = resendParams;
         sharedScriptManager.callAjax(self,

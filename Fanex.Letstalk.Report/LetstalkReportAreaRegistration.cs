@@ -8,7 +8,7 @@ namespace Fanex.Letstalk.Report
         {
             get
             {
-                return "LetstalkReport";
+                return "LetstalkNotification";
             }
         }
 
@@ -18,7 +18,7 @@ namespace Fanex.Letstalk.Report
                 AreaName + "_default",
                 AreaName + "/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new[] { "Fanex.Letstalk.Report.Controllers" });
+                new[] { "Fanex.Letstalk.Notification.Controllers" });
         }
     }
 }

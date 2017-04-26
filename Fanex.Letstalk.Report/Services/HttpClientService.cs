@@ -4,16 +4,27 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace Fanex.Letstalk.Report.Services
+namespace Fanex.Letstalk.Notification.Services
 {
     public class HttpClientService : IHttpClientService
     {
-        public const string letstalkApiUrl = "http://ha.nexdev.net:7309/Api/Letstalk/";
+        private IAppConfigurationService service;
+
+        public HttpClientService() : this(null)
+        {
+
+        }
+
+        public HttpClientService(IAppConfigurationService service)
+        {
+            this.service = service ?? new AppConfigurationService();
+        }
 
         public T PostAsync<T, P>(string action, P inputParams)
         {
             using (HttpClient client = new HttpClient())
             {
+                string letstalkApiUrl = $"{service.LetstalkApiUrl}/Api/Letstalk/";
                 client.BaseAddress = new Uri(letstalkApiUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

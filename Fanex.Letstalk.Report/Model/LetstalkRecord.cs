@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Fanex.Letstalk.Report.Model
+namespace Fanex.Letstalk.Notification.Model
 {
     public class LetstalkRecord
     {

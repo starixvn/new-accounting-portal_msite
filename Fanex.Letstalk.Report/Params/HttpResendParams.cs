@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Fanex.Letstalk.Report.Params
+namespace Fanex.Letstalk.Notification.Params
 {
     public class HttpResendParams
     {

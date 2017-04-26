@@ -1,4 +1,4 @@
-﻿namespace Fanex.Letstalk.Report.Services
+﻿namespace Fanex.Letstalk.Notification.Services
 {
     public interface IHttpClientService
     {

@@ -1,9 +1,9 @@
-﻿using Fanex.Letstalk.Report.Params;
-using Fanex.Letstalk.Report.Services;
+﻿using Fanex.Letstalk.Notification.Params;
+using Fanex.Letstalk.Notification.Services;
 using Fanex.Maintenance.Controller;
 using System.Web.Mvc;
 
-namespace Fanex.Letstalk.Report.Controllers
+namespace Fanex.Letstalk.Notification.Controllers
 {
     public class LetstalkReportController : BaseController
     {

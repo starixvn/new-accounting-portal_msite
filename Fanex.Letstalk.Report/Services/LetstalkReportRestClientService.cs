@@ -1,8 +1,8 @@
-﻿using Fanex.Letstalk.Report.Model;
-using Fanex.Letstalk.Report.Params;
+﻿using Fanex.Letstalk.Notification.Model;
+using Fanex.Letstalk.Notification.Params;
 using System.Collections.Generic;
 
-namespace Fanex.Letstalk.Report.Services
+namespace Fanex.Letstalk.Notification.Services
 {
     public class LetstalkReportRestClientService : ILetstalkReportRestClientService
     {

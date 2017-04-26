@@ -768,9 +768,9 @@
     <Content Include="Views\ConnectionString\LogAction\LogAction405.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.Letstalk.Report\Fanex.Letstalk.Report.csproj">
+    <ProjectReference Include="..\Fanex.Letstalk.Report\Fanex.Letstalk.Notification.csproj">
       <Project>{e8348bb1-1c03-4852-aea3-ccbab083764a}</Project>
-      <Name>Fanex.Letstalk.Report</Name>
+      <Name>Fanex.Letstalk.Notification</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.MailDelivery.MailStation\Fanex.MailDelivery.MailStation.csproj">
       <Project>{108c1d8a-cae1-46da-b951-60e1fc67ef12}</Project>
