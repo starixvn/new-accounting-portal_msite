@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.Site", "Fanex.Maintenance.Site\Fanex.Maintenance.Site.csproj", "{D4312B0D-CC74-4AA1-979A-AF26702808A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.Core", "Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj", "{60BC3FA8-DF7C-4024-B469-4ED110420143}"
@@ -23,6 +25,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.ServiceManagement", "Fanex.ServiceManagement\Fanex.ServiceManagement.csproj", "{1F903078-36B9-40AE-9FF2-67F7DC5E058B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.MailDelivery.MailStation", "Fanex.MailDelivery.MailStation\Fanex.MailDelivery.MailStation.csproj", "{108C1D8A-CAE1-46DA-B951-60E1FC67EF12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Letstalk.Report", "Fanex.Letstalk.Report\Fanex.Letstalk.Report.csproj", "{E8348BB1-1C03-4852-AEA3-CCBAB083764A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -114,6 +118,18 @@ Global
 		{108C1D8A-CAE1-46DA-B951-60E1FC67EF12}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{108C1D8A-CAE1-46DA-B951-60E1FC67EF12}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{108C1D8A-CAE1-46DA-B951-60E1FC67EF12}.Release|x86.ActiveCfg = Release|Any CPU
+		{E8348BB1-1C03-4852-AEA3-CCBAB083764A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8348BB1-1C03-4852-AEA3-CCBAB083764A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8348BB1-1C03-4852-AEA3-CCBAB083764A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E8348BB1-1C03-4852-AEA3-CCBAB083764A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E8348BB1-1C03-4852-AEA3-CCBAB083764A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E8348BB1-1C03-4852-AEA3-CCBAB083764A}.Debug|x86.Build.0 = Debug|Any CPU
+		{E8348BB1-1C03-4852-AEA3-CCBAB083764A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8348BB1-1C03-4852-AEA3-CCBAB083764A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8348BB1-1C03-4852-AEA3-CCBAB083764A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E8348BB1-1C03-4852-AEA3-CCBAB083764A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E8348BB1-1C03-4852-AEA3-CCBAB083764A}.Release|x86.ActiveCfg = Release|Any CPU
+		{E8348BB1-1C03-4852-AEA3-CCBAB083764A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

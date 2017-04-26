@@ -310,6 +310,7 @@
     <Content Include="App_Data\UAT\NAPCommonSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\LetstalkReport\Scripts\LetstalkReportController.js" />
     <Content Include="Areas\MailStation\MailGroup\CreateMailGroup\Scripts\CreateMailGroup.js" />
     <Content Include="Areas\MailStation\MailGroup\ManageMailGroup\Scripts\ManageMailGroup.js" />
     <Content Include="Areas\MailStation\MailGroup\ManageMailGroup\Styles\Images\trigger.png" />
@@ -767,6 +768,10 @@
     <Content Include="Views\ConnectionString\LogAction\LogAction405.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.Letstalk.Report\Fanex.Letstalk.Report.csproj">
+      <Project>{e8348bb1-1c03-4852-aea3-ccbab083764a}</Project>
+      <Name>Fanex.Letstalk.Report</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.MailDelivery.MailStation\Fanex.MailDelivery.MailStation.csproj">
       <Project>{108c1d8a-cae1-46da-b951-60e1fc67ef12}</Project>
       <Name>Fanex.MailDelivery.MailStation</Name>
@@ -854,6 +859,8 @@
       <DependentUpon>WebConnectionString.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\LetstalkReport\Index.cshtml" />
+    <Content Include="Areas\LetstalkReport\Web.config" />
     <None Include="scripts\lib\Fanex.Grid\Fanex.Grid.less" />
     <Content Include="scripts\lib\InputCombobox\colors.less" />
     <Content Include="scripts\lib\InputCombobox\common.less" />
