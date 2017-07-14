@@ -1,0 +1,31 @@
+﻿namespace Fanex.Tool.TraceSP.Services
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Xml.Serialization;
+    using Fanex.Tool.TraceSP.Models;
+    interface IDbServerService
+    {
+        List<Server> GetDbServerList(string dbServerXmlPath);
+    }
+    class DbServerService : IDbServerService
+    {
+        public List<Server> GetDbServerList(string dbServerXmlPath)
+        {
+            var Servers = new List<Server>();
+
+            if (File.Exists(dbServerXmlPath))
+            {
+                var deserializer = new XmlSerializer(typeof(List<Server>), new XmlRootAttribute("DBServers"));
+
+                using (FileStream stream = File.OpenRead(dbServerXmlPath))
+                {
+                    Servers = deserializer.Deserialize(stream) as List<Server>;
+                }
+            }
+
+            return Servers;
+        }
+    }
+}

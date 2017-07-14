@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Fanex.Tool.TraceSP.Models
 {
-    class SPModel
+    public class TracingSp
     {
         public string Site { get; set; }
+
         public int TraceTimer { get; set; }
 
         public string TextDataLike { get; set; }
@@ -17,8 +18,10 @@ namespace Fanex.Tool.TraceSP.Models
 
         public string TextDataLike3 { get; set; }
 
-        public string TextDataLike4 { get; set; }
-
         public bool TraceStartEvents { get; set; }
+
+        public bool Mode { get; set; }
+
+        public string Server { get; set; }
     }
 }

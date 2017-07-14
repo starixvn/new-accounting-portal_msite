@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DBServers>
+  <Server Name="DB02" Ip="10.40.40.40"/>
+  <Server Name="DB03" Ip="10.40.40.50"/>
+  <Server Name="DB05" Ip="10.40.40.90"/>
+  <Server Name="DB052" Ip="10.40.40.92"/>
+  <Server Name="DB053" Ip="10.40.40.94"/>
+  <Server Name="DB054" Ip="10.40.40.95"/>
+  <Server Name="DB06" Ip="10.40.40.100"/>
+  <Server Name="DB07" Ip="10.40.40.191"/>
+  <Server Name="DBCUST" Ip="10.40.40.61"/>
+  <Server Name="DBDW" Ip="10.40.40.62"/>
+  <Server Name="DBDW2" Ip="10.40.40.159"/>
+  <Server Name="DBTRANS" Ip="10.40.40.17"/>
+</DBServers>
