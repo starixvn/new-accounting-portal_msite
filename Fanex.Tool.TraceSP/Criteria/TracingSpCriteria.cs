@@ -19,6 +19,11 @@
 
         public override bool IsValid()
         {
+            if(TraceTimer > 120)
+            {
+                return false;
+            }
+
             return true;
         }
 

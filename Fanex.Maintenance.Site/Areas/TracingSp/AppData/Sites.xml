@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sites>
+  <Site>
+    <Id>NAP</Id>
+    <Name>NAP Accounting</Name>
+  </Site>
+  <Site>
+    <Id>EX-NAP</Id>
+    <Name>External NAP Accounting</Name>
+  </Site>
+  <Site>
+    <Id>DW</Id>
+    <Name>NAP Data warehouse</Name>
+  </Site>
+</Sites>

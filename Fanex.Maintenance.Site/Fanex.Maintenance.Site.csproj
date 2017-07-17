@@ -266,7 +266,7 @@
     <Content Include="App_Data\LOCAL\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\TracingSp\DbServerList\LOCAL\DBServerList.xml" />
+    <Content Include="Areas\TracingSp\AppData\LOCAL\DBServerList.xml" />
     <Content Include="App_Data\SIT\ConnectionStringSpName.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -330,6 +330,8 @@
     <Content Include="Areas\MailStation\Report\MailDetail\Scripts\MailDetailController.js" />
     <Content Include="Areas\MailStation\Report\MailLog\Scripts\MailLogController.js" />
     <Content Include="Areas\MailStation\Report\MailReport\Scripts\MailReportController.js" />
+    <Content Include="Areas\TracingSp\AppData\Sites.xml" />
+    <Content Include="Areas\TracingSp\Scripts\TracingSpController.js" />
     <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />
     <Content Include="Areas\UserLogin\scripts\lib\msgbox\images\alert.png" />
     <Content Include="Areas\UserLogin\scripts\lib\msgbox\images\btn-close.png" />
@@ -815,9 +817,8 @@
     <Content Include="Views\Mail\ComposeEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\TracingSp\DbServerList\PRO\" />
-    <Folder Include="Areas\TracingSp\DbServerList\UAT\" />
-    <Folder Include="Areas\TracingSp\Scripts\" />
+    <Folder Include="Areas\TracingSp\AppData\PRO\" />
+    <Folder Include="Areas\TracingSp\AppData\UAT\" />
     <Folder Include="ServiceMonitoringCache\" />
   </ItemGroup>
   <ItemGroup>

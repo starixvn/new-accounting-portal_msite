@@ -23,5 +23,9 @@ namespace Fanex.Tool.TraceSP.Models
         public bool Mode { get; set; }
 
         public string Server { get; set; }
+
+        public List<Site> Sites { get; set; }
+
+        public List<Server> Servers { get; set; }
     }
 }

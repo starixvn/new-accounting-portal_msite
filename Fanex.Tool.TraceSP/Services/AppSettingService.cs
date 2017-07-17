@@ -10,5 +10,13 @@
                 return ConfigurationManager.AppSettings["DbListXMLPath"].ToString();
             }
         }
+
+        public static string SiteXMLPath
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SiteXMLPath"].ToString();
+            }
+        }
     }
 }
