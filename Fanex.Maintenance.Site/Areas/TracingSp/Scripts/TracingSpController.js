@@ -90,20 +90,20 @@ var TracingSPController = function () {
         }
 
         var headerColumns = [];
-        headerColumns.push({ HeaderText: "Event", Width: 20, Name: "ColEvent", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "SPID", Width: 20, Name: "ColSPID", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "TextDataXML", Width: 20, Name: "ColTextDataXML", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "TextData", Width: 20, Name: "ColTextData", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Host Name", Width: 20, Name: "ColHostName", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Application Name", Width: 20, Name: "ColApplicationName", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Login Name", Width: 20, Name: "ColLoginName", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Duration", Width: 20, Name: "ColDuration", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Reads", Width: 20, Name: "ColReads", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Writes", Width: 20, Name: "ColWrites", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "CPU", Width: 20, Name: "ColCPU", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Db Name", Width: 20, Name: "ColDatabaseName", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Start Time", Width: 20, Name: "ColStartTime", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "End Time", Width: 20, Name: "ColEndTime", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: "Event", Width: 150, Name: "ColEvent", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: "SPID", Width: 50, Name: "ColSPID", HeaderAlign: "center", CellAlign: "center" });
+        headerColumns.push({ HeaderText: "TextDataXML", Width: 500, Name: "ColTextDataXML", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: "TextData", Width: 500, Name: "ColTextData", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: "Host Name", Width: 200, Name: "ColHostName", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: "Application Name", Width: 200, Name: "ColApplicationName", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: "Login Name", Width: 200, Name: "ColLoginName", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: "Duration", Width: 70, Name: "ColDuration", HeaderAlign: "center", CellAlign: "center" });
+        headerColumns.push({ HeaderText: "Reads", Width: 70, Name: "ColReads", HeaderAlign: "center", CellAlign: "center" });
+        headerColumns.push({ HeaderText: "Writes", Width: 70, Name: "ColWrites", HeaderAlign: "center", CellAlign: "center" });
+        headerColumns.push({ HeaderText: "CPU", Width: 70, Name: "ColCPU", HeaderAlign: "center", CellAlign: "center" });
+        headerColumns.push({ HeaderText: "Db Name", Width: 200, Name: "ColDatabaseName", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: "Start Time", Width: 150, Name: "ColStartTime", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: "End Time", Width: 150, Name: "ColEndTime", HeaderAlign: "center", CellAlign: "left" });
 
         var gridOptions = {
             columns: headerColumns,
@@ -112,14 +112,15 @@ var TracingSPController = function () {
             showDistinctRow: false,
             showHighlightRow: true,
             gridExpandHeight: 350,
-            headerColumnHeight: 29,
+            headerColumnHeight: 29,            
             showPager: true,
             pagerOption: {
                 itemsPerPage: 50,
                 currentPage: 0,
                 itemsPerPageArray: [50, 100, 200, 500],
                 showDetail: true
-            }
+            },
+            numberOfFrozenColumn: 4
         };
 
         $("#tracingsp-report").removeClass("display-none").fanexGrid(gridOptions);

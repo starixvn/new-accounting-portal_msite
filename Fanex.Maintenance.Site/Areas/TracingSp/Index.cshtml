@@ -37,19 +37,19 @@
                 @Html.LabelFor(m => m.TextDataLike, "Text Like")
             </div>
             <div class="edit-field width-180">
-                @Html.TextBoxFor(m => m.TextDataLike, new { @class = "width-180" })
+                @Html.TextBoxFor(m => m.TextDataLike, new { @class = "width-180", @Value = "%NAP_%" })
             </div>
             <div class="lbl-field width-auto">
                 @Html.LabelFor(m => m.TextDataLike2, "Text Like 2")
             </div>
             <div class="edit-field width-180">
-                @Html.TextBoxFor(m => m.TextDataLike2, new { @class = "width-180" })
+                @Html.TextBoxFor(m => m.TextDataLike2, new { @class = "width-180", @Value = "%EXEC%" })
             </div>
             <div class="lbl-field width-auto">
                 @Html.LabelFor(m => m.TextDataLike3, "Text Like 3")
             </div>
             <div class="edit-field width-180">
-                @Html.TextBoxFor(m => m.TextDataLike3, new { @class = "width-180" })
+                @Html.TextBoxFor(m => m.TextDataLike3, new { @class = "width-180", @Value = "%Select%" })
             </div>
             <div class="submit margin-left">
                 <input id="button-search" type="submit" value="Submit" />
