@@ -1,11 +1,8 @@
 ﻿namespace Fanex.Tool.TraceSP.Controllers
 {
-    using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Web.Hosting;
     using System.Web.Mvc;
-    using Data.Configuration;
     using Fanex.Maintenance.Controller;
     using Models;
     using Services;
