@@ -266,7 +266,9 @@
     <Content Include="App_Data\LOCAL\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\TracingSp\AppData\LOCAL\DBServerList.xml" />
+    <Content Include="Areas\TracingSp\AppData\LOCAL\DBServerList.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Data\SIT\ConnectionStringSpName.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -330,7 +332,9 @@
     <Content Include="Areas\MailStation\Report\MailDetail\Scripts\MailDetailController.js" />
     <Content Include="Areas\MailStation\Report\MailLog\Scripts\MailLogController.js" />
     <Content Include="Areas\MailStation\Report\MailReport\Scripts\MailReportController.js" />
-    <Content Include="Areas\TracingSp\AppData\Sites.xml" />
+    <Content Include="Areas\TracingSp\AppData\Sites.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Areas\TracingSp\Scripts\TracingSpController.js" />
     <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />
     <Content Include="Areas\UserLogin\scripts\lib\msgbox\images\alert.png" />
