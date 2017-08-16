@@ -46,7 +46,7 @@
             var model = new TracingSp
             {
                 Mode = false,
-                TraceStartEvents = true,
+                TraceStartEvents = criteria.TraceStartEvents,
                 Server = criteria.Server,
                 Site = criteria.Site,
                 TextDataLike = criteria.TextDataLike,

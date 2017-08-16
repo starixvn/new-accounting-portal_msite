@@ -119,8 +119,7 @@ var TracingSPController = function () {
                 currentPage: 0,
                 itemsPerPageArray: [50, 100, 200, 500],
                 showDetail: true
-            },
-            numberOfFrozenColumn: 4
+            }
         };
 
         $("#tracingsp-report").removeClass("display-none").fanexGrid(gridOptions);

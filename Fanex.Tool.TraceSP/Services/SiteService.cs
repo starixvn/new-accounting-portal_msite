@@ -28,7 +28,7 @@ namespace Fanex.Tool.TraceSP.Services
                 }
             }
 
-            return sites;
+            return sites.OrderBy(x => x.Name).ToList();
         }
     }
 }
