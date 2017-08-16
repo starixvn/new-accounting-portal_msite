@@ -39,8 +39,7 @@
             return View("~/Areas/TracingSp/Index.cshtml", model);
         }
 
-        [HttpPost]
-        [NapAuth(FunctionKey = SiteFunctionKeys.TracingSP, Policy = Constant.Policy.Read)]
+        [HttpPost]        
         public ActionResult GetTracingSpData(TracingSp criteria)
         {
             var model = new TracingSp
