@@ -119,4 +119,6 @@ public static class SiteFunctionKeys
 
     public const string ViewMailReport = "ViewMailReport";
 
+    public const string TracingSP = "TracingSP";
+
 }

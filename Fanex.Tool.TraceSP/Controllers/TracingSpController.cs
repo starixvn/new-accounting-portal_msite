@@ -5,6 +5,8 @@
     using System.Web.Mvc;
     using Fanex.Maintenance.Controller;
     using Models;
+    using NAP.Core.Business;
+    using NAP.Core.Web.Attribute;
     using Services;
 
     public class TracingSpController : BaseController
@@ -24,6 +26,7 @@
             _siteService = new SiteService();
         }
 
+        [NapAuth(FunctionKey = SiteFunctionKeys.TracingSP, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             var servers = _dbServerService.GetDbServerList(_dbServerXmlPath);
@@ -37,6 +40,7 @@
         }
 
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.TracingSP, Policy = Constant.Policy.Read)]
         public ActionResult GetTracingSpData(TracingSp criteria)
         {
             var model = new TracingSp
