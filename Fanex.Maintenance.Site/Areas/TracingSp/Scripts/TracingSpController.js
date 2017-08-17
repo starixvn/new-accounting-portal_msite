@@ -119,8 +119,8 @@ var TracingSPController = function () {
         headerColumns.push({ HeaderText: "Writes", Width: 70, Name: "ColWrites", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: "CPU", Width: 70, Name: "ColCPU", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: "Db Name", Width: 200, Name: "ColDatabaseName", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Start Time", Width: 150, Name: "ColStartTime", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MM/DD/YYYY h:mm:ss a" });
-        headerColumns.push({ HeaderText: "End Time", Width: 150, Name: "ColEndTime", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MM/DD/YYYY h:mm:ss a" });
+        headerColumns.push({ HeaderText: "Start Time", Width: 150, Name: "ColStartTime", HeaderAlign: "center", CellAlign: "right", FormatDateTime: "MM/DD/YYYY h:mm:ss A" });
+        headerColumns.push({ HeaderText: "End Time", Width: 150, Name: "ColEndTime", HeaderAlign: "center", CellAlign: "right", FormatDateTime: "MM/DD/YYYY h:mm:ss A" });
 
         var gridOptions = {
             columns: headerColumns,
