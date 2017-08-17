@@ -46,7 +46,7 @@ var TracingSPController = function () {
     };
 
     self.getData = function () {
-        sharedScriptManager.blockUI();
+        
         self.params = {
             Site: $("#Site").val(),
             Server: $("#Server").val(),
@@ -54,13 +54,30 @@ var TracingSPController = function () {
             TextDataLike: $("#TextDataLike").val(),
             TextDataLike2: $("#TextDataLike2").val(),
             TextDataLike3: $("#TextDataLike3").val(),
+            TraceStartEvents: $("#TraceStartEvents").is(':checked')
         };
-        sharedScriptManager.callAjax(self,
-            window.rootUrl + "ProfilerSP/TracingSp/GetTracingSpData",
-            self.params,
-            self.renderData,
-            null,
-            sharedScriptManager.unblockUI);
+
+        $.ajax({
+            url: window.rootUrl + "ProfilerSP/TracingSp/GetTracingSpData",
+            data: self.params,
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            beforeSend: function () {
+                sharedScriptManager.blockUI();
+            },
+            complete: function () {
+                sharedScriptManager.unblockUI();
+            },
+            success: function (result) {
+                if (result.length > 0) {
+                    self.renderData(result);
+                }
+            },
+            error: function (xhr, status, err) {
+                NAP.handleAjaxError(xhr, status, err);
+            }
+        });        
     };
 
     self.renderData = function (result) {
@@ -102,8 +119,8 @@ var TracingSPController = function () {
         headerColumns.push({ HeaderText: "Writes", Width: 70, Name: "ColWrites", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: "CPU", Width: 70, Name: "ColCPU", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: "Db Name", Width: 200, Name: "ColDatabaseName", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Start Time", Width: 150, Name: "ColStartTime", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "End Time", Width: 150, Name: "ColEndTime", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: "Start Time", Width: 150, Name: "ColStartTime", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MM/DD/YYYY h:mm:ss a" });
+        headerColumns.push({ HeaderText: "End Time", Width: 150, Name: "ColEndTime", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MM/DD/YYYY h:mm:ss a" });
 
         var gridOptions = {
             columns: headerColumns,
