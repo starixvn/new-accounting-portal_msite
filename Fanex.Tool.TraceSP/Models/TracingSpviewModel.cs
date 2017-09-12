@@ -6,14 +6,8 @@
         public string Event { get; set; }
 
         public int SPID { get; set; }
-
-        public string TextDataXML { get; set; }
-
+        
         public string TextData { get; set; }
-
-        public string HostName { get; set; }
-
-        public string ApplicationName { get; set; }
 
         public string LoginName { get; set; }
 

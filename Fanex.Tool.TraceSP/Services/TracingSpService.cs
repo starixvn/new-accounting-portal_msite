@@ -12,7 +12,7 @@ namespace Fanex.Tool.TraceSP.Services
 {
     interface ITracingSpService
     {
-        List<TracingSpViewModel> GetTracingSpData(TracingSp criteria);
+        List<TracingSpViewModel> GetTracingSpData(TracingSp model);
     }
 
     class TracingSpService : ITracingSpService

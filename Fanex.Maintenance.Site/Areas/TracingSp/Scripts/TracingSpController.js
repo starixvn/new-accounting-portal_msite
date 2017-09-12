@@ -88,10 +88,7 @@ var TracingSPController = function () {
             var rowColumns = [];
             rowColumns.push({ Name: "ColEvent", Value: record.Event });
             rowColumns.push({ Name: "ColSPID", Value: record.SPID });
-            rowColumns.push({ Name: "ColTextDataXML", Value: record.TextDataXML });
             rowColumns.push({ Name: "ColTextData", Value: record.TextData });
-            rowColumns.push({ Name: "ColHostName", Value: record.HostName });
-            rowColumns.push({ Name: "ColApplicationName", Value: record.ApplicationName });
             rowColumns.push({ Name: "ColLoginName", Value: record.LoginName });
             rowColumns.push({ Name: "ColDuration", Value: record.Duration });
             rowColumns.push({ Name: "ColReads", Value: record.Reads });
@@ -109,10 +106,7 @@ var TracingSPController = function () {
         var headerColumns = [];
         headerColumns.push({ HeaderText: "Event", Width: 120, Name: "ColEvent", HeaderAlign: "center", CellAlign: "left" });
         headerColumns.push({ HeaderText: "SPID", Width: 50, Name: "ColSPID", HeaderAlign: "center", CellAlign: "center" });
-        headerColumns.push({ HeaderText: "TextDataXML", Width: 500, Name: "ColTextDataXML", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "TextData", Width: 500, Name: "ColTextData", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Host Name", Width: 110, Name: "ColHostName", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Application Name", Width: 200, Name: "ColApplicationName", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: "TextData", Width: 750, Name: "ColTextData", HeaderAlign: "center", CellAlign: "left" });
         headerColumns.push({ HeaderText: "Login Name", Width: 120, Name: "ColLoginName", HeaderAlign: "center", CellAlign: "left" });
         headerColumns.push({ HeaderText: "Duration", Width: 70, Name: "ColDuration", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: "Reads", Width: 70, Name: "ColReads", HeaderAlign: "center", CellAlign: "center" });
