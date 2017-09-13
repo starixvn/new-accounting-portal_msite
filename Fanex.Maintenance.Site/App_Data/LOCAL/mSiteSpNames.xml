@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Functions>
+<Functions SiteId="66" SiteName="mSite">
     <Function Name="Log">
         <Setting Key="Logging_Category_SelAll" SpName="IS_SelLogCategory_ALL" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" />
         <Setting Key="Logging_Sel_Padding" SpName="IS_SelLogPadding_All" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" />

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
+<Functions SiteId="66" SiteName="mSite">
     <Function Name="Site">
         <Setting Key="ConnectionString_Site_GetAll" SpName="Site_GetAll" DbName="DBCONN.bodb_ConnectionString.bodbInternalNet" >
             <Mapping DataField="ModifierUserId" ObjectProperty="Id" />
