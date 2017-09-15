@@ -6,56 +6,82 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-
 ALTER PROCEDURE [dbo].[IS_SelLogPadding_All]
-	@Categoryid		INT,
-	@Severity		NVARCHAR(32),
-	@MachineId		INT			= 0,
-	@IsProduction	BIT			= NULL,
-	@IsMonitored	BIT			= NULL,
-	@ToGMT			SMALLINT	= 7,
-	@From			DATETIME,
-	@To				DATETIME,
-	@Page			INT,
-	@Size			INT,
-	@TotalRows		INT			= 0		OUTPUT
+	@CategoryId				INT,
+	@Severity				NVARCHAR(32),
+	@MachineId				INT			= 0,
+	@IsProduction			BIT			= NULL,
+	@IsMonitored			BIT			= NULL,
+	@ToGMT					SMALLINT	= 7,
+	@From					DATETIME,
+	@To						DATETIME,
+	@SearchText				NVARCHAR(100)	= '',
+	@RemovedLogCategories	NVARCHAR(500)	= '',
+	@Page					INT,
+	@Size					INT,
+	@TotalRows				INT			= 0		OUTPUT
 AS
 
-/**  
+/*
 	- Created: 20130909@Edward
-	- Task : Get log
-	- DB	: bodb_CustomerLog
+	- Task: Get log
+	- DB: DBLOG.bodb_CustomerLog
 	- Revisions:
-		- 20150929@Kos: modify to enhance performance
-		- 20151009@Kos: add machine ip
-	- Param's Explanation	: 
+		- 20150929@Kos: Modify to enhance performance
+		- 20151009@Kos: Add machine ip
+		- 20170915@Kos: Add removed log categories, search text [Redmine: #72546]
+
+	- Param's Explanation :
  */
 
 BEGIN
 	SET NOCOUNT ON
 
 	CREATE TABLE #TempTable (Id BIGINT, Num INT, CategoryID INT)
-	CREATE clustered INDEX IDX_CategoryID on #TempTable (CategoryID)
+	CREATE CLUSTERED INDEX IDX_CategoryID ON #TempTable (CategoryID)
 
-	DECLARE @tsql NVARCHAR(MAX),@ParmDefinition NVARCHAR(500);  
+	CREATE TABLE #RemovedLogCategoryTable (CategoryId INT)
+
+	IF @RemovedLogCategories IS NOT NULL AND @RemovedLogCategories <> ''
+	BEGIN
+		INSERT INTO #RemovedLogCategoryTable
+		SELECT s.CategoryID
+		FROM dbo.AppLog_Category AS s WITH (NOLOCK)
+			INNER JOIN (SELECT val FROM dbo.StrSplit(@RemovedLogCategories, ',')) AS t ON s.CategoryName LIKE '%' + t.val + '%'
+	END
+
+	DECLARE @tsql			NVARCHAR(MAX),
+		@ParamDefinition	NVARCHAR(500)
+
 	SET @tsql = N'INSERT INTO #TempTable(Id, Num, CategoryID)
 				SELECT MAX(al.LogID)
 					,COUNT(*)
 					,acl.CategoryID
-				FROM AppLog_Machine AS m WITH(NOLOCK)
-					INNER JOIN AppLog_Log AS al WITH (NOLOCK) ON al.MachineId = m.MachineId
-					INNER JOIN AppLog_CategoryLog AS acl WITH (NOLOCK) ON al.LogID = acl.LogID
+				FROM dbo.AppLog_Machine AS m WITH(NOLOCK)
+					INNER JOIN dbo.AppLog_Log AS al WITH (NOLOCK) ON al.MachineId = m.MachineId
+					INNER JOIN dbo.AppLog_CategoryLog AS acl WITH (NOLOCK) ON al.LogID = acl.LogID
 				WHERE al.Timestamp BETWEEN @From AND @To '
-	IF @Categoryid <> 0
+
+	IF @CategoryId <> 0
 		SET @tsql = @tsql + N' AND acl.CategoryID = @Categoryid'
+
 	IF @Severity <> 'ALL'
 		SET @tsql = @tsql + N' AND al.Severity = @Severity'
-	IF @MachineId <> 0 
+
+	IF @MachineId <> 0
 		SET @tsql = @tsql + N' AND al.MachineId = @MachineId'
-	IF @IsMonitored IS NOT NULL 
+
+	IF @IsMonitored IS NOT NULL
 		SET @tsql = @tsql + N' AND al.IsMonitored = @IsMonitored'
+
 	IF @IsProduction IS NOT NULL
 		SET @tsql = @tsql + N' AND m.IsProduction = @IsProduction'
+
+	IF @SearchText IS NOT NULL AND @SearchText <> ''
+		SET @tsql = @tsql + N' AND al.FormattedMessage LIKE ''%' + @SearchText + '%'''
+
+	IF EXISTS (SELECT 1 FROM #RemovedLogCategoryTable)
+		SET @tsql = @tsql + N' AND acl.CategoryId NOT IN (SELECT CategoryId FROM #RemovedLogCategoryTable)'
 
 	SET @tsql = @tsql + N' GROUP BY 
 							al.Message,
@@ -65,23 +91,24 @@ BEGIN
 							DATEADD(HOUR, DATEDIFF(HOUR, 0, al.Timestamp), 0)
 							OPTION (recompile) '
  
-	SET @ParmDefinition =  N'@From DATETIME, @To DATETIME,@Categoryid INT,@Severity NVARCHAR(32),@MachineId INT,@IsMonitored BIT,@IsProduction BIT';  
-	EXECUTE sp_executesql @tsql, @ParmDefinition,  
+	SET @ParamDefinition =  N'@From DATETIME, @To DATETIME, @Categoryid INT, @Severity NVARCHAR(32), @MachineId INT, @IsMonitored BIT, @IsProduction BIT';
+
+	EXECUTE sp_executesql @tsql, @ParamDefinition,
 						@From = @From,
 						@To = @To,
-						@Categoryid = @Categoryid,
+						@CategoryId = @Categoryid,
 						@Severity = @Severity,
 						@MachineId = @MachineId,
 						@IsMonitored = @IsMonitored,
-						@IsProduction = @IsProduction;  
+						@IsProduction = @IsProduction;
  
 	SELECT @TotalRows = COUNT(*)
-	FROM #TempTable 	
+	FROM #TempTable
 
-	SELECT TOP(@Size) * 
+	SELECT TOP(@Size) *
 	FROM
 	(
-		SELECT 
+		SELECT
 			DATEADD(Hour, @ToGMT, a.Timestamp) AS Timestamp
 			,a.EventID As C_EventID
 			,a.LogID
@@ -106,16 +133,17 @@ BEGIN
 			,m.MachineIP
 			,m.IsProduction
 			,ROW_NUMBER() OVER (ORDER BY a.Timestamp DESC) AS num
-		FROM AppLog_Category AS c WITH (NOLOCK)
-			INNER JOIN #TempTable AS temp ON  c.CategoryID = temp.CategoryID
-			INNER JOIN AppLog_Log AS a WITH (NOLOCK) ON  a.LogID = temp.Id			 
-			INNER JOIN AppLog_Machine AS m WITH (NOLOCK) ON a.MachineId = m.MachineId
+		FROM dbo.AppLog_Category AS c WITH (NOLOCK)
+			INNER JOIN #TempTable AS temp ON c.CategoryID = temp.CategoryID
+			INNER JOIN dbo.AppLog_Log AS a WITH (NOLOCK) ON a.LogID = temp.Id
+			INNER JOIN dbo.AppLog_Machine AS m WITH (NOLOCK) ON a.MachineId = m.MachineId
 			LEFT JOIN bodb02.dbo.CustInfo AS ci WITH (NOLOCK) ON ci.custid = a.MonitoringUserID
 	) AS alias
 	WHERE num > (@Page - 1) * @Size
 
 	DROP TABLE #TempTable
-END	 
+	DROP TABLE #RemovedLogCategoryTable
+END
 
 
 
