@@ -70,9 +70,7 @@ var TracingSPController = function () {
                 sharedScriptManager.unblockUI();
             },
             success: function (result) {
-                if (result.length > 0) {
-                    self.renderData(result);
-                }
+                self.renderData(result);
             },
             error: function (xhr, status, err) {
                 NAP.handleAjaxError(xhr, status, err);
