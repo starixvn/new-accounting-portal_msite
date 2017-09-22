@@ -3,6 +3,23 @@
 
 $(document).ready(function () {
     tracingSPController.initPage();
+    
+    $("#errorDialog").dialog({
+        modal: false,
+        draggable: false,
+        resizable: false,
+        position: ['center', 'top'],
+        show: 'blind',
+        hide: 'blind',
+        width: 400,
+        dialogClass: 'main-dialog-class',
+        autoOpen: false,
+        buttons: {
+            Ok: function () {
+                $(this).dialog("close"); //closing on Ok click
+            }
+        }
+    });
 });
 
 var TracingSPController = function () {
@@ -25,6 +42,13 @@ var TracingSPController = function () {
 
     self.bindingEvent = function () {
         $("#button-search").click(function () {
+            if ($("#TextDataLike").val() == '' && $("#TextDataLike2").val() == '' && $("#TextDataLike3").val() == '')
+            {
+                $("#errorDialog").html("- Text Like cannot be empty.");
+                $("#errorDialog").dialog("open");                
+                return;
+            }
+          
             self.getData();
         });
     };
@@ -46,7 +70,7 @@ var TracingSPController = function () {
     };
 
     self.getData = function () {
-        
+
         self.params = {
             Site: $("#Site").val(),
             Server: $("#Server").val(),
@@ -75,7 +99,7 @@ var TracingSPController = function () {
             error: function (xhr, status, err) {
                 NAP.handleAjaxError(xhr, status, err);
             }
-        });        
+        });
     };
 
     self.renderData = function (result) {
@@ -94,8 +118,13 @@ var TracingSPController = function () {
             rowColumns.push({ Name: "ColCPU", Value: record.CPU });
             rowColumns.push({ Name: "ColDatabaseName", Value: record.DatabaseName });
             rowColumns.push({ Name: "ColStartTime", Value: record.StartTime });
-            rowColumns.push({ Name: "ColEndTime", Value: record.EndTime });
-
+            
+            if (record.EndTime != '/Date(-62135596800000)/') {
+                rowColumns.push({ Name: "ColEndTime", Value: record.EndTime });
+            }
+            else {
+                rowColumns.push({ Name: "ColEndTime", Value: "N/A" });
+            }
             bodyData.push({
                 Columns: rowColumns
             });
@@ -121,7 +150,7 @@ var TracingSPController = function () {
             showDistinctRow: false,
             showHighlightRow: true,
             gridExpandHeight: 350,
-            headerColumnHeight: 29,            
+            headerColumnHeight: 29,
             showPager: true,
             pagerOption: {
                 itemsPerPage: 50,

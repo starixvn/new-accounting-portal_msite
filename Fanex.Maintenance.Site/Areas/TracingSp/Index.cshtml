@@ -6,14 +6,17 @@
     @Styles.Render("~/css/manage")
     @Styles.Render("~/themes/fanexgridstyles")
     <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/shared/formedit.less" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/TracingSp/Styles/style.less" rel="stylesheet" type="text/css" />
 }
 @section Headline {
     <h1>
         Tracing Store Procedure
     </h1>
 }
+
 <section id="filter-bar">
-    <div class="filter-form">
+    <div class="filter-form">        
         <div class="filter-row">
             <div class="lbl-field width-80">
                 @Html.LabelFor(m => m.Server, "Server")
@@ -31,34 +34,34 @@
                 @Html.LabelFor(m => m.TraceTimer, "Trace Timer")
             </div>
             <div class="edit-field width-80">
-                @Html.TextBoxFor(m => m.TraceTimer, new { @Value = "60", @class = "width-60" })
+                @Html.TextBoxFor(m => m.TraceTimer, new { @Value = "30", @class = "width-60" })
             </div>
             <div class="lbl-field width-auto">
                 @Html.LabelFor(m => m.TraceStartEvents, "Include Starting Events")
             </div>
             <div class="edit-field width-60">
                 @Html.CheckBoxFor(m => m.TraceStartEvents, new { @Value = "60", @class = "width-60" })
-            </div>            
+            </div>
         </div>
         <div class="filter-row">
             <div class="lbl-field width-80">
                 @Html.LabelFor(m => m.TextDataLike, "Text Like")
             </div>
             <div class="edit-field width-180">
-                @Html.TextBoxFor(m => m.TextDataLike, new { @class = "width-180", @Value = "%NAP_%" })
+                @Html.TextBoxFor(m => m.TextDataLike, new { @class = "width-180" })
             </div>
             <div class="lbl-field width-80">
                 @Html.LabelFor(m => m.TextDataLike2, "Text Like 2")
             </div>
             <div class="edit-field width-180">
-                @Html.TextBoxFor(m => m.TextDataLike2, new { @class = "width-180", @Value = "%EXEC%" })
+                @Html.TextBoxFor(m => m.TextDataLike2, new { @class = "width-180" })
             </div>
             <div class="lbl-field width-80">
                 @Html.LabelFor(m => m.TextDataLike3, "Text Like 3")
             </div>
             <div class="edit-field width-180">
-                @Html.TextBoxFor(m => m.TextDataLike3, new { @class = "width-180", @Value = "%Select%" })
-            </div>          
+                @Html.TextBoxFor(m => m.TextDataLike3, new { @class = "width-180" })
+            </div>
             <div class="submit margin-left">
                 <input id="button-search" type="submit" value="Submit" />
             </div>
@@ -71,6 +74,8 @@
         </div>
     </div>
 </section>
+<div id="errorDialog" title="Message Info">    
+</div>
 @section Foot {
     @Scripts.Render("~/scripts/sharedscripts")
     @Scripts.Render("~/scripts/fanexgridscripts")

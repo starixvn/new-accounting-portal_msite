@@ -894,6 +894,7 @@
     <Content Include="Areas\LetstalkReport\Web.config" />
     <Content Include="Areas\TracingSp\Index.cshtml" />
     <Content Include="Areas\TracingSp\Web.config" />
+    <Content Include="Areas\TracingSp\Styles\style.less" />
     <None Include="scripts\lib\Fanex.Grid\Fanex.Grid.less" />
     <Content Include="scripts\lib\InputCombobox\colors.less" />
     <Content Include="scripts\lib\InputCombobox\common.less" />
