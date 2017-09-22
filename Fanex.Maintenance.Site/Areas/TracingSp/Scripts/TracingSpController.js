@@ -112,11 +112,11 @@ var TracingSPController = function () {
             rowColumns.push({ Name: "ColSPID", Value: record.SPID });
             rowColumns.push({ Name: "ColTextData", Value: record.TextData });
             rowColumns.push({ Name: "ColLoginName", Value: record.LoginName });
-            rowColumns.push({ Name: "ColDuration", Value: record.Duration });
+            rowColumns.push({ Name: "ColDatabaseName", Value: record.DatabaseName });
             rowColumns.push({ Name: "ColReads", Value: record.Reads });
             rowColumns.push({ Name: "ColWrites", Value: record.Writes });
             rowColumns.push({ Name: "ColCPU", Value: record.CPU });
-            rowColumns.push({ Name: "ColDatabaseName", Value: record.DatabaseName });
+            rowColumns.push({ Name: "ColDuration", Value: record.Duration });            
             rowColumns.push({ Name: "ColStartTime", Value: record.StartTime });
             
             if (record.EndTime != '/Date(-62135596800000)/') {
@@ -135,11 +135,11 @@ var TracingSPController = function () {
         headerColumns.push({ HeaderText: "SPID", Width: 50, Name: "ColSPID", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: "TextData", Width: 750, Name: "ColTextData", HeaderAlign: "center", CellAlign: "left" });
         headerColumns.push({ HeaderText: "Login Name", Width: 120, Name: "ColLoginName", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: "Duration", Width: 70, Name: "ColDuration", HeaderAlign: "center", CellAlign: "center" });
+        headerColumns.push({ HeaderText: "Db Name", Width: 110, Name: "ColDatabaseName", HeaderAlign: "center", CellAlign: "left" });        
         headerColumns.push({ HeaderText: "Reads", Width: 70, Name: "ColReads", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: "Writes", Width: 70, Name: "ColWrites", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: "CPU", Width: 70, Name: "ColCPU", HeaderAlign: "center", CellAlign: "center" });
-        headerColumns.push({ HeaderText: "Db Name", Width: 110, Name: "ColDatabaseName", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: "Duration(s)", Width: 70, Name: "ColDuration", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: "Start Time", Width: 150, Name: "ColStartTime", HeaderAlign: "center", CellAlign: "right", FormatDateTime: "MM/DD/YYYY h:mm:ss A" });
         headerColumns.push({ HeaderText: "End Time", Width: 150, Name: "ColEndTime", HeaderAlign: "center", CellAlign: "right", FormatDateTime: "MM/DD/YYYY h:mm:ss A" });
 
