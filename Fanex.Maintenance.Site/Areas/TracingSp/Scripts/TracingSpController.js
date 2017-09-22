@@ -108,6 +108,7 @@ var TracingSPController = function () {
             var record = result[i];
 
             var rowColumns = [];
+
             rowColumns.push({ Name: "ColEvent", Value: record.Event });
             rowColumns.push({ Name: "ColSPID", Value: record.SPID });
             rowColumns.push({ Name: "ColTextData", Value: record.TextData });
@@ -117,14 +118,14 @@ var TracingSPController = function () {
             rowColumns.push({ Name: "ColWrites", Value: record.Writes });
             rowColumns.push({ Name: "ColCPU", Value: record.CPU });
             rowColumns.push({ Name: "ColDuration", Value: record.Duration });            
-            rowColumns.push({ Name: "ColStartTime", Value: record.StartTime });
-            
+            rowColumns.push({ Name: "ColStartTime", Value: record.StartTime });            
             if (record.EndTime != '/Date(-62135596800000)/') {
                 rowColumns.push({ Name: "ColEndTime", Value: record.EndTime });
             }
             else {
                 rowColumns.push({ Name: "ColEndTime", Value: "N/A" });
             }
+
             bodyData.push({
                 Columns: rowColumns
             });

@@ -19,7 +19,7 @@
 
         public override bool IsValid()
         {
-            if(TraceTimer > 120)
+            if(TraceTimer > 120 || (string.IsNullOrWhiteSpace(TextDataLike) && string.IsNullOrWhiteSpace(TextDataLike2) && string.IsNullOrWhiteSpace(TextDataLike3)))
             {
                 return false;
             }
