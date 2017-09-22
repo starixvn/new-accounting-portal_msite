@@ -94,7 +94,15 @@ var TracingSPController = function () {
                 sharedScriptManager.unblockUI();
             },
             success: function (result) {
-                self.renderData(result);
+                if (result.HasError == 0)
+                {
+                    self.renderData(result.Data);
+                }
+                else
+                {
+                    $("#errorDialog").html(result.ErrorMsg);
+                    $("#errorDialog").dialog("open");
+                }
             },
             error: function (xhr, status, err) {
                 NAP.handleAjaxError(xhr, status, err);
@@ -119,7 +127,7 @@ var TracingSPController = function () {
             rowColumns.push({ Name: "ColCPU", Value: record.CPU });
             rowColumns.push({ Name: "ColDuration", Value: record.Duration });            
             rowColumns.push({ Name: "ColStartTime", Value: record.StartTime });            
-            if (record.EndTime != '/Date(-62135596800000)/') {
+            if (record.EndTime != '/Date(-62135596800000)/' || record.EndTime != '/Date(-62135582400000)/') {
                 rowColumns.push({ Name: "ColEndTime", Value: record.EndTime });
             }
             else {

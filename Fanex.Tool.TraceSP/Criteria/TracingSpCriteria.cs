@@ -17,6 +17,10 @@
 
         public bool Mode { get; set; }
 
+        public string ErrorMsg { get; set; }
+
+        public bool HasError { get; set; }
+
         public override bool IsValid()
         {
             if(TraceTimer > 120 || (string.IsNullOrWhiteSpace(TextDataLike) && string.IsNullOrWhiteSpace(TextDataLike2) && string.IsNullOrWhiteSpace(TextDataLike3)))

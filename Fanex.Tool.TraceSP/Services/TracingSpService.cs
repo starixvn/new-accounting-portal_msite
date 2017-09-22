@@ -12,12 +12,12 @@ namespace Fanex.Tool.TraceSP.Services
 {
     interface ITracingSpService
     {
-        List<TracingSpViewModel> GetTracingSpData(TracingSp model);
+        List<TracingSpViewModel> GetTracingSpData(ref TracingSp model);
     }
 
     class TracingSpService : ITracingSpService
     {
-        public List<TracingSpViewModel> GetTracingSpData(TracingSp model)
+        public List<TracingSpViewModel> GetTracingSpData(ref TracingSp model)
         {
             var criteria = new TracingSpCriteria()
             {
@@ -27,11 +27,15 @@ namespace Fanex.Tool.TraceSP.Services
                 TextDataLike2 = model.TextDataLike2,
                 TextDataLike3 = model.TextDataLike3,
                 TraceStartEvents = model.TraceStartEvents,
-                TraceTimer = model.TraceTimer
+                TraceTimer = model.TraceTimer,
+                ErrorMsg = string.Empty,
+                HasError = false
             };
 
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
+                var param = criteria.GetSpParams();
+
                 var dbSetting = db.DbSetting;
                 var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbSetting.ConnectionString);
 
@@ -41,7 +45,12 @@ namespace Fanex.Tool.TraceSP.Services
 
                 using (var objectDb = new ObjectDb(dbSetting))
                 {
-                    return objectDb.Query<TracingSpViewModel>(criteria).ToList();
+                    var result = objectDb.Query<TracingSpViewModel>(param).ToList();
+
+                    model.HasError = Convert.ToBoolean(param["haserror"]);
+                    model.ErrorMsg = param["errormsg"].ToString();
+
+                    return result;
                 }
             }
         }

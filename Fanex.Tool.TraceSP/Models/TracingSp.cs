@@ -28,5 +28,9 @@ namespace Fanex.Tool.TraceSP.Models
         public List<Site> Sites { get; set; }
 
         public List<Server> Servers { get; set; }
+
+        public bool HasError { get; set; }
+
+        public string ErrorMsg { get; set; }
     }
 }

@@ -31,8 +31,9 @@
         {
             var servers = _dbServerService.GetDbServerList(_dbServerXmlPath);
             var sites = _siteService.GetSites(_siteXmlPath);
-            var model = new TracingSp {
-                Servers = servers.Select(x=> new Server { Ip = x.Ip , Name = x.Name + " (" + x.Ip +")" }).ToList(),
+            var model = new TracingSp
+            {
+                Servers = servers.Select(x => new Server { Ip = x.Ip, Name = x.Name + " (" + x.Ip + ")" }).ToList(),
                 Sites = sites
             };
 
@@ -52,12 +53,19 @@
                 TextDataLike = criteria.TextDataLike,
                 TextDataLike2 = criteria.TextDataLike2,
                 TextDataLike3 = criteria.TextDataLike3,
-                TraceTimer = criteria.TraceTimer              
+                TraceTimer = criteria.TraceTimer,
+                ErrorMsg = string.Empty,
+                HasError = false
             };
 
-            var tracingSpData = _tracingSpService.GetTracingSpData(model);
+            var tracingSpData = _tracingSpService.GetTracingSpData(ref model);
 
-            return Json(tracingSpData, JsonRequestBehavior.AllowGet);
+            return Json(new
+            {
+                Data = tracingSpData,
+                HasError = model.HasError,
+                ErrorMsg = model.ErrorMsg
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 }
