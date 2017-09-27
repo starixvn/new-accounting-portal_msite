@@ -44,7 +44,7 @@ namespace Fanex.Maintenance.Repository.Criteria.Log
 
         public string SearchText { get; set; }
 
-        public string RemovedLogCategories { get; }
+        public string RemovedLogCategories { get; set; }
 
         [SpParam(Ignored = true)]
         public bool GroupMessage { get; set; }

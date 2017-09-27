@@ -197,7 +197,8 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
                 IsProduction = this._isProduction,
                 IsMonitored = this._isMonitored,
                 ToGMT = _showLogTimeZone,
-                SearchText = searchText
+                SearchText = searchText,
+                RemovedLogCategories = removedLogCategories
             };
 
             var list = _logRepository.GetLog(ref criteria);
