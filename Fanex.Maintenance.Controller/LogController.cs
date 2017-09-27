@@ -16,6 +16,7 @@ namespace Fanex.Maintenance.Controller
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+    using Core.Configurations;
     using Fanex.Maintenance.Core;
     using Fanex.Maintenance.Core.Model;
     using Fanex.Maintenance.Repository.Criteria.Log;
@@ -84,6 +85,7 @@ namespace Fanex.Maintenance.Controller
                 Page = 0,
                 Size = 10,
                 Severity = "All",
+                SearchText = string.Empty,
                 ToGMT = ShowLogTimeZone
             };
 
@@ -116,18 +118,22 @@ namespace Fanex.Maintenance.Controller
                 criteria.IsProduction,
                 criteria.IsMonitored,
                 criteria.Severity,
-                criteria.ToGMT)
+                criteria.ToGMT,
+                criteria.SearchText)
                 .From(from)
                 .To(to)
                 .WithPagination(criteria.Page, criteria.Size)
+                .FilterWith(AppSettings.RemovedLogCategories)
                 .GetLogs(ref totalRows);
 
             if (listLogs.Any())
             {
-                listLogs = listLogs.Select<Log, Log>(log =>
+                listLogs = listLogs.Select(log =>
                 {
                     log.Message = HttpUtility.HtmlEncode(log.Message);
+
                     log.FormattedMessage = HttpUtility.HtmlEncode(log.FormattedMessage);
+                    log.FormattedMessage = ReplaceTimestampFromLogMessage(log.FormattedMessage, criteria.ToGMT);
 
                     return log;
                 });
@@ -379,6 +385,18 @@ namespace Fanex.Maintenance.Controller
             }).ToList();
             listCategory.Insert(0, defaultSelection);
             ViewBag.ListCategory = listCategory;
+        }
+
+        private string ReplaceTimestampFromLogMessage(string message, int GMT)
+        {
+            var messageIndex = message.IndexOf("\r", StringComparison.InvariantCulture) - 1;
+            var timestampLength = messageIndex - message.IndexOf(":", StringComparison.InvariantCulture);
+            var timestamp = message.Substring(10, timestampLength);
+            var offsetSign = GMT > 0 ? "+" : string.Empty;
+
+            message = message.Replace(timestamp, $" {Convert.ToDateTime(timestamp).AddHours(GMT).ToString()} (GMT{offsetSign}{GMT})");
+
+            return message;
         }
 
         #endregion Private

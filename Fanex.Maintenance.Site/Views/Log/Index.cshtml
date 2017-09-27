@@ -43,7 +43,7 @@
                 <div class="edit-field width-120">
                     @Html.TextBox("To", Model.To.ToString("MMM dd,yyyy HH:mm"), new { @style = "width:100px;margin-right:5px;", @autocomplete = "off" })
                 </div>
-                <div class="lbl-field width-70">
+                <div class="lbl-field width-80">
                     @Html.LabelFor(m => m.ToGMT, ViewResource.TimeZone)
                 </div>
                 <div class="edit-field width-120">
@@ -68,6 +68,12 @@
                 </div>
                 <div class="edit-field width-120">
                     @Html.DropDownListFor(m => m.IsMonitored, (List<SelectListItem>)ViewBag.LogStatus, new { @class = "width-100" })
+                </div>
+                <div class="lbl-field width-80">
+                    @Html.LabelFor(m => m.SearchText, ViewResource.SearchText)
+                </div>
+                <div class="edit-field width-160">
+                    @Html.TextBoxFor(m => m.SearchText, new { @style = "width:140px;margin-right:5px;", @autocomplete = "off" })
                 </div>
                 <div class="submit">
                     <input type="button" value="@ViewResource.Submit" id="submit" />

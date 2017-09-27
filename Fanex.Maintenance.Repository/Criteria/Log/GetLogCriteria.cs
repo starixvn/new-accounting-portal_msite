@@ -42,6 +42,10 @@ namespace Fanex.Maintenance.Repository.Criteria.Log
 
         public int ToGMT { get; set; }
 
+        public string SearchText { get; set; }
+
+        public string RemovedLogCategories { get; }
+
         [SpParam(Ignored = true)]
         public bool GroupMessage { get; set; }
 

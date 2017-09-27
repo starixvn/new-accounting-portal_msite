@@ -44,6 +44,10 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
 
         private int _showLogTimeZone;
 
+        private string searchText;
+
+        private string removedLogCategories;
+
         private LogService(int showLogTimeZone = 0)
         {
             _categoryId = 0;
@@ -54,6 +58,8 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
             _page = 0;
             _size = 100;
             _showLogTimeZone = showLogTimeZone;
+            searchText = string.Empty;
+            removedLogCategories = string.Empty;
         }
 
         /// <summary>
@@ -101,7 +107,7 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
         /// <param name="isMonitored">Monitored or not.</param>
         /// <param name="severity">Severity level.</param>
         /// <returns>Log service object.</returns>
-        public LogService With(int? categoryId, int? machineId, bool? isProduction, bool? isMonitored, string severity, int timeZone)
+        public LogService With(int? categoryId, int? machineId, bool? isProduction, bool? isMonitored, string severity, int timeZone, string searchText)
         {
             this._categoryId = categoryId;
             this._machineId = machineId;
@@ -109,6 +115,7 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
             this._isProduction = isProduction;
             this._isMonitored = isMonitored;
             this._showLogTimeZone = timeZone;
+            this.searchText = searchText;
 
             return this;
         }
@@ -151,6 +158,13 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
             return this;
         }
 
+        public LogService FilterWith(string removedLogCategories)
+        {
+            this.removedLogCategories = removedLogCategories;
+
+            return this;
+        }
+
         /// <summary>
         /// Get message detail.
         /// </summary>
@@ -182,7 +196,8 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
                 MachineId = this._machineId,
                 IsProduction = this._isProduction,
                 IsMonitored = this._isMonitored,
-                ToGMT = _showLogTimeZone
+                ToGMT = _showLogTimeZone,
+                SearchText = searchText
             };
 
             var list = _logRepository.GetLog(ref criteria);

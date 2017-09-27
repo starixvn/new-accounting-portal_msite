@@ -14,6 +14,7 @@ var Logs = (function ($) {
         btnSubmit: null,
         chbGroupMessage: null,
         hasEdit: null,
+        searchText: null,
 
         init: function () {
             Logs.ddlCategory = $('#CategoryId');
@@ -28,6 +29,7 @@ var Logs = (function ($) {
             Logs.hasEditRight = $('#HasEdit').val() == 1;
             Logs.ddlTimeZone = $('#ToGMT');
             Logs.lblTimeZone = $('#timeZone');
+            Logs.searchText = $('#SearchText');
         },
         generateData: function (pageSize, index) {
             var categoryId = Logs.ddlCategory.val();
@@ -39,6 +41,7 @@ var Logs = (function ($) {
             var isMonitored = Logs.ddlStatus.val();
             var timezone = Logs.ddlTimeZone.val();
             var timeZoneValue = (timezone > 0 ? '+' : '') + timezone;
+            var searchText = Logs.searchText.val();
 
             if (machineId === 'UAT') {
                 isProduction = false;
@@ -64,7 +67,8 @@ var Logs = (function ($) {
                     Page: index,
                     Size: pageSize,
                     ToGMT: timezone,
-                    GroupMessage: true
+                    GroupMessage: true,
+                    SearchText: searchText
                 },
                 type: 'POST',
                 dataType: 'JSON',

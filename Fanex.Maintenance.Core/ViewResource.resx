@@ -870,4 +870,7 @@
   <data name="Environment_Production" xml:space="preserve">
     <value>Production</value>
   </data>
+  <data name="SearchText" xml:space="preserve">
+    <value>Search Text</value>
+  </data>
 </root>

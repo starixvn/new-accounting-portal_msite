@@ -1087,6 +1087,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Risk &amp; Control Letstalk Notification.
+        /// </summary>
+        public static string LetstalkNotification {
+            get {
+                return ResourceManager.GetString("LetstalkNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Local Time Range.
         /// </summary>
         public static string Local_Time_Range {
@@ -1609,15 +1618,6 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Risk &amp; Control Letstalk Notification.
-        /// </summary>
-        public static string LetstalkNotification {
-            get {
-                return ResourceManager.GetString("LetstalkNotification", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to rpt_betting.
         /// </summary>
         public static string rpt_betting {
@@ -1731,6 +1731,15 @@ namespace Fanex.Maintenance.Core {
         public static string ScheduleTotalJob {
             get {
                 return ResourceManager.GetString("ScheduleTotalJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Text.
+        /// </summary>
+        public static string SearchText {
+            get {
+                return ResourceManager.GetString("SearchText", resourceCulture);
             }
         }
         

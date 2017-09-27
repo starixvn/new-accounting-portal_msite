@@ -64,6 +64,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SiteFunctionKeys.tt</DependentUpon>
     </Compile>
+    <Compile Include="Configurations\AppSettings.cs" />
     <Compile Include="Extension\Extension.cs" />
     <Compile Include="Helpers\AlphaCategoryHelper.cs" />
     <Compile Include="Helpers\PagerList.cs" />
