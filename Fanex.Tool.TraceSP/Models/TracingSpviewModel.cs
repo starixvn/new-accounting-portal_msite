@@ -1,13 +1,23 @@
 ﻿namespace Fanex.Tool.TraceSP.Models
 {
     using System;
+    using System.Web;
+    using System.Xml;
     class TracingSpViewModel
     {
+        private string _textData;
         public string Event { get; set; }
 
         public int SPID { get; set; }
-        
-        public string TextData { get; set; }
+
+        public string TextData {
+            get {
+                return HttpContext.Current.Server.HtmlEncode(_textData);
+            }
+            set {
+                _textData = value;
+            }
+        }
 
         public string LoginName { get; set; }
 
