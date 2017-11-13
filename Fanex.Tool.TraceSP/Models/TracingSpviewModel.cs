@@ -10,11 +10,14 @@
 
         public int SPID { get; set; }
 
-        public string TextData {
-            get {
-                return HttpContext.Current.Server.HtmlEncode(_textData);
+        public string TextData
+        {
+            get
+            {
+                return HttpContext.Current.Server.HtmlEncode(_textData.Replace("><", "> <").Replace(",", ", "));
             }
-            set {
+            set
+            {
                 _textData = value;
             }
         }
