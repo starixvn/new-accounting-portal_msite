@@ -73,7 +73,6 @@ namespace Fanex.Maintenance.Controller
             InitPageSize();
 
             ViewBag.ListLog = null;
-
             var criteria = new GetLogCriteria
             {
                 CategoryId = 0,
