@@ -7,7 +7,7 @@ namespace Fanex.Letstalk.Notification.Controllers
 {
     public class LetstalkReportController : BaseController
     {
-        private ILetstalkReportRestClientService service;
+        private readonly ILetstalkReportRestClientService service;
 
         public LetstalkReportController() : this(null)
         {

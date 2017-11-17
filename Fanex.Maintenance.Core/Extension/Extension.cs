@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="Extension.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Maintenance.Core.Extension
+﻿namespace Fanex.Maintenance.Core.Extension
 {
     using System.Security.Cryptography;
     using System.Text;

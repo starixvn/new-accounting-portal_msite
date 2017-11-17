@@ -1,13 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ServiceManagementRepository.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Phillip.Truong" date="2014.6.26">Created</change>
-// </history>
-
-namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
+﻿namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
 {
     using System.Collections.Generic;
     using System.ServiceProcess;
@@ -16,12 +7,9 @@ namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
     using Fanex.ServiceManagement;
     using Fanex.ServiceManagement.Model;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class ServiceManagementRepository : IServiceManagementRepository
     {
-        private ServiceUtility _serviceUtility;
+        private readonly ServiceUtility _serviceUtility;
 
         public ServiceManagementRepository(string ip, string username, string password)
         {
@@ -84,8 +72,8 @@ namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
 
             for (int i = 0; i < servicesList.Count; i++)
             {
-                result += servicesList[i].Name.ToString();
-                result += servicesList[i].Status.ToString();
+                result += servicesList[i].Name;
+                result += servicesList[i].Status;
             }
 
             return Extension.GetMd5Hash(result);

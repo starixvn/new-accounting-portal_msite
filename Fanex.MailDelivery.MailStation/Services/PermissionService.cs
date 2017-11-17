@@ -1,14 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="PermissionService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Nguyen" date="2012.10.18">Created</change>
-//   <change who="Ricky.Nguyen" date="2012.11.20">Update Check Permission</change>
-// </history>
-
-namespace Fanex.MailDelivery.MailStation.Services
+﻿namespace Fanex.MailDelivery.MailStation.Services
 {
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Configuration;
@@ -16,9 +6,6 @@ namespace Fanex.MailDelivery.MailStation.Services
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Session;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class PermissionService
     {
         private static ICurrentSession _currentSession;

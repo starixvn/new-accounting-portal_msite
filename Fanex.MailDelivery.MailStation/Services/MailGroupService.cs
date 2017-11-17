@@ -18,7 +18,7 @@
 
         public List<MailGroupModel> GetMailGroup(GetMailGroupCriteria criteria)
         {
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.AssignParamValues(criteria.GetSpParams());
                 return db.Query<MailGroupModel>().ToList();
@@ -42,7 +42,7 @@
 
         public MailGroupModel GetMailGroupByID(GetMailGroupByIdCriteria criteria)
         {
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.AssignParamValues(criteria.GetSpParams());
                 return db.Query<MailGroupModel>().FirstOrDefault();

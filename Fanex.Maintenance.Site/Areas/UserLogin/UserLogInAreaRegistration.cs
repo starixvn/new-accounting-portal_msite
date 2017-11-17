@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="UserLogInAreaRegistration.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Edward.Nguyen" date="2013.9.6">Created</change>
-// </history>
-
-namespace Fanex.NAP.Hub.Areas.UserLogin
+﻿namespace Fanex.NAP.Hub.Areas.UserLogin
 {
     using System.Web.Mvc;
 

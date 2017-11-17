@@ -1,13 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ServiceManagement.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Phillip.Truong" date="2014.6.26">Created</change>
-// </history>
-
-namespace Fanex.Maintenance.Service.Impl.ServiceMonitoring
+﻿namespace Fanex.Maintenance.Service.Impl.ServiceMonitoring
 {
     using System.Collections.Generic;
     using System.ServiceProcess;
@@ -16,19 +7,14 @@ namespace Fanex.Maintenance.Service.Impl.ServiceMonitoring
     using Fanex.Maintenance.Service.Interface.ServiceMonitoring;
     using Fanex.ServiceManagement.Model;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class ServiceManagement
     {
-        private IServiceManagementRepository _serviceManagementRepository;
-
-        private IUserManagement _userManagement;
+        private readonly IServiceManagementRepository _serviceManagementRepository;
 
         public ServiceManagement(int userID, string ip)
         {
-            this._userManagement = new UserManagement();
-            var networkLogin = this._userManagement.GetNetworkLoginByIP(userID, ip);
+            var userManagement = new UserManagement();
+            var networkLogin = userManagement.GetNetworkLoginByIP(userID, ip);
             this._serviceManagementRepository = new ServiceManagementRepository(
                 ip,
                 networkLogin == null ? string.Empty : networkLogin.UserName,

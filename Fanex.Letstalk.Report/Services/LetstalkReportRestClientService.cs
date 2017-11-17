@@ -6,7 +6,7 @@ namespace Fanex.Letstalk.Notification.Services
 {
     public class LetstalkReportRestClientService : ILetstalkReportRestClientService
     {
-        private IHttpClientService clientService;
+        private readonly IHttpClientService clientService;
 
         public LetstalkReportRestClientService() : this(null)
         {

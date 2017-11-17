@@ -1,14 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="MailController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Edward.Nguyen" date="2012.9.20">Created</change>
-//   <change who="Ricky.Nguyen" date="2012.10.16">StyleCop</change>
-// </history>
-
-namespace Fanex.Maintenance.Controller
+﻿namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
@@ -80,8 +70,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateFrom = DateTime.Now.ToString("dd/MM/yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("dd/MM/yyyy");
 
-            var listMail = new List<MailRecord>();
-            listMail = this._mailServer.WithApp(appId)
+            var listMail = this._mailServer.WithApp(appId)
                 .FromDate(DateTime.Now.ToShortDateString())
                 .ToDate(DateTime.Now.ToShortDateString())
                 .WithStatus(0)
@@ -115,8 +104,7 @@ namespace Fanex.Maintenance.Controller
             DateTime dateFrom = DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             DateTime dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-            var listMail = new List<MailRecord>();
-            listMail = this._mailServer.WithApp(applicationID)
+            var listMail = this._mailServer.WithApp(applicationID)
                 .FromDate(dateFrom.ToString())
                 .ToDate(dateTo.ToString())
                 .WithStatus(mailStatus)
@@ -481,7 +469,7 @@ namespace Fanex.Maintenance.Controller
             if (!string.IsNullOrWhiteSpace(mailRecord.FileAttachments))
             {
                 string extension = Path.GetExtension(mailRecord.FileAttachments);
-                var fileExtension = new FileExtentions();
+                FileExtentions fileExtension;
 
                 switch (extension.ToLower())
                 {
@@ -675,8 +663,7 @@ namespace Fanex.Maintenance.Controller
             DateTime dateFrom = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTime.Now;
             DateTime dateTo = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTime.Now;
 
-            var listMail = new List<MailRecord>();
-            listMail = _mailServer.WithApp(applicationID)
+            var listMail = _mailServer.WithApp(applicationID)
                 .FromDate(dateFrom.ToString())
                 .ToDate(dateTo.ToString())
                 .WithPagination(page, size)

@@ -13,7 +13,7 @@
         {
             TimeZoneInfo.ClearCachedData();
             string standardName = TimeZone.CurrentTimeZone.StandardName;
-            var timezone = TimeZoneConstants.Timezones.Where(timeZone => timeZone.StandardName.Equals(standardName)).FirstOrDefault();
+            var timezone = TimeZoneConstants.Timezones.FirstOrDefault(timeZone => timeZone.StandardName.Equals(standardName));
             return timezone == null ? null : timezone.TimeZoneString;
         }
     }

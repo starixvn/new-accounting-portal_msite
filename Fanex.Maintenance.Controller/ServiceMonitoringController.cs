@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="ServiceMonitoringController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Phillip.truong" date="2014.6.25">Created</change>
-// </history>
-
-namespace Fanex.Maintenance.Controller
+﻿namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
@@ -26,10 +17,6 @@ namespace Fanex.Maintenance.Controller
     [NapSuperAuth]
     public class ServiceMonitoringController : BaseController
     {
-        public ServiceMonitoringController()
-        {
-        }
-
         /// <summary>
         /// Log list page.
         /// </summary>

@@ -1,14 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="BaseRepository.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Edward.Nguyen" date="2012.10.8">Created</change>
-//   <change who="Ricky.Nguyen" date="2012.10.9">Add Fetchm, Get Datatable Function</change>
-// </history>
-
-namespace Fanex.Maintenance.Repository.Impl
+﻿namespace Fanex.Maintenance.Repository.Impl
 {
     using System;
     using System.Collections;

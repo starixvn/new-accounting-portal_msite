@@ -1,9 +1,3 @@
-// --------------------------------------------------------------------------
-// <copyright file="GetAllMailGroupCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
 namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
     using Fanex.Data.Repository;

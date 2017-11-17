@@ -1,20 +1,8 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="SessionManager.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Ricky.Nguyen" date="2012.11.22">Created</change>
-// </history>
-
-namespace Fanex.MailDelivery.MailStation.Services
+﻿namespace Fanex.MailDelivery.MailStation.Services
 {
     using System;
     using System.Web;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class SessionManager
     {
         /// <summary>

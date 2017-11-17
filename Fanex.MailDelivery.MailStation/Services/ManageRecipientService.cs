@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="ManageRecipientService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Nguyen" date="2014.10.03">Created</change>
-// </history>
-
-namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
+﻿namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
 {
     using Fanex.Data;
     using Fanex.MailDelivery.MailStation.Criteria;
@@ -26,7 +17,7 @@ namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
     /// </summary>
     public class ManageRecipientService : MailStationBaseService
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
 
         public ManageRecipientService()
         {

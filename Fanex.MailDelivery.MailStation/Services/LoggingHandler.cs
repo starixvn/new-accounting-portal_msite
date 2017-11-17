@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="LoggingHandler.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="" date="2012.12.17">Created</change>
-// </history>
-
-namespace Fanex.MailDelivery.MailStation.Services
+﻿namespace Fanex.MailDelivery.MailStation.Services
 {
     using System;
     using System.Web;
@@ -26,9 +17,6 @@ namespace Fanex.MailDelivery.MailStation.Services
         Error = 2
     }
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class LoggingHandler
     {
         /// <summary>
@@ -41,8 +29,8 @@ namespace Fanex.MailDelivery.MailStation.Services
                               "<br>\r\nSOURCE: " + ex.Source +
                               "<br>\r\nDOMAIN: " + HttpContext.Current.Request.Headers["Host"] +
                               "<br>\r\nREFERRER: " + HttpContext.Current.Request.UrlReferrer +
-                              "<br>\r\nFORM: " + HttpContext.Current.Request.Form.ToString() +
-                              "<br>\r\nQUERYSTRING: " + HttpContext.Current.Request.QueryString.ToString() +
+                              "<br>\r\nFORM: " + HttpContext.Current.Request.Form +
+                              "<br>\r\nQUERYSTRING: " + HttpContext.Current.Request.QueryString +
                               "<br>\r\nTARGETSITE: " + ex.TargetSite +
                               "<br>\r\nSTACKTRACE: " + ex.StackTrace;
             Logger.Log.Error(message);
@@ -55,14 +43,13 @@ namespace Fanex.MailDelivery.MailStation.Services
         /// <param name="logType">Type of the log.</param>
         public static void Log(string message = "", LogType logType = LogType.Error)
         {
-            switch (logType)
+            if (logType == LogType.Info)
             {
-                case LogType.Info:
-                    LogService.Info(message);
-                    break;
-                case LogType.Error:
-                    LogService.Error(message);
-                    break;
+                LogService.Info(message);
+            }
+            else if (logType == LogType.Error)
+            {
+                LogService.Error(message);
             }
         }
     }

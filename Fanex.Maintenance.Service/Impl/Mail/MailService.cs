@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="MailService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Edward.Nguyen" date="2012.9.20">Created</change>
-// </history>
-
-namespace Fanex.Maintenance.Service.Impl.Mail
+﻿namespace Fanex.Maintenance.Service.Impl.Mail
 {
     using System;
     using System.Collections.Generic;
@@ -84,9 +75,9 @@ namespace Fanex.Maintenance.Service.Impl.Mail
         /// </summary>
         /// <param name="fromDate">From date.</param>
         /// <returns>Mail service.</returns>
-        public IMailService FromDate(string fromDate)
+        public IMailService FromDate(string date)
         {
-            this._fromDate = fromDate;
+            this._fromDate = date;
 
             return this;
         }
@@ -96,9 +87,9 @@ namespace Fanex.Maintenance.Service.Impl.Mail
         /// </summary>
         /// <param name="toDate">To date string.</param>
         /// <returns>Mail service.</returns>
-        public IMailService ToDate(string toDate)
+        public IMailService ToDate(string date)
         {
-            this._toDate = toDate;
+            this._toDate = date;
 
             return this;
         }

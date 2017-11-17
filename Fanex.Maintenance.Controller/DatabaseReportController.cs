@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="DatabaseReportController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Ricky.Nguyen" date="2012.10.16">StyleCop</change>
-// </history>
-
-namespace Fanex.Maintenance.Controller
+﻿namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;

@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="MachineRepository.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Jason.Ly" date="2013.8.7">Created</change>
-// </history>
-
-namespace Fanex.Maintenance.Repository.Impl.AppLog
+﻿namespace Fanex.Maintenance.Repository.Impl.AppLog
 {
     using System.Collections;
     using Fanex.Data;

@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="SSOController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Edward.Nguyen" date="2012.8.28">Add properties _currentContext</change>
-// </history>
-
-namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
+﻿namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -31,9 +22,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         #region members
 
         private readonly int _timeExipration = 30;
-        private IUserService _userService;
-        private ISecurityService _securityService;
-        private ICurrentSession _currentSession;
+        private readonly IUserService _userService;
+        private readonly ISecurityService _securityService;
+        private readonly ICurrentSession _currentSession;
 
         #endregion members
 
@@ -68,21 +59,21 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         [HttpGet]
         public ActionResult Index(string userId, string onuserId, string time)
         {
-            userId = Cryptography.CfsDeCrypt(userId.Replace(" ", "+"));
-            onuserId = Cryptography.CfsDeCrypt(onuserId.Replace(" ", "+"));
-            time = Cryptography.CfsDeCrypt(time.Replace(" ", "+"));
+            string decryptedUserId = Cryptography.CfsDeCrypt(userId.Replace(" ", "+"));
+            string decryptedOnuserId = Cryptography.CfsDeCrypt(onuserId.Replace(" ", "+"));
+            string decryptedTime = Cryptography.CfsDeCrypt(time.Replace(" ", "+"));
             string currentTime = _securityService.GetTime();
 
-            var expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(time);
+            var expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(decryptedTime);
 
             if (expiration.TotalSeconds <= _timeExipration)
             {
                 // SSO check-in
                 var criteria = new SSOLoginParameter
                 {
-                    UserId = Convert.ToInt32(userId),
+                    UserId = Convert.ToInt32(decryptedUserId),
                     SiteId = SiteId,
-                    CheckOnUserId = Convert.ToInt32(onuserId),
+                    CheckOnUserId = Convert.ToInt32(decryptedOnuserId),
                     OnUserId = 0,
                     IP = CurrentContext.IP,
                     NetSessionId = Session.SessionID,
@@ -97,13 +88,13 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                 if (onlineUserId != 0)
                 {
-                    var user = _userService.Get(criteria.UserId) as User;
+                    var user = _userService.Get(criteria.UserId);
 
                     // saves user session & auth info
                     _currentSession.UserId = user.Id;
                     _currentSession.Username = user.Username;
                     _currentSession.OnUserId = onlineUserId;
-                    _currentSession.SessionId = Session.SessionID.ToString();
+                    _currentSession.SessionId = Session.SessionID;
                     _currentSession.Level = _userService.GetUserLevel(user.Id, this.SiteId);
 
                     if (this.SiteId != 0)
@@ -115,7 +106,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                                                                 true) as IList<MenuItem>;
                     }
 
-                    CreateAuthInfo(user);
+                    CreateAuthInfo(user, onlineUserId);
 
                     return Redirect(FormsAuthentication.DefaultUrl);
                 }
@@ -123,42 +114,5 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
             return Redirect(FormsAuthentication.LoginUrl);
         }
-
-        #region utilities
-
-        /// <summary>
-        /// Create authorize information.
-        /// </summary>
-        /// <param name="user">Current login user.</param>
-        private void CreateAuthInfo(User user)
-        {
-            var currentDomain = CurrentContext.CurrentDomain;
-
-            var authInfo = new AuthInfo();
-
-            authInfo.UserId = user.Id;
-            authInfo.OnUserId = this._currentSession.OnUserId;
-
-            var authTicket = new FormsAuthenticationTicket(
-                 1,
-                user.Username,
-                DateTime.Now,
-                DateTime.Now.AddMinutes(20000),
-                false,
-                authInfo.ToXml(),
-                currentDomain.Path);
-
-            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
-            {
-                HttpOnly = true,
-                Path = currentDomain.Path,
-                Name = FormsAuthentication.FormsCookieName
-            };
-
-            Response.Cookies.Add(authCookie);
-        }
-
-        #endregion utilities
     }
 }

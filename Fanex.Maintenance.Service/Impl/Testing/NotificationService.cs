@@ -36,7 +36,7 @@
             string[] serverUrls = { setting.NotificationService1, setting.NotificationService2 };
 
             var emailContent = model.Message + " at " + DateTime.Now;
-            var contents = new Dictionary<string, string>()
+            var contents = new Dictionary<string, string>
                 {
                     { "Mail.Subject", "Testing" },
                     { "Email", emailContent }
@@ -54,7 +54,7 @@
             string[] serverUrls = { setting.NotificationService1, setting.NotificationService2 };
 
             var contentMessage = model.Message + " at " + DateTime.Now;
-            var contents = new Dictionary<string, string>()
+            var contents = new Dictionary<string, string>
                 {
                     { "Push.Subject", "Testing" },
                     { "Letstalk",  contentMessage }

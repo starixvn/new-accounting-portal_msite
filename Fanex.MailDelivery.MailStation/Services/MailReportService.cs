@@ -25,11 +25,9 @@
     /// </summary>
     public class MailReportService : MailStationBaseService, IDisposable
     {
-        private IMailService _mailService;
-
-        private IJobService _jobService;
-
-        private IJobOperationService _jobOperationService;
+        private readonly IMailService _mailService;
+        private readonly IJobService _jobService;
+        private readonly IJobOperationService _jobOperationService;
 
         public MailReportService()
         {
@@ -59,7 +57,7 @@
 
             criteria.Status = oldStatus;
             List<MailTaskDetailModel> listMailTaskDetail = new List<MailTaskDetailModel>();
-            GetAllScheduleCriteria getAllScheduleCriteria = new GetAllScheduleCriteria() { MailName = criteria.MailName, SiteId = criteria.SiteId };
+            GetAllScheduleCriteria getAllScheduleCriteria = new GetAllScheduleCriteria { MailName = criteria.MailName, SiteId = criteria.SiteId };
             using (ObjectDb db = new ObjectDb(getAllScheduleCriteria.GetSettingKey()))
             {
                 db.AssignParamValues(getAllScheduleCriteria.GetSpParams());
@@ -93,7 +91,7 @@
                             var status = triggertime.LocalDateTime.AddSeconds(5) > DateTime.Now ? (int)JobStatus.Waiting : (int)JobStatus.Missing;
                             if (criteria.Status == -1 || criteria.Status == status)
                             {
-                                MailTaskModel waitingTask = new MailTaskModel()
+                                MailTaskModel waitingTask = new MailTaskModel
                                 {
                                     MailName = schedule.MailName,
                                     MailId = schedule.MailId,
@@ -159,8 +157,8 @@
         /// <param name="criteria">The criteria.</param>
         public void RetrySendMail(RetrySendMailCriteria criteria)
         {
-            MailTaskModel mailTask = this.GetMailTaskByID(new GetMailTaskByIdCriteria() { MailTaskId = criteria.TaskId });
-            Schedule schedule = this.GetScheduleByMailId(new GetScheduleByIdCriteria() { MailId = mailTask.MailId });
+            MailTaskModel mailTask = this.GetMailTaskByID(new GetMailTaskByIdCriteria { MailTaskId = criteria.TaskId });
+            Schedule schedule = this.GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailTask.MailId });
             schedule.TaskId = mailTask.MailTaskId;
 
             _jobOperationService.Retry(schedule);
@@ -188,8 +186,8 @@
                 mailTaskId = Converter.ToInt(db.GetParameterValue("MailTaskID"));
             }
 
-            MailTaskModel mailTask = this.GetMailTaskByID(new GetMailTaskByIdCriteria() { MailTaskId = mailTaskId });
-            Schedule schedule = this.GetScheduleByMailId(new GetScheduleByIdCriteria() { MailId = mailTask.MailId });
+            MailTaskModel mailTask = this.GetMailTaskByID(new GetMailTaskByIdCriteria { MailTaskId = mailTaskId });
+            Schedule schedule = this.GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailTask.MailId });
             schedule.CurrentFireTime = criteria.ScheduledTime;
             schedule.TaskId = mailTaskId;
 

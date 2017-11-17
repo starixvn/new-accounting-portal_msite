@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="MachineService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Jason.Ly" date="2013.8.7">Created</change>
-// </history>
-
-namespace Fanex.Maintenance.Service.Impl.AppLog
+﻿namespace Fanex.Maintenance.Service.Impl.AppLog
 {
     using System.Collections.Generic;
     using Fanex.Maintenance.Core.Model;

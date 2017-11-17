@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="UserManagementRepository.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
+﻿namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
 {
     using System;
     using System.Collections.Generic;
@@ -26,12 +20,14 @@ namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
         /// <returns>Network login collection.</returns>
         public List<NetworkLogin> GetListServerIP(int userID)
         {
-            var result = new List<NetworkLogin>();
             string folderPath = AppDomain.CurrentDomain.BaseDirectory + "//ServiceMonitoringCache//" + userID.ToString();
+
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
+
+            var result = new List<NetworkLogin>();
 
             using (StreamReader file = new StreamReader(File.Open(
                 folderPath + "//ServerList.txt",
@@ -45,7 +41,7 @@ namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
                     if (!string.IsNullOrEmpty(line))
                     {
                         var elements = line.Split(',');
-                        result.Add(new NetworkLogin()
+                        result.Add(new NetworkLogin
                         {
                             IP = elements[0],
                             UserName = string.Empty,
@@ -64,13 +60,15 @@ namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
         /// <param name="userID">The user identifier.</param>
         /// <returns>List Network login.</returns>
         public List<NetworkLogin> GetListServer(int userID)
-        {
-            var result = new List<NetworkLogin>();
+        {            
             string folderPath = AppDomain.CurrentDomain.BaseDirectory + "//ServiceMonitoringCache//" + userID.ToString();
+
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
+
+            var result = new List<NetworkLogin>();
 
             using (StreamReader file = new StreamReader(File.Open(
                 folderPath + "//ServerList.txt",
@@ -84,7 +82,7 @@ namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
                     if (!string.IsNullOrEmpty(line))
                     {
                         var elements = line.Split(',');
-                        result.Add(new NetworkLogin()
+                        result.Add(new NetworkLogin
                         {
                             IP = elements[0],
                             UserName = elements[1],
@@ -129,7 +127,7 @@ namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
         public NetworkLogin GetNetworkLoginByIP(int userID, string ip)
         {
             var listServers = this.GetListServer(userID);
-            NetworkLogin networkLogin = listServers.Where(m => (m.IP == ip)).FirstOrDefault();
+            NetworkLogin networkLogin = listServers.FirstOrDefault(m => (m.IP == ip));
             return networkLogin;
         }
 
@@ -143,10 +141,11 @@ namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
         public void UpdateNetworkLoginByIP(int userID, string ip, string userName, string password)
         {
             var listServers = this.GetListServer(userID);
+
             if (listServers == null || listServers.Count == 0)
             {
                 listServers = new List<NetworkLogin>();
-                listServers.Add(new NetworkLogin() { IP = ip, UserName = userName, Password = password });
+                listServers.Add(new NetworkLogin { IP = ip, UserName = userName, Password = password });
                 this.UpdateListServer(userID, listServers);
                 return;
             }
@@ -165,7 +164,7 @@ namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
 
             if (!isExists)
             {
-                listServers.Add(new NetworkLogin() { IP = ip, UserName = userName, Password = password });
+                listServers.Add(new NetworkLogin { IP = ip, UserName = userName, Password = password });
             }
 
             this.UpdateListServer(userID, listServers);
@@ -194,7 +193,6 @@ namespace Fanex.Maintenance.Repository.Impl.ServiceMonitoring
                 var line = file.ReadLine();
                 if (!string.IsNullOrEmpty(line))
                 {
-                    var elements = line.Split(',');
                     result = new List<string>(line.Split(','));
                 }
             }

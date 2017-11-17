@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="LoginController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Edward.Nguyen" date="2012.8.28">Add properties _currentContext</change>
-// </history>
-
-namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
+﻿namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -36,33 +27,30 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     {
         #region members
 
-        private IUserService _userService;
-        private IGroupService _groupService;
-        private ISiteService _siteService;
-        private ICurrentSession _currentSession;
-        private IMaintenanceService _maintenanceService;
-        private ISecurityService _securityService;
+        private readonly IUserService _userService;
+        private readonly IGroupService _groupService;
+        private readonly ICurrentSession _currentSession;
+        private readonly IMaintenanceService _maintenanceService;
+        private readonly ISecurityService _securityService;
 
         #endregion members
 
         #region ctors
 
         public LoginController()
-            : this(null, null, null, null, null, null)
+            : this(null, null, null, null, null)
         {
         }
 
         public LoginController(
             IUserService userService,
             IGroupService groupService,
-            ISiteService siteService,
             ICurrentSession currentSession,
             IMaintenanceService maintenanceService,
             ISecurityService securityService)
         {
             _userService = userService ?? new UserService();
             _groupService = groupService ?? new GroupService();
-            _siteService = siteService ?? new SiteService();
             _currentSession = currentSession ?? new CurrentSession();
             _maintenanceService = maintenanceService ?? new MaintenanceService();
             _securityService = securityService ?? new SecurityService();
@@ -110,7 +98,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             {
                 if (!username.IsNullOrTrimEmpty() && !password.IsNullOrTrimEmpty())
                 {
-                    var user = _userService.Get(username.Trim()) as User;
+                    var user = _userService.Get(username.Trim());
 
                     if (user != null)
                     {
@@ -120,12 +108,12 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                         {
                             var siteLevelList = _userService.GetSiteLevel(user.Id, Environment);
 
-                            if (siteLevelList.Where(x => x.Site.Id == this.SiteId).Any())
+                            if (siteLevelList.Any(x => x.Site.Id == this.SiteId))
                             {
                                 var group = user.Group == null ? null : _groupService.Get(user.Group.Id);
 
                                 if ((group == null || group.IsActive)
-                                    && siteLevelList.Where(x => x.Site.Id == this.SiteId && x.IsActive).Any())
+                                    && siteLevelList.Any(x => x.Site.Id == this.SiteId && x.IsActive))
                                 {
                                     // check-in user
                                     var criteria = new LoginParameter
@@ -143,17 +131,17 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                                     var onlineUserId = _securityService.Login(criteria);
 
-                                    int level = siteLevelList.Where(x => x.Site.Id == this.SiteId).FirstOrDefault().Level;
+                                    int level = siteLevelList.FirstOrDefault(x => x.Site.Id == this.SiteId).Level;
 
                                     // saves user session
                                     _currentSession.Level = level;
                                     _currentSession.UserId = user.Id;
                                     _currentSession.Username = username;
                                     _currentSession.OnUserId = onlineUserId;
-                                    _currentSession.SessionId = Session.SessionID.ToString();
+                                    _currentSession.SessionId = Session.SessionID;
 
                                     CreateUserMenu(user);
-                                    CreateAuthInfo(user);
+                                    CreateAuthInfo(user, onlineUserId);
 
                                     return Redirect(FormsAuthentication.DefaultUrl);
                                 }
@@ -244,8 +232,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         #endregion re check in
 
-        #region helpers
-
         /// <summary>
         /// Create user menu.
         /// </summary>
@@ -258,40 +244,5 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                                                                     Environment,
                                                                                     true);
         }
-
-        /// <summary>
-        /// Create authorization info.
-        /// </summary>
-        /// <param name="user">User object.</param>
-        private void CreateAuthInfo(User user)
-        {
-            var currentDomain = CurrentContext.CurrentDomain;
-
-            var authInfo = new AuthInfo();
-
-            authInfo.UserId = user.Id;
-            authInfo.OnUserId = this._currentSession.OnUserId;
-
-            var authTicket = new FormsAuthenticationTicket(
-                 1,
-                user.Username,
-                DateTime.Now,
-                DateTime.Now.AddMinutes(20000),
-                false,
-                authInfo.ToXml(),
-                currentDomain.Path);
-
-            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
-            {
-                HttpOnly = true,
-                Path = currentDomain.Path,
-                Name = FormsAuthentication.FormsCookieName
-            };
-
-            Response.Cookies.Add(authCookie);
-        }
-
-        #endregion helpers
     }
 }

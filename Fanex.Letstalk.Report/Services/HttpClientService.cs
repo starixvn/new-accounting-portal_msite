@@ -8,7 +8,7 @@ namespace Fanex.Letstalk.Notification.Services
 {
     public class HttpClientService : IHttpClientService
     {
-        private IAppConfigurationService service;
+        private readonly IAppConfigurationService service;
 
         public HttpClientService() : this(null)
         {

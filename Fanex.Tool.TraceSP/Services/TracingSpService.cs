@@ -19,7 +19,7 @@ namespace Fanex.Tool.TraceSP.Services
     {
         public List<TracingSpViewModel> GetTracingSpData(ref TracingSp model)
         {
-            var criteria = new TracingSpCriteria()
+            var criteria = new TracingSpCriteria
             {
                 Site = model.Site,
                 Mode = model.Mode,

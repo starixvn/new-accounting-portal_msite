@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="GetMachinesByTypeCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Jason.Ly" date="2013.8.8">Created</change>
-// </history>
-
-namespace Fanex.Maintenance.Repository.Criteria.Log
+﻿namespace Fanex.Maintenance.Repository.Criteria.Log
 {
     using System;
     using Fanex.Data.Repository;

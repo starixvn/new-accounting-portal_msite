@@ -2,6 +2,6 @@
 {
     public interface IHttpClientService
     {
-        T PostAsync<T, P>(string action, P inputPrams);
+        T PostAsync<T, P>(string action, P inputParams);
     }
 }

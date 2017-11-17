@@ -1,13 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ServiceUtility.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Phillip.Truong" date="2014.6.26">Created</change>
-// </history>
-
-namespace Fanex.ServiceManagement
+﻿namespace Fanex.ServiceManagement
 {
     using System;
     using System.Collections.Generic;
@@ -106,7 +97,7 @@ namespace Fanex.ServiceManagement
             {
                 foreach (var service in searcher.Get())
                 {
-                    result.Add(new ServiceViewModel()
+                    result.Add(new ServiceViewModel
                     {
                         Name = Convert.ToString(service["Name"]),
                         Status = Convert.ToString(service["State"]),
@@ -331,7 +322,7 @@ namespace Fanex.ServiceManagement
         {
             string servicePath = this.GetServicePhysicalPath(serviceName);
             string fullPath = Path.GetDirectoryName(servicePath) + "\\" + fileName;
-            string result = string.Empty;
+ 
             if (this._isSelfConnect)
             {
                 try

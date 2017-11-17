@@ -1,13 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IServiceManagement.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Phillip.Truong" date="2014.6.26">Created</change>
-// </history>
-
-namespace Fanex.Maintenance.Service.Interface.ServiceMonitoring
+﻿namespace Fanex.Maintenance.Service.Interface.ServiceMonitoring
 {
     using System.Collections.Generic;
     using System.ServiceProcess;

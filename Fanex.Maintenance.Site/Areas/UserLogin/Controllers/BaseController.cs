@@ -1,18 +1,14 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="BaseController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Edward.Nguyen" date="2012.8.28">Add properties _currentContext</change>
-// </history>
-
-namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
+﻿namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Web;
     using System.Web.Mvc;
+    using System.Web.Security;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Context;
+    using Fanex.NAP.Core.Models;
+    using Fanex.NAP.Core.Web.Auth;
 
     /// <summary>
     /// Base controller.
@@ -26,7 +22,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         protected readonly CurrentContext CurrentContext;
 
-        private bool _enableDirectLogin = NapSettings.Settings.EnableDirectLogin;
+        private readonly bool _enableDirectLogin = NapSettings.Settings.EnableDirectLogin;
 
         public BaseController()
         {
@@ -43,6 +39,41 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             {
                 return _enableDirectLogin;
             }
+        }
+
+        /// <summary>
+        /// Creates authorize information.
+        /// </summary>
+        /// <param name="user">The user object.</param>
+        /// <param name="onlineUserId">The online user ID.</param>
+        protected void CreateAuthInfo(User user, int onlineUserId)
+        {
+            string currentDomainPath = CurrentContext.CurrentDomain.Path;
+
+            var authInfo = new AuthInfo
+            {
+                UserId = user.Id,
+                OnUserId = onlineUserId
+            };
+
+            var authTicket = new FormsAuthenticationTicket(
+                1,
+                user.Username,
+                DateTime.Now,
+                DateTime.Now.AddMinutes(20000),
+                false,
+                authInfo.ToXml(),
+                currentDomainPath);
+
+            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
+            {
+                HttpOnly = true,
+                Path = currentDomainPath,
+                Name = FormsAuthentication.FormsCookieName
+            };
+
+            Response.Cookies.Add(authCookie);
         }
     }
 }

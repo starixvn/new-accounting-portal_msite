@@ -1,15 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="LogController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Edward.Nguyen" date="2012.9.20">Created</change>
-//   <change who="Ricky.Nguyen" date="2012.10.16">Style cop</change>
-//   <change who="Jason.Ly" date="2013.8.7">Modify Get Logs</change>
-// </history>
-
-namespace Fanex.Maintenance.Controller
+﻿namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
@@ -241,32 +230,7 @@ namespace Fanex.Maintenance.Controller
 
             ViewBag.PageSize = listPageSize;
         }
-
-        /// <summary>
-        /// Initialize Machine Types data.
-        /// </summary>
-        private void InitMachineTypes()
-        {
-            List<SelectListItem> machineTypes = new List<SelectListItem>();
-            machineTypes.Add(new SelectListItem
-            {
-                Text = ViewResource.All,
-                Value = "null"
-            });
-            machineTypes.Add(new SelectListItem
-            {
-                Text = ViewResource.MachineType_Production,
-                Value = "true"
-            });
-            machineTypes.Add(new SelectListItem
-            {
-                Text = ViewResource.MachineType_UAT,
-                Value = "false"
-            });
-
-            ViewBag.MachineTypes = machineTypes;
-        }
-
+        
         /// <summary>
         /// Initialize Log Status data.
         /// </summary>

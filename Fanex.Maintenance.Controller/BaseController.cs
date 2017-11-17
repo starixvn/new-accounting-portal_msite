@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="BaseController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Edward.Nguyen" date="2013.1.4">Created</change>
-// </history>
-
-namespace Fanex.Maintenance.Controller
+﻿namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Configuration;
@@ -30,8 +21,8 @@ namespace Fanex.Maintenance.Controller
         protected readonly CurrentContext CurrentContext;
         protected readonly CurrentSession CurrentSession;
         private readonly IUserService _userService;
-        private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
-        private int _showLogTimeZone = 7;
+        private readonly bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
+        private readonly int _showLogTimeZone;
 
         public BaseController()
         {
@@ -96,7 +87,7 @@ namespace Fanex.Maintenance.Controller
 
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
         {
-            return new JsonResult()
+            return new JsonResult
             {
                 Data = data,
                 ContentType = contentType,

@@ -298,9 +298,6 @@
     <Content Include="App_Data\SIT\mSiteSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\SIT\NAPCommonSpNames.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="App_Data\LOCAL\ConnectionStringSpName.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -308,9 +305,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\LOCAL\mSiteSpNames.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\LOCAL\NAPCommonSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\PRO\ConnectionStringSpName.xml">
@@ -322,9 +316,6 @@
     <Content Include="App_Data\PRO\mSiteSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\PRO\NAPCommonSpNames.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="App_Data\UAT\ConnectionStringSpName.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -332,9 +323,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\UAT\mSiteSpNames.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\UAT\NAPCommonSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\LetstalkReport\Scripts\LetstalkReportController.js" />

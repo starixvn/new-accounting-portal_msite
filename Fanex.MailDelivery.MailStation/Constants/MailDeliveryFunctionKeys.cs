@@ -1,10 +1,4 @@
-﻿// ---------------------------------------------------------------------------------
-// <copyright file="MailDeliveryFunctionKeys.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// ---------------------------------------------------------------------------------
-
-namespace Fanex.MailDelivery.MailStation.Constants
+﻿namespace Fanex.MailDelivery.MailStation.Constants
 {
     /// <summary>
     /// Mail Delivery FunctionKeys.

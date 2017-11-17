@@ -1,14 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="MachineController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Jason.Ly" date="2013.8.8">Created</change>
-//   <change who="Edward.Nguyen" date="2013.8.12">Edit GetMachineByType</change>
-// </history>
-
-namespace Fanex.Maintenance.Controller
+﻿namespace Fanex.Maintenance.Controller
 {
     using System.Collections.Generic;
     using System.Linq;

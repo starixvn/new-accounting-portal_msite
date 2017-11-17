@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="UserManagement.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Maintenance.Service.Impl.ServiceMonitoring
+﻿namespace Fanex.Maintenance.Service.Impl.ServiceMonitoring
 {
     using System.Collections.Generic;
     using Fanex.Maintenance.Repository.Impl.ServiceMonitoring;
@@ -12,12 +6,9 @@ namespace Fanex.Maintenance.Service.Impl.ServiceMonitoring
     using Fanex.Maintenance.Service.Interface.ServiceMonitoring;
     using Fanex.ServiceManagement.Model;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class UserManagement : IUserManagement
     {
-        private IUserManagementRepository _userManagement;
+        private readonly IUserManagementRepository _userManagement;
 
         public UserManagement()
         {

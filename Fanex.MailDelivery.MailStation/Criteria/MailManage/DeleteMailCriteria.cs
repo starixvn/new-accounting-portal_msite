@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="DeleteMailCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
+﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
     using Fanex.Data.Repository;
 

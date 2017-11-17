@@ -7,7 +7,7 @@
         {
             get
             {
-                return ConfigurationManager.AppSettings["DbListXMLPath"].ToString();
+                return ConfigurationManager.AppSettings["DbListXMLPath"];
             }
         }
 
@@ -15,7 +15,7 @@
         {
             get
             {
-                return ConfigurationManager.AppSettings["SiteXMLPath"].ToString();
+                return ConfigurationManager.AppSettings["SiteXMLPath"];
             }
         }
     }

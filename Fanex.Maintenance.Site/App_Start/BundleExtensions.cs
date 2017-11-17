@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="BundleExtensions.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Edward.Nguyen" date="2013.8.30">Created</change>
-// </history>
-
-namespace Fanex.Maintenance.Site.App_Start
+﻿namespace Fanex.Maintenance.Site.App_Start
 {
     using System.Web;
     using System.Web.Optimization;

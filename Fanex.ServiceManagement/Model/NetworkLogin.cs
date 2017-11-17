@@ -1,17 +1,5 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="NetworkLogin.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Phillip.truong" date="2014.6.25">Created</change>
-// </history>
-
-namespace Fanex.ServiceManagement.Model
+﻿namespace Fanex.ServiceManagement.Model
 {
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NetworkLogin
     {
         public NetworkLogin()
