@@ -36,4 +36,8 @@
     <Id>AFF</Id>
     <Name>Affiliate</Name>
   </Site>
+  <Site>
+    <Id>FPS</Id>
+    <Name>Fraud Protection System</Name>
+  </Site>
 </Sites>

@@ -41,6 +41,11 @@ namespace Fanex.Tool.TraceSP.Services
 
                 sqlConnectionStringBuilder.DataSource = model.Server;
 
+                if (criteria.Site.Equals("FPS", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    sqlConnectionStringBuilder.InitialCatalog = "perfmonDB";
+                }
+
                 dbSetting.ConnectionString = sqlConnectionStringBuilder.ToString();
 
                 using (var objectDb = new ObjectDb(dbSetting))
