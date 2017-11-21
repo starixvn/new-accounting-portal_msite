@@ -40,4 +40,8 @@
     <Id>FPS</Id>
     <Name>Fraud Protection System</Name>
   </Site>
+  <Site>
+    <Id>FD</Id>
+    <Name>Fraud Sensor</Name>
+  </Site>
 </Sites>
