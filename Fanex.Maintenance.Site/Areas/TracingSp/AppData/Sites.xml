@@ -44,4 +44,8 @@
     <Id>FD</Id>
     <Name>Fraud Sensor</Name>
   </Site>
+  <Site>
+    <Id>OWP</Id>
+    <Name>Operation Working Page</Name>
+  </Site>
 </Sites>
