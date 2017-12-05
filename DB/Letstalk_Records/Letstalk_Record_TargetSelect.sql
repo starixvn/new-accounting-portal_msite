@@ -1,4 +1,4 @@
-ALTER PROCEDURE Letstalk_Record_FilterSelect 
+ALTER PROCEDURE Letstalk_Record_TargetSelect 
      @FromDate DATETIME, 
      @ToDate   DATETIME
 AS
@@ -19,16 +19,10 @@ BEGIN
     FROM   Letstalk_Record(nolock)
     WHERE  CreatedDate BETWEEN @FromDate AND @ToDate
     ORDER BY TargetName;
-
-    SELECT DISTINCT 
-           [Group]
-    FROM   Letstalk_Record(nolock)
-    WHERE  CreatedDate BETWEEN @FromDate AND @ToDate
-    ORDER BY [Group];
 END;
 GO
 
-GRANT EXECUTE ON dbo.Letstalk_Record_FilterSelect TO [bodbAdminNet];
+GRANT EXECUTE ON dbo.Letstalk_Record_TargetSelect TO [bodbAdminNet];
 GO
 
-GRANT VIEW DEFINITION ON dbo.Letstalk_Record_FilterSelect TO [vnteam];
+GRANT VIEW DEFINITION ON dbo.Letstalk_Record_TargetSelect TO [vnteam];

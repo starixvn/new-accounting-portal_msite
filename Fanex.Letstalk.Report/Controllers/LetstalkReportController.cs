@@ -24,12 +24,43 @@ namespace Fanex.Letstalk.Notification.Controllers
         }
 
         [HttpPost]
+        public ActionResult GetTargets(HttpGetLogParams httpParams)
+        {
+            var queryParams = new GetLogParams
+            {
+                FromDate = httpParams.FromDate,
+                ToDate = httpParams.ToDate,
+                Id = 0
+            };
+
+            var result = service.GetTargets(queryParams);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult GetGroupsByTarget(HttpGetLogParams httpParams)
+        {
+            var queryParams = new GetLogParams
+            {
+                FromDate = httpParams.FromDate,
+                ToDate = httpParams.ToDate,
+                TargetName = httpParams.TargetName,
+                Id = 0
+            };
+
+            var result = service.GetGroupsByTarget(queryParams);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public ActionResult GetReport(HttpGetLogParams httpParams)
         {
             var queryParams = new GetLogParams
             {
                 FromDate = httpParams.FromDate,
                 ToDate = httpParams.ToDate.AddDays(1),
+                TargetName = httpParams.TargetName,
+                Group = httpParams.Group,
                 Id = 0
             };
 
@@ -67,5 +98,7 @@ namespace Fanex.Letstalk.Notification.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+
     }
 }

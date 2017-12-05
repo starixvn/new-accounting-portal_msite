@@ -17,17 +17,35 @@
 <section id="filter-bar">
     <div class="filter-form">
         <div class="filter-row">
-            <div class="lbl-field width-auto">
+            <div class="lbl-field width-100">
                 @Html.LabelFor(m => m.FromDate, "From")
             </div>
             <div class="edit-field">
                 @Html.TextBoxFor(m => m.FromDate, new { @Value = DateTime.Now.ToString("MMM dd,yyyy"), style = "width: 100px" })
             </div>
-            <div class="lbl-field">
+            <div class="lbl-field width-120">
                 @Html.LabelFor(m => m.ToDate, "To")
             </div>
             <div class="edit-field">
                 @Html.TextBoxFor(m => m.ToDate, new { @Value = DateTime.Now.ToString("MMM dd,yyyy"), style = "width: 100px" })
+            </div>            
+        </div>
+        <div class="filter-row">
+            <div class="lbl-field width-100">
+                Target Name
+            </div>
+            <div class="edit-field">
+                <select id="Target" class="select2-choice width-140">
+                    <option>All</option>
+                </select>
+            </div>
+            <div class="lbl-field width-120">
+                Group
+            </div>
+            <div class="edit-field width-130">
+                <select id="Group" class="select2-choice width-140">
+                    <option>All</option>
+                </select>
             </div>
             <div class="submit">
                 <input id="button-search" type="submit" value="Submit" />
