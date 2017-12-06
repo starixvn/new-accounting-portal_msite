@@ -85,8 +85,11 @@ var LetstalkReportController = function () {
 		for (var i = 0; i < reportLength; i++) {
 			var dataRow = result[i];
 			var rowColumns = [];
-
-			var linkResend = "<a href='#' class='resendLetstalk' data-letstak-id='" + dataRow.Id + "' data-letstak-ismessage='" + dataRow.IsMessage + "'>Resend</a>";
+			
+			var email = "<div title='Email' class='email'></div>";
+			var letstalk = "<div title='Letstalk' class='letstalk'></div>";
+			var resend = "<div class='resend resendLetstalk'></div>";
+			var linkResend = "<a title='Resend' href='#' class='resendLetstalk' data-letstak-id='" + dataRow.Id + "' data-letstak-ismessage='" + dataRow.IsMessage + "'>" + resend + "</a>";
 
 			rowColumns.push({ Name: "TargetName", Value: dataRow.TargetName });
 			rowColumns.push({ Name: "Subject", Value: dataRow.Subject });
@@ -96,25 +99,26 @@ var LetstalkReportController = function () {
 			rowColumns.push({ Name: "LatestSendDate", Value: dataRow.LastSentDate });
 			rowColumns.push({ Name: "SendSuccess", Value: dataRow.SendSuccess });
 			rowColumns.push({ Name: "SendFail", Value: dataRow.SendFail });
-			rowColumns.push({ Name: "IsMessage", Value: dataRow.IsMessage });
+			rowColumns.push({ Name: "IsMessage", Value: dataRow.IsMessage ? letstalk : email });
 			rowColumns.push({ Name: "Resend", Value: linkResend });
 
 			bodyData.push({
 				Columns: rowColumns
 			});
 		}
-
+		
 		var headerColumns = [
-							{ HeaderText: "TargetName", Width: 125, Name: "TargetName", HeaderAlign: "center", CellAlign: "center" },
-							{ HeaderText: "Subject", Width: 300, Name: "Subject", HeaderAlign: "center", CellAlign: "left" },
-							{ HeaderText: "Content", Width: 300, Name: "Content", HeaderAlign: "center", CellAlign: "left" },
-							{ HeaderText: "Group", Width: 125, Name: "Group", HeaderAlign: "center", CellAlign: "center" },
-							{ HeaderText: "Created Date<br/> (GMT +7)", Width: 200, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
-							{ HeaderText: "Latest Send Date<br/> (GMT +7)", Width: 200, Name: "LatestSendDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
-							{ HeaderText: "Success", Width: 50, Name: "SendSuccess", HeaderAlign: "center", CellAlign: "center" },
-							{ HeaderText: "Fail", Width: 40, Name: "SendFail", HeaderAlign: "center", CellAlign: "center" },
-							{ HeaderText: "IsMessage", Width: 40, Name: "IsMessage", HeaderAlign: "center", CellAlign: "center" },
-							{ HeaderText: "Resend", Width: 70, Name: "Resend", HeaderAlign: "center", CellAlign: "center" }];
+							{ HeaderText: "Target Name", Width: 125, Name: "TargetName", HeaderAlign: "center", CellAlign: "center" },
+							{ HeaderText: "Subject", Width: 195, Name: "Subject", HeaderAlign: "center", CellAlign: "left" },
+							{ HeaderText: "Content", Width: 1080, Name: "Content", HeaderAlign: "center", CellAlign: "left" },
+							{ HeaderText: "Group", Width: 150, Name: "Group", HeaderAlign: "center", CellAlign: "center" },
+							{ HeaderText: "Created Date<br/> (GMT +7)", Width: 70, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
+							{ HeaderText: "Latest Send Date<br/> (GMT +7)", Width: 70, Name: "LatestSendDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
+							{ HeaderText: "<div class='success'></div>", Width: 30, Name: "SendSuccess", HeaderAlign: "center", CellAlign: "center" },
+							{ HeaderText: "<div class='fail'></div>", Width: 30, Name: "SendFail", HeaderAlign: "center", CellAlign: "center" },
+							{ HeaderText: "<div class='type'></div>", Width: 30, Name: "IsMessage", HeaderAlign: "center", CellAlign: "center" },
+							{ HeaderText: "<div class='resend'></div>", Width: 30, Name: "Resend", HeaderAlign: "center", CellAlign : "center"
+							}];
 
 		var gridOptions = {
 			columns: headerColumns,
