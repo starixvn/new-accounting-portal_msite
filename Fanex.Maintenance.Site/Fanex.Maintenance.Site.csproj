@@ -551,6 +551,12 @@
     <Content Include="themes\manage\images\del-ico.png" />
     <Content Include="themes\manage\images\duplicate.png" />
     <Content Include="themes\manage\images\edit-ico.png" />
+    <Content Include="themes\manage\images\email.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\manage\images\email_small.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="themes\manage\images\error.png" />
     <Content Include="themes\manage\images\evolution_tasks.png" />
     <Content Include="themes\manage\images\expand-title.png" />
@@ -590,6 +596,9 @@
     <Content Include="themes\manage\images\icn_view_users.png" />
     <Content Include="themes\manage\images\ico-relevant-mail.png" />
     <Content Include="themes\manage\images\icon-view-log.png" />
+    <Content Include="themes\manage\images\letstalk.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="themes\manage\images\list_information.png" />
     <Content Include="themes\manage\images\loading-ico.gif" />
     <Content Include="themes\manage\images\loading7.gif" />
@@ -600,6 +609,12 @@
     <Content Include="themes\manage\images\network_server.png" />
     <Content Include="themes\manage\images\post_message.png" />
     <Content Include="themes\manage\images\progress.png" />
+    <Content Include="themes\manage\images\resend-24.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\manage\images\resend.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="themes\manage\images\retry.png" />
     <Content Include="themes\manage\images\schedule.png" />
     <Content Include="themes\manage\images\secondary_bar.png" />
@@ -919,6 +934,7 @@
     </Content>
     <Content Include="Web.sit.config" />
     <Content Include="Web.uat.config" />
+    <Content Include="themes\manage\LetstalkReport.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

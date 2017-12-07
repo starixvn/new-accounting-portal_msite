@@ -84,6 +84,8 @@
   <ItemGroup>
     <Compile Include="Controllers\LetstalkReportController.cs" />
     <Compile Include="LetstalkReportAreaRegistration.cs" />
+    <Compile Include="Model\FilterGroup.cs" />
+    <Compile Include="Model\FilterTarget.cs" />
     <Compile Include="Model\LetstalkRecord.cs" />
     <Compile Include="Params\GetLogParams.cs" />
     <Compile Include="Params\HttpGetLogParams.cs" />

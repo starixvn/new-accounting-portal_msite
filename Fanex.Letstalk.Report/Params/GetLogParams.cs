@@ -8,6 +8,10 @@ namespace Fanex.Letstalk.Notification.Params
 
         public DateTime ToDate { get; set; }
 
+        public string TargetName { get; set; }
+
+        public string Group { get; set; }
+
         public int Id { get; set; }
     }
 }

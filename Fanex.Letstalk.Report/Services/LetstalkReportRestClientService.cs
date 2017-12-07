@@ -17,6 +17,17 @@ namespace Fanex.Letstalk.Notification.Services
             this.clientService = clientService ?? new HttpClientService();
         }
 
+        public List<FilterTarget> GetTargets(GetLogParams queryParams)
+        {
+            var result = clientService.PostAsync<List<FilterTarget>, GetLogParams>("GetTargets", queryParams);
+            return result;
+        }
+        public List<FilterGroup> GetGroupsByTarget(GetLogParams queryParams)
+        {
+            var result = clientService.PostAsync<List<FilterGroup>, GetLogParams>("GetGroupsByTarget", queryParams);
+            return result;
+        }
+
         public List<LetstalkRecord> GetLogs(GetLogParams queryParams)
         {
             var result = clientService.PostAsync<List<LetstalkRecord>, GetLogParams>("GetLogs", queryParams);
