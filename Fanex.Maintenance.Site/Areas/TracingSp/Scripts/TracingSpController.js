@@ -148,7 +148,7 @@ var TracingSPController = function () {
         headerColumns.push({ HeaderText: "Reads", Width: 70, Name: "ColReads", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: "Writes", Width: 70, Name: "ColWrites", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: "CPU", Width: 70, Name: "ColCPU", HeaderAlign: "center", CellAlign: "center" });
-        headerColumns.push({ HeaderText: "Duration(s)", Width: 70, Name: "ColDuration", HeaderAlign: "center", CellAlign: "center" });
+        headerColumns.push({ HeaderText: "Duration(ms)", Width: 70, Name: "ColDuration", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: "Start Time", Width: 150, Name: "ColStartTime", HeaderAlign: "center", CellAlign: "right", FormatDateTime: "MM/DD/YYYY h:mm:ss A" });
         headerColumns.push({ HeaderText: "End Time", Width: 150, Name: "ColEndTime", HeaderAlign: "center", CellAlign: "right", FormatDateTime: "MM/DD/YYYY h:mm:ss A" });
 
