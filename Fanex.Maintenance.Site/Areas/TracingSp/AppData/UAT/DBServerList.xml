@@ -52,4 +52,8 @@
     <Ip>10.40.40.17</Ip>
     <Name>DBTRANS</Name>
   </Server>
+  <Server>
+    <Ip>10.40.40.224</Ip>
+    <Name>DBAFF</Name>
+  </Server>
 </DBServers>

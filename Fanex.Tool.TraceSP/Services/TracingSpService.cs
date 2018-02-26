@@ -40,6 +40,7 @@ namespace Fanex.Tool.TraceSP.Services
                 var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbSetting.ConnectionString);
 
                 sqlConnectionStringBuilder.DataSource = model.Server;
+                sqlConnectionStringBuilder.ConnectTimeout = 125;
 
                 if (criteria.Site.Equals("FPS", StringComparison.CurrentCultureIgnoreCase))
                 {
