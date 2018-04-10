@@ -151,6 +151,7 @@
   <ItemGroup>
     <Compile Include="BaseController.cs" />
     <Compile Include="CommonErrorController.cs" />
+    <Compile Include="RemotingRefController.cs" />
     <Compile Include="TestingController.cs" />
     <Compile Include="ServiceMonitoringController.cs" />
     <Compile Include="DatabaseReportController.cs" />

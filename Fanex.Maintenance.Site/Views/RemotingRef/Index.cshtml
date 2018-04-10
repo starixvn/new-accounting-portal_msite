@@ -1,0 +1,20 @@
+﻿@model string
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = string.Format("{0}", "RemotingRef");
+}
+@section Head{
+    @Styles.Render("~/css/manage")
+}
+@section HeadLine
+{
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}
+
+<iframe frameborder="0" src="@(ViewBag.RemotingRefDemoUrl)"></iframe>
+
