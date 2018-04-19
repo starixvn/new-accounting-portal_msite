@@ -30,3 +30,7 @@ $tf*/
 .vs/config/applicationhost.config
 node_modules
 packages
+/.vs/Fanex.Maintenance/v15/Server/sqlite3/db.lock
+/.vs/Fanex.Maintenance/v15/Server/sqlite3/storage.ide
+/.vs/Fanex.Maintenance/v15/Server/sqlite3/storage.ide-shm
+/.vs/Fanex.Maintenance/v15/Server/sqlite3/storage.ide-wal
