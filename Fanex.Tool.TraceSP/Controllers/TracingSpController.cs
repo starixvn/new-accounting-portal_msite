@@ -50,9 +50,9 @@
                 TraceStartEvents = criteria.TraceStartEvents,
                 Server = criteria.Server,
                 Site = criteria.Site,
-                TextDataLike = criteria.TextDataLike,
-                TextDataLike2 = criteria.TextDataLike2,
-                TextDataLike3 = criteria.TextDataLike3,
+                TextDataLike = AddPercentSign(criteria.TextDataLike),
+                TextDataLike2 = AddPercentSign(criteria.TextDataLike2),
+                TextDataLike3 = AddPercentSign(criteria.TextDataLike3),
                 TraceTimer = criteria.TraceTimer,
                 ErrorMsg = string.Empty,
                 HasError = false
@@ -67,5 +67,8 @@
                 ErrorMsg = model.ErrorMsg
             }, JsonRequestBehavior.AllowGet);
         }
+
+        private static string AddPercentSign(string textLike)
+        => (!string.IsNullOrWhiteSpace(textLike) && !textLike.Contains("%")) ? $"%{textLike}%" : textLike;
     }
 }
