@@ -153,7 +153,7 @@
 
         protected override void Dispose(bool disposing)
         {
-            _mailManageService.Dispose();
+            _mailManageService.DisposeObjects();
 
             base.Dispose(disposing);
         }

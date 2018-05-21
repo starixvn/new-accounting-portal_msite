@@ -242,7 +242,7 @@
             _jobOperationService.RunNow(response.Schedule);
         }
 
-        public void Dispose()
+        public void DisposeObjects()
         {
             _mailService.Dispose();
             _jobService.Dispose();

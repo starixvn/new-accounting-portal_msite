@@ -1,5 +1,10 @@
 ﻿namespace Fanex.MailDelivery.MailStation.Services
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Criteria;
     using Fanex.Common;
     using Fanex.Data;
@@ -14,16 +19,11 @@
     using Fanex.Maintenance.Service.Interface.Mail;
     using Quartz;
     using Quartz.Spi;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     /// <summary>
     /// Mail Report Service.
     /// </summary>
-    public class MailReportService : MailStationBaseService, IDisposable
+    public class MailReportService : MailStationBaseService
     {
         private readonly IMailService _mailService;
         private readonly IJobService _jobService;
@@ -230,18 +230,6 @@
             {
                 return date1;
             }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            _jobService.Dispose();
-            _jobOperationService.Dispose();
         }
     }
 }
