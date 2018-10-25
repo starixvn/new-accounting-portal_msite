@@ -5,7 +5,7 @@
       <Mapping DataField="MailGroupID" ObjectProperty="Value" />
       <Mapping DataField="MailGroupName" ObjectProperty="Text" />
     </Setting>
-    <Setting Key="MailStation_GetAllSites" SpName="NAP_Site_GetAll" DbName="DBNAP.bodb_NAP.bodbAdminNet">
+    <Setting Key="MailStation_GetAllSites" SpName="NAP_Site_GetAll" DbName="DBPOL.NAP_UserControl.bodbAdminNet">
       <Mapping DataField="SiteId" ObjectProperty="Value" />
       <Mapping DataField="SiteName" ObjectProperty="Text" />
     </Setting>
@@ -20,7 +20,7 @@
     </Setting>
     <Setting Key="MailStation_EditMail" SpName="Mail_MailManagement_UpdateMail" DbName="DBMMS.bodb_MMS.bodbAdminNet" />
     <Setting Key="MailStation_DeleteMail" SpName="Mail_MailManagement_DeleteMail" DbName="DBMMS.bodb_MMS.bodbAdminNet" />
-    <Setting Key="Mail_MailManagement_GetScheduleByMailId" SpName="Mail_MailManagement_GetScheduleByMailId" DbName="DBMMS.bodb_MMS.bodbAdminNet" >
+    <Setting Key="Mail_MailManagement_GetScheduleByMailId" SpName="Mail_MailManagement_GetScheduleByMailId" DbName="DBMMS.bodb_MMS.bodbAdminNet">
       <Mapping DataField="MailID" ObjectProperty="Id" />
       <Mapping DataField="SiteId" ObjectProperty="SiteId" />
       <Mapping DataField="MailName" ObjectProperty="Name" />
@@ -59,6 +59,6 @@
   </Function>
 
   <Function Name="MailDeliver">
-    <Setting Key="StoreMail" SpName="MailRecorder_InsRecord" DbName="DBMA.bodb_Maintenance.bodbAdminNet"  />
+    <Setting Key="StoreMail" SpName="MailRecorder_InsRecord" DbName="DBMA.bodb_Maintenance.bodbAdminNet" />
   </Function>
 </Functions>
