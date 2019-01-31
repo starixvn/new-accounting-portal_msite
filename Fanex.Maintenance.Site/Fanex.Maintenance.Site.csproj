@@ -305,16 +305,10 @@
     <Content Include="Areas\TracingSp\AppData\LOCAL\DBServerList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\SIT\ConnectionStringSpName.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="App_Data\SIT\DBMMS.bodb_MMS.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\SIT\mSiteSpNames.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\LOCAL\ConnectionStringSpName.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\LOCAL\DBMMS.bodb_MMS.bodbAdminNet.xml">
@@ -323,16 +317,10 @@
     <Content Include="App_Data\LOCAL\mSiteSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\PRO\ConnectionStringSpName.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="App_Data\PRO\DBMMS.bodb_MMS.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\PRO\mSiteSpNames.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\UAT\ConnectionStringSpName.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\UAT\DBMMS.bodb_MMS.bodbAdminNet.xml">
@@ -920,6 +908,10 @@
       <DependentUpon>WebConnectionString.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
+	<Content Include="WebConnectionString.sit2.config">
+      <DependentUpon>WebConnectionString.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\LetstalkReport\Index.cshtml" />
     <Content Include="Areas\LetstalkReport\Web.config" />
     <Content Include="Areas\TracingSp\Index.cshtml" />
@@ -949,6 +941,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.sit.config" />
+	<Content Include="Web.sit2.config" />
     <Content Include="Web.uat.config" />
     <Content Include="themes\manage\LetstalkReport.less" />
     <Content Include="Views\RemotingRef\Index.cshtml" />
