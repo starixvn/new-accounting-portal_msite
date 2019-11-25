@@ -48,4 +48,8 @@
     <Id>OWP</Id>
     <Name>Operation Working Page</Name>
   </Site>
+  <Site>
+    <Id>Ploutos</Id>
+    <Name>Ploutos</Name>
+  </Site>
 </Sites>
