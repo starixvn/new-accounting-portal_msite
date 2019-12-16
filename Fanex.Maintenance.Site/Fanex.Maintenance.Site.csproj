@@ -302,6 +302,7 @@
     <Content Include="App_Data\UAT\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\TracingSp\AppData\backupMNL\DBServerList.xml" />
     <Content Include="Areas\TracingSp\AppData\LOCAL\DBServerList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -908,7 +909,7 @@
       <DependentUpon>WebConnectionString.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-	<Content Include="WebConnectionString.sit2.config">
+    <Content Include="WebConnectionString.sit2.config">
       <DependentUpon>WebConnectionString.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
@@ -941,7 +942,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.sit.config" />
-	<Content Include="Web.sit2.config" />
+    <Content Include="Web.sit2.config" />
     <Content Include="Web.uat.config" />
     <Content Include="themes\manage\LetstalkReport.less" />
     <Content Include="Views\RemotingRef\Index.cshtml" />
