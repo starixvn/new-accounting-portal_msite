@@ -1,15 +1,10 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
-{
-    using Fanex.Data.Repository;
+﻿using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Get all log category criteria.
-    /// </summary>
+namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
+{
     public class GetMailGroupCriteria : CriteriaBase
     {
         public string MailGroupName { get; set; }
-
-        public string Description { get; set; }
 
         public override bool IsValid()
         {

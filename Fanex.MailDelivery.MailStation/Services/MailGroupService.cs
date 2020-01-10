@@ -1,22 +1,19 @@
-﻿namespace Fanex.MailDelivery.MailStation.Services
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using Fanex.Data;
-    using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
-    using Fanex.MailDelivery.MailStation.Models;
-    using Fanex.NAP.Core.Command;
+﻿using Fanex.Data;
+using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
+using Fanex.MailDelivery.MailStation.Models;
+using Fanex.NAP.Core.Command;
+using System.Collections.Generic;
+using System.Linq;
 
-    /// <summary>
-    /// Mail Report Service.
-    /// </summary>
+namespace Fanex.MailDelivery.MailStation.Services
+{
     public class MailGroupService : MailStationBaseService
     {
         public MailGroupService()
         {
         }
 
-        public List<MailGroupModel> GetMailGroup(GetMailGroupCriteria criteria)
+        public List<MailGroupModel> GetMailGroups(GetMailGroupCriteria criteria)
         {
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
@@ -40,7 +37,7 @@
             return this.ExecuteNonQuery(criteria);
         }
 
-        public MailGroupModel GetMailGroupByID(GetMailGroupByIdCriteria criteria)
+        public MailGroupModel GetMailGroupById(GetMailGroupByIdCriteria criteria)
         {
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {

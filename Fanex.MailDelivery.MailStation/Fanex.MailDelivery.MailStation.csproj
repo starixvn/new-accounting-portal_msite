@@ -78,12 +78,8 @@
       <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.4\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.MailDelivery.Admin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.Admin.1.0.1.6\lib\net40\Fanex.MailDelivery.Admin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Fanex.MailDelivery.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.Admin.1.0.1.6\lib\net40\Fanex.MailDelivery.Core.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.Core.1.0.0-beta1\lib\net461\Fanex.MailDelivery.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.NAP.Core, Version=1.1.0.5, Culture=neutral, processorArchitecture=MSIL">
@@ -191,7 +187,7 @@
     <Compile Include="Controllers\MailManageController.cs" />
     <Compile Include="Controllers\MailRecipientController.cs" />
     <Compile Include="Controllers\MailReportController.cs" />
-    <Compile Include="Criteria\MailGroup\GetMailGroupByIDCriteria.cs" />
+    <Compile Include="Criteria\MailGroup\GetMailGroupByIdCriteria.cs" />
     <Compile Include="Criteria\MailGroup\GetMailGroupCriteria.cs" />
     <Compile Include="Criteria\MailGroup\DeleteMailGroupCriteria.cs" />
     <Compile Include="Criteria\MailGroup\UpdateMailGroupCriteria.cs" />

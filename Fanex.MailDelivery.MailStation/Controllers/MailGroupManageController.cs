@@ -1,28 +1,23 @@
-﻿namespace Fanex.MailDelivery.MailStation.Controllers
-{
-    using System.Web.Mvc;
-    using Criteria.MailGroup;
-    using Extensions;
-    using Fanex.MailDelivery.Admin.Messaging;
-    using Fanex.MailDelivery.Admin.Messaging.ManageGroup;
-    using Fanex.MailDelivery.Admin.Services.Group;
-    using Fanex.MailDelivery.MailStation.Constants;
-    using Fanex.Maintenance.Controller;
-    using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Command;
-    using Fanex.NAP.Core.Web.Attribute;
+﻿using Fanex.MailDelivery.MailStation.Constants;
+using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
+using Fanex.MailDelivery.MailStation.Extensions;
+using Fanex.MailDelivery.MailStation.Services;
+using Fanex.Maintenance.Controller;
+using Fanex.NAP.Core.Business;
+using Fanex.NAP.Core.Command;
+using Fanex.NAP.Core.Web.Attribute;
+using System.Web.Mvc;
 
-    /// <summary>
-    /// Mail Controller.
-    /// </summary>
+namespace Fanex.MailDelivery.MailStation.Controllers
+{
     [NapSuperAuth]
     public class MailGroupManageController : BaseController
     {
-        private readonly IGroupService _groupService;
+        private readonly MailGroupService mailGroupService;
 
         public MailGroupManageController()
         {
-            _groupService = new GroupService();
+            mailGroupService = new MailGroupService();
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
@@ -32,10 +27,6 @@
             return View("~/Areas/MailStation/MailGroup/ManageMailGroup/Index.cshtml", criteria);
         }
 
-        /// <summary>
-        /// Creates the mail view.
-        /// </summary>
-        /// <returns>Create Mail View.</returns>
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
         public ActionResult CreateMailGroupView()
         {
@@ -43,27 +34,10 @@
             return View("~/Areas/MailStation/MailGroup/CreateMailGroup/Index.cshtml");
         }
 
-        /// <summary>
-        /// Creates the mail.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Result message.</returns>
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
         public JsonResult CreateMailGroup(CreateMailGroupCriteria criteria)
         {
-            CreateGroupRequest request = new CreateGroupRequest
-            {
-                Name = criteria.MailGroupName,
-                Description = criteria.Description
-            };
-
-            ResultResponse response = _groupService.CreateGroup(request);
-
-            CommandResult commandResult = new CommandResult
-            {
-                Code = response.ErrCode,
-                Message = response.ErrMsg
-            };
+            CommandResult commandResult = mailGroupService.CreateMailGroup(criteria);
 
             return Json(commandResult);
         }
@@ -71,59 +45,34 @@
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
         public JsonResult MailGroupList(GetMailGroupCriteria criteria)
         {
-            GetGroupListRequest request = new GetGroupListRequest
-            {
-                Name = criteria.MailGroupName
-            };
+            var groups = mailGroupService.GetMailGroups(criteria);
 
-            GetGroupListResponse response = _groupService.GetGroupList(request);
-
-            return Json(response.GroupModels);
+            return Json(groups);
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
         public ActionResult DeleteMailGroup(DeleteMailGroupCriteria criteria)
         {
-            DeleteGroupRequest request = new DeleteGroupRequest
-            {
-                Id = criteria.MailGroupId,
-            };
-
-            ResultResponse response = _groupService.DeleteGroup(request);
-
-            CommandResult commandResult = new CommandResult
-            {
-                Code = response.ErrCode,
-                Message = response.ErrMsg
-            };
+            CommandResult commandResult = mailGroupService.DeleteMailGroup(criteria);
 
             return Json(commandResult);
         }
 
-        /// <summary>
-        /// Updates mail group.
-        /// </summary>
-        /// <param name="criteria">Mail group by id.</param>
-        /// <returns>Action Result.</returns>
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
         public ActionResult UpdateMailGroupView(GetMailGroupByIdCriteria criteria)
         {
-            GetMailGroupByIdRequest request = new GetMailGroupByIdRequest
-            {
-                Id = criteria.MailGroupId
-            };
-
-            GetMailGroupByIdResponse response = _groupService.GetMailGroupById(request);
-
             var model = new UpdateMailGroupCriteria();
-            if (response != null)
+            var group = mailGroupService.GetMailGroupById(criteria);
+
+            if (group != null)
             {
-                model.MailGroupId = response.GroupModel.MailGroupId;
-                model.MailGroupName = response.GroupModel.MailGroupName;
-                model.Description = response.GroupModel.Description;
+                model.MailGroupId = group.MailGroupId;
+                model.MailGroupName = group.MailGroupName;
+                model.Description = group.Description;
             }
 
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
+
             return View("~/Areas/MailStation/MailGroup/UpdateMailGroup/Index.cshtml", model);
         }
 
@@ -131,20 +80,7 @@
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
         public JsonResult UpdateMailGroup(UpdateMailGroupCriteria criteria)
         {
-            UpdateGroupRequest request = new UpdateGroupRequest
-            {
-                Id = criteria.MailGroupId,
-                Name = criteria.MailGroupName,
-                Description = criteria.Description
-            };
-
-            ResultResponse response = _groupService.UpdateGroup(request);
-
-            CommandResult commandResult = new CommandResult
-            {
-                Code = response.ErrCode,
-                Message = response.ErrMsg
-            };
+            CommandResult commandResult = mailGroupService.UpdateMailGroup(criteria);
 
             return Json(commandResult);
         }
@@ -153,13 +89,6 @@
         public ActionResult ViewRelevantMail(int mailGroupId)
         {
             return RedirectToAction("Index", "MailManage", new { MailGroupId = mailGroupId });
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            _groupService.Dispose();
-
-            base.Dispose(disposing);
-        }
+        }        
     }
 }

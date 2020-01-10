@@ -1,10 +1,7 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
-{
-    using Fanex.Data.Repository;
+﻿using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Get all log category criteria.
-    /// </summary>
+namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
+{
     public class DeleteMailGroupCriteria : CriteriaBase
     {
         public int MailGroupId { get; set; }
