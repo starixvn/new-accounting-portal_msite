@@ -1,10 +1,7 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
-{
-    using Fanex.MailDelivery.Core.Models.Mails;
+﻿using Fanex.MailDelivery.Core.Models.Mails;
 
-    /// <summary>
-    /// Get all log category criteria.
-    /// </summary>
+namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
+{
     public class UpdateMailCriteria : CreateMailCriteria
     {
         public UpdateMailCriteria()

@@ -1,10 +1,7 @@
+﻿using Fanex.Data.Repository;
+
 namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
-    using Fanex.Data.Repository;
-
-    /// <summary>
-    /// Get all log category criteria.
-    /// </summary>
     public class GetMailListCriteria : CriteriaBase
     {
         public GetMailListCriteria()

@@ -1,233 +1,99 @@
-﻿namespace Fanex.MailDelivery.MailStation.Services
-{
-    using System;
-    using System.Collections.Generic;
-    using Fanex.MailDelivery.Admin.Messaging;
-    using Fanex.MailDelivery.Admin.Messaging.ManageMail;
-    using Fanex.MailDelivery.Admin.Services.Job;
-    using Fanex.MailDelivery.Admin.Services.JobOperation;
-    using Fanex.MailDelivery.Admin.Services.Mail;
-    using Fanex.MailDelivery.Core.Messaging.Job;
-    using Fanex.MailDelivery.Core.Models;
-    using Fanex.MailDelivery.Core.Models.Mails;
-    using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
-    using Fanex.MailDelivery.MailStation.Criteria.MailManage;
-    using Fanex.NAP.Core.Command;
+﻿using Fanex.Data;
+using Fanex.MailDelivery.Core.Models;
+using Fanex.MailDelivery.Core.Models.Mails;
+using Fanex.MailDelivery.MailStation.Configurations;
+using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
+using Fanex.MailDelivery.MailStation.Criteria.MailManage;
+using Fanex.MailDelivery.MailStation.Criteria.MailReport;
+using Fanex.NAP.Core.Command;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace Fanex.MailDelivery.MailStation.Services
+{
     public class MailManageService : MailStationBaseService
     {
-        private readonly IMailService _mailService;
-        private readonly IJobService _jobService;
-        private readonly IJobOperationService _jobOperationService;
+        private IJobOperationService jobOperationService;
 
-        public MailManageService(IMailService mailService, IJobService jobService, IJobOperationService jobOperationService)
+        public MailManageService()
         {
-            _mailService = mailService;
-            _jobService = jobService;
-            _jobOperationService = jobOperationService;
         }
 
         public IList<MailModel> MailList(GetMailListCriteria criteria)
         {
-            GetMailListRequest request = new GetMailListRequest
+            List<MailModel> mailModels;
+            DateTime now;
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                MailName = criteria.MailName,
-                Status = criteria.IsActive,
-                GroupIds = criteria.MailGroupId,
-                TriggerType = criteria.TriggerType,
-                Emails = criteria.Emails,
-                SiteId = criteria.SiteId
-            };
+                db.AssignParamValues(criteria.GetSpParams());
+                using (var multi = db.QueryMultiple())
+                {
+                    mailModels = multi.Read<MailModel>().ToList();
+                    now = multi.Read<DateTime>().FirstOrDefault();
+                }
+            }
 
-            GetMailListResponse response = _mailService.GetMailList(request);
+            mailModels.ToList().ForEach(n =>
+            {
+                if (n.TriggerType == (int)MailType.Schedule)
+                {
+                    n.IsClientOnline = n.LastActive != null && n.LastActive.Value.AddSeconds(AppSettings.ClientNotifyTimeOutInSecond) >= now;
+                }
+                else
+                {
+                    // Function and others always true
+                    n.IsClientOnline = true;
+                }
+            });
 
-            return response.MailModels;
+            return mailModels;
         }
 
         public MailModel MailById(GetMailByIdCriteria criteria)
         {
-            GetMailByIdRequest request = new GetMailByIdRequest
+            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
-                Id = criteria.MailId
-            };
+                db.AssignParamValues(criteria.GetSpParams());
 
-            GetMailByIdResponse response = _mailService.GetMailById(request);
-
-            return response.MailModel;
+                return db.Query<MailModel>().FirstOrDefault();
+            }
         }
 
         public CommandResult CreateMail(CreateMailCriteria criteria)
         {
-            if (criteria.TriggerType == 0)
-            {
-                return CreateFunctionMail(criteria);
-            }
-
-            return CreateAutoMail(criteria);
-        }
-
-        private CommandResult CreateFunctionMail(CreateMailCriteria criteria)
-        {
-            CreateFunctionMailRequest request = new CreateFunctionMailRequest
-            {
-                GroupId = criteria.MailGroupId,
-                MailName = criteria.MailName,
-                SiteId = criteria.SiteId,
-
-                MailTo = criteria.MailTo,
-                MailCc = criteria.MailCc,
-                MailBcc = criteria.MailBcc,
-
-                Description = criteria.Description,
-                IsActive = criteria.IsActive,
-            };
-
-            ResultResponse response = _mailService.CreateFunctionMail(request);
-
-            CommandResult commandResult = new CommandResult
-            {
-                Code = response.ErrCode,
-                Message = response.ErrMsg
-            };
-
-            return commandResult;
-        }
-
-        private CommandResult CreateAutoMail(CreateMailCriteria criteria)
-        {
-            CreateAutoMailRequest request = new CreateAutoMailRequest
-            {
-                GroupId = criteria.MailGroupId,
-                MailName = criteria.MailName,
-                SiteId = criteria.SiteId,
-
-                MailTo = criteria.MailTo,
-                MailCc = criteria.MailCc,
-                MailBcc = criteria.MailBcc,
-
-                Description = criteria.Description,
-                IsActive = criteria.IsActive,
-
-                RepeatType = criteria.RepeatType,
-                CronExpression = criteria.CronExpression,
-                StartOn = criteria.StartOn,
-                EndOn = criteria.EndOn,
-                Attempt = criteria.Attempt,
-                Interval = criteria.Interval
-            };
-
-            ResultResponse response = _mailService.CreateAutoMail(request);
-
-            CommandResult commandResult = new CommandResult
-            {
-                Code = response.ErrCode,
-                Message = response.ErrMsg
-            };
-
-            return commandResult;
+            return ExecuteNonQuery(criteria);
         }
 
         public CommandResult UpdateMail(UpdateMailCriteria criteria)
         {
-            // TODO: No need publish for Function Mail ?
-            _jobOperationService.PublishScheduleChange(new Schedule
-            {
-                Id = criteria.MailId,
-                Active = criteria.IsActive,
-                EndTime = criteria.EndOn,
-                StartTime = criteria.StartOn ?? DateTime.Now,
-                MaxRetryTimes = criteria.Attempt,
-                Name = criteria.MailName,
-                RepeatExpression = criteria.CronExpression,
-                RetryInterval = criteria.Interval,
-                SiteId = criteria.SiteId
-            });
+            CommandResult result = ExecuteNonQuery(criteria);
 
-            if (criteria.TriggerType == 0)
+            if (result.IsSuccessful && criteria.TriggerType == (int)MailType.Schedule)
             {
-                return UpdateFunctionMail(criteria);
+                using (jobOperationService = new JobOperationService())
+                {
+                    jobOperationService.PublishScheduleChange(new Schedule
+                    {
+                        Id = criteria.MailId,
+                        Active = criteria.IsActive,
+                        EndTime = criteria.EndOn,
+                        StartTime = criteria.StartOn ?? DateTime.Now,
+                        MaxRetryTimes = criteria.Attempt,
+                        Name = criteria.MailName,
+                        RepeatExpression = criteria.CronExpression,
+                        RetryInterval = criteria.Interval,
+                        SiteId = criteria.SiteId
+                    });
+                }
             }
 
-            return UpdateAutoMail(criteria);
-        }
-
-        private CommandResult UpdateFunctionMail(UpdateMailCriteria criteria)
-        {
-            UpdateFunctionMailRequest request = new UpdateFunctionMailRequest
-            {
-                MailId = criteria.MailId,
-                MailName = criteria.MailName,
-                GroupId = criteria.MailGroupId,
-                SiteId = criteria.SiteId,
-                MailTo = criteria.MailTo,
-                MailCc = criteria.MailCc,
-                MailBcc = criteria.MailBcc,
-
-                Description = criteria.Description,
-                IsActive = criteria.IsActive
-            };
-
-            ResultResponse response = _mailService.UpdateFunctionMail(request);
-
-            CommandResult commandResult = new CommandResult
-            {
-                Code = response.ErrCode,
-                Message = response.ErrMsg
-            };
-
-            return commandResult;
-        }
-
-        private CommandResult UpdateAutoMail(UpdateMailCriteria criteria)
-        {
-            UpdateAutoMailRequest request = new UpdateAutoMailRequest
-            {
-                MailId = criteria.MailId,
-                MailName = criteria.MailName,
-                GroupId = criteria.MailGroupId,
-                SiteId = criteria.SiteId,
-                MailTo = criteria.MailTo,
-                MailCc = criteria.MailCc,
-                MailBcc = criteria.MailBcc,
-
-                Description = criteria.Description,
-                IsActive = criteria.IsActive,
-
-                RepeatType = criteria.RepeatType,
-                CronExpression = criteria.CronExpression,
-                StartOn = criteria.StartOn,
-                EndOn = criteria.EndOn,
-                Attempt = criteria.Attempt,
-                Interval = criteria.Interval
-            };
-
-            ResultResponse response = _mailService.UpdateAutoMail(request);
-
-            CommandResult commandResult = new CommandResult
-            {
-                Code = response.ErrCode,
-                Message = response.ErrMsg
-            };
-
-            return commandResult;
+            return result;
         }
 
         public CommandResult DeleteMail(DeleteMailCriteria criteria)
         {
-            DeleteMailRequest request = new DeleteMailRequest
-            {
-                MailId = criteria.MailId
-            };
-
-            ResultResponse response = _mailService.DeleteMail(request);
-
-            CommandResult commandResult = new CommandResult
-            {
-                Code = response.ErrCode,
-                Message = response.ErrMsg
-            };
-
-            return commandResult;
+            return ExecuteNonQuery(criteria);
         }
 
         public CommandResult CreateMailGroup(CreateMailGroupCriteria criteria)
@@ -237,16 +103,12 @@
 
         public void RunNow(int mailId)
         {
-            GetScheduleByMailIdResponse response = _jobService.GetScheduleByIdsRequest(new GetScheduleByMailIdRequest { MailId = mailId });
+            Schedule schedule = GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailId });
 
-            _jobOperationService.RunNow(response.Schedule);
-        }
-
-        public void DisposeObjects()
-        {
-            _mailService.Dispose();
-            _jobService.Dispose();
-            _jobOperationService.Dispose();
+            using (jobOperationService = new JobOperationService())
+            {
+                jobOperationService.RunNow(schedule);
+            }
         }
     }
 }

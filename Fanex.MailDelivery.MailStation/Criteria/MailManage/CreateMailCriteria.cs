@@ -1,13 +1,9 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
-{
-    using Fanex.Data.Repository;
-    using Fanex.MailDelivery.Core.Models.Mails;
-    using System;
-    using System.Diagnostics.CodeAnalysis;
+﻿using Fanex.Data.Repository;
+using Fanex.MailDelivery.Core.Models.Mails;
+using System;
 
-    /// <summary>
-    /// Get all log category criteria.
-    /// </summary>
+namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
+{
     public class CreateMailCriteria : CriteriaBase
     {
         public CreateMailCriteria()
@@ -20,26 +16,26 @@
         {
             if (model != null)
             {
-                this.MailName = model.MailName;
-                this.MailGroupId = model.MailGroupId;
-                this.SiteId = model.SiteId;
-                this.TriggerType = model.TriggerType;
-                this.RepeatType = model.RepeatType;
-                this.CronExpression = model.CronExpression;
-                this.MailFrom = model.MailFrom;
-                this.MailTo = model.MailTo;
-                this.MailCc = model.MailCc;
-                this.MailBcc = model.MailBcc;
-                this.IsActive = model.IsActive;
-                this.StartOn = model.StartOn;
-                this.EndOn = model.EndOn;
-                this.Attempt = model.Attempt;
-                this.Interval = model.Interval;
-                this.Description = model.Description;
+                MailName = model.MailName;
+                MailGroupId = model.MailGroupId;
+                SiteId = model.SiteId;
+                TriggerType = model.TriggerType;
+                RepeatType = model.RepeatType;
+                CronExpression = model.CronExpression;
+                MailFrom = model.MailFrom;
+                MailTo = model.MailTo;
+                MailCc = model.MailCc;
+                MailBcc = model.MailBcc;
+                IsActive = model.IsActive;
+                StartOn = model.StartOn;
+                EndOn = model.EndOn;
+                Attempt = model.Attempt;
+                Interval = model.Interval;
+                Description = model.Description;
             }
-            else 
+            else
             {
-                this.TriggerType = 1;
+                TriggerType = 1;
             }
         }
 
@@ -59,7 +55,6 @@
 
         public string MailTo { get; set; }
 
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "It's ok here.")]
         public string MailCc { get; set; }
 
         public string MailBcc { get; set; }

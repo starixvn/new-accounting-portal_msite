@@ -180,6 +180,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\AppSettings.cs" />
     <Compile Include="Constants\TimeZoneConstants.cs" />
     <Compile Include="Constants\MailStationConstants.cs" />
     <Compile Include="Constants\MailDeliveryFunctionKeys.cs" />
@@ -200,7 +201,7 @@
     <Compile Include="Criteria\MailReport\RetryMissingTaskCriteria.cs" />
     <Compile Include="Criteria\MailReport\GetAllScheduleCriteria.cs" />
     <Compile Include="Criteria\MailReport\GetMailTaskByIDCriteria.cs" />
-    <Compile Include="Criteria\MailReport\GetScheduleByIDCriteria.cs" />
+    <Compile Include="Criteria\MailReport\GetScheduleByIdCriteria.cs" />
     <Compile Include="Criteria\MailReport\MailDetailCriteria.cs" />
     <Compile Include="Criteria\MailReport\MailLogCriteria.cs" />
     <Compile Include="Criteria\MailReport\MailReportCriteria.cs" />
@@ -235,6 +236,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MailStationResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\JobOperationService.cs" />
     <Compile Include="Services\MailGroupService.cs" />
     <Compile Include="Services\MailManageService.cs" />
     <Compile Include="Services\MailReportService.cs" />

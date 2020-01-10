@@ -1,34 +1,25 @@
-﻿namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
-{
-    using Fanex.Data;
-    using Fanex.MailDelivery.MailStation.Criteria;
-    using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
-    using Fanex.MailDelivery.MailStation.Models;
-    using Fanex.NAP.Core.Models;
-    using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Core.Service.Interface;
-    using NAP.Core.Command;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
+﻿using Fanex.Data;
+using Fanex.MailDelivery.MailStation.Criteria;
+using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
+using Fanex.MailDelivery.MailStation.Models;
+using Fanex.NAP.Core.Models;
+using Fanex.NAP.Core.Service.Impl;
+using Fanex.NAP.Core.Service.Interface;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-    /// <summary>
-    /// Mail Recipient Service.
-    /// </summary>
+namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
+{
     public class ManageRecipientService : MailStationBaseService
     {
-        private readonly IUserService _userService;
+        private readonly IUserService userService;
 
         public ManageRecipientService()
         {
-            this._userService = this._userService ?? new UserService();
+            userService = new UserService();
         }
-
-        /// <summary>
-        /// Gets the recipient list.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The recipient list.</returns>
+      
         public List<RecipientModel> RecipientList(RecipientListCriteria criteria)
         {
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
@@ -37,12 +28,7 @@
                 return db.Query<RecipientModel>().ToList();
             }
         }
-
-        /// <summary>
-        /// Gets the recipient by identity.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The recipient by identity.</returns>
+      
         public RecipientModel RecipientById(RecipientByIdCriteria criteria)
         {
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
@@ -107,7 +93,7 @@
         /// <returns>The recipient information.</returns>
         public User CheckRecipient(CheckRecipientInfoCriteria criteria)
         {
-            return _userService.Get(criteria.Username);
+            return userService.Get(criteria.Username);
         }
     }
 }

@@ -1,36 +1,26 @@
-﻿namespace Fanex.MailDelivery.MailStation.Services
-{
-    using Criteria.MailManage;
-    using Criteria.MailReport;
-    using Fanex.Data;
-    using Fanex.Data.Repository;
-    using Fanex.MailDelivery.Core.Models;
-    using Fanex.MailDelivery.MailStation.Constants;
-    using Fanex.MailDelivery.MailStation.Criteria;
-    using Fanex.MailDelivery.MailStation.Models;
-    using NAP.Core.Command;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Mvc;
+﻿using Fanex.Data;
+using Fanex.Data.Repository;
+using Fanex.MailDelivery.Core.Models;
+using Fanex.MailDelivery.MailStation.Constants;
+using Fanex.MailDelivery.MailStation.Criteria;
+using Fanex.MailDelivery.MailStation.Criteria.MailManage;
+using Fanex.MailDelivery.MailStation.Criteria.MailReport;
+using Fanex.MailDelivery.MailStation.Models;
+using Fanex.NAP.Core.Command;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
-    /// <summary>
-    /// Mail Station Base Service.
-    /// </summary>
+namespace Fanex.MailDelivery.MailStation.Services
+{
     public class MailStationBaseService
     {
-        /// <summary>
-        /// Sites the specified has all element.
-        /// </summary>
-        /// <param name="hasAllElement">If set to <c>true</c> [has all element].</param>
-        /// <returns>
-        /// List sites.
-        /// </returns>
         public List<SelectListItem> Sites(bool hasAllElement = true)
         {
             GetAllSiteCriteria criteria = new GetAllSiteCriteria();
-            List<SelectListItem> result = new List<SelectListItem>();
+            List<SelectListItem> result;
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
                 result = db.Query<SelectListItem>().ToList();
@@ -44,17 +34,10 @@
             return result;
         }
 
-        /// <summary>
-        /// Mails the groups.
-        /// </summary>
-        /// <param name="hasAllElement">If set to <c>true</c> [has all element].</param>
-        /// <returns>
-        /// Mail Groups.
-        /// </returns>
         public List<SelectListItem> MailGroups(bool hasAllElement = true)
         {
             GetAllMailGroupCriteria criteria = new GetAllMailGroupCriteria();
-            List<SelectListItem> result = new List<SelectListItem>();
+            List<SelectListItem> result;
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
                 result = db.Query<SelectListItem>().ToList();
@@ -101,14 +84,13 @@
         [AllowAnonymous]
         public List<SuggestMailModel> SuggestMails(SuggestMailCriteria criteria)
         {
-            List<SuggestMailModel> result = new List<SuggestMailModel>();
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.AssignParamValues(criteria.GetSpParams());
-                result = db.Query<SuggestMailModel>().ToList();
-            }
+                List<SuggestMailModel> result = db.Query<SuggestMailModel>().ToList();
 
-            return result;
+                return result;
+            }
         }
 
         public CommandResult GetCommandResult(Hashtable hash)
@@ -129,6 +111,7 @@
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.ExecuteNonQuery(hash);
+
                 return GetCommandResult(hash);
             }
         }
@@ -138,6 +121,7 @@
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.AssignParamValues(criteria.GetSpParams());
+
                 return db.Query<MailTaskModel>().FirstOrDefault();
             }
         }
@@ -147,6 +131,7 @@
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.AssignParamValues(criteria.GetSpParams());
+
                 return db.Query<Schedule>().FirstOrDefault();
             }
         }

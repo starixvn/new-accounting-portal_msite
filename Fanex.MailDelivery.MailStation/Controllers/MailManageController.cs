@@ -1,76 +1,66 @@
-﻿namespace Fanex.MailDelivery.MailStation.Controllers
-{
-    using System.Collections.Generic;
-    using System.Web.Mvc;
-    using Fanex.MailDelivery.Admin.Services.Job;
-    using Fanex.MailDelivery.Admin.Services.JobOperation;
-    using Fanex.MailDelivery.Admin.Services.Mail;
-    using Fanex.MailDelivery.Core.Models.Mails;
-    using Fanex.MailDelivery.MailStation.Constants;
-    using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
-    using Fanex.MailDelivery.MailStation.Criteria.MailManage;
-    using Fanex.MailDelivery.MailStation.Extensions;
-    using Fanex.MailDelivery.MailStation.Resources;
-    using Fanex.MailDelivery.MailStation.Services;
-    using Fanex.Maintenance.Controller;
-    using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Command;
-    using Fanex.NAP.Core.Web.Attribute;
+﻿using Fanex.MailDelivery.Core.Models.Mails;
+using Fanex.MailDelivery.MailStation.Constants;
+using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
+using Fanex.MailDelivery.MailStation.Criteria.MailManage;
+using Fanex.MailDelivery.MailStation.Extensions;
+using Fanex.MailDelivery.MailStation.Resources;
+using Fanex.MailDelivery.MailStation.Services;
+using Fanex.Maintenance.Controller;
+using Fanex.NAP.Core.Business;
+using Fanex.NAP.Core.Command;
+using Fanex.NAP.Core.Web.Attribute;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
-    /// <summary>
-    /// Mail Controller.
-    /// </summary>
+namespace Fanex.MailDelivery.MailStation.Controllers
+{
     [NapSuperAuth]
     public class MailManageController : BaseController
     {
-        private readonly MailManageService _mailManageService;
+        private readonly MailManageService mailManageService;
 
         public MailManageController()
         {
-            _mailManageService = new MailManageService(new MailService(), new JobService(), new JobOperationService());
+            mailManageService = new MailManageService();
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
         public ActionResult Index(GetMailListCriteria criteria)
         {
-            ViewBag.ListMailGroup = _mailManageService.MailGroups();
-            ViewBag.ListSite = _mailManageService.Sites();
-            ViewBag.ListStatus = _mailManageService.Status();
-            ViewBag.ListTriggerType = _mailManageService.Trigger();
+            ViewBag.ListMailGroup = mailManageService.MailGroups();
+            ViewBag.ListSite = mailManageService.Sites();
+            ViewBag.ListStatus = mailManageService.Status();
+            ViewBag.ListTriggerType = mailManageService.Trigger();
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
             ViewBag.IsUseCookie = string.IsNullOrEmpty(criteria.Emails) && string.IsNullOrEmpty(criteria.MailGroupId);
+
             return View("~/Areas/MailStation/ManageMail/ManageMail/Index.cshtml", criteria);
         }
 
         public JsonResult Sites()
         {
-            return Json(_mailManageService.Sites());
+            return Json(mailManageService.Sites());
         }
 
         public JsonResult MailGroups(bool hasAllElement = true)
         {
-            return Json(_mailManageService.MailGroups(hasAllElement));
+            return Json(mailManageService.MailGroups(hasAllElement));
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public JsonResult AddMailGroup(CreateMailGroupCriteria criteria)
         {
-            return Json(_mailManageService.CreateMailGroup(criteria));
+            return Json(mailManageService.CreateMailGroup(criteria));
         }
 
-        /// <summary>
-        /// Creates the mail view.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Create Mail View.</returns>
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
         public ActionResult CreateMailView(GetMailByIdCriteria criteria)
         {
-            ViewBag.ListMailGroup = _mailManageService.MailGroups(false);
-            ViewBag.ListSite = _mailManageService.Sites(false);
-            ViewBag.ListTriggerType = _mailManageService.Trigger(false);
+            ViewBag.ListMailGroup = mailManageService.MailGroups(false);
+            ViewBag.ListSite = mailManageService.Sites(false);
+            ViewBag.ListTriggerType = mailManageService.Trigger(false);
 
-            MailModel mailModel = _mailManageService.MailById(criteria);
+            MailModel mailModel = mailManageService.MailById(criteria);
 
             if (mailModel != null)
             {
@@ -79,14 +69,10 @@
 
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
             CreateMailCriteria model = new CreateMailCriteria(mailModel);
+
             return View("~/Areas/MailStation/ManageMail/CreateMail/Index.cshtml", model);
         }
 
-        /// <summary>
-        /// Creates the mail.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Result message.</returns>
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public JsonResult CreateMail(CreateMailCriteria criteria)
         {
@@ -100,34 +86,36 @@
                 criteria.EndOn = criteria.EndOn.Value.ToUniversalTime();
             }
 
-            return Json(_mailManageService.CreateMail(criteria), JsonRequestBehavior.AllowGet);
+            return Json(mailManageService.CreateMail(criteria), JsonRequestBehavior.AllowGet);
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
         public ActionResult MailList(GetMailListCriteria criteria)
         {
-            IList<MailModel> result = _mailManageService.MailList(criteria);
+            IList<MailModel> result = mailManageService.MailList(criteria);
+
             return Json(result);
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public ActionResult DeleteMail(DeleteMailCriteria criteria)
         {
-            CommandResult commandResult = _mailManageService.DeleteMail(criteria);
+            CommandResult commandResult = mailManageService.DeleteMail(criteria);
+
             return Json(commandResult);
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
         public ActionResult UpdateMailView(GetMailByIdCriteria criteria)
         {
-            ViewBag.ListMailGroup = _mailManageService.MailGroups(false);
-            ViewBag.ListSite = _mailManageService.Sites(false);
-            ViewBag.ListTriggerType = _mailManageService.Trigger(false);
-
-            MailModel mailModel = _mailManageService.MailById(criteria);
-
-            UpdateMailCriteria model = new UpdateMailCriteria(mailModel);
+            ViewBag.ListMailGroup = mailManageService.MailGroups(false);
+            ViewBag.ListSite = mailManageService.Sites(false);
+            ViewBag.ListTriggerType = mailManageService.Trigger(false);
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
+
+            MailModel mailModel = mailManageService.MailById(criteria);
+            UpdateMailCriteria model = new UpdateMailCriteria(mailModel);
+
             return View("~/Areas/MailStation/ManageMail/UpdateMail/Index.cshtml", model);
         }
 
@@ -135,27 +123,21 @@
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public JsonResult UpdateMail(UpdateMailCriteria criteria)
         {
-            CommandResult commandResult = _mailManageService.UpdateMail(criteria);
+            CommandResult commandResult = mailManageService.UpdateMail(criteria);
+
             return Json(commandResult, JsonRequestBehavior.AllowGet);
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
         public JsonResult SuggestMail(SuggestMailCriteria criteria)
         {
-            return Json(_mailManageService.SuggestMails(criteria), JsonRequestBehavior.AllowGet);
+            return Json(mailManageService.SuggestMails(criteria), JsonRequestBehavior.AllowGet);
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public void RunNow(int mailId)
         {
-            _mailManageService.RunNow(mailId);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            _mailManageService.DisposeObjects();
-
-            base.Dispose(disposing);
+            mailManageService.RunNow(mailId);
         }
     }
 }
