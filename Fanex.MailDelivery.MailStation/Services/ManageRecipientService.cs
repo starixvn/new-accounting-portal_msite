@@ -2,6 +2,7 @@
 using Fanex.MailDelivery.MailStation.Criteria;
 using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
 using Fanex.MailDelivery.MailStation.Models;
+using Fanex.NAP.Core.Command;
 using Fanex.NAP.Core.Models;
 using Fanex.NAP.Core.Service.Impl;
 using Fanex.NAP.Core.Service.Interface;
@@ -38,12 +39,7 @@ namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
             }
         }
 
-        /// <summary>
-        /// Edits the recipient.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Editing result.</returns>
-        public CommandResult EditRecipient(UpdateRecipientCriteria criteria)
+        public CommandResult UpdateRecipient(UpdateRecipientCriteria criteria)
         {
             Hashtable hash = criteria.GetSpParams();
             hash = (new ResultCriteria()).AddSpParams(hash);
@@ -54,12 +50,7 @@ namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
             }
         }
 
-        /// <summary>
-        /// Inserts the recipient.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Inserting result.</returns>
-        public CommandResult InsertRecipient(CreateRecipientCriteria criteria)
+        public CommandResult CreateRecipient(CreateRecipientCriteria criteria)
         {
             Hashtable hash = criteria.GetSpParams();
             hash = (new ResultCriteria()).AddSpParams(hash);
@@ -70,11 +61,6 @@ namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
             }
         }
 
-        /// <summary>
-        /// Deletes the recipient.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Command result.</returns>
         public CommandResult DeleteRecipient(DeleteRecipientCriteria criteria)
         {
             Hashtable hash = criteria.GetSpParams();
@@ -86,11 +72,6 @@ namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
             }
         }
 
-        /// <summary>
-        /// Checks the recipient information.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The recipient information.</returns>
         public User CheckRecipient(CheckRecipientInfoCriteria criteria)
         {
             return userService.Get(criteria.Username);

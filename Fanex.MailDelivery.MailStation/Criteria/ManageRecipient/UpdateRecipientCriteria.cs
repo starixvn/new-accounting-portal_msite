@@ -1,10 +1,7 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
-{
-    using Fanex.Data.Repository;
+﻿using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Update Recipient Criteria.
-    /// </summary>
+namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
+{
     public class UpdateRecipientCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "RecipientID")]
