@@ -1,77 +1,51 @@
-﻿namespace Fanex.MailDelivery.MailStation.Services
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using Criteria;
-    using Fanex.Common;
-    using Fanex.Data;
-    using Fanex.MailDeliver.Model;
-    using Fanex.MailDelivery.Admin.Services.Job;
-    using Fanex.MailDelivery.Admin.Services.JobOperation;
-    using Fanex.MailDelivery.Core.Messaging.Job;
-    using Fanex.MailDelivery.Core.Models;
-    using Fanex.MailDelivery.MailStation.Criteria.MailReport;
-    using Fanex.MailDelivery.MailStation.Models;
-    using Fanex.Maintenance.Service.Impl.Mail;
-    using Fanex.Maintenance.Service.Interface.Mail;
-    using Quartz;
-    using Quartz.Spi;
+﻿using Fanex.Common;
+using Fanex.Data;
+using Fanex.MailDeliver.Model;
+using Fanex.MailDelivery.Core.Models;
+using Fanex.MailDelivery.MailStation.Criteria;
+using Fanex.MailDelivery.MailStation.Criteria.MailReport;
+using Fanex.MailDelivery.MailStation.Models;
+using Fanex.Maintenance.Service.Impl.Mail;
+using Fanex.Maintenance.Service.Interface.Mail;
+using Quartz;
+using Quartz.Spi;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-    /// <summary>
-    /// Mail Report Service.
-    /// </summary>
+namespace Fanex.MailDelivery.MailStation.Services
+{
     public class MailReportService : MailStationBaseService
     {
-        private readonly IMailService _mailService;
-        private readonly IJobService _jobService;
-        private readonly IJobOperationService _jobOperationService;
+        private readonly IMailService mailService;
+        private IJobOperationService jobOperationService;
 
         public MailReportService()
         {
-            _mailService = _mailService ?? MailService.Create();
-
-            _jobService = new JobService();
-
-            _jobOperationService = new JobOperationService();
+            mailService = mailService ?? MailService.Create();
         }
 
-        /// <summary>
-        /// Gets the mail report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The mail report.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public List<MailTaskModel> MailReport(MailReportCriteria criteria)
         {
             int oldStatus = criteria.Status;
             criteria.Status = -1;
-            List<MailTaskModel> result = new List<MailTaskModel>();
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-                result = db.Query<MailTaskModel>().ToList();
-            }
+            List<MailTaskModel> mailTasks = GetMailTasks(criteria);
 
             criteria.Status = oldStatus;
-            List<MailTaskDetailModel> listMailTaskDetail = new List<MailTaskDetailModel>();
             GetAllScheduleCriteria getAllScheduleCriteria = new GetAllScheduleCriteria { MailName = criteria.MailName, SiteId = criteria.SiteId };
-            using (ObjectDb db = new ObjectDb(getAllScheduleCriteria.GetSettingKey()))
-            {
-                db.AssignParamValues(getAllScheduleCriteria.GetSpParams());
-                listMailTaskDetail = db.Query<MailTaskDetailModel>().ToList();
-            }
+            List<MailTaskDetailModel> mailTaskDetails = GetMailTaskDetails(getAllScheduleCriteria);
 
             if (criteria.Status == -1 || criteria.Status == (int)JobStatus.Waiting || criteria.Status == (int)JobStatus.Missing)
             {
                 TimeSpan ts = new TimeSpan(23, 59, 59);
                 criteria.ToDate += ts;
-                foreach (MailTaskDetailModel schedule in listMailTaskDetail)
+
+                foreach (MailTaskDetailModel schedule in mailTaskDetails)
                 {
                     DateTime fromDate = this.MaxDateTime(criteria.FromDate, schedule.StartOn).ToUniversalTime();
                     DateTime toDate = this.MinDateTime(criteria.ToDate, schedule.EndOn).ToUniversalTime();
+
                     if (fromDate <= toDate)
                     {
                         ITrigger trigger = TriggerBuilder.Create().WithCronSchedule(schedule.CronExpression).Build();
@@ -81,14 +55,16 @@
                             new DateTimeOffset(fromDate),
                             new DateTimeOffset(toDate));
                         listtriggerdate = (from trigertime in listtriggerdate
-                                           where !(from task in result
+                                           where !(from task in mailTasks
                                                    where task.MailId == schedule.MailId
                                                    select task.ScheduledTime)
                                                .Contains(trigertime.LocalDateTime)
                                            select trigertime).ToList();
+
                         foreach (var triggertime in listtriggerdate)
                         {
                             var status = triggertime.LocalDateTime.AddSeconds(5) > DateTime.Now ? (int)JobStatus.Waiting : (int)JobStatus.Missing;
+
                             if (criteria.Status == -1 || criteria.Status == status)
                             {
                                 MailTaskModel waitingTask = new MailTaskModel
@@ -104,7 +80,7 @@
                                     TriggerType = (int)MailType.Schedule
                                 };
 
-                                result.Add(waitingTask);
+                                mailTasks.Add(waitingTask);
                             }
                         }
                     }
@@ -113,22 +89,40 @@
 
             if (oldStatus != -1)
             {
-                result = result.Where(m => m.Status == oldStatus).ToList();
+                mailTasks = mailTasks.Where(m => m.Status == oldStatus).ToList();
             }
 
-            return result.OrderBy(m => m.MailName).ThenByDescending(m => m.ScheduledTime).ThenByDescending(m => m.LastSent).ToList();
+            return mailTasks.OrderBy(m => m.MailName).ThenByDescending(m => m.ScheduledTime).ThenByDescending(m => m.LastSent).ToList();
         }
 
-        /// <summary>
-        /// Gets the mail detail.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The mail detail.</returns>
+        private static List<MailTaskDetailModel> GetMailTaskDetails(GetAllScheduleCriteria getAllScheduleCriteria)
+        {
+            using (ObjectDb db = new ObjectDb(getAllScheduleCriteria.GetSettingKey()))
+            {
+                db.AssignParamValues(getAllScheduleCriteria.GetSpParams());
+                List<MailTaskDetailModel> mailTaskDetails = db.Query<MailTaskDetailModel>().ToList();
+
+                return mailTaskDetails;
+            }
+        }
+
+        private static List<MailTaskModel> GetMailTasks(MailReportCriteria criteria)
+        {
+            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                db.AssignParamValues(criteria.GetSpParams());
+
+                List<MailTaskModel> mailTasks = db.Query<MailTaskModel>().ToList();
+
+                return mailTasks;
+            }
+        }
+
         public MailRecord MailDetail(MailDetailCriteria criteria)
         {
             try
             {
-                return _mailService.GetMail(criteria.MailId);
+                return mailService.GetMail(criteria.MailId);
             }
             catch (Exception ex)
             {
@@ -137,11 +131,6 @@
             }
         }
 
-        /// <summary>
-        /// Gets the mail log.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The mail log.</returns>
         public List<MailLogModel> MailLog(MailLogCriteria criteria)
         {
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
@@ -151,27 +140,27 @@
             }
         }
 
-        /// <summary>
-        /// Retry send mail.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void RetrySendMail(RetrySendMailCriteria criteria)
         {
             MailTaskModel mailTask = this.GetMailTaskByID(new GetMailTaskByIdCriteria { MailTaskId = criteria.TaskId });
             Schedule schedule = this.GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailTask.MailId });
             schedule.TaskId = mailTask.MailTaskId;
 
-            _jobOperationService.Retry(schedule);
+            using (jobOperationService = new JobOperationService())
+            {
+                jobOperationService.Retry(schedule);
+            }
         }
 
         public void AbortJob(int taskId)
         {
-            AbortJobRequest request = new AbortJobRequest
+            var criteria = new UpdateMailTaskStatusCriteria
             {
                 TaskId = taskId,
+                Status = (int)JobStatus.Abort
             };
 
-            _jobOperationService.AbortJob(request);
+            ExecuteNonQuery(criteria);
         }
 
         public void RetryMissingJob(RetryMissingTaskCriteria criteria)
@@ -191,15 +180,12 @@
             schedule.CurrentFireTime = criteria.ScheduledTime;
             schedule.TaskId = mailTaskId;
 
-            _jobOperationService.Retry(schedule);
+            using (jobOperationService = new JobOperationService())
+            {
+                jobOperationService.Retry(schedule);
+            }
         }
 
-        /// <summary>
-        /// Get maximum date time.
-        /// </summary>javascript:;
-        /// <param name="date1">The date1.</param>
-        /// <param name="date2">The date2.</param>
-        /// <returns>The max date.</returns>
         private DateTime MaxDateTime(DateTime date1, DateTime? date2)
         {
             if (date2.HasValue)
@@ -213,12 +199,6 @@
             }
         }
 
-        /// <summary>
-        /// Get minimum date time.
-        /// </summary>
-        /// <param name="date1">The date1.</param>
-        /// <param name="date2">The date2.</param>
-        /// <returns>The min date.</returns>
         private DateTime MinDateTime(DateTime date1, DateTime? date2)
         {
             if (date2.HasValue)

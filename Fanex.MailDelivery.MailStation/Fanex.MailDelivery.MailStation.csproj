@@ -200,12 +200,13 @@
     <Compile Include="Criteria\MailManage\GetMailListCriteria.cs" />
     <Compile Include="Criteria\MailReport\RetryMissingTaskCriteria.cs" />
     <Compile Include="Criteria\MailReport\GetAllScheduleCriteria.cs" />
-    <Compile Include="Criteria\MailReport\GetMailTaskByIDCriteria.cs" />
+    <Compile Include="Criteria\MailReport\GetMailTaskByIdCriteria.cs" />
     <Compile Include="Criteria\MailReport\GetScheduleByIdCriteria.cs" />
     <Compile Include="Criteria\MailReport\MailDetailCriteria.cs" />
     <Compile Include="Criteria\MailReport\MailLogCriteria.cs" />
     <Compile Include="Criteria\MailReport\MailReportCriteria.cs" />
     <Compile Include="Criteria\MailReport\RetrySendMailCriteria.cs" />
+    <Compile Include="Criteria\MailReport\UpdateMailTaskStatusCriteria.cs" />
     <Compile Include="Criteria\ManageRecipient\CheckRecipientInfoCriteria.cs" />
     <Compile Include="Criteria\ManageRecipient\CreateRecipientCriteria.cs" />
     <Compile Include="Criteria\ManageRecipient\DeleteRecipientCriteria.cs" />

@@ -2,9 +2,6 @@
 {
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Mail Report Criteria.
-    /// </summary>
     public class GetMailTaskByIdCriteria : CriteriaBase
     {
         public int MailTaskId { get; set; }
