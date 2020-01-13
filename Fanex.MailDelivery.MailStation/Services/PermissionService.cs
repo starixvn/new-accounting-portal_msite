@@ -1,30 +1,16 @@
-﻿namespace Fanex.MailDelivery.MailStation.Services
+﻿using Fanex.NAP.Core.Business;
+using Fanex.NAP.Core.Configuration;
+using Fanex.NAP.Core.Service.Impl;
+using Fanex.NAP.Core.Service.Interface;
+using Fanex.NAP.Core.Web.Session;
+
+namespace Fanex.MailDelivery.MailStation.Services
 {
-    using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Core.Service.Interface;
-    using Fanex.NAP.Core.Web.Session;
-
-    public class PermissionService
+    public static class PermissionService
     {
-        private static ICurrentSession _currentSession;
+        private static ICurrentSession currentSession = new CurrentSession();
+        private static IUserService userService = new UserService();
 
-        private static IUserService _userService;
-
-        static PermissionService()
-        {
-            _userService = new UserService();
-            _currentSession = new CurrentSession();
-        }
-
-        /// <summary>
-        /// HasPermission: check that user has permission to access one menu link.
-        /// </summary>
-        /// <param name="functionName">Name of the function.</param>
-        /// <returns>
-        /// Has Read Permission indicator.
-        /// </returns>
         public static bool HasReadPermission(string functionName)
         {
             return HasPermission(functionName);
@@ -37,8 +23,8 @@
 
         public static bool HasPermission(string functionName, Constant.Policy functionPolicy = Constant.Policy.Read)
         {
-            return _userService.IsHavingPermission(
-                _currentSession.UserId,
+            return userService.IsHavingPermission(
+                currentSession.UserId,
                 NapSettings.Settings.SiteId,
                 functionName,
                 functionPolicy);

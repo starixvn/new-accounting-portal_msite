@@ -1,7 +1,7 @@
 ﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
-    using System;
     using Fanex.Data.Repository;
+    using System;
 
     /// <summary>
     /// Add Missing Task Criteria.

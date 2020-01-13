@@ -3,7 +3,7 @@
     using System;
     using System.Web;
 
-    public class SessionManager
+    public static class SessionManager
     {
         /// <summary>
         /// Set Value to session with specific type.

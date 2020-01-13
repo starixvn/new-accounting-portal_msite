@@ -1,8 +1,8 @@
 ﻿namespace Fanex.MailDelivery.MailStation.Constants
 {
+    using Fanex.MailDelivery.MailStation.Models;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using Fanex.MailDelivery.MailStation.Models;
 
     /// <summary>
     /// Error Code Constants.

@@ -1,8 +1,8 @@
 ﻿namespace Fanex.MailDelivery.MailStation.Extensions
 {
+    using Fanex.MailDelivery.MailStation.Constants;
     using System;
     using System.Linq;
-    using Fanex.MailDelivery.MailStation.Constants;
 
     /// <summary>
     /// Time Zone Extension.
