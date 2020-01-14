@@ -1,4 +1,5 @@
 using EasyNetQ;
+using EasyNetQ.Topology;
 using Fanex.MailDelivery.Core;
 using Fanex.MailDelivery.Core.Models;
 using Fanex.MailDelivery.MailStation.Configurations;
@@ -18,10 +19,15 @@ namespace Fanex.MailDelivery.MailStation.Services
     public class JobOperationService : IJobOperationService
     {
         private readonly IBus bus;
+        private readonly IAdvancedBus advancedBus;
+        private readonly IExchange oldScheduleExchange;
+        private const string OldScheduleExchangeName = "Fanex.MailDelivery.Core.Models.Schedule:Fanex.MailDelivery.Core";
 
         public JobOperationService()
         {
             bus = RabbitHutch.CreateBus(AppSettings.RabbitMQConnectionString);
+            advancedBus = bus.Advanced;
+            oldScheduleExchange = advancedBus.ExchangeDeclare(OldScheduleExchangeName, ExchangeType.Topic);
         }
 
         public void PublishScheduleChange(Schedule schedule)
@@ -29,6 +35,8 @@ namespace Fanex.MailDelivery.MailStation.Services
             var updateSchedulePublishId = string.Format(MailDeliveryConstants.UpdateScheduleRoutingKeyFormat, schedule.SiteId);
 
             bus.Publish(schedule, updateSchedulePublishId);
+
+            advancedBus.Publish(oldScheduleExchange, updateSchedulePublishId, true, new Message<Schedule>(schedule));
         }
 
         public void RunNow(Schedule schedule)
@@ -36,6 +44,8 @@ namespace Fanex.MailDelivery.MailStation.Services
             var runnowJobPublishId = string.Format(MailDeliveryConstants.RunNowJobRoutingKeyFormat, schedule.SiteId);
 
             bus.Publish(schedule, runnowJobPublishId);
+
+            advancedBus.Publish(oldScheduleExchange, runnowJobPublishId, true, new Message<Schedule>(schedule));
         }
 
         public void Retry(Schedule schedule)
@@ -43,6 +53,8 @@ namespace Fanex.MailDelivery.MailStation.Services
             var retryJobPublishId = string.Format(MailDeliveryConstants.RetryJobRoutingKeyFormat, schedule.SiteId);
 
             bus.Publish(schedule, retryJobPublishId);
+
+            advancedBus.Publish(oldScheduleExchange, retryJobPublishId, true, new Message<Schedule>(schedule));
         }
 
         #region IDisposable Support
