@@ -214,6 +214,7 @@
     <Compile Include="Criteria\ManageRecipient\RecipientListCriteria.cs" />
     <Compile Include="Criteria\ResultCriteria.cs" />
     <Compile Include="Extensions\TimeZoneExtension.cs" />
+    <Compile Include="Logging\RabbitMQLogProvider.cs" />
     <Compile Include="Models\CustomTimeZone.cs" />
     <Compile Include="Models\MailGroupModel.cs" />
     <Compile Include="Models\MailTaskDetailModel.cs" />

@@ -21,12 +21,7 @@ namespace Fanex.MailDelivery.MailStation.Services
 
         public JobOperationService()
         {
-            bus = RabbitHutch.CreateBus(
-                    AppSettings.RabbitMQConnectionString,
-                    serviceRegister =>
-                    {
-                        //serviceRegister.Register<IEasyNetQLogger>(_ => new MailAdminLogger());
-                    });
+            bus = RabbitHutch.CreateBus(AppSettings.RabbitMQConnectionString);
         }
 
         public void PublishScheduleChange(Schedule schedule)
