@@ -1,10 +1,10 @@
 ﻿using Fanex.Data;
 using Fanex.MailDelivery.Core.Models;
-using Fanex.MailDelivery.Core.Models.Mails;
 using Fanex.MailDelivery.MailStation.Configurations;
 using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
 using Fanex.MailDelivery.MailStation.Criteria.MailManage;
 using Fanex.MailDelivery.MailStation.Criteria.MailReport;
+using Fanex.MailDelivery.MailStation.Models;
 using Fanex.NAP.Core.Command;
 using System;
 using System.Collections.Generic;

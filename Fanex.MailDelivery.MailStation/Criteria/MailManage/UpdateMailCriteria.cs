@@ -1,4 +1,4 @@
-﻿using Fanex.MailDelivery.Core.Models.Mails;
+﻿using Fanex.MailDelivery.MailStation.Models;
 
 namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {

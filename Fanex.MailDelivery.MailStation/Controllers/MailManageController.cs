@@ -1,8 +1,8 @@
-﻿using Fanex.MailDelivery.Core.Models.Mails;
-using Fanex.MailDelivery.MailStation.Constants;
+﻿using Fanex.MailDelivery.MailStation.Constants;
 using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
 using Fanex.MailDelivery.MailStation.Criteria.MailManage;
 using Fanex.MailDelivery.MailStation.Extensions;
+using Fanex.MailDelivery.MailStation.Models;
 using Fanex.MailDelivery.MailStation.Resources;
 using Fanex.MailDelivery.MailStation.Services;
 using Fanex.Maintenance.Controller;
