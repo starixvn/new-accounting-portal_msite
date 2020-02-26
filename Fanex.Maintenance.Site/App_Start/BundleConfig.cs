@@ -68,6 +68,12 @@
                 "~/scripts/lib/XMLEditor/css/main.css",
                 "~/scripts/lib/XMLEditor/js/ext/GLR/css/GLR.messenger.css");
 
+            bundles.AddAndInclude(
+                "~/css/mail-report",
+                "~/themes/manage/log/manage.less",
+                "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css");
+
             // js
             bundles.Add(new ScriptBundle("~/scripts/common").Include(
                 "~/scripts/lib/jquery-1.8.0.min.js",
