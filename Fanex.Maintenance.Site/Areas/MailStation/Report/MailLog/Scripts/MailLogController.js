@@ -60,7 +60,7 @@ var MailLogController = function () {
         var gridOptions = {
             columns: [{ HeaderText: viewResources.Symbol_No, Width: 40, Name: "ColId", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: viewResources.Status, Width: 100, Name: "ColStatus", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: viewResources.Message, Width: 200, Name: "ColMessage", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true },
+                { HeaderText: viewResources.Message, Width: 310, Name: "ColMessage", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true },
                 { HeaderText: viewResources.Log_Time, Width: 120, Name: "ColLogTime", HeaderAlign: "center", CellAlign: "center", AllowTruncate: true },
                 { HeaderText: viewResources.Stack_Trace, Width: 500, Name: "ColStackTrace", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true}],
             showTitle: false,
