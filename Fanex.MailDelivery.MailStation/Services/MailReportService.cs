@@ -43,8 +43,8 @@ namespace Fanex.MailDelivery.MailStation.Services
 
                 foreach (MailTaskDetailModel schedule in mailTaskDetails)
                 {
-                    DateTime fromDate = this.MaxDateTime(criteria.FromDate, schedule.StartOn).ToUniversalTime();
-                    DateTime toDate = this.MinDateTime(criteria.ToDate, schedule.EndOn).ToUniversalTime();
+                    DateTime fromDate = MaxDateTime(criteria.FromDate, schedule.StartOn).ToUniversalTime();
+                    DateTime toDate = MinDateTime(criteria.ToDate, schedule.EndOn).ToUniversalTime();
 
                     if (fromDate <= toDate)
                     {
@@ -142,9 +142,11 @@ namespace Fanex.MailDelivery.MailStation.Services
 
         public void RetrySendMail(RetrySendMailCriteria criteria)
         {
-            MailTaskModel mailTask = this.GetMailTaskByID(new GetMailTaskByIdCriteria { MailTaskId = criteria.TaskId });
-            Schedule schedule = this.GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailTask.MailId });
+            MailTaskModel mailTask = GetMailTaskByID(new GetMailTaskByIdCriteria { MailTaskId = criteria.TaskId });
+            Schedule schedule = GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailTask.MailId });
             schedule.TaskId = mailTask.MailTaskId;
+
+            UpdateRunningTask(mailTask.MailTaskId);
 
             using (jobOperationService = new JobOperationService())
             {
@@ -152,14 +154,20 @@ namespace Fanex.MailDelivery.MailStation.Services
             }
         }
 
-        public void AbortJob(int taskId)
+        public void AbortTask(int taskId)
         {
             var criteria = new UpdateMailTaskStatusCriteria
             {
                 TaskId = taskId,
-                Status = (int)JobStatus.Abort
+                Status = (int)JobStatus.Abort,
+                LastSent = DateTime.Now
             };
 
+            ExecuteNonQuery(criteria);
+        }
+
+        public void AddMailLog(AddMailLogCriteria criteria)
+        {
             ExecuteNonQuery(criteria);
         }
 
@@ -175,8 +183,8 @@ namespace Fanex.MailDelivery.MailStation.Services
                 mailTaskId = Converter.ToInt(db.GetParameterValue("MailTaskID"));
             }
 
-            MailTaskModel mailTask = this.GetMailTaskByID(new GetMailTaskByIdCriteria { MailTaskId = mailTaskId });
-            Schedule schedule = this.GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailTask.MailId });
+            MailTaskModel mailTask = GetMailTaskByID(new GetMailTaskByIdCriteria { MailTaskId = mailTaskId });
+            Schedule schedule = GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailTask.MailId });
             schedule.CurrentFireTime = criteria.ScheduledTime;
             schedule.TaskId = mailTaskId;
 
@@ -184,6 +192,18 @@ namespace Fanex.MailDelivery.MailStation.Services
             {
                 jobOperationService.Retry(schedule);
             }
+        }
+
+        private void UpdateRunningTask(int taskId)
+        {
+            var criteria = new UpdateMailTaskStatusCriteria
+            {
+                TaskId = taskId,
+                Status = (int)JobStatus.Running,
+                LastSent = DateTime.Now
+            };
+
+            ExecuteNonQuery(criteria);
         }
 
         private DateTime MaxDateTime(DateTime date1, DateTime? date2)

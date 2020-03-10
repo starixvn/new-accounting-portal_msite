@@ -1,10 +1,12 @@
-﻿using Fanex.MailDelivery.MailStation.Constants;
+﻿using Fanex.MailDelivery.Core.Models;
+using Fanex.MailDelivery.MailStation.Constants;
 using Fanex.MailDelivery.MailStation.Criteria.MailReport;
 using Fanex.MailDelivery.MailStation.Extensions;
 using Fanex.MailDelivery.MailStation.Services;
 using Fanex.Maintenance.Controller;
 using Fanex.NAP.Core.Business;
 using Fanex.NAP.Core.Web.Attribute;
+using System;
 using System.Web.Mvc;
 
 namespace Fanex.MailDelivery.MailStation.Controllers
@@ -56,12 +58,28 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Host)]
         public void AbortTask(int taskId)
         {
-            mailReportService.AbortJob(taskId);
+            mailReportService.AbortTask(taskId);
+
+            mailReportService.AddMailLog(new AddMailLogCriteria
+            {
+                ExceptionMessage = $"> It's aborted by \"{CurrentSession.Username}\"",
+                LogTime = DateTime.Now,
+                Status = (int)JobStatus.Abort,
+                TaskId = taskId
+            });
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
         public ActionResult RetrySendMail(RetrySendMailCriteria criteria)
         {
+            mailReportService.AddMailLog(new AddMailLogCriteria
+            {
+                ExceptionMessage = $"> It's retried by \"{CurrentSession.Username}\"",
+                LogTime = DateTime.Now,
+                Status = (int)JobStatus.Running,
+                TaskId = criteria.TaskId
+            });
+
             mailReportService.RetrySendMail(criteria);
 
             return new EmptyResult();

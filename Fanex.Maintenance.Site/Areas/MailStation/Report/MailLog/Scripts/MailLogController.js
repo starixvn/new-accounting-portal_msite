@@ -38,6 +38,8 @@ var MailLogController = function () {
                 return '<div class="column-status sent-status">' + viewResources.Sent.toUpperCase() + '</div>';
             case self.Enums.TaskStatus.Failed:
                 return '<div class="column-status failed-status">' + viewResources.Failed.toUpperCase() + '</div>';
+            case self.Enums.TaskStatus.Abort:
+                return '<div class="column-status failed-status">' + viewResources.Aborted.toUpperCase() + '</div>';
         }
     };
 
@@ -53,16 +55,16 @@ var MailLogController = function () {
                     { Name: "ColStatus", Value: self.getStatusDisplay(log.Status) },
                     { Name: "ColMessage", Value: log.ExceptionMessage },
                     { Name: "ColLogTime", Value: log.LogTime },
-                    { Name: "ColStackTrace", Value: log.StackTrace}]
+                    { Name: "ColStackTrace", Value: log.StackTrace }]
             });
         }
 
         var gridOptions = {
             columns: [{ HeaderText: viewResources.Symbol_No, Width: 40, Name: "ColId", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: viewResources.Status, Width: 100, Name: "ColStatus", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: viewResources.Message, Width: 310, Name: "ColMessage", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true },
-                { HeaderText: viewResources.Log_Time, Width: 120, Name: "ColLogTime", HeaderAlign: "center", CellAlign: "center", AllowTruncate: true },
-                { HeaderText: viewResources.Stack_Trace, Width: 500, Name: "ColStackTrace", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true}],
+                { HeaderText: viewResources.Message, Width: 580, Name: "ColMessage", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true },
+                { HeaderText: viewResources.Log_Time, Width: 135, Name: "ColLogTime", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: viewResources.Stack_Trace, Width: 430, Name: "ColStackTrace", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true }],
             showTitle: false,
             bodyRows: bodyData,
             numberOfFrozenColumn: 0,

@@ -57,7 +57,7 @@ var MailReportController = function () {
             { Id: 3, Value: 90 },
             { Id: 4, Value: 120 },
             { Id: 5, Value: 150 },
-            { Id: 6, Value: 180}];
+            { Id: 6, Value: 180 }];
         var options = '';
         var countDownsLength = countDowns.length;
         for (var i = 0; i < countDownsLength; i++) {
@@ -243,11 +243,12 @@ var MailReportController = function () {
     };
 
     self.getActionColumn = function (mail, index) {
+        var mailIndex = ' mail-index="' + mail.MailTaskId + '"';
+
         if (mail.TriggerType === self.Enums.TriggerType.ScheduleMail) {
-            var mailIndex = ' mail-index="' + mail.MailTaskId + '"';
             switch (mail.Status) {
                 case self.Enums.TaskStatus.Running:
-                    return '<input type="submit" value="Aborted" class="button-abort"' + mailIndex + '>';
+                    return '<input type="submit" value="Abort" class="button-abort"' + mailIndex + '>';
                 case self.Enums.TaskStatus.DataNotReady:
                 case self.Enums.TaskStatus.Sent:
                 case self.Enums.TaskStatus.Failed:
@@ -264,12 +265,16 @@ var MailReportController = function () {
                         + 'scheduledTime="' + mail.ScheduledTime + '"'
                         + ' >';
             }
+        } else if (mail.Status === self.Enums.TaskStatus.Running) {
+            return '<input type="submit" value="Abort" class="button-abort"' + mailIndex + '>';
         }
     };
 
     self.getLogColumn = function (mail, index) {
         var mailIndex = ' mail-index="' + mail.MailTaskId + '"';
         switch (mail.Status) {
+            case self.Enums.TaskStatus.Abort:
+            case self.Enums.TaskStatus.Succeeded:
             case self.Enums.TaskStatus.Running:
             case self.Enums.TaskStatus.DataNotReady:
             case self.Enums.TaskStatus.Sent:
