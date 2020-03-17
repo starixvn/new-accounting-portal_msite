@@ -34,6 +34,8 @@ var MailLogController = function () {
                         '</div>';
             case self.Enums.TaskStatus.DataNotReady:
                 return '<div class="column-status data-not-ready-status">' + viewResources.Data_not_ready.toUpperCase() + '</div>';
+            case self.Enums.TaskStatus.Succeeded:
+                return '<div class="column-status sent-status">' + viewResources.Succeeded.toUpperCase() + '</div>';
             case self.Enums.TaskStatus.Sent:
                 return '<div class="column-status sent-status">' + viewResources.Sent.toUpperCase() + '</div>';
             case self.Enums.TaskStatus.Failed:
