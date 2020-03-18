@@ -1,5 +1,4 @@
 using EasyNetQ;
-using EasyNetQ.Topology;
 using Fanex.MailDelivery.Core;
 using Fanex.MailDelivery.Core.Models;
 using Fanex.MailDelivery.MailStation.Configurations;
@@ -19,15 +18,14 @@ namespace Fanex.MailDelivery.MailStation.Services
     public class JobOperationService : IJobOperationService
     {
         private readonly IBus bus;
-        private readonly IAdvancedBus advancedBus;
-        private readonly IExchange oldScheduleExchange;
-        private const string OldScheduleExchangeName = "Fanex.MailDelivery.Core.Models.Schedule:Fanex.MailDelivery.Core";
+        private readonly IBus legacyBus;
 
         public JobOperationService()
         {
             bus = RabbitHutch.CreateBus(AppSettings.RabbitMQConnectionString);
-            advancedBus = bus.Advanced;
-            oldScheduleExchange = advancedBus.ExchangeDeclare(OldScheduleExchangeName, ExchangeType.Topic);
+            legacyBus = RabbitHutch.CreateBus(
+                AppSettings.RabbitMQConnectionString,
+                serviceRegister => serviceRegister.Register<ITypeNameSerializer>(serviceProvider => new LegacyTypeNameSerializer()));
         }
 
         public void PublishScheduleChange(Schedule schedule)
@@ -36,16 +34,16 @@ namespace Fanex.MailDelivery.MailStation.Services
 
             bus.Publish(schedule, updateSchedulePublishId);
 
-            advancedBus.Publish(oldScheduleExchange, updateSchedulePublishId, true, new Message<Schedule>(schedule));
+            legacyBus.Publish(schedule, updateSchedulePublishId);
         }
 
         public void RunNow(Schedule schedule)
         {
-            var runnowJobPublishId = string.Format(MailDeliveryConstants.RunNowJobRoutingKeyFormat, schedule.SiteId);
+            var runNowJobPublishId = string.Format(MailDeliveryConstants.RunNowJobRoutingKeyFormat, schedule.SiteId);
 
-            bus.Publish(schedule, runnowJobPublishId);
+            bus.Publish(schedule, runNowJobPublishId);
 
-            advancedBus.Publish(oldScheduleExchange, runnowJobPublishId, true, new Message<Schedule>(schedule));
+            legacyBus.Publish(schedule, runNowJobPublishId);
         }
 
         public void Retry(Schedule schedule)
@@ -54,7 +52,7 @@ namespace Fanex.MailDelivery.MailStation.Services
 
             bus.Publish(schedule, retryJobPublishId);
 
-            advancedBus.Publish(oldScheduleExchange, retryJobPublishId, true, new Message<Schedule>(schedule));
+            legacyBus.Publish(schedule, retryJobPublishId);
         }
 
         #region IDisposable Support
@@ -70,6 +68,7 @@ namespace Fanex.MailDelivery.MailStation.Services
                 }
 
                 bus?.Dispose();
+                legacyBus?.Dispose();
 
                 disposedValue = true;
             }
