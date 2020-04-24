@@ -35,6 +35,12 @@
             <div class="edit-field site-box">
                 @Html.DropDownListFor(m => m.SiteId, (IEnumerable<SelectListItem>)ViewBag.ListSite, new { @class = "site-box" })
             </div>
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.TriggerType, "Trigger")
+            </div>
+            <div class="edit-field">
+                @Html.DropDownListFor(m => m.TriggerType, (IEnumerable<SelectListItem>)ViewBag.ListTriggerType)
+            </div>
         </div>
         <div class="filter-row">
             <div class="lbl-field width-80">

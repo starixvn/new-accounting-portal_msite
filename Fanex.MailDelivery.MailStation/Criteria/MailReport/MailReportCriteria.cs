@@ -18,6 +18,8 @@
 
         public int Status { get; set; }
 
+        public int TriggerType { get; set; }
+
         public override string GetSettingKey()
         {
             return "MailStation_MailReport_GetMailTaskList";

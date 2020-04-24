@@ -26,6 +26,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         {
             ViewBag.ListStatus = mailReportService.TaskStatus();
             ViewBag.ListSite = mailReportService.Sites();
+            ViewBag.ListTriggerType = mailReportService.Trigger();
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
             return View("~/Areas/MailStation/Report/MailReport/Index.cshtml");

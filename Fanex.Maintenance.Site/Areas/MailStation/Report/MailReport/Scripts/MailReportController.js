@@ -48,6 +48,7 @@ var MailReportController = function () {
             $('#FromDate').datepicker('setDate', new Date(cookie.FromDate));
             $('#ToDate').datepicker('setDate', new Date(cookie.ToDate));
             $('#Status').val(cookie.Status);
+            $('#TriggerType').val(cookie.TriggerType);
         }
     };
     self.renderDropdownRefresh = function () {
@@ -129,7 +130,8 @@ var MailReportController = function () {
             SiteId: $("#SiteId").val(),
             FromDate: $("#FromDate").val(),
             ToDate: $("#ToDate").val(),
-            Status: $("#Status").val()
+            Status: $("#Status").val(),
+            TriggerType: $("#TriggerType").val()
         };
         self.cachedData.searchParams = searchParams;
         $.cookie('MailReport', searchParams);
