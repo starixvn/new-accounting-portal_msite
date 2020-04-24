@@ -32,6 +32,7 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
                 Attempt = model.Attempt;
                 Interval = model.Interval;
                 Description = model.Description;
+                Owners = model.Owners;
             }
             else
             {
@@ -70,6 +71,8 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
         public int Interval { get; set; }
 
         public string Description { get; set; }
+
+        public string Owners { get; set; }
 
         public override bool IsValid()
         {

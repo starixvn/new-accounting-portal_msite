@@ -111,6 +111,14 @@
         </div>
         <div class="form-row">
             <div class="lbl-field width-100">
+                @Html.LabelFor(m => m.Owners, "Owners", new { @class = "bold-weight" })
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.Owners)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field width-100">
                 @Html.LabelFor(m => m.Description, "Description")
             </div>
             <div class="edit-field">

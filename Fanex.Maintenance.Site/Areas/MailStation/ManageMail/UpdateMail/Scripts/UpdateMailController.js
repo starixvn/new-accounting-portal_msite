@@ -46,6 +46,7 @@ var UpdateMailController = function () {
         MailCc: null,
         MailBcc: null,
         Description: null,
+        Owners: null,
         IsActive: null,
         BtnCancel: null,
         BtnSave: null
@@ -118,6 +119,7 @@ var UpdateMailController = function () {
         DOMElements.MailCc = $('#MailCc');
         DOMElements.MailBcc = $('#MailBcc');
         DOMElements.Description = $('#Description');
+        DOMElements.Owners = $('#Owners');
         DOMElements.IsActive = $('#IsActive');
         DOMElements.BtnSave = $('#button-save');
         DOMElements.BtnCancel = $('#button-cancel');
@@ -220,7 +222,8 @@ var UpdateMailController = function () {
                 MailCc: DOMElements.MailCc.getValue().join(','),
                 MailBcc: DOMElements.MailBcc.getValue().join(','),
                 IsActive: DOMElements.IsActive.is(':checked'),
-                Description: DOMElements.Description.val()
+                Description: DOMElements.Description.val(),
+                Owners: DOMElements.Owners.val()
             };
         }
 
@@ -242,7 +245,8 @@ var UpdateMailController = function () {
             EndOn: cronResult.EndOn,
             Attempt: cronResult.Attempt,
             Interval: cronResult.Interval,
-            Description: DOMElements.Description.val()
+            Description: DOMElements.Description.val(),
+            Owners: DOMElements.Owners.val()
         };
     };
 

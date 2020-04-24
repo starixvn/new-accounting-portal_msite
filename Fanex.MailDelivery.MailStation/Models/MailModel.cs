@@ -60,6 +60,8 @@ namespace Fanex.MailDelivery.MailStation.Models
 
         public string Description { get; set; }
 
+        public string Owners { get; set; }
+
         public DateTime? LastActive { get; set; }
 
         public bool IsClientOnline { get; set; }

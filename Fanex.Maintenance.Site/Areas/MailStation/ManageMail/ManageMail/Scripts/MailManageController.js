@@ -128,7 +128,6 @@ var MailManageController = function () {
                 }
 
                 self.bindEvents();
-                DOMElements.TriggerType.val(-1);
                 contextMenuController.bindContextMenuEvents();
                 DOMElements.btnSearch.click();
             },
@@ -182,6 +181,7 @@ var MailManageController = function () {
             rowColumns.push({ Name: "ColTo", Value: mail.MailTo });
             rowColumns.push({ Name: "ColCC", Value: mail.MailCc });
             rowColumns.push({ Name: "ColBCC", Value: mail.MailBcc });
+            rowColumns.push({ Name: "ColOwners", Value: mail.Owners });
             rowColumns.push({ Name: "ColLastSent", Value: mail.LastSent === null || mail.LastSent === '' ? 'N/A' : mail.LastSent });
             rowColumns.push({ Name: "ColActive", Value: mail.IsActive ? '<div class="ico-tick"></div>' : '' });
             if (viewResources.hasEditRight) {
@@ -213,6 +213,7 @@ var MailManageController = function () {
         headerColumns.push({ HeaderText: viewResources.To, Width: 120, Name: "ColTo", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true });
         headerColumns.push({ HeaderText: viewResources.CC, Width: 110, Name: "ColCC", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true });
         headerColumns.push({ HeaderText: viewResources.BCC, Width: 110, Name: "ColBCC", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true });
+        headerColumns.push({ HeaderText: viewResources.Owners, Width: 100, Name: "ColOwners", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true });
         headerColumns.push({ HeaderText: viewResources.Last_Run, Width: 150, Name: "ColLastSent", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A", AllowTruncate: true });
         headerColumns.push({ HeaderText: viewResources.Active, Width: 40, Name: "ColActive", HeaderAlign: "center", CellAlign: "center" });
         if (viewResources.hasEditRight) {

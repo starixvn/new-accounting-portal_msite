@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Fanex.MailDelivery.MailStation.Resources
-{
-
-
+namespace Fanex.MailDelivery.MailStation.Resources {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -507,6 +507,15 @@ namespace Fanex.MailDelivery.MailStation.Resources
         public static string Note {
             get {
                 return ResourceManager.GetString("Note", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owners.
+        /// </summary>
+        public static string Owners {
+            get {
+                return ResourceManager.GetString("Owners", resourceCulture);
             }
         }
         
