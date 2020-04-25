@@ -159,6 +159,7 @@ var MailReportController = function () {
             });
 
             rowColumns.push({ Name: "ColSite", Value: mail.SiteName });
+            rowColumns.push({ Name: "ColTrigger", Value: self.getTriggerIcon(mail) });
             rowColumns.push({ Name: "ColScheduledTime", Value: mail.ScheduledTime });
             rowColumns.push({ Name: "ColLastSent", Value: mail.LastSent });
             rowColumns.push({ Name: "ColStatus", Value: self.getStatusDisplay(mail, i) });
@@ -177,6 +178,7 @@ var MailReportController = function () {
         headerColumns.push({ HeaderText: viewResources.Id, Width: 40, Name: "ColId", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: viewResources.Mail_Name, Width: 340, Name: "ColMailName", HeaderAlign: "center", CellAlign: "left" });
         headerColumns.push({ HeaderText: viewResources.Site, Width: 150, Name: "ColSite", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: viewResources.Trigger, Width: 90, Name: "ColTrigger", HeaderAlign: "center", CellAlign: "center" });
         headerColumns.push({ HeaderText: viewResources.Scheduled_Time, Width: 150, Name: "ColScheduledTime", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
         headerColumns.push({ HeaderText: viewResources.Last_Run, Width: 150, Name: "ColLastSent", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
         headerColumns.push({ HeaderText: viewResources.Status, Width: 120, Name: "ColStatus", HeaderAlign: "center", CellAlign: "center" });
@@ -217,6 +219,17 @@ var MailReportController = function () {
 
         $("#mail-report").removeClass("display-none").fanexGrid(gridOptions);
         self.bindGridEvent();
+    };
+
+    self.getTriggerIcon = function (mail) {
+        switch (mail.TriggerType) {
+            case 0:
+                return '<div class="trigger-type trigger-function"></div>';
+            case 1:
+                return '<div class="trigger-type trigger-schedule"></div>';
+            default:
+                return '';
+        }
     };
 
     self.getStatusDisplay = function (mail, index) {
