@@ -222,6 +222,11 @@ var MailReportController = function () {
                     rows = self.customSortColumn(rows, sortColumnName, sortDirection);
 
                     return rows;
+                },
+                afterGridSorted: function (bodyRows) {
+                    self.bindGridEvent();
+
+                    return bodyRows;
                 }
             }
         };
@@ -291,6 +296,7 @@ var MailReportController = function () {
 
                 var startIndex = (self.gridOptions.pagerOption.currentPage * self.gridOptions.pagerOption.itemsPerPage);
                 var endIndex = ((self.gridOptions.pagerOption.currentPage + 1) * self.gridOptions.pagerOption.itemsPerPage);
+
                 result = sortedData.slice(startIndex, endIndex);
             }
         }
