@@ -221,6 +221,7 @@
     <Compile Include="Models\MailGroupModel.cs" />
     <Compile Include="Models\MailModel.cs" />
     <Compile Include="Models\MailTaskDetailModel.cs" />
+    <Compile Include="Models\MailTaskStatusCounterModel.cs" />
     <Compile Include="Models\SelectListItemExtra.cs" />
     <Compile Include="Models\SuggestMailModel.cs" />
     <Compile Include="Criteria\ManageRecipient\UpdateRecipientCriteria.cs" />

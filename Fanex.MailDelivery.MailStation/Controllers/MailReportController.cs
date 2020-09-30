@@ -39,6 +39,12 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
+        public ActionResult GetMailTaskStatusCounter()
+        {
+            return Json(mailReportService.GetMailTaskStatusCounter());
+        }
+
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
         public ActionResult MailDetail(int mailId)
         {
             var mailDetail = mailReportService.MailDetail(new MailDetailCriteria { MailId = mailId });

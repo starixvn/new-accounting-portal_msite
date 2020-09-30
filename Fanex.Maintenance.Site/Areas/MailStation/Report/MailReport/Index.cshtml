@@ -9,7 +9,7 @@
     var hasEditRight = PermissionService.HasHostPermission(MailDeliveryFunctionKeys.MailReport);
 }
 @section Head {
-    @Styles.Render("~/css/mail-report")    
+    @Styles.Render("~/css/mail-report")
     <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
     <link href="~/scripts/lib/Countdown/CountDown.less" rel="stylesheet" type="text/css" />
     <link href="~/Areas/MailStation/Report/MailReport/Styles/MailReport.less" rel="stylesheet" type="text/css" />
@@ -19,6 +19,17 @@
         <span class="title"><span class="first">@Labels.SystemName /</span> @ViewBag.Title</span>
     </h1>
 }
+<section id="dashboard">
+    <div>
+        <ul class="nav nav-pills">
+            <li role="presentation"><a href="#" class="missing-status">MISSING (<span class="missing-count">0</span>)</a></li>
+            <li role="presentation"><a href="#" class="missing-status">FAILED (<span class="failed-count">0</span>)</a></li>
+            <li role="presentation"><a href="#" class="running-status">RUNNING (<span class="running-count">0</span>)</a></li>
+            <li role="presentation"><a href="#">SUCCEEDED (<span class="succeeded-count">0</span>)</a></li>
+            <li role="presentation"><a href="#">SENT (<span class="sent-count">0</span>)</a></li>
+        </ul>
+    </div>
+</section>
 <section id="filter-bar">
     <div class="filter-form">
         <div class="filter-row">
@@ -28,7 +39,7 @@
             <div class="edit-field" style="width: 372px !important">
                 @Html.TextBoxFor(m => m.MailName, new { style = "width: 360px !important" })
             </div>
-            
+
             <div class="lbl-field">
                 @Html.LabelFor(m => m.SiteId, "Site")
             </div>

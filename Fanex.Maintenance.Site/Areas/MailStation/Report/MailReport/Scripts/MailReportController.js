@@ -35,6 +35,7 @@ var MailReportController = function () {
     self.initPage = function () {
         self.loadFilter();
         self.bindEvents();
+        self.getMailTaskStatusCounter();
         self.getMailReport();
     };
 
@@ -142,6 +143,21 @@ var MailReportController = function () {
             self.renderMailReport,
             null,
             sharedScriptManager.unblockUI);
+    };
+
+    self.getMailTaskStatusCounter = function () {
+        sharedScriptManager.callAjax(self,
+            window.rootUrl + "MailStation/MailReport/GetMailTaskStatusCounter",
+            null,
+            function (result) {
+                if (result) {
+                    var $dashboard = $("#dashboard");
+
+                    $dashboard.find(".missing-count").text(result.MissingItemCount);
+                }
+            },
+            null,
+            null);
     };
 
     self.renderMailReport = function (result) {

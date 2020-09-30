@@ -98,6 +98,32 @@ namespace Fanex.MailDelivery.MailStation.Services
             return mailTasks.OrderBy(m => m.MailName).ThenByDescending(m => m.ScheduledTime).ThenByDescending(m => m.LastSent).ToList();
         }
 
+        public MailTaskStatusCounterModel GetMailTaskStatusCounter()
+        {
+            var criteria = new MailReportCriteria
+            {
+                FromDate = DateTime.Now.Date,
+                ToDate = DateTime.Now.Date,
+                MailName = null,
+                SiteId = -1,
+                Status = -1,
+                TriggerType = -1
+            };
+
+            List<MailTaskModel> mailTasks = MailReport(criteria);
+
+            var counter = new MailTaskStatusCounterModel
+            {
+                MissingItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.Missing),
+                FailedItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.JobFailed),
+                RunningItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.Running),
+                SentItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.Success),
+                SucceededItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.SuccessWithoutSendmail)
+            };
+
+            return counter;
+        }
+
         private static List<MailTaskDetailModel> GetMailTaskDetails(GetAllScheduleCriteria getAllScheduleCriteria)
         {
             using (ObjectDb db = new ObjectDb(getAllScheduleCriteria.GetSettingKey()))
