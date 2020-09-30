@@ -25,6 +25,7 @@ var MailReportController = function () {
             ScheduleMail: 1
         }
     };
+    self.gridOptions = {};
 
     self.cachedData = {
         searchParams: null,
@@ -155,14 +156,15 @@ var MailReportController = function () {
                 Name: "ColMailName",
                 Value: mail.MSiteMailId == 0 ? mail.MailName : '<a class="link mail-name" href="javascript:;"' + mailIndex + '>' +
                            mail.MailName +
-                       '</a>'
+                       '</a>',
+                Data: mail.MailName
             });
 
-            rowColumns.push({ Name: "ColSite", Value: mail.SiteName });
+            rowColumns.push({ Name: "ColSite", Value: mail.SiteName, Data: mail.SiteName });
             rowColumns.push({ Name: "ColTrigger", Value: self.getTriggerIcon(mail) });
             rowColumns.push({ Name: "ColScheduledTime", Value: mail.ScheduledTime });
             rowColumns.push({ Name: "ColLastSent", Value: mail.LastSent });
-            rowColumns.push({ Name: "ColStatus", Value: self.getStatusDisplay(mail, i) });
+            rowColumns.push({ Name: "ColStatus", Value: self.getStatusDisplay(mail, i), Data: self.getStatusName(mail.Status) });
             if (viewResources.hasEditRight) {
                 rowColumns.push({ Name: "ColAction", Value: self.getActionColumn(mail, i) });
             }
@@ -176,18 +178,18 @@ var MailReportController = function () {
         self.cachedData.bodyRows = bodyData;
         var headerColumns = [];
         headerColumns.push({ HeaderText: viewResources.Id, Width: 40, Name: "ColId", HeaderAlign: "center", CellAlign: "center" });
-        headerColumns.push({ HeaderText: viewResources.Mail_Name, Width: 340, Name: "ColMailName", HeaderAlign: "center", CellAlign: "left" });
-        headerColumns.push({ HeaderText: viewResources.Site, Width: 150, Name: "ColSite", HeaderAlign: "center", CellAlign: "left" });
+        headerColumns.push({ HeaderText: viewResources.Mail_Name, Width: 340, Name: "ColMailName", HeaderAlign: "center", CellAlign: "left", Sort: true });
+        headerColumns.push({ HeaderText: viewResources.Site, Width: 150, Name: "ColSite", HeaderAlign: "center", CellAlign: "left", Sort: true });
         headerColumns.push({ HeaderText: viewResources.Trigger, Width: 90, Name: "ColTrigger", HeaderAlign: "center", CellAlign: "center" });
-        headerColumns.push({ HeaderText: viewResources.Scheduled_Time, Width: 150, Name: "ColScheduledTime", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
-        headerColumns.push({ HeaderText: viewResources.Last_Run, Width: 150, Name: "ColLastSent", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
-        headerColumns.push({ HeaderText: viewResources.Status, Width: 120, Name: "ColStatus", HeaderAlign: "center", CellAlign: "center" });
+        headerColumns.push({ HeaderText: viewResources.Scheduled_Time, Width: 150, Name: "ColScheduledTime", HeaderAlign: "center", CellAlign: "center", Sort: true, FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
+        headerColumns.push({ HeaderText: viewResources.Last_Run, Width: 150, Name: "ColLastSent", HeaderAlign: "center", CellAlign: "center", Sort: true, FormatDateTime: "MMM DD, YYYY hh:mm:ss A" });
+        headerColumns.push({ HeaderText: viewResources.Status, Width: 120, Name: "ColStatus", HeaderAlign: "center", CellAlign: "center", Sort: true });
         if (viewResources.hasEditRight) {
             headerColumns.push({ HeaderText: viewResources.Action, Width: 120, Name: "ColAction", HeaderAlign: "center", CellAlign: "center" });
         }
 
         headerColumns.push({ HeaderText: viewResources.Log, Width: 120, Name: "ColLog", HeaderAlign: "center", CellAlign: "center" });
-        var gridOptions = {
+        self.gridOptions = {
             columns: headerColumns,
             showTitle: false,
             bodyRows: self.cachedData.bodyRows.slice(0, sharedScriptManager.cachedData.defaultItemsPerPage),
@@ -204,21 +206,96 @@ var MailReportController = function () {
                 itemsPerPageArray: sharedScriptManager.cachedData.pagingOptions,
                 totalItem: bodyData.length,
                 pagerSelectCallBack: function (page_index, itemsPerPage, jq) {
-                    gridOptions.pagerOption.itemsPerPage = itemsPerPage;
-                    gridOptions.pagerOption.currentPage = page_index;
+                    self.gridOptions.pagerOption.itemsPerPage = itemsPerPage;
+                    self.gridOptions.pagerOption.currentPage = page_index;
                     var startIndex = (page_index * itemsPerPage);
                     var endIndex = ((page_index + 1) * itemsPerPage);
                     var currentBodyRows = self.cachedData.bodyRows.slice(startIndex, endIndex);
-                    gridOptions.bodyRows = currentBodyRows;
-                    $("#mail-report").fanexGrid(gridOptions);
+                    self.gridOptions.bodyRows = currentBodyRows;
+                    $("#mail-report").fanexGrid(self.gridOptions);
                     self.bindGridEvent();
                     return false;
+                }
+            },
+            sortOption: {
+                customGridSort: function (rows, sortColumnName, sortDirection) {
+                    rows = self.customSortColumn(rows, sortColumnName, sortDirection);
+
+                    return rows;
                 }
             }
         };
 
-        $("#mail-report").removeClass("display-none").fanexGrid(gridOptions);
+        $("#mail-report").removeClass("display-none").fanexGrid(self.gridOptions);
         self.bindGridEvent();
+    };
+
+    self.customSortColumn = function (rows, sortColumnName, sortDirection) {
+        var result = rows;
+
+        if (rows && rows.length > 0) {
+            var index = -1;
+
+            var cols = $.grep(rows[0].Columns, function (item) {
+                return item.Name === sortColumnName;
+            });
+
+            if (cols.length > 0) {
+                index = rows[0].Columns.indexOf(cols[0]);
+            }
+
+            if (index !== -1) {
+                var sortedData = self.cachedData.bodyRows;
+
+                switch (sortColumnName) {
+                    case "ColMailName":
+                    case "ColSite":
+                    case "ColStatus":
+                        sortedData.sort(function (row1, row2) {
+                            var value1 = row1.Columns[index].Data,
+                                value2 = row2.Columns[index].Data,
+                                comparison = value1.localeCompare(value2);
+
+                            return comparison;
+                        });
+                        break;
+
+                    case "ColLastSent":
+                    case "ColScheduledTime":
+                        sortedData.sort(function (row1, row2) {
+                            var value1 = row1.Columns[index].Value,
+                                value2 = row2.Columns[index].Value,
+                                comparison = 0;
+
+                            if (value1 && value2) {
+                                var date1 = moment(value1),
+                                     date2 = moment(value2);
+
+                                comparison = date1 - date2;
+                            } else if (!value1 && value2) {
+                                comparison = -1;
+                            } else if (value1 && !value2) {
+                                comparison = 1;
+                            } else {
+                                comparison = 0;
+                            }
+
+                            return comparison;
+                        });
+                        break;
+                }
+
+                if (sortDirection === 'desc') {
+                    sortedData.reverse();
+                }
+
+                var startIndex = (self.gridOptions.pagerOption.currentPage * self.gridOptions.pagerOption.itemsPerPage);
+                var endIndex = ((self.gridOptions.pagerOption.currentPage + 1) * self.gridOptions.pagerOption.itemsPerPage);
+                result = sortedData.slice(startIndex, endIndex);
+            }
+        }
+
+        return result;
     };
 
     self.getTriggerIcon = function (mail) {
@@ -255,6 +332,39 @@ var MailReportController = function () {
             case self.Enums.TaskStatus.Missing:
                 return '<div class="column-status missing-status"' + mailIndex + '>' + viewResources.Missing.toUpperCase() + '</div>';
         }
+    };
+
+    self.getStatusName = function (status) {
+        var statusName = "";
+
+        switch (status) {
+            case self.Enums.TaskStatus.Waiting:
+                statusName = viewResources.Waiting.toUpperCase();
+                break;
+            case self.Enums.TaskStatus.Running:
+                statusName = viewResources.Running.toUpperCase();
+                break;
+            case self.Enums.TaskStatus.DataNotReady:
+                statusName = viewResources.Data_not_ready.toUpperCase();
+                break;
+            case self.Enums.TaskStatus.Sent:
+                statusName = viewResources.Sent.toUpperCase();
+                break;
+            case self.Enums.TaskStatus.Failed:
+                statusName = viewResources.Failed.toUpperCase();
+                break;
+            case self.Enums.TaskStatus.Abort:
+                statusName = viewResources.Abort;
+                break;
+            case self.Enums.TaskStatus.Succeeded:
+                statusName = viewResources.Succeeded.toUpperCase();
+                break;
+            case self.Enums.TaskStatus.Missing:
+                statusName = viewResources.Missing.toUpperCase();
+                break;
+        }
+
+        return statusName;
     };
 
     self.getActionColumn = function (mail, index) {
