@@ -19,14 +19,15 @@
         <span class="title"><span class="first">@Labels.SystemName /</span> @ViewBag.Title</span>
     </h1>
 }
-<section id="dashboard">
+<section id="dashboard" data-current-date="">
     <div>
         <ul class="nav nav-pills">
-            <li role="presentation"><a href="#" class="missing-status">MISSING (<span class="missing-count">0</span>)</a></li>
-            <li role="presentation"><a href="#" class="missing-status">FAILED (<span class="failed-count">0</span>)</a></li>
-            <li role="presentation"><a href="#" class="running-status">RUNNING (<span class="running-count">0</span>)</a></li>
-            <li role="presentation"><a href="#">SUCCEEDED (<span class="succeeded-count">0</span>)</a></li>
-            <li role="presentation"><a href="#">SENT (<span class="sent-count">0</span>)</a></li>
+            <li role="presentation" class="nav-title">Today</li>
+            <li role="presentation"><a href="#" class="status missing-status" data-status-id="8">MISSING (<span class="missing-count">0</span>)</a></li>
+            <li role="presentation"><a href="#" class="status missing-status" data-status-id="3">FAILED (<span class="failed-count">0</span>)</a></li>
+            <li role="presentation"><a href="#" class="status running-status" data-status-id="1">RUNNING (<span class="running-count">0</span>)</a></li>
+            <li role="presentation"><a href="#" class="status" data-status-id="7">SUCCEEDED (<span class="succeeded-count">0</span>)</a></li>
+            <li role="presentation"><a href="#" class="status" data-status-id="4">SENT (<span class="sent-count">0</span>)</a></li>
         </ul>
     </div>
 </section>

@@ -118,7 +118,8 @@ namespace Fanex.MailDelivery.MailStation.Services
                 FailedItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.JobFailed),
                 RunningItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.Running),
                 SentItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.Success),
-                SucceededItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.SuccessWithoutSendmail)
+                SucceededItemCount = mailTasks.Count(x => x.Status == (int)JobStatus.SuccessWithoutSendmail),
+                CurrentDate = DateTime.Now.Date
             };
 
             return counter;

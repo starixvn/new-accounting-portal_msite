@@ -104,21 +104,81 @@ input[type="submit"]:hover, input[type="submit"] {
     }
 }
 
-.trigger-type
-{
+.trigger-type {
     height: 25px;
-    width: 80px;    
+    width: 80px;
     line-height: 25px;
     vertical-align: middle;
     color: #FFFFFF;
-    
-    &.trigger-function
-    {
-       background: url("Images/trigger.png") no-repeat scroll right 2px transparent;
+
+    &.trigger-function {
+        background: url("Images/trigger.png") no-repeat scroll right 2px transparent;
     }
-    
-    &.trigger-schedule
-    {
-       background: url("Images/trigger.png") no-repeat scroll right -27px transparent;
+
+    &.trigger-schedule {
+        background: url("Images/trigger.png") no-repeat scroll right -27px transparent;
+    }
+}
+
+
+#dashboard {
+    height: 50px;
+    margin-top: -10px;
+
+    .nav {
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+        margin-left: 5px;
+    }
+
+    .nav-pills > li {
+        float: left;
+        background-color: white;
+        border-top: 3px solid #65adcb;
+
+        &.nav-title {
+            background-color: inherit;
+            border: 0;
+            padding: 5px 0;
+        }
+    }
+
+    .nav > li {
+        position: relative;
+        display: block;
+        font-size: 1.6em;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+        color: #fff;
+        background-color: #337ab7;
+    }
+
+    .nav-pills > li > a {
+        border-radius: 4px;
+    }
+
+    .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 5px 0;
+        width: 190px;
+        text-align: center;
+        color: black;
+
+        &.missing-status {
+            color: red;
+        }
+
+        &.running-status {
+            color: blue;
+        }
+    }
+
+    .nav-pills > li + li {
+        margin-left: 10px;
     }
 }

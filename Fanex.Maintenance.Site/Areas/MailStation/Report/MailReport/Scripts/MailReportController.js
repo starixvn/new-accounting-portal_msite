@@ -71,7 +71,7 @@ var MailReportController = function () {
             options += '<div class="countDownOption' + (i === 0 ? ' countDownOptionCheck' : '') +
                 '" value="' + countDown.Value + '">' +
                     displayName +
-                '</div>'
+                '</div>';
         }
 
         $(".countDownOptionContainer").empty().append(options);
@@ -115,8 +115,24 @@ var MailReportController = function () {
                 self.getMailReport();
             }
         });
+
+        $("#dashboard").on("click", ".status", function () {
+            var statusId = $(this).data("status-id"),
+                currentDate = $("#dashboard").data("current-date");
+
+            $("#MailName").val('');
+            $("#SiteId").val(-1);
+            $("#TriggerType").val(-1);
+            $("#Status").val(statusId);
+            $("#FromDate").val(currentDate);
+            $("#ToDate").val(currentDate);
+
+            self.getMailReport();
+        });
     };
     self.refreshMailReport = function () {
+        self.getMailTaskStatusCounter();
+
         sharedScriptManager.blockUI();
         sharedScriptManager.callAjax(self,
             window.rootUrl + "MailStation/MailReport/MailReport",
@@ -153,7 +169,12 @@ var MailReportController = function () {
                 if (result) {
                     var $dashboard = $("#dashboard");
 
+                    $dashboard.data("current-date", moment(result.CurrentDate).format("MMM DD,YYYY"));
                     $dashboard.find(".missing-count").text(result.MissingItemCount);
+                    $dashboard.find(".failed-count").text(result.FailedItemCount);
+                    $dashboard.find(".running-count").text(result.RunningItemCount);
+                    $dashboard.find(".succeeded-count").text(result.SucceededItemCount);
+                    $dashboard.find(".sent-count").text(result.SentItemCount);
                 }
             },
             null,
@@ -190,7 +211,7 @@ var MailReportController = function () {
             bodyData.push({
                 Columns: rowColumns
             });
-        };
+        }
         self.cachedData.bodyRows = bodyData;
         var headerColumns = [];
         headerColumns.push({ HeaderText: viewResources.Id, Width: 40, Name: "ColId", HeaderAlign: "center", CellAlign: "center" });

@@ -1,4 +1,6 @@
-﻿namespace Fanex.MailDelivery.MailStation.Models
+﻿using System;
+
+namespace Fanex.MailDelivery.MailStation.Models
 {
     public class MailTaskStatusCounterModel
     {
@@ -11,5 +13,7 @@
         public int SucceededItemCount { get; set; }
 
         public int SentItemCount { get; set; }
+
+        public DateTime CurrentDate { get; set; }
     }
 }
