@@ -74,6 +74,8 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 
         public string Owners { get; set; }
 
+        public string ModifiedBy { get; set; }
+
         public override bool IsValid()
         {
             return true;

@@ -85,6 +85,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             {
                 criteria.EndOn = criteria.EndOn.Value.ToUniversalTime();
             }
+            criteria.ModifiedBy = CurrentSession.Username;
 
             return Json(mailManageService.CreateMail(criteria), JsonRequestBehavior.AllowGet);
         }
@@ -123,6 +124,8 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public JsonResult UpdateMail(UpdateMailCriteria criteria)
         {
+            criteria.ModifiedBy = CurrentSession.Username;
+
             CommandResult commandResult = mailManageService.UpdateMail(criteria);
 
             return Json(commandResult, JsonRequestBehavior.AllowGet);
