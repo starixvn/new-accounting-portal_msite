@@ -31,6 +31,8 @@
       <Mapping DataField="Interval" ObjectProperty="RetryInterval" />
       <Mapping DataField="Attempt" ObjectProperty="MaxRetryTimes" />
     </Setting>
+    <Setting Key="Mail_MailManagement_GetLog" SpName="Mail_MailManagement_GetLog" DbName="DBMMS.bodb_MMS.bodbAdminNet">
+    </Setting>
   </Function>
 
   <Function Name="Mail Report">

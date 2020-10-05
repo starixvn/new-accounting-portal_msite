@@ -69,6 +69,12 @@
                 "~/scripts/lib/XMLEditor/js/ext/GLR/css/GLR.messenger.css");
 
             bundles.AddAndInclude(
+                "~/css/mail-manage",
+                "~/themes/manage/log/manage.less",
+                "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css");
+
+            bundles.AddAndInclude(
                 "~/css/mail-report",
                 "~/themes/manage/log/manage.less",
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",

@@ -194,6 +194,7 @@
     <Compile Include="Criteria\MailGroup\DeleteMailGroupCriteria.cs" />
     <Compile Include="Criteria\MailGroup\UpdateMailGroupCriteria.cs" />
     <Compile Include="Criteria\MailManage\DeleteMailCriteria.cs" />
+    <Compile Include="Criteria\MailManage\GetMailLogByIdCriteria.cs" />
     <Compile Include="Criteria\MailManage\GetMailByIdCriteria.cs" />
     <Compile Include="Criteria\MailManage\UpdateMailCriteria.cs" />
     <Compile Include="Criteria\MailManage\CreateMailCriteria.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Extensions\TimeZoneExtension.cs" />
     <Compile Include="Logging\RabbitMQLogProvider.cs" />
     <Compile Include="Models\CustomTimeZone.cs" />
+    <Compile Include="Models\MailActionLogModel.cs" />
     <Compile Include="Models\MailGroupModel.cs" />
     <Compile Include="Models\MailModel.cs" />
     <Compile Include="Models\MailTaskDetailModel.cs" />

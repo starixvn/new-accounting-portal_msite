@@ -184,6 +184,7 @@ var MailManageController = function () {
             rowColumns.push({ Name: "ColOwners", Value: mail.Owners });
             rowColumns.push({ Name: "ColLastSent", Value: mail.LastSent === null || mail.LastSent === '' ? 'N/A' : mail.LastSent });
             rowColumns.push({ Name: "ColActive", Value: mail.IsActive ? '<div class="ico-tick"></div>' : '' });
+            rowColumns.push({ Name: "ColLog", Value: '<div class="icon-view-log" ' + mailIndex + ' data-mail-name="' + mail.MailName + '"></div>' });
             if (viewResources.hasEditRight) {
                 rowColumns.push({
                     Name: "ColAction",
@@ -200,7 +201,7 @@ var MailManageController = function () {
 
             bodyData.push({
                 Columns: rowColumns,
-                CssClass: mail.IsClientOnline == false ? 'client-off-line': ''
+                CssClass: mail.IsClientOnline == false ? 'client-off-line' : ''
             });
         }
 
@@ -216,6 +217,7 @@ var MailManageController = function () {
         headerColumns.push({ HeaderText: viewResources.Owners, Width: 100, Name: "ColOwners", HeaderAlign: "center", CellAlign: "left", AllowTruncate: true });
         headerColumns.push({ HeaderText: viewResources.Last_Run, Width: 150, Name: "ColLastSent", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A", AllowTruncate: true });
         headerColumns.push({ HeaderText: viewResources.Active, Width: 40, Name: "ColActive", HeaderAlign: "center", CellAlign: "center" });
+        headerColumns.push({ HeaderText: viewResources.Log, Width: 40, Name: "ColLog", HeaderAlign: "center", CellAlign: "center" });
         if (viewResources.hasEditRight) {
             headerColumns.push({ HeaderText: viewResources.Action, Width: 50, Name: "ColAction", HeaderAlign: "center", CellAlign: "center" });
             headerColumns.push({ HeaderText: '', Width: 80, Name: "ColRunNow", HeaderAlign: "center", CellAlign: "center" });
@@ -298,6 +300,31 @@ var MailManageController = function () {
             var mailid = parseInt($this.attr("mailid"));
             self.editMail(mailid);
         });
+
+        DOMElements.gridContainer.find(".icon-view-log").click(function (event) {
+            var mailId = parseInt($(this).attr("mailid")),
+                mailName = $(this).data("mail-name");
+
+            self.viewMailLog(mailId, mailName);
+        });
+    };
+
+    self.viewMailLog = function (mailId, mailName) {
+        popUpManager.openPopup(
+            window.rootUrl + 'MailStation/MailManage/MailActionLog?' +
+            $.param({
+                mailId: mailId
+            }),
+            viewResources.Log + ' > ' + mailName,
+            670,
+            500,
+            true,
+            false,
+            parent.window,
+            3000,
+            null,
+            null,
+            ['center', 80]);
     };
 
     self.runNow = function (mailIndex, callBack) {

@@ -98,6 +98,15 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             return Json(result);
         }
 
+        [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
+        public ActionResult MailActionLog(int mailId)
+        {
+            var mailLog = mailManageService.MailLogById(new GetMailLogByIdCriteria { MailId = mailId });
+            ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
+
+            return View("~/Areas/MailStation/ManageMail/MailActionLog/Index.cshtml", mailLog);
+        }
+
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public ActionResult DeleteMail(DeleteMailCriteria criteria)
         {

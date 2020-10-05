@@ -319,6 +319,7 @@
     <Content Include="App_Data\UAT\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\MailStation\ManageMail\MailActionLog\Scripts\MailActionLogController.js" />
     <Content Include="Areas\MailStation\Report\MailReport\Styles\Images\trigger.png" />
     <Content Include="Areas\TracingSp\AppData\backupMNL\DBServerList.xml" />
     <Content Include="Areas\TracingSp\AppData\LOCAL\DBServerList.xml">
@@ -932,6 +933,8 @@
     <Content Include="Areas\TracingSp\Web.config" />
     <Content Include="Areas\TracingSp\Styles\style.less" />
     <Content Include="packages.config" />
+    <Content Include="Areas\MailStation\ManageMail\MailActionLog\Index.cshtml" />
+    <Content Include="Areas\MailStation\ManageMail\MailActionLog\Styles\MailActionLog.less" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="scripts\lib\Fanex.Grid\Fanex.Grid.less" />
     <Content Include="scripts\lib\InputCombobox\colors.less" />

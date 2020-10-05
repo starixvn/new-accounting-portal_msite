@@ -60,6 +60,16 @@ namespace Fanex.MailDelivery.MailStation.Services
             }
         }
 
+        public IList<MailActionLogModel> MailLogById(GetMailLogByIdCriteria criteria)
+        {
+            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                db.AssignParamValues(criteria.GetSpParams());
+
+                return db.Query<MailActionLogModel>().ToList();
+            }
+        }
+
         public CommandResult CreateMail(CreateMailCriteria criteria)
         {
             return ExecuteNonQuery(criteria);
