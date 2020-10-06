@@ -14,21 +14,21 @@
     </h1>
 }
 @using (Html.BeginForm())
-{ 
+{
     <section id="filter-bar">
         <div class="filter-form">
             <div class="lbl-field width-auto">
                 @Html.Label("Application")
             </div>
             <div class="edit-field width-180">
-            @if (hasLimitedConfigPermission)
-            { 
-                @Html.DropDownList("ApplicationID", (List<SelectListItem>)ViewBag.ListMailConfig, new { @class = "width-180" })
-            }
-            else
-            { 
-                @Html.DropDownList("ApplicationID", (List<SelectListItem>)ViewBag.ListMailConfig, "All", new { @class = "width-180" })
-            }
+                @if (hasLimitedConfigPermission)
+                {
+                    @Html.DropDownList("ApplicationID", (List<SelectListItem>)ViewBag.ListMailConfig, new { @class = "width-180" })
+                }
+                else
+                {
+                    @Html.DropDownList("ApplicationID", (List<SelectListItem>)ViewBag.ListMailConfig, "All", new { @class = "width-180" })
+                }
             </div>
             <div class="lbl-field width-auto">
                 @Html.Label("Status")
@@ -53,27 +53,33 @@
             </div>
         </div>
     </section>
-    <div id="refreshCountDownId" refresh-id="refreshCountDown" class="btnCountDown refresh">
-        <span>Refresh</span>
-        <div id="ddlCountDown" class="btnCountDown clearfix">
-            <div id="countdownrefresh" class="btnRefresh" title="Refresh">
-            </div>
-            <div class="btnDown" id="btndown">
-            </div>
+    <div class="grid-toolbox">
+        <div class="btnResend" style="display:none">
+            <input type="button" value="Resend" id="btnResendMulti" />
         </div>
-        <ul id="countdownmenu" class="panelDown">
-            <li data-intervaltime="0" class="menuitem">Inactive</li>
-            @for (var i = 15; i <= 75; i += 15)
-            {
-                <li data-intervaltime="@i.ToString()" class="menuitem">
-                    @(i.ToString())
-                    sec </li>
-            }
-            <li data-intervaltime="180" class="menuitem">180 sec</li>
-        </ul>
-        <span class="refresh" id="btnrefresh"></span>
-        <input type="hidden" id="apo-on-refresh" value="MailList.generateData(50, 0);" />
-        <input type="hidden" id="inactive" value="Inactive" />
+        <div id="refreshCountDownId" refresh-id="refreshCountDown" class="btnCountDown refresh">
+            <span>Refresh</span>
+            <div id="ddlCountDown" class="btnCountDown clearfix">
+                <div id="countdownrefresh" class="btnRefresh" title="Refresh">
+                </div>
+                <div class="btnDown" id="btndown">
+                </div>
+            </div>
+            <ul id="countdownmenu" class="panelDown">
+                <li data-intervaltime="0" class="menuitem">Inactive</li>
+                @for (var i = 15; i <= 75; i += 15)
+                {
+                    <li data-intervaltime="@i.ToString()" class="menuitem">
+                        @(i.ToString())
+                        sec
+                    </li>
+                }
+                <li data-intervaltime="180" class="menuitem">180 sec</li>
+            </ul>
+            <span class="refresh" id="btnrefresh"></span>
+            <input type="hidden" id="apo-on-refresh" value="MailList.generateData(50, 0);" />
+            <input type="hidden" id="inactive" value="Inactive" />
+        </div>
     </div>
     <div id="gridId" class="freegrid  content-grid">
     </div>

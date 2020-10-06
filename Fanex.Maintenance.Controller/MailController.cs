@@ -1,12 +1,5 @@
 ﻿namespace Fanex.Maintenance.Controller
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Configuration;
-    using System.Globalization;
-    using System.IO;
-    using System.Linq;
-    using System.Web.Mvc;
     using Fanex.MailDeliver.Model;
     using Fanex.Maintenance.Repository.Criteria.MailService;
     using Fanex.Maintenance.Service.Impl.Mail;
@@ -15,6 +8,13 @@
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Attribute;
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Web.Mvc;
 
     /// <summary>
     /// Mail Controller.
@@ -600,6 +600,24 @@
             }
 
             return Json(false);
+        }
+
+        [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ResendMail, Policy = Constant.Policy.Host)]
+        public ActionResult ResendMultipleMails(int[] mailIds)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                foreach (var mailId in mailIds)
+                {
+                    if (mailId > 0)
+                    {
+                        _mailServer.SendMail(mailId);
+                    }
+                }
+            }
+
+            return new EmptyResult();
         }
 
         /// <summary>
