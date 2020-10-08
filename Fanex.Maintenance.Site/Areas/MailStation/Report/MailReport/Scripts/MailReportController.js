@@ -331,10 +331,13 @@ var MailReportController = function () {
                     sortedData.reverse();
                 }
 
+                self.gridOptions.pagerOption.currentPage = 0;
                 var startIndex = (self.gridOptions.pagerOption.currentPage * self.gridOptions.pagerOption.itemsPerPage);
                 var endIndex = ((self.gridOptions.pagerOption.currentPage + 1) * self.gridOptions.pagerOption.itemsPerPage);
 
                 result = sortedData.slice(startIndex, endIndex);
+                self.gridOptions.bodyRows = result;
+                $("#mail-report").fanexGrid(self.gridOptions);
             }
         }
 
