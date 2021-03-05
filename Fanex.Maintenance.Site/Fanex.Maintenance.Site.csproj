@@ -785,6 +785,9 @@
     <Content Include="Views\Mail\AddMailSettingPopUp.cshtml" />
     <Content Include="Views\Mail\GetMessage.cshtml" />
     <Content Include="Views\DatabaseReport\DataIntegrity.cshtml" />
+    <Content Include="WebConnectionString.aws.config">
+      <DependentUpon>WebConnectionString.config</DependentUpon>
+    </Content>
     <Content Include="WebConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
@@ -963,6 +966,9 @@
     <Content Include="Web.uat.config" />
     <Content Include="themes\manage\LetstalkReport.less" />
     <Content Include="Views\RemotingRef\Index.cshtml" />
+    <Content Include="Web.aws.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
