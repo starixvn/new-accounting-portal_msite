@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Delete Temp Variable";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/css/manage")
+}
+@section Headline {
+    <h1>
+        <span class="title">Match</span>
+    </h1>
+}
+@using (Html.BeginForm())
+{
+    <section id="filter-bar">
+        <div class="filter-form">
+            <div class="lbl-field width-auto">
+                MatchId
+            </div>
+            <div class="edit-field">
+                @Html.TextBox("MatchId")
+            </div>
+            <div class="submit">
+                <input type="submit" value="@ViewResource.Submit" />
+            </div>
+        </div>
+    </section>
+}
+<table class="grid" style="width: 99.2%">
+    <thead>
+        <tr>
+            <th class="width-100">
+                MatchId
+            </th>
+            <th class="width-300">
+                Event Name
+            </th>
+            <th class="width-300">
+                Created Date
+            </th>
+            <th class="width-60">
+                SportType
+            </th>
+            <th class="width-50">
+                Action
+            </th>
+            <th class="width-100">
+                IsCal
+            </th>
+            <th class="width-300">
+                Product
+            </th>
+            <th class="width-50">
+                Value 2
+            </th>
+            <th>
+                Error Message
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+            var matches = ViewBag.Matches as List<Match>;
+            if (matches.Count > 0)
+            {
+                foreach (Match match in matches)
+                {
+                    string row_class = i % 2 == 0 ? "alt" : string.Empty;
+
+                    <tr class="@row_class">
+                        <td class="align-center">
+                            @Html.ActionLink(match.MatchId.ToString(), "Detail", "DeleteTempVariable", new { matchId = match.MatchId, keyId = match.KeyId, actionName = match.Action, marketId = match.MarketId }, null)
+                        </td>
+                        <td>
+                            @match.EventName
+                        </td>
+                        <td class="align-center">
+                            @match.CreatedDateTime.ToString("MMM dd, yyyy hh:mm:ss tt")
+                        </td>
+                        <td class="align-center">
+                            @match.SportName
+                        </td>
+                        <td class="align-center">
+                            @match.Action
+                        </td>
+                        <td class="align-center">
+                            @match.Status
+                        </td>
+                        <td class="align-center">
+                            @match.ProductName
+                        </td>
+                        <td class="align-center">
+                            @match.MarketId
+                        </td>
+                        <td>
+                            @match.ErrorMsg
+                        </td>
+                    </tr>
+                    i++;
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="9" class="align-center">
+                        @ViewResource.NoInformationAvailable
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

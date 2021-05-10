@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions SiteId="66" SiteName="mSite">
+	<Function Name="TempVariableNumber ">
+		<Setting Key="NAP_Set_MatchLockingDel" SpName="NAP_Set_MatchLockingDel" DbName="DBTXN.bodb02.bodbAdminNet" />
+		<Setting Key="NAP_Set_MatchLockingSel" SpName="NAP_Set_MatchLockingSel" DbName="DBTXN.bodb02.bodbAdminNet" />
+		<Setting Key="NAP_Set_MatchLockingTicketSel" SpName="NAP_Set_MatchLockingTicketSel" DbName="DBTXN.bodb02.bodbAdminNet" />
+	</Function>
+</Functions>

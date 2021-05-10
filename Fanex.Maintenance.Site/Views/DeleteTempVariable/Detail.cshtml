@@ -1,0 +1,111 @@
+﻿@using Fanex.Maintenance.Core.Model
+@model Match
+@{
+    ViewBag.Title = ViewResource.EditMachine;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var hasDeleteRight = (bool)ViewBag.HasDelete;
+}
+@section Head {
+    @Styles.Render("~/css/manage")
+}
+@section Headline {
+    <h1>
+        <span class="title">Detail</span>
+        @Html.ActionLink("← " + ViewResource.Back_To_List, "Index", "DeleteTempVariable", null, new { @class = "lnk" })
+    </h1>
+}
+@using (Html.BeginForm())
+{
+    <div class="form">
+        <table style="border-spacing: 13px !important; border-collapse:unset !important">
+            <tr>
+                <td class="width-100 align-right">MatchId:</td>
+                <td>@Model.MatchId</td>
+            </tr>
+            <tr>
+                <td class="align-right">SportType:</td>
+                <td>@Model.SportName</td>
+            </tr>
+            <tr>
+                <td class="align-right">Event Name:</td>
+                <td>@Model.EventName</td>
+            </tr>
+            <tr>
+                <td class="align-right">Product:</td>
+                <td>@Model.ProductName</td>
+            </tr>
+            <tr>
+                <td class="align-right">Running Tickets:</td>
+                <td>@Model.TicketCount</td>
+            </tr>
+            <tr>
+                <td class="align-right">Action:</td>
+                <td>@Model.Action</td>
+            </tr>
+            <tr>
+                <td class="align-right">IsCal:</td>
+                <td>@Model.Status</td>
+            </tr>
+            <tr>
+                <td class="align-right">Wrong Balance:</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="align-right">Error Message:</td>
+                <td>@Model.ErrorMsg</td>
+            </tr>
+            <tr>
+                <td class="align-right">Remark:</td>
+                <td>@(string.IsNullOrWhiteSpace(Model.Remark)? "N/A" : Model.Remark)</td>
+            </tr>
+            @if (hasDeleteRight)
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" class="matchId" value="@Model.MatchId" />
+                        <input type="hidden" class="keyId" value="@Model.KeyId" />
+                        <input type="hidden" class="marketId" value="@Model.MarketId" />
+                    </td>
+                    <td>
+                        <input type="button" value="Delete" />
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+@section Foot
+{
+    <script type="text/javascript">
+        $(function () {
+            $('input[type=button]').bind('click', function () {
+                var answer = confirm("Are you sure you want to DELETE this row?");
+                if (answer) {
+                    var params = {
+                        matchId: $(".matchId").val(),
+                        keyId: $(".keyId").val(),
+                        marketId: $(".marketId").val()
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: NAP.resolveClientUrl("DeleteTempVariable/Delete"),
+                        contentType: "application/json",
+                        dataType: "json",
+                        data: JSON.stringify(params),
+                        beforeSend: function () {
+                            NAP.loadingBox.show();
+                        },
+                        complete: function () {
+                            NAP.loadingBox.close();
+                        },
+                        success: function (result) {
+                            if (result > 0) {
+                                window.location.replace(NAP.resolveClientUrl('DeleteTempVariable'));
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
