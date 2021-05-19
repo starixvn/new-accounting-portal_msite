@@ -40,11 +40,11 @@
             </tr>
             <tr>
                 <td class="align-right">Action:</td>
-                <td>@Model.Action</td>
+                <td>@(string.IsNullOrWhiteSpace(Model.Action) ? "N/A" : @Model.Action)</td>
             </tr>
             <tr>
                 <td class="align-right">IsCal:</td>
-                <td>@Model.Status</td>
+                <td>@(string.IsNullOrWhiteSpace(Model.Status) ? "N/A" : @Model.Status)</td>
             </tr>
             <tr>
                 <td class="align-right">Wrong Balance:</td>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td class="align-right">Error Message:</td>
-                <td>@Model.ErrorMsg</td>
+                <td>@(string.IsNullOrWhiteSpace(Model.Message) ? "N/A" : @Model.Message)</td>
             </tr>
             <tr>
                 <td class="align-right">Remark:</td>

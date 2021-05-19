@@ -10,11 +10,13 @@ namespace Fanex.DeleteTempVariable.Model
 
         public string AwayTeam { get; set; }
 
+        public string LeagueName { get; set; }
+
         public string EventName
         {
             get
             {
-                return $"{HomeTeam} - vs - {AwayTeam}";
+                return (KeyId == 2 || KeyId == 4) ? LeagueName : $"{HomeTeam} - vs - {AwayTeam}";
             }
         }
 
@@ -24,7 +26,7 @@ namespace Fanex.DeleteTempVariable.Model
 
         public string Action { get; set; }
 
-        public string ErrorMsg { get; set; }
+        public string Message { get; set; }
 
         public string ProductName
         {
@@ -33,25 +35,25 @@ namespace Fanex.DeleteTempVariable.Model
                 switch (KeyId)
                 {
                     case 1:
-                        return "Sportbook, Numbergame";
+                        return $"{KeyId}-Sportbook, Numbergame";
 
                     case 2:
-                        return "Outright";
+                        return $"{KeyId}-Outright";
 
                     case 3:
-                        return "Metric Gaming";
+                        return $"{KeyId}-Metric Gaming";
 
                     case 4:
-                        return "VS Racing";
+                        return $"{KeyId}-VS Racing";
 
                     case 5:
-                        return "BetBuilder";
+                        return $"{KeyId}-BetBuilder";
 
                     case 6:
-                        return "Fast Market";
+                        return $"{KeyId}-Fast Market";
 
                     case 7:
-                        return "Fast Market SABA Time Machine";
+                        return $"{KeyId}-Fast Market SABA Time Machine";
 
                     default:
                         return string.Empty;
