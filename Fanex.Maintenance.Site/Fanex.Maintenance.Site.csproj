@@ -307,15 +307,19 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="App_Data\LOCAL\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\LOCAL\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\PRO\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\SIT\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\SIT\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\UAT\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -831,6 +835,10 @@
     <Content Include="Views\ConnectionString\LogAction\LogAction405.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.DeleteTempVariable\Fanex.DeleteTempVariable.csproj">
+      <Project>{ff142e89-2dc8-4dd8-8a88-98e7a2350b00}</Project>
+      <Name>Fanex.DeleteTempVariable</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.Letstalk.Report\Fanex.Letstalk.Notification.csproj">
       <Project>{e8348bb1-1c03-4852-aea3-ccbab083764a}</Project>
       <Name>Fanex.Letstalk.Notification</Name>
@@ -969,6 +977,8 @@
     <Content Include="Web.aws.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\DeleteTempVariable\Detail.cshtml" />
+    <Content Include="Views\DeleteTempVariable\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -984,12 +994,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>56146</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:56146/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
