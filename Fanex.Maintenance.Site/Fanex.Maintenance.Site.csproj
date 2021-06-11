@@ -368,6 +368,9 @@
     <Content Include="Areas\MailStation\Report\MailDetail\Scripts\MailDetailController.js" />
     <Content Include="Areas\MailStation\Report\MailLog\Scripts\MailLogController.js" />
     <Content Include="Areas\MailStation\Report\MailReport\Scripts\MailReportController.js" />
+    <Content Include="Areas\TracingSp\AppData\AWS\DBServerList.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Areas\TracingSp\AppData\PRO\DBServerList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
