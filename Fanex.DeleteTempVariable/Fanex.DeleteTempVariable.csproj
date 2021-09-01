@@ -65,6 +65,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -91,15 +92,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DeleteParlayLockingController.cs" />
     <Compile Include="Controllers\DeleteTempVariableController.cs" />
+    <Compile Include="Controllers\UpdateSystemSettingsController.cs" />
+    <Compile Include="Criteria\DeleteParlayLockingCriteria.cs" />
     <Compile Include="Criteria\DeleteMatchCriteria.cs" />
+    <Compile Include="Criteria\UpdateSystemSettingCriteria.cs" />
+    <Compile Include="Criteria\GetSystemSettingCriteria.cs" />
+    <Compile Include="Criteria\GetParlayLockingCriteria.cs" />
     <Compile Include="Criteria\GetTicketCriteria.cs" />
     <Compile Include="Criteria\GetMatchesCriteria.cs" />
+    <Compile Include="DeleteTempVariableAreaRegistration.cs" />
     <Compile Include="Model\Match.cs" />
+    <Compile Include="Model\MatchParlayLocking.cs" />
     <Compile Include="Model\MatchTicket.cs" />
+    <Compile Include="Model\SystemSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\DeleteParlayLockingRequest.cs" />
     <Compile Include="Requests\DeleteTempRequest.cs" />
     <Compile Include="Requests\MatchTicketRequest.cs" />
+    <Compile Include="Requests\ParlayLockingRequest.cs" />
+    <Compile Include="Services\ParlayLockingService.cs" />
     <Compile Include="Services\MatchService.cs" />
   </ItemGroup>
   <ItemGroup>

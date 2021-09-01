@@ -1,7 +1,6 @@
-﻿@using Fanex.Maintenance.Core.Model
-@model Match
+﻿@model Match
 @{
-    ViewBag.Title = ViewResource.EditMachine;
+    ViewBag.Title = "Delete Temp Variable Number";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var hasDeleteRight = (bool)ViewBag.HasDelete;
 }
@@ -10,7 +9,7 @@
 }
 @section Headline {
     <h1>
-        <span class="title">Detail</span>
+        <span class="title">@ViewBag.Title >> Detail</span>
         @Html.ActionLink("← " + ViewResource.Back_To_List, "Index", "DeleteTempVariable", null, new { @class = "lnk" })
     </h1>
 }

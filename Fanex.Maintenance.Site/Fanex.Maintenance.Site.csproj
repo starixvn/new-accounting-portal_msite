@@ -548,6 +548,7 @@
     <Content Include="scripts\LetstalkNotification\LetstalkNotification.js" />
     <Content Include="scripts\ServiceMonitoring\ServiceMonitoring.js" />
     <Content Include="scripts\ShareScripts\SharedScriptManager.js" />
+    <Content Include="scripts\TempVariable\ParlayLocking.js" />
     <Content Include="themes\assets\css\font-awesome-ie7.css" />
     <Content Include="themes\assets\css\font-awesome.css" />
     <Content Include="themes\assets\css\prettify.css" />
@@ -980,8 +981,10 @@
     <Content Include="Web.aws.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\DeleteTempVariable\Detail.cshtml" />
-    <Content Include="Views\DeleteTempVariable\Index.cshtml" />
+    <Content Include="Views\TempVariable\Detail.cshtml" />
+    <Content Include="Views\TempVariable\Index.cshtml" />
+    <Content Include="Views\TempVariable\ParlayLocking.cshtml" />
+    <Content Include="Views\TempVariable\SystemSettings.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
