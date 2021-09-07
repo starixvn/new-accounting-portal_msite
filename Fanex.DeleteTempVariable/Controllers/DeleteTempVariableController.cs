@@ -26,8 +26,7 @@ namespace Fanex.DeleteTempVariable.Controllers
         {
             var matches = service.GetMatches(matchId);
             ViewBag.Matches = matches;
-
-            return View();
+            return View("~/Views/TempVariable/Index.cshtml");
         }
 
         [HttpGet]
@@ -38,7 +37,7 @@ namespace Fanex.DeleteTempVariable.Controllers
             var detail = service.GetMatchDetail(request.MatchId);
             detail.TicketCount = ticketCount;
             ViewBag.HasDelete = HasRight(SiteFunctionKeys.DeleteTempVariable, Constant.Policy.Host);
-            return View(detail);
+            return View("~/Views/TempVariable/Detail.cshtml", detail);
         }
 
         [HttpPost]
