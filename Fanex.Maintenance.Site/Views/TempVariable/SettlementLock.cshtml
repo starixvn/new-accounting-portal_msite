@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Delete Settlement Lock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Fanex.DeleteTempVariable.Requests.DeleteTempRequest
+@section Head {
+    @Styles.Render("~/css/manage")
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}
+@using (Html.BeginForm("Index", "DeleteSettlementLock", FormMethod.Post, new { name = "deleteSettlementLockForm", id = "deleteSettlementLockForm" }))
+{
+    <section id="filter-bar" style="width: 98%">
+        <div class="filter-form">
+            <div class="lbl-field width-auto">
+                MatchId
+            </div>
+            <div class="edit-field">
+                @Html.TextBox("MatchId", Model.MatchId)
+            </div>
+            <div class="lbl-field width-auto">
+                Time
+            </div>
+            <div class="submit">
+                <input type="submit" value="@ViewResource.Submit" />
+            </div>
+        </div>
+    </section>
+}
+<table class="grid" style="width: 99.2%">
+    <thead>
+    <tr>
+        <th class="width-30">
+            DB Server
+        </th>
+        <th class="width-50">
+            MatchId
+        </th>
+        <th class="width-100">
+            SessionId
+        </th>
+        <th class="width-120">
+            Created Time
+        </th>
+        <th class="width-240">
+            Event Name
+        </th>
+        <th class="width-300">
+            Error Message
+        </th>
+        <th class="width-50">
+            SettlementLock
+        </th>
+        <th class="width-50">
+            SettlementProcessing
+        </th>
+        <th class="width-50">
+            SSB_SettlementLogs
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+            var matches = ViewBag.Matches as List<MatchSettlementLock>;
+            if (matches != null && matches.Count > 0)
+            {
+                foreach (MatchSettlementLock match in matches)
+                {
+                    var row_class = i % 2 == 0 ? "alt" : string.Empty;
+
+                <tr class="@row_class">
+                    <td class="align-center">
+                        @match.DBServer
+                    </td>
+                    <td class="align-center">
+                        @match.MatchId
+                    </td>
+                    <td class="align-center">
+                        @match.SessionId
+                    </td>
+                    <td class="align-center">
+                        @match.CreatedTime.ToString("MMM dd, yyyy hh:mm:ss tt")
+                    </td>
+                    <td class="align-center">
+                        @match.HomeTeam - @match.AwayTeam
+                    </td>
+                    <td class="align-center">
+                        @match.ErrorMessage
+                    </td>
+                    <td class="align-center">
+                        @if (!match.DBServer.Equals("DBTrans"))
+                        {       
+                        <input type="button" value="Delete" onclick="return deleteSettlementProcessing(@match.MatchId, @match.SessionId, '@match.DBServer', true);" />
+                        }
+
+                    </td>
+                    <td class="align-center">
+                        <input type="button" value="Delete" onclick="return deleteSettlementProcessing(@match.MatchId, @match.SessionId, '@match.DBServer', false);" />
+                    </td>
+                    <td class="align-center">
+                        @if (string.IsNullOrWhiteSpace(match.ErrorMessage))
+                        {
+                            <input type="button" value="Update"  style="background: grey; border: 0; cursor:default" disabled="disabled"/>
+                        }
+                        else
+                        {
+                            <input type="button" value="Update" onclick="return updateSettlementLogs(@match.MatchId, @match.SessionId, '@match.CreatedTime', '@match.DBServer');" />
+                        }
+                    </td>
+                </tr>
+                    i++;
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="9" class="align-center">
+                        @ViewResource.NoInformationAvailable
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@section Foot {
+    <script src="~/scripts/TempVariable/ParlayLocking.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~")';
+    </script>
+}

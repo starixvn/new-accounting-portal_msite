@@ -4,7 +4,7 @@ namespace Fanex.DeleteTempVariable.Criteria
 {
     public class DeleteMatchCriteria : CriteriaBase
     {
-        public int MatchId { get; set; }
+        public int? MatchId { get; set; }
 
         public int KeyId { get; set; }
 

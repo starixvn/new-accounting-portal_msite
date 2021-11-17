@@ -307,6 +307,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="App_Data\LOCAL\SBSETTLE.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\LOCAL\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\LOCAL\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
@@ -985,6 +986,7 @@
     <Content Include="Views\TempVariable\Index.cshtml" />
     <Content Include="Views\TempVariable\ParlayLocking.cshtml" />
     <Content Include="Views\TempVariable\SystemSettings.cshtml" />
+    <Content Include="Views\TempVariable\SettlementLock.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

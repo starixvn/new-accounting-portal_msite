@@ -8,5 +8,8 @@
     <Setting Key="NAP_Set_ParlayLockingSel" SpName="NAP_Set_ParlayLockingSel" DbName="DBTXN.bodb02.bodbAdminNet" />
     <Setting Key="NAP_Set_SystemSettingsSel" SpName="NAP_Set_SystemSettingsSel" DbName="DBTXN.bodb02.bodbAdminNet" />
     <Setting Key="NAP_Set_SystemSettingsUpd" SpName="NAP_Set_SystemSettingsUpd" DbName="DBTXN.bodb02.bodbAdminNet" />
+    <Setting Key="NAP_Set_SSBErrorMessageSel" SpName="NAP_Set_SSBErrorMessageSel" DbName="DBTXN.bodb02.bodbAdminNet" />
+    <Setting Key="NAP_Set_SettlementProcessingDel" SpName="NAP_Set_SettlementProcessingDel" DbName="DBTXN.bodb02.bodbAdminNet" />
+    <Setting Key="NAP_Set_SSBSettlementLogUpd" SpName="NAP_Set_SSBSettlementLogUpd" DbName="DBTXN.bodb02.bodbAdminNet" />
   </Function>
 </Functions>
