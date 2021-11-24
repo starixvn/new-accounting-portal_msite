@@ -14,6 +14,8 @@ namespace Fanex.DeleteTempVariable.Model
 
         public string AwayTeam { get; set; }
 
+        public int TotalSettlementProcessing { get; set; }
+
         public string DBServer { get; set; }
 
         public string ErrorMessage { get; set; }
