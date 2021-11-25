@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Delete Settlement Lock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Fanex.DeleteTempVariable.Requests.DeleteTempRequest
+@section Head {
+    @Styles.Render("~/css/manage")
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}
+@using (Html.BeginForm("Index", "DeleteSettlementLock", FormMethod.Post, new { name = "deleteSettlementLockForm", id = "deleteSettlementLockForm" }))
+{
+<section id="filter-bar" style="width: 98%">
+    <div class="filter-form">
+        <div class="lbl-field width-auto">
+            MatchId
+        </div>
+        <div class="edit-field">
+            @Html.TextBox("MatchId", Model.MatchId)
+        </div>
+        <div class="submit">
+            <input type="submit" value="@ViewResource.Submit" />
+        </div>
+
+    </div>
+    <div class="filter-form width-300"></div>
+    <div class="filter-form width-140"></div>
+    <div class="filter-form">
+        <div><b>Guideline: You need to do step by step</b></div>
+        <div><b>Step 1:</b> Delete Settlement Processing</div>
+        <div><b>Step 2:</b> Update SSB_SettlementLogs</div>
+    </div>
+    <div class="filter-form width-50"></div>
+    <div class="filter-form">
+        <div><b>Step 3:</b> Delete SettlementLock (If having)</div>
+        <div><b>Step 4:</b> Please check and delete locked match from function</div>
+        <div>Delete Temp Variable Number before recalculate (If having)</div>
+    </div>
+</section>
+}
+<table class="grid" style="width: 99.2%">
+    <thead>
+    <tr>
+        <th class="width-50">
+            DB Server
+        </th>
+        <th class="width-50">
+            MatchId
+        </th>
+        <th class="width-100">
+            SessionId
+        </th>
+        <th class="width-120">
+            Created Time
+        </th>
+        <th class="width-240">
+            Event Name
+        </th>
+        <th class="width-300">
+            Error Message
+        </th>
+        <th class="width-50">
+            SettlementLock
+        </th>
+        <th class="width-50">
+            SettlementProcessing
+        </th>
+        <th class="width-50">
+            SSB_SettlementLogs
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+            var matches = ViewBag.Matches as List<MatchSettlementLock>;
+            if (matches != null && matches.Count > 0)
+            {
+                foreach (MatchSettlementLock match in matches)
+                {
+                    var row_class = i % 2 == 0 ? "alt" : string.Empty;
+
+                <tr class="@row_class">
+                    <td class="align-center">
+                        @match.DBServer
+                    </td>
+                    <td class="align-center">
+                        @match.MatchId
+                    </td>
+                    <td class="align-center">
+                        @match.SessionId
+                    </td>
+                    <td class="align-center">
+                        @match.CreatedTime.ToString("MMM dd, yyyy hh:mm:ss tt")
+                    </td>
+                    <td class="align-center">
+                        @match.HomeTeam - @match.AwayTeam
+                    </td>
+                    <td class="align-left">
+                        @if (!string.IsNullOrWhiteSpace(match.ErrorMessage))
+                        {
+                            @Html.Raw(@match.ErrorMessage.Replace("\\n", "<br/>"))
+                        }
+
+                    </td>
+                    <td class="align-center">
+                        @if (!match.DBServer.Equals("DBTrans"))
+                        {       
+                        <input type="button" value="Delete" onclick="return deleteSettlementProcessing(@match.MatchId, @match.SessionId, '@match.DBServer', true, 0);" />
+                        }
+
+                    </td>
+                    <td class="align-center">
+                        @if (match.TotalSettlementProcessing > 0)
+                        {
+                            <input type="button" value="Delete" onclick="return deleteSettlementProcessing(@match.MatchId, @match.SessionId, '@match.DBServer', false, @match.TotalSettlementProcessing);" />
+                        }
+                        else
+                        {
+                            <input type="button" value="Delete" style="background: grey; border: 0; cursor:default" disabled="disabled" />
+                        }
+                    </td>
+                    <td class="align-center">
+                        @if (string.IsNullOrWhiteSpace(match.ErrorMessage))
+                        {
+                            <input type="button" value="Update"  style="background: grey; border: 0; cursor:default" disabled="disabled"/>
+                        }
+                        else
+                        {
+                            <input type="button" value="Update" onclick="return updateSettlementLogs(@match.MatchId, @match.SessionId, '@match.CreatedTime', '@match.DBServer');" />
+                        }
+                    </td>
+                </tr>
+                    i++;
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="9" class="align-center">
+                        @ViewResource.NoInformationAvailable
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@section Foot {
+    @Scripts.Render("~/scripts/sharedscripts")
+    <script src="~/scripts/TempVariable/ParlayLocking.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~")';
+    </script>
+}
