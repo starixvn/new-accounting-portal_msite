@@ -313,6 +313,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\PRO\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\SBSETTLE.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -321,6 +322,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\UAT\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\SBSETTLE.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
