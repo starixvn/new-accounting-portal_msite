@@ -1,5 +1,10 @@
 ﻿namespace Fanex.Maintenance.Site
 {
+    using System;
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Optimization;
+    using System.Web.Routing;
     using App_Start;
     using Data.Configuration;
     using EasyNetQ.Logging;
@@ -7,11 +12,6 @@
     using Logging.Extensions.Web;
     using MailDelivery.MailStation.Logging;
     using ONEbook.UM.Filters;
-    using System;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.Optimization;
-    using System.Web.Routing;
 
     public class MvcApplication : HttpApplication
     {
@@ -23,6 +23,7 @@
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             DbSettingProviderManager.Current.Start();
+            FanexLogging.Register();
 
             GlobalFilters.Filters.Add(new CheckUMFilter());
 
