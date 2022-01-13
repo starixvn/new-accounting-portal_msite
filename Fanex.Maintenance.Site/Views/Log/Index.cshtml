@@ -14,8 +14,14 @@
         <span class="title">@ViewBag.Title</span>
         @if (Model.HasEdit)
         {
-            <a href="#" id="btnRemoveLog" class="lnk">
+            <a href="#" id="btnRemoveLog5" class="lnk" data-day="5">
                 Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString())
+            </a>
+            <a href="#" id="btnRemoveLog3" class="lnk" data-day="3">
+                Remove (Before date @DateTime.Now.AddDays(-3).ToShortDateString())
+            </a>
+            <a href="#" id="btnRemoveLog1" class="lnk" data-day="1">
+                Remove (Before date @DateTime.Now.AddDays(-1).ToShortDateString())
             </a>
         }
     </h1>

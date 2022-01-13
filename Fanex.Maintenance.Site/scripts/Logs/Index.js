@@ -10,12 +10,13 @@ var Logs = (function ($) {
         ddlStatus: null,
         dpkFrom: null,
         dpkTo: null,
-        btnRemoveLog: null,
         btnSubmit: null,
         chbGroupMessage: null,
         hasEdit: null,
         searchText: null,
-
+        btnRemoveLog1: null,
+        btnRemoveLog3: null,
+        btnRemoveLog5: null,
         init: function () {
             Logs.ddlCategory = $('#CategoryId');
             Logs.ddlMachine = $('#MachineId');
@@ -23,7 +24,9 @@ var Logs = (function ($) {
             Logs.ddlStatus = $('#IsMonitored');
             Logs.dpkFrom = $('#From');
             Logs.dpkTo = $('#To');
-            Logs.btnRemoveLog = $("#btnRemoveLog");
+            Logs.btnRemoveLog1 = $('#btnRemoveLog1');
+            Logs.btnRemoveLog3 = $('#btnRemoveLog3');
+            Logs.btnRemoveLog5 = $('#btnRemoveLog5');
             Logs.btnSubmit = $('#submit');
             Logs.chbGroupMessage = $('#GroupMessage');
             Logs.hasEditRight = $('#HasEdit').val() == 1;
@@ -109,11 +112,11 @@ var Logs = (function ($) {
                             + "</td><td class='align-center'>" +
                             "<span id='monitoringUser" + value.LogId + "'>" +
                             (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" +
-                            value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") +
+                                value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") +
                             "</span>" + countMessage + "</td>"
-                                + "<td class='align-center' title='" + value.LogDate + "'>"
-                                    + convertedTimeAgo
-                                + "</td>" +
+                            + "<td class='align-center' title='" + value.LogDate + "'>"
+                            + convertedTimeAgo
+                            + "</td>" +
                             +"</tr>";
 
                         $('#content').append(content);
@@ -158,7 +161,7 @@ var Logs = (function ($) {
             var fromNowTime = moment(logDate + ' ' + timeZoneValue + ':00').fromNow();
 
             return fromNowTime
-            + "<div class='log-occur-date'>" + logDate + "</div>";
+                + "<div class='log-occur-date'>" + logDate + "</div>";
         },
 
         replaceAll: function (find, replace, str) {
@@ -169,11 +172,13 @@ var Logs = (function ($) {
             Logs.generateData(itemsPerPage, pageIndex);
         },
         removeLog: function () {
+            var day = $(this).data("day");
             var answer = confirm("Are you sure delete logs !");
+
             if (answer) {
                 $.ajax({
                     type: "POST",
-                    url: "Log/RemoveLog",
+                    url: "Log/RemoveLog?day=" + day,
                     beforeSend: function () {
                         NAP.loadingBox.show();
                     },
@@ -187,7 +192,7 @@ var Logs = (function ($) {
                         else {
                             NAP.headlineMsgBox.showInfo("Removed " + data + " logs !", { closeBtn: false });
                         }
-                        Logs.btnRemoveLog.attr("disabled", "true");
+                        $(this).attr("disabled", "true")
                     },
                     error: function (xhr, status, err) {
                         NAP.handleAjaxError(xhr, status, err);
@@ -331,7 +336,9 @@ var Logs = (function ($) {
         bindEventHandlers: function () {
             Logs.getMachines(0);
             Logs.ddlCategory.select2();
-            Logs.btnRemoveLog.bind("click", Logs.removeLog);
+            Logs.btnRemoveLog1.bind("click", Logs.removeLog);
+            Logs.btnRemoveLog3.bind("click", Logs.removeLog);
+            Logs.btnRemoveLog5.bind("click", Logs.removeLog);
             Logs.btnSubmit.live('click', function () {
                 Logs.generateData(50, 0);
             });

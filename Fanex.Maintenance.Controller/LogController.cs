@@ -161,11 +161,12 @@
         /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ViewLog, Policy = Constant.Policy.Host)]
-        public ActionResult RemoveLog()
+        public ActionResult RemoveLog(int day)
         {
+            day = day <= 0 ? 1 : day;
             if (Request.IsAjaxRequest())
             {
-                return Json(_logService.From(DateTime.Now.AddDays(-5)).RemoveLogs());
+                return Json(_logService.From(DateTime.Now.AddDays(-day)).RemoveLogs());
             }
 
             return Json(0);
@@ -230,7 +231,7 @@
 
             ViewBag.PageSize = listPageSize;
         }
-        
+
         /// <summary>
         /// Initialize Log Status data.
         /// </summary>
