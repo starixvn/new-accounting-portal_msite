@@ -476,21 +476,27 @@
                     case ".xls":
                         fileExtension = FileExtentions.MS_EXCEL;
                         break;
+
                     case ".doc":
                         fileExtension = FileExtentions.MS_DOC;
                         break;
+
                     case ".jpg":
                         fileExtension = FileExtentions.IMG_JPG;
                         break;
+
                     case ".gif":
                         fileExtension = FileExtentions.IMG_GIF;
                         break;
+
                     case ".png":
                         fileExtension = FileExtentions.IMG_PNG;
                         break;
+
                     case ".pdf":
                         fileExtension = FileExtentions.PDF;
                         break;
+
                     default:
                         fileExtension = FileExtentions.TEXT;
                         break;
@@ -510,7 +516,8 @@
 
             return View(mailRecord);
         }
-        #endregion
+
+        #endregion Compose Email
 
         #endregion Action
 
