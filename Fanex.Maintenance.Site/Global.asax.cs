@@ -24,6 +24,7 @@
 
             DbSettingProviderManager.Current.Start();
             FanexLogging.Register();
+            MailServiceRegister.Register();
 
             GlobalFilters.Filters.Add(new CheckUMFilter());
 
