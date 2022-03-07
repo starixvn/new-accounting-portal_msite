@@ -1,0 +1,102 @@
+﻿using System.Web.Mvc;
+using Fanex.Letstalk.Notification.Params;
+using Fanex.Letstalk.Notification.Services;
+using Fanex.Maintenance.Controller;
+
+namespace Fanex.Letstalk.Notification.Controllers
+{
+    public class LetstalkComposeController : BaseController
+    {
+        private readonly ILetstalkReportRestClientService service;
+
+        public LetstalkComposeController() : this(null)
+        {
+        }
+
+        public LetstalkComposeController(ILetstalkReportRestClientService service)
+        {
+            this.service = service ?? new LetstalkReportRestClientService();
+        }
+
+        public ActionResult Index()
+        {
+            return View("~/Areas/LetstalkCompose/Index.cshtml");
+        }
+
+        [HttpPost]
+        public ActionResult GetTargets(HttpGetLogParams httpParams)
+        {
+            var queryParams = new GetLogParams
+            {
+                FromDate = httpParams.FromDate,
+                ToDate = httpParams.ToDate,
+                Id = 0
+            };
+
+            var result = service.GetTargets(queryParams);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult GetGroupsByTarget(HttpGetLogParams httpParams)
+        {
+            var queryParams = new GetLogParams
+            {
+                FromDate = httpParams.FromDate,
+                ToDate = httpParams.ToDate,
+                TargetName = httpParams.TargetName,
+                Id = 0
+            };
+
+            var result = service.GetGroupsByTarget(queryParams);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult GetReport(HttpGetLogParams httpParams)
+        {
+            var queryParams = new GetLogParams
+            {
+                FromDate = httpParams.FromDate,
+                ToDate = httpParams.ToDate.AddDays(1),
+                TargetName = httpParams.TargetName,
+                Group = httpParams.Group,
+                Id = 0
+            };
+
+            var result = service.GetLogs(queryParams);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ReSendMessage(HttpResendParams httpParams)
+        {
+            var resendParams = new ResendParams
+            {
+                FromDate = httpParams.FromDate,
+                ToDate = httpParams.ToDate,
+                Id = httpParams.Id
+            };
+
+            var result = service.ReSendMessage(resendParams);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ReSendMail(HttpResendParams httpParams)
+        {
+            var resendParams = new ResendParams
+            {
+                FromDate = httpParams.FromDate,
+                ToDate = httpParams.ToDate,
+                Id = httpParams.Id
+            };
+
+            var result = service.ReSendMail(resendParams);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+    }
+}

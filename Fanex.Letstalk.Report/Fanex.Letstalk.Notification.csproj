@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\LetstalkComposeController.cs" />
     <Compile Include="Controllers\LetstalkReportController.cs" />
     <Compile Include="LetstalkReportAreaRegistration.cs" />
     <Compile Include="Model\FilterGroup.cs" />
