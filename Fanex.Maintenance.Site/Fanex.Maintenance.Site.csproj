@@ -360,6 +360,7 @@
     <Content Include="App_Data\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\LetstalkCompose\Scripts\LetstalkCompose.js" />
     <Content Include="Areas\LetstalkCompose\Scripts\LetstalkReportController.js" />
     <Content Include="Areas\MailStation\ManageMail\MailActionLog\Scripts\MailActionLogController.js" />
     <Content Include="Areas\MailStation\Report\MailReport\Styles\Images\trigger.png" />
@@ -434,6 +435,18 @@
     <Content Include="scripts\lib\Fanex.Grid\Language\Fanex.Gird.Lang.zh-TW.js" />
     <Content Include="scripts\lib\Fanex.Grid\moment.min.js" />
     <Content Include="scripts\lib\Fanex.Grid\numeral.min.js" />
+    <Content Include="scripts\lib\Fanex.Multiselect\fanex.multiSelect.css" />
+    <Content Include="scripts\lib\Fanex.Multiselect\fanex.multiSelect.js" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\BottomLine.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\FirstNodeSpan.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\MiddleLine.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\NodeSpan.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\PlusMinus.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\sprites.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\TopLine.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\ui-icons_2e83ff_256x240-1.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\ui-icons_2e83ff_256x240-2.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\ui-icons_2e83ff_256x240.png" />
     <Content Include="scripts\lib\InputCombobox\jquery.combobox-ext.js" />
     <Content Include="scripts\lib\jquery.blockUI.js" />
     <Content Include="scripts\lib\chosen\chosen-sprite.png" />
@@ -971,6 +984,7 @@
     <Content Include="Views\TempVariable\SystemSettings.cshtml" />
     <Content Include="Views\TempVariable\SettlementLock.cshtml" />
     <Content Include="Views\Auth\Offline.cshtml" />
+    <Content Include="themes\manage\composeletstalk.less" />
     <Content Include="Views\Auth\NotFound.cshtml" />
     <Content Include="Views\Auth\Index.cshtml" />
     <Content Include="Views\Auth\Error.cshtml" />

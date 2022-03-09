@@ -80,6 +80,10 @@
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css");
 
+            bundles.AddAndInclude(
+                "~/css/compose-letstalk",
+                "~/themes/manage/composeletstalk.less");
+
             // js
             bundles.Add(new ScriptBundle("~/scripts/common").Include(
                 "~/scripts/lib/jquery-1.8.0.min.js",

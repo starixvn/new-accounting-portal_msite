@@ -33,4 +33,8 @@
     <Setting Key="GET_CreditDataToValidate_DW" SpName="GET_CreditDataToValidate_DW" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_SelBalanceUpDay" SpName="Lrf_SelBalanceUpDay" DbName="DBEXT.bodb02.bodbLicenseeNet" />
   </Function>
+	<Function Name="LetstalkCompose">
+		<Setting Key="Notif_InsertNewNotification" SpName="Notif_InsertNewNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+		<Setting Key="Notif_GetListRecipients" SpName="Notif_GetListRecipients" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+	</Function>
 </Functions>

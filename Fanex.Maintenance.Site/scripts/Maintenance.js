@@ -108,6 +108,24 @@ var NAP = (function ($) {
 
 			NAP.dialogPopup.dialog('option', { title: title });
 		},
+		modal: function (title, content, callback) {
+			NAP.dialogMsg.html(content).dialog({
+				buttons: {
+					Save: function () {
+						if (typeof callback === 'function') {
+							callback();
+							$(this).dialog("close");
+						}
+					},
+					Cancel: function () { $(this).dialog("close"); }
+				},
+				width: 'auto',
+				modal: true,
+				resizable: false
+			});
+
+			NAP.dialogMsg.dialog('option', { title: title });
+		},
 		closeDialog: function () {
 			NAP.dialogMsg.dialog('close');
 		},

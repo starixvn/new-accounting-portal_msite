@@ -1,13 +1,15 @@
-﻿using System.Web.Mvc;
-using Fanex.Letstalk.Notification.Params;
+﻿using Fanex.Letstalk.Notification.Criteria;
 using Fanex.Letstalk.Notification.Services;
 using Fanex.Maintenance.Controller;
+using Fanex.NAP.Core.Command;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Fanex.Letstalk.Notification.Controllers
 {
     public class LetstalkComposeController : BaseController
     {
-        private readonly ILetstalkReportRestClientService service;
+        private readonly LetstalkComposeService letstalkComposeService;
 
         public LetstalkComposeController() : this(null)
         {
@@ -15,7 +17,7 @@ namespace Fanex.Letstalk.Notification.Controllers
 
         public LetstalkComposeController(ILetstalkReportRestClientService service)
         {
-            this.service = service ?? new LetstalkReportRestClientService();
+            letstalkComposeService = new LetstalkComposeServiceImp();
         }
 
         public ActionResult Index()
@@ -24,79 +26,18 @@ namespace Fanex.Letstalk.Notification.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetTargets(HttpGetLogParams httpParams)
+        public JsonResult InsertNotification(InsertNotificationCriteria criteria)
         {
-            var queryParams = new GetLogParams
-            {
-                FromDate = httpParams.FromDate,
-                ToDate = httpParams.ToDate,
-                Id = 0
-            };
-
-            var result = service.GetTargets(queryParams);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            //var result = letstalkComposeService.InsertNotification(criteria);
+            var result = new CommandResult { Code = 0, Message = "" };
+            return Json(result);
         }
 
         [HttpPost]
-        public ActionResult GetGroupsByTarget(HttpGetLogParams httpParams)
+        public JsonResult GetGroups()
         {
-            var queryParams = new GetLogParams
-            {
-                FromDate = httpParams.FromDate,
-                ToDate = httpParams.ToDate,
-                TargetName = httpParams.TargetName,
-                Id = 0
-            };
-
-            var result = service.GetGroupsByTarget(queryParams);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult GetReport(HttpGetLogParams httpParams)
-        {
-            var queryParams = new GetLogParams
-            {
-                FromDate = httpParams.FromDate,
-                ToDate = httpParams.ToDate.AddDays(1),
-                TargetName = httpParams.TargetName,
-                Group = httpParams.Group,
-                Id = 0
-            };
-
-            var result = service.GetLogs(queryParams);
-
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult ReSendMessage(HttpResendParams httpParams)
-        {
-            var resendParams = new ResendParams
-            {
-                FromDate = httpParams.FromDate,
-                ToDate = httpParams.ToDate,
-                Id = httpParams.Id
-            };
-
-            var result = service.ReSendMessage(resendParams);
-
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult ReSendMail(HttpResendParams httpParams)
-        {
-            var resendParams = new ResendParams
-            {
-                FromDate = httpParams.FromDate,
-                ToDate = httpParams.ToDate,
-                Id = httpParams.Id
-            };
-
-            var result = service.ReSendMail(resendParams);
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            var result = letstalkComposeService.GetGroups();
+            return Json(result);
         }
     }
 }
