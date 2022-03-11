@@ -98,6 +98,7 @@
     <Compile Include="Controllers\LetstalkComposeController.cs" />
     <Compile Include="Controllers\LetstalkReportController.cs" />
     <Compile Include="Criteria\GetGroupCriteria.cs" />
+    <Compile Include="Criteria\InsertAttachmentFileCriteria.cs" />
     <Compile Include="Criteria\InsertNotificationCriteria.cs" />
     <Compile Include="LetstalkReportAreaRegistration.cs" />
     <Compile Include="Model\FilterGroup.cs" />

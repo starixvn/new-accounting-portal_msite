@@ -1,4 +1,5 @@
-﻿using Fanex.Data;
+﻿using Fanex.Common;
+using Fanex.Data;
 using Fanex.Letstalk.Notification.Criteria;
 using Fanex.Letstalk.Notification.Model;
 using Fanex.NAP.Core.Command;
@@ -6,30 +7,61 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Fanex.Letstalk.Notification.Services
 {
     public interface LetstalkComposeService
     {
-        CommandResult InsertNotification(InsertNotificationCriteria criteria);
+        CommandResult InsertNotification(InsertNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files);
 
         IEnumerable<SelectListItem> GetGroups();
     }
 
     public class LetstalkComposeServiceImp : LetstalkComposeService
     {
-        public CommandResult InsertNotification(InsertNotificationCriteria criteria)
+        public CommandResult InsertNotification(InsertNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files)
         {
+            Hashtable hash = criteria.GetSpParams();
+            int notificationID = 0;
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                db.ExecuteNonQuery(hash);
+                notificationID = Converter.ToInt(db.GetParameterValue("NotificationID"));
+            }
+
+            foreach (var file in files)
+            {
+                InsertAttachementFileData(notificationID, file);
+            }
+
+            return new CommandResult
+            {
+                Code = 0,
+                Message =string.Empty
+            };
+        }
+
+        private void InsertAttachementFileData(int notificationId, HttpPostedFileBase file)
+        {
+            MemoryStream target = new MemoryStream();
+            file.InputStream.CopyTo(target);
+            byte[] bytes = target.ToArray();
+            var criteria = new InsertAttachmentFileCriteria
+            {
+                ContentType = file.ContentType,
+                NotificationID = notificationId,
+                FileName = file.FileName,
+                Content = bytes
+            };
+
             Hashtable hash = criteria.GetSpParams();
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.ExecuteNonQuery(hash);
-
-                //Converter.ToInt(db.GetParameterValue("NotificationID"));
-
-                return GetCommandResult(hash);
             }
         }
 
@@ -57,17 +89,6 @@ namespace Fanex.Letstalk.Notification.Services
                 
             }
             return result;
-        }
-
-        public CommandResult GetCommandResult(Hashtable hash)
-        {
-            var errCode = hash["errcode"];
-            var errMsg = hash["errmsg"];
-            return new CommandResult
-            {
-                Code = (errCode is DBNull) ? 0 : Convert.ToInt32(errCode),
-                Message = (errMsg is DBNull) ? string.Empty : Convert.ToString(errMsg)
-            };
         }
     }
 }

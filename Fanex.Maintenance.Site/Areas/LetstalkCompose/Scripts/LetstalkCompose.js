@@ -10,7 +10,7 @@ var LetstalkComposeController = function () {
         self.renderGroupFilter();
         self.initTimeGMT4();
         self.bindEvents();
-        //self.loadData();
+        self.loadData();
     };
 
     self.initDatePicker = function () {
@@ -90,10 +90,9 @@ var LetstalkComposeController = function () {
         $("#mm").val(minutes);
     }
 
-    self.updateList = function () {
+    self.getFiles = function () {
         var input = document.getElementById('myFile');
         var output = document.getElementById('fileList');
-
         output.innerHTML = '<div>';
         for (var i = 0; i < input.files.length; ++i) {
             output.innerHTML += '<span class="mr-5">' + input.files.item(i).name + ', </span>';
@@ -109,8 +108,6 @@ var LetstalkComposeController = function () {
         for (var i = 0; i < reportLength; i++) {
             var dataRow = result[i];
             var rowColumns = [];
-            var actionContent = "<div class='inline-flex'><div class='edit-icon pointer-cursor mr-5' onclick='letstalkComposeController.edit(\"" + dataRow.Message + "\"," + dataRow.Id + "," + JSON.stringify(dataRow.AttachesFile) + ")'></div>";
-            actionContent += "<div class='delete-icon'></div></div >";
             rowColumns.push({ Name: "No", Value: dataRow.Id });
             rowColumns.push({ Name: "LetstalkGroup", Value: dataRow.LetstalkGroup });
             rowColumns.push({ Name: "Message", Value: dataRow.Message });
@@ -122,7 +119,7 @@ var LetstalkComposeController = function () {
             rowColumns.push({ Name: "Creator", Value: dataRow.Creator });
             rowColumns.push({ Name: "LatestEditor", Value: dataRow.LatestEditor });
             rowColumns.push({ Name: "Resend", Value: "<a href='#' class='link-color'>Resend</a>" });
-            rowColumns.push({ Name: "Action", Value:  actionContent});
+            rowColumns.push({ Name: "Action", Value: "<a href='#' class='link-color'>Cancel</a>"});
             bodyData.push({
                 Columns: rowColumns
             });
@@ -185,36 +182,31 @@ var LetstalkComposeController = function () {
 
     self.insertNotification = function () {
         sharedScriptManager.blockUI();
+        var data = new FormData();
+        $.each($("input[type='file']")[0].files, function (i, file) {
+            data.append('files', file);
+        });
         var insertNotificationParams = {
             ConfigSendTime: $("#ConfigSendTime").val() + " " + $("#hh").val() + ":" + $("#mm").val(),
             Title: $('#title').val(),
             Content: $('#message').val(),
             LstRecipientID: $('#group').fanexMultiSelect('getItems', true).toString()
         };
-        sharedScriptManager.callAjax(self,
-            window.rootUrl + "LetstalkNotification/LetstalkCompose/InsertNotification",
-            insertNotificationParams,
-            function (result) {
+        data.append("insertNotificationCriteria", JSON.stringify(insertNotificationParams));
+        $.ajax({
+            type: 'POST',
+            url: window.rootUrl + "LetstalkNotification/LetstalkCompose/InsertNotification",
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (result) {
                 var message = result.IsSuccessful ? "Letstalk has been added successfully" : "Failed to add data!!!";
-                NAP.alert("Notify", message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/LetstalkCompose/Index"));});
+                NAP.alert("Notify", message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/LetstalkCompose/Index")); });
             },
-            null,
-            sharedScriptManager.unblockUI);
-    }
-
-    self.edit = function (message, id, attachesFile) {
-        var html = '<div><div class="inline-flex"><div class="mr-5 width-100">Message: </div><div><textarea id="txtEditMessage" style="width:300px;height:100px;">' + message + '</textarea></div></div>';
-        html += '<div><div class="mr-5 width-100 float-left">Attaches file(s): </div><div class="inline-block">';
-        $.each(attachesFile, function (key, value) {
-            html += '<div class="mb-8"><span>' + value.Name + '</span> <input id="file-' + key + '" type="file" /><div class="delete-icon float-right pointer-cursor" onclick="$(this).parent().remove();"></div></div>'
-        });
-        html += '<input id="add-file" multiple type="file" /></div></div>';
-        NAP.modal("Edit", html, function () {
-            var message = $("#txtEditMessage").val();
-            for (var i = 0; i < attachesFile.length; i++ ) {
-                
+            complete: function () {
+                sharedScriptManager.unblockUI();
             }
-        });
+        })
     }
 
     self.getFakeData = function () {

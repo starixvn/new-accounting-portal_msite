@@ -36,5 +36,6 @@
 	<Function Name="LetstalkCompose">
 		<Setting Key="Notif_InsertNewNotification" SpName="Notif_InsertNewNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
 		<Setting Key="Notif_GetListRecipients" SpName="Notif_GetListRecipients" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+		<Setting Key="Notif_InsertNewAttachment" SpName="Notif_InsertNewAttachment" DbName="DBWH.bodb_Notification.bodbAdminNet" />
 	</Function>
 </Functions>

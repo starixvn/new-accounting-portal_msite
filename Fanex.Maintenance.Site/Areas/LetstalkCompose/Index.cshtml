@@ -46,7 +46,7 @@
                     Attched file(s)
                 </div>
                 <div class="edit-field width-auto">
-                    <input type="file" id="myFile" name="myFile" multiple onchange="letstalkComposeController.updateList()" class="width-95"> (Maximum size: 15MB)
+                    <input type="file" id="myFile" name="myFile" multiple onchange="letstalkComposeController.getFiles()" class="width-95"> (Maximum size: 15MB)
                     <div id="fileList" class="inline-flex"></div>
                 </div>
             </div>
@@ -80,10 +80,10 @@
     </div>
 </section>
 <section id="body">
-    @*<div id="letstalk-compose-container" class="letstalk-compose-container">
+    <div id="letstalk-compose-container" class="letstalk-compose-container">
             <div id="letstalk-compose" class="freegrid display-none">
             </div>
-        </div>*@
+        </div>
     @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 </section>
 @section Foot {

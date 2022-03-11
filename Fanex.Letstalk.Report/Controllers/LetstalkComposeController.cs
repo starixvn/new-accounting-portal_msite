@@ -2,7 +2,9 @@
 using Fanex.Letstalk.Notification.Services;
 using Fanex.Maintenance.Controller;
 using Fanex.NAP.Core.Command;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Fanex.Letstalk.Notification.Controllers
@@ -26,10 +28,11 @@ namespace Fanex.Letstalk.Notification.Controllers
         }
 
         [HttpPost]
-        public JsonResult InsertNotification(InsertNotificationCriteria criteria)
+        public JsonResult InsertNotification(FormCollection formValues, IEnumerable<HttpPostedFileBase> files)
         {
-            //var result = letstalkComposeService.InsertNotification(criteria);
-            var result = new CommandResult { Code = 0, Message = "" };
+            var insertNotificationCriteria = JsonConvert.DeserializeObject<InsertNotificationCriteria>(formValues["insertNotificationCriteria"]);
+            var result = letstalkComposeService.InsertNotification(insertNotificationCriteria, files);
+            //var result = new CommandResult { Code = 0, Message = "" };
             return Json(result);
         }
 
