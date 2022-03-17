@@ -6,7 +6,7 @@
     using System.Data;
     using Fanex.Data;
     using Fanex.Data.Repository;
-    using Fanex.NAP.Core.Command;
+    using Fanex.Maintenance.Repository.Command;
 
     /// <summary>
     /// Base repository.
@@ -41,7 +41,7 @@
         /// <param name="mapObjectFunction">Map object function.</param>
         /// <returns>List of object.</returns>
         public virtual IEnumerable<S> Fetch<S>(
-            ICriteria criteria, 
+            ICriteria criteria,
             Func<IDataReader, S> mapObjectFunction) where S : class
         {
             IList<S> listObject = new List<S>();

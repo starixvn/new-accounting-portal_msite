@@ -1,13 +1,13 @@
-﻿using Fanex.MailDelivery.MailStation.Constants;
+﻿using System.Web.Mvc;
+using Fanex.MailDelivery.MailStation.Constants;
 using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
 using Fanex.MailDelivery.MailStation.Extensions;
 using Fanex.MailDelivery.MailStation.Models;
 using Fanex.MailDelivery.MailStation.Services.ManageRecipient;
 using Fanex.Maintenance.Controller;
+using Fanex.Maintenance.Repository.Command;
 using Fanex.NAP.Core.Business;
-using Fanex.NAP.Core.Command;
 using Fanex.NAP.Core.Web.Attribute;
-using System.Web.Mvc;
 
 namespace Fanex.MailDelivery.MailStation.Controllers
 {

@@ -1,12 +1,12 @@
-﻿using Fanex.MailDelivery.MailStation.Constants;
+﻿using System.Web.Mvc;
+using Fanex.MailDelivery.MailStation.Constants;
 using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
 using Fanex.MailDelivery.MailStation.Extensions;
 using Fanex.MailDelivery.MailStation.Services;
 using Fanex.Maintenance.Controller;
+using Fanex.Maintenance.Repository.Command;
 using Fanex.NAP.Core.Business;
-using Fanex.NAP.Core.Command;
 using Fanex.NAP.Core.Web.Attribute;
-using System.Web.Mvc;
 
 namespace Fanex.MailDelivery.MailStation.Controllers
 {
@@ -89,6 +89,6 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         public ActionResult ViewRelevantMail(int mailGroupId)
         {
             return RedirectToAction("Index", "MailManage", new { MailGroupId = mailGroupId });
-        }        
+        }
     }
 }

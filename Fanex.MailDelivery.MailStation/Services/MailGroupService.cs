@@ -1,9 +1,9 @@
-﻿using Fanex.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Fanex.Data;
 using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
 using Fanex.MailDelivery.MailStation.Models;
-using Fanex.NAP.Core.Command;
-using System.Collections.Generic;
-using System.Linq;
+using Fanex.Maintenance.Repository.Command;
 
 namespace Fanex.MailDelivery.MailStation.Services
 {
