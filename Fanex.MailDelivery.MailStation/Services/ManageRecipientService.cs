@@ -1,14 +1,14 @@
-﻿using Fanex.Data;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Fanex.Data;
 using Fanex.MailDelivery.MailStation.Criteria;
 using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
 using Fanex.MailDelivery.MailStation.Models;
-using Fanex.NAP.Core.Command;
+using Fanex.Maintenance.Repository.Command;
 using Fanex.NAP.Core.Models;
 using Fanex.NAP.Core.Service.Impl;
 using Fanex.NAP.Core.Service.Interface;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
 {
@@ -20,7 +20,7 @@ namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
         {
             userService = new UserService();
         }
-      
+
         public List<RecipientModel> RecipientList(RecipientListCriteria criteria)
         {
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
@@ -29,7 +29,7 @@ namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
                 return db.Query<RecipientModel>().ToList();
             }
         }
-      
+
         public RecipientModel RecipientById(RecipientByIdCriteria criteria)
         {
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))

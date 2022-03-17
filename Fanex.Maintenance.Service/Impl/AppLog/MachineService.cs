@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
     using Fanex.Maintenance.Core.Model;
+    using Fanex.Maintenance.Repository.Command;
     using Fanex.Maintenance.Repository.Criteria.Log;
     using Fanex.Maintenance.Repository.Impl.AppLog;
-    using Fanex.NAP.Core.Command;
 
     /// <summary>
     /// Machine Service.

@@ -11,7 +11,6 @@
     using Logging.Extensions.Database;
     using Logging.Extensions.Web;
     using MailDelivery.MailStation.Logging;
-    using ONEbook.UM.Filters;
 
     public class MvcApplication : HttpApplication
     {
@@ -26,11 +25,11 @@
             FanexLogging.Register();
             MailServiceRegister.Register();
 
-            GlobalFilters.Filters.Add(new CheckUMFilter());
-
             ExceptionHandler.UseGetDbExceptionInfo(DatabaseInfoGetters.GetDbExceptionInfo);
 
             LogProvider.SetCurrentLogProvider(new RabbitMQLogProvider());
+
+            OnebookUMConfig.Register(GlobalFilters.Filters);
         }
 
         protected void Application_Error(object sender, EventArgs e)

@@ -1,14 +1,14 @@
-﻿using Fanex.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Fanex.Data;
 using Fanex.MailDelivery.Core.Models;
 using Fanex.MailDelivery.MailStation.Configurations;
 using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
 using Fanex.MailDelivery.MailStation.Criteria.MailManage;
 using Fanex.MailDelivery.MailStation.Criteria.MailReport;
 using Fanex.MailDelivery.MailStation.Models;
-using Fanex.NAP.Core.Command;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Fanex.Maintenance.Repository.Command;
 
 namespace Fanex.MailDelivery.MailStation.Services
 {

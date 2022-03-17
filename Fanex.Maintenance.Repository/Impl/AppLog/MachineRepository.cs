@@ -3,9 +3,9 @@
     using System.Collections;
     using Fanex.Data;
     using Fanex.Maintenance.Core.Model;
+    using Fanex.Maintenance.Repository.Command;
     using Fanex.Maintenance.Repository.Criteria.Log;
     using Fanex.Maintenance.Repository.Criteria.Misc;
-    using Fanex.NAP.Core.Command;
 
     /// <summary>
     /// Machine Repository.
