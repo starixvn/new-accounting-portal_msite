@@ -115,8 +115,6 @@
                 "~/scripts/lib/DatetimePicker/jquery.datetimepicker.js",
                 "~/scripts/Logs/Index.js"));
 
-            bundles.Add(new ScriptBundle("~/scripts/recheckin").Include(
-              "~/Areas/UserLogin/scripts/ReCheckIn.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/connectionstring-database").Include(
               "~/scripts/Connection/Database.js"));
