@@ -1,9 +1,4 @@
-﻿using Fanex.Common;
-using Fanex.Data;
-using Fanex.Letstalk.Notification.Criteria;
-using Fanex.Letstalk.Notification.Model;
-using Fanex.NAP.Core.Command;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,6 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Fanex.Common;
+using Fanex.Data;
+using Fanex.Letstalk.Notification.Criteria;
+using Fanex.Letstalk.Notification.Model;
+using Fanex.Maintenance.Repository.Command;
 
 namespace Fanex.Letstalk.Notification.Services
 {
@@ -41,7 +41,7 @@ namespace Fanex.Letstalk.Notification.Services
             return new CommandResult
             {
                 Code = 0,
-                Message =string.Empty
+                Message = string.Empty
             };
         }
 
@@ -75,7 +75,7 @@ namespace Fanex.Letstalk.Notification.Services
             {
                 recipientList = db.Query<RecipientModel>().ToList();
             }
-            foreach(var recipient in recipientList)
+            foreach (var recipient in recipientList)
             {
                 if (recipient.Environment.Equals(environment, StringComparison.CurrentCultureIgnoreCase))
                 {
@@ -86,7 +86,7 @@ namespace Fanex.Letstalk.Notification.Services
                         Text = recipient.ConversationID + " - " + recipient.RecipientName
                     });
                 }
-                
+
             }
             return result;
         }
