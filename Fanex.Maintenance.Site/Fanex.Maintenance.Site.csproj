@@ -360,8 +360,7 @@
     <Content Include="App_Data\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\LetstalkCompose\Scripts\LetstalkCompose.js" />
-    <Content Include="Areas\LetstalkCompose\Scripts\LetstalkReportController.js" />
+    <Content Include="Areas\ManageLetstalkMessage\Scripts\ManageLetstalkMessage.js" />
     <Content Include="Areas\MailStation\ManageMail\MailActionLog\Scripts\MailActionLogController.js" />
     <Content Include="Areas\MailStation\Report\MailReport\Styles\Images\trigger.png" />
     <Content Include="Areas\TracingSp\AppData\backupMNL\DBServerList.xml" />
@@ -951,8 +950,9 @@
     <Content Include="Areas\MailStation\ManageMail\MailActionLog\Index.cshtml" />
     <Content Include="Areas\MailStation\ManageMail\MailActionLog\Styles\MailActionLog.less" />
     <None Include="app.config" />
-    <Content Include="Areas\LetstalkCompose\Index.cshtml" />
-    <Content Include="Areas\LetstalkCompose\Web.config" />
+    <Content Include="Areas\ManageLetstalkMessage\Index.cshtml" />
+    <Content Include="Areas\ManageLetstalkMessage\Web.config" />
+    <Content Include="Areas\ManageLetstalkMessage\CreateLetstalkMessage.cshtml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="scripts\lib\Fanex.Grid\Fanex.Grid.less" />
     <Content Include="scripts\lib\InputCombobox\colors.less" />
@@ -984,7 +984,7 @@
     <Content Include="Views\TempVariable\SystemSettings.cshtml" />
     <Content Include="Views\TempVariable\SettlementLock.cshtml" />
     <Content Include="Views\Auth\Offline.cshtml" />
-    <Content Include="themes\manage\composeletstalk.less" />
+    <Content Include="themes\manage\ManageLetstalkMessage.less" />
     <Content Include="Views\Auth\NotFound.cshtml" />
     <Content Include="Views\Auth\Index.cshtml" />
     <Content Include="Views\Auth\Error.cshtml" />

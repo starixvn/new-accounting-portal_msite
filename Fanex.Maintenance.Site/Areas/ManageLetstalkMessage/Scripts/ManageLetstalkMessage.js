@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
-    letstalkComposeController.initPage();
+    manageLetstalkMessageController.initPage();
 });
 
-var LetstalkComposeController = function () {
+var ManageLetstalkMessageController = function () {
     var self = this;
 
     self.initPage = function () {
@@ -14,7 +14,19 @@ var LetstalkComposeController = function () {
     };
 
     self.initDatePicker = function () {
-        $("#ConfigSendTime").datepicker({
+        $("#FromDate").datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            dateFormat: "M dd,yy",
+            showOn: "button",
+            buttonImage: $('#imagePath').val(),
+            buttonText: "To",
+            buttonImageOnly: true
+        }).datepicker('init', '#FromDate');
+
+        $("#ToDate").datepicker({
             defaultDate: "+1w",
             changeMonth: true,
             changeYear: true,
@@ -25,12 +37,21 @@ var LetstalkComposeController = function () {
             buttonText: "To",
             buttonImageOnly: true
         }).datepicker('init', '#ToDate');
+
+        var time = moment(new Date()).zone("-04:00");
+        $("#ConfigSendTime").val(time);
+        $("#ConfigSendTime").datetimepicker({
+            dateFormat: "M dd,yy",
+            timeFormat: 'HH:mm',
+            controlType: 'select',
+            oneLine: true,
+        });
     };
 
     self.renderGroupFilter = function () {
         sharedScriptManager.blockUI();
         sharedScriptManager.callAjax(self,
-            window.rootUrl + "LetstalkNotification/LetstalkCompose/GetGroups",
+            window.rootUrl + "LetstalkNotification/ManageLetstalkMessage/GetGroups",
             null,
             function (result) {
                 if (result && result.length > 0) {
@@ -108,6 +129,8 @@ var LetstalkComposeController = function () {
         for (var i = 0; i < reportLength; i++) {
             var dataRow = result[i];
             var rowColumns = [];
+            var actionCancel = "<div class='pointer-cursor' onclick='manageLetstalkMessage.cancelNotification(" + dataRow.Id + ")'>Cancel</div>";
+            var actionResend = "<div class='pointer-cursor' onclick='manageLetstalkMessageController.updatelNotificationStatus(" + dataRow.Id + ", 0)'>Resend</div>";
             rowColumns.push({ Name: "No", Value: dataRow.Id });
             rowColumns.push({ Name: "LetstalkGroup", Value: dataRow.LetstalkGroup });
             rowColumns.push({ Name: "Message", Value: dataRow.Message });
@@ -118,8 +141,8 @@ var LetstalkComposeController = function () {
             rowColumns.push({ Name: "CreatedDate", Value: dataRow.CreatedDate });
             rowColumns.push({ Name: "Creator", Value: dataRow.Creator });
             rowColumns.push({ Name: "LatestEditor", Value: dataRow.LatestEditor });
-            rowColumns.push({ Name: "Resend", Value: "<a href='#' class='link-color'>Resend</a>" });
-            rowColumns.push({ Name: "Action", Value: "<a href='#' class='link-color'>Cancel</a>"});
+            rowColumns.push({ Name: "Resend", Value: dataRow.Status == "FAILED" ? actionResend : "" });
+            rowColumns.push({ Name: "Action", Value: actionCancel });
             bodyData.push({
                 Columns: rowColumns
             });
@@ -148,7 +171,7 @@ var LetstalkComposeController = function () {
             showHighlightRow: true,
             gridExpandHeight: 500,
             headerColumnHeight: 29,
-            showPager: true,
+            showPager: false,
             pagerOption: {
                 itemsPerPage: 50,
                 currentPage: 0,
@@ -161,6 +184,10 @@ var LetstalkComposeController = function () {
     };
 
     self.bindEvents = function () {
+        $("#btnSubmit").click(function () {
+            self.GetNotificationList();
+        });
+
         $("#button-create").click(function () {
             self.insertNotification();
         });
@@ -180,12 +207,31 @@ var LetstalkComposeController = function () {
         });
     }
 
+    self.GetNotificationList = function () {
+        var params = {
+            FromDate: $("#FromDate").val(),
+            ToDate: $("#ToDate").val(),
+            RecipientID: $('#LetstalkGroup').val(),
+            Statusid: $('#Status').val(),
+            NotificationID: null
+        };
+        sharedScriptManager.blockUI();
+        sharedScriptManager.callAjax(self,
+            window.rootUrl + "LetstalkNotification/ManageLetstalkMessage/GetNotificationList",
+            params,
+            function (result) {
+                
+            },
+            null,
+            sharedScriptManager.unblockUI);
+    }
+
     self.insertNotification = function () {
         sharedScriptManager.blockUI();
         var data = new FormData();
-        $.each($("input[type='file']")[0].files, function (i, file) {
-            data.append('files', file);
-        });
+        //$.each($("input[type='file']")[0].files, function (i, file) {
+        //    data.append('files', file);
+        //});
         var insertNotificationParams = {
             ConfigSendTime: $("#ConfigSendTime").val() + " " + $("#hh").val() + ":" + $("#mm").val(),
             Title: $('#title').val(),
@@ -195,19 +241,53 @@ var LetstalkComposeController = function () {
         data.append("insertNotificationCriteria", JSON.stringify(insertNotificationParams));
         $.ajax({
             type: 'POST',
-            url: window.rootUrl + "LetstalkNotification/LetstalkCompose/InsertNotification",
+            url: window.rootUrl + "LetstalkNotification/ManageLetstalkMessage/InsertNotification",
             contentType: false,
             processData: false,
             data: data,
             success: function (result) {
-                var message = result.IsSuccessful ? "Letstalk has been added successfully" : "Failed to add data!!!";
-                NAP.alert("Notify", message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/LetstalkCompose/Index")); });
+                var message = result.IsSuccessful ? "Notification has been added successfully" : "Failed to add data!!!";
+                NAP.alert("Notify", message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
             },
             complete: function () {
                 sharedScriptManager.unblockUI();
             }
         })
     }
+
+    self.cancelNotification = function (notificationId) {
+        NAP.modal("Cancel Notification", "Do you want to cancel this notification?", function () {
+            sharedScriptManager.blockUI();
+            sharedScriptManager.callAjax(self,
+                window.rootUrl + "LetstalkNotification/ManageLetstalkMessage/CancelNotification",
+                { NotificationId : notificationId },
+                function (result) {
+                    var message = result.IsSuccessful ? "Notification has been cancelled successfully" : "Failed to cancel notification!!!";
+                    NAP.alert("Notify", message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
+                },
+                null,
+                sharedScriptManager.unblockUI);
+        })
+    }
+
+    self.updatelNotificationStatus = function (notificationId, recipientId) {
+        NAP.modal("Update Notification Status", "Do you want to update this notification?", function () {
+            sharedScriptManager.blockUI();
+            sharedScriptManager.callAjax(self,
+                window.rootUrl + "LetstalkNotification/ManageLetstalkMessage/UpdateNotificationStatus",
+                { NotificationID: notificationId, RecipientID: recipientId, StatusID: 0 },
+                function (result) {
+                    var message = result.IsSuccessful ? "Notification has been updated successfully" : "Failed to update notification!!!";
+                    NAP.alert("Notify", message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
+                },
+                null,
+                sharedScriptManager.unblockUI);
+        })
+    }
+
+    //self.getData() = function () {
+
+    //}
 
     self.getFakeData = function () {
         return [
@@ -384,4 +464,4 @@ var LetstalkComposeController = function () {
 
 };
 
-var letstalkComposeController = new LetstalkComposeController();
+var manageLetstalkMessageController = new ManageLetstalkMessageController();

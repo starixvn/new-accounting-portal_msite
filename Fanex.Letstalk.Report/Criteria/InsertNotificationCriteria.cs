@@ -5,6 +5,8 @@ namespace Fanex.Letstalk.Notification.Criteria
 {
     public class InsertNotificationCriteria : CriteriaBase
     {
+        public int NotificationID { get; set; }
+
         public string Title { get; set; }
 
         public string Content { get; set; }

@@ -14,29 +14,37 @@ using Fanex.Maintenance.Repository.Command;
 
 namespace Fanex.Letstalk.Notification.Services
 {
-    public interface LetstalkComposeService
+    public interface ManageLetstalkMessageService
     {
         CommandResult InsertNotification(InsertNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files);
 
         IEnumerable<SelectListItem> GetGroups();
+
+        CommandResult CancelNotificationId(int notificationId);
+
+        CommandResult UpdateNotificationStatus(UpdateNotificationStatusCriteria criteria);
+
+        IEnumerable<SelectListItem> GetStatusList();
+
+        IEnumerable<NotificationModel> GetNotificationList(GetNotificationListCriteria criteria);
     }
 
-    public class LetstalkComposeServiceImp : LetstalkComposeService
+    public class LetstalkComposeServiceImp : ManageLetstalkMessageService
     {
         public CommandResult InsertNotification(InsertNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files)
         {
             Hashtable hash = criteria.GetSpParams();
-            int notificationID = 0;
+            //int notificationID = 0;
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.ExecuteNonQuery(hash);
-                notificationID = Converter.ToInt(db.GetParameterValue("NotificationID"));
+                //notificationID = Converter.ToInt(db.GetParameterValue("NotificationID"));
             }
 
-            foreach (var file in files)
-            {
-                InsertAttachementFileData(notificationID, file);
-            }
+            //foreach (var file in files)
+            //{
+            //    InsertAttachementFileData(notificationID, file);
+            //}
 
             return new CommandResult
             {
@@ -87,6 +95,60 @@ namespace Fanex.Letstalk.Notification.Services
                     });
                 }
 
+            }
+            return result;
+        }
+
+        public CommandResult CancelNotificationId(int notificationId)
+        {
+            var criteria = new CancelNotificationCriteria { LstNotificationID = notificationId.ToString() };
+            Hashtable hash = criteria.GetSpParams();
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                db.ExecuteNonQuery(hash);
+            }
+
+            return new CommandResult
+            {
+                Code = 0,
+                Message = string.Empty
+            };
+        }
+
+        public CommandResult UpdateNotificationStatus(UpdateNotificationStatusCriteria criteria)
+        {
+            Hashtable hash = criteria.GetSpParams();
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                db.ExecuteNonQuery(hash);
+            }
+
+            return new CommandResult
+            {
+                Code = 0,
+                Message = string.Empty
+            };
+        }
+
+        public IEnumerable<SelectListItem> GetStatusList()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem { Text = "All" , Value = "" },
+                new SelectListItem { Text = "Waiting" , Value = "0" },
+                new SelectListItem { Text = "Sending" , Value = "1" },
+                new SelectListItem { Text = "Successful" , Value = "2" },
+                new SelectListItem { Text = "Failed" , Value = "3" }
+            };
+        }
+
+        public IEnumerable<NotificationModel> GetNotificationList(GetNotificationListCriteria criteria)
+        {
+            List<NotificationModel> result;
+            var param = criteria.GetSpParams();
+            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                result = db.Query<NotificationModel>(param).ToList();
             }
             return result;
         }

@@ -81,8 +81,8 @@
                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css");
 
             bundles.AddAndInclude(
-                "~/css/compose-letstalk",
-                "~/themes/manage/composeletstalk.less");
+                "~/css/manage-letstalk-message",
+                "~/themes/manage/ManageLetstalkMessage.less");
 
             // js
             bundles.Add(new ScriptBundle("~/scripts/common").Include(

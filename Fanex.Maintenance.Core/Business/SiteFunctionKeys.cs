@@ -45,6 +45,8 @@ public static class SiteFunctionKeys
 
     public const string LetstalkNotification = "LetstalkNotification";
 
+    public const string ManageLetstalkMessage = "ManageLetstalkMessage";
+
     public const string LetstalkReport = "LetstalkReport";
 
     public const string LicenseeSetting = "LicenseeSetting";

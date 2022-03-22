@@ -4,14 +4,8 @@ namespace Fanex.Letstalk.Notification.Criteria
 {
     public class GetGroupCriteria : CriteriaBase
     {
-        public override bool IsValid()
-        {
-            return true;
-        }
+        public override bool IsValid() => true;
 
-        public override string GetSettingKey()
-        {
-            return "Notif_GetListRecipients";
-        }
+        public override string GetSettingKey() => "Notif_GetListRecipients";
     }
 }
