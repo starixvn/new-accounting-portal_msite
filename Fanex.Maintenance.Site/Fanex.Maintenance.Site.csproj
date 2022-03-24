@@ -117,10 +117,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.NAP.Core.Client, Version=1.2.1.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.14-beta8\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
+      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.15-beta2\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core.SignIn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.SignIn.1.0.1.1-beta7\lib\net461\Fanex.NAP.Core.SignIn.dll</HintPath>
+      <HintPath>..\packages\Fanex.NAP.Core.SignIn.1.0.1.2-beta1\lib\net461\Fanex.NAP.Core.SignIn.dll</HintPath>
     </Reference>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
@@ -360,6 +360,7 @@
     <Content Include="App_Data\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\ManageLetstalkMessage\Scripts\ManageLetstalkMessage.js" />
     <Content Include="Areas\MailStation\ManageMail\MailActionLog\Scripts\MailActionLogController.js" />
     <Content Include="Areas\MailStation\Report\MailReport\Styles\Images\trigger.png" />
     <Content Include="Areas\TracingSp\AppData\backupMNL\DBServerList.xml" />
@@ -433,6 +434,18 @@
     <Content Include="scripts\lib\Fanex.Grid\Language\Fanex.Gird.Lang.zh-TW.js" />
     <Content Include="scripts\lib\Fanex.Grid\moment.min.js" />
     <Content Include="scripts\lib\Fanex.Grid\numeral.min.js" />
+    <Content Include="scripts\lib\Fanex.Multiselect\fanex.multiSelect.css" />
+    <Content Include="scripts\lib\Fanex.Multiselect\fanex.multiSelect.js" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\BottomLine.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\FirstNodeSpan.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\MiddleLine.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\NodeSpan.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\PlusMinus.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\sprites.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\TopLine.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\ui-icons_2e83ff_256x240-1.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\ui-icons_2e83ff_256x240-2.png" />
+    <Content Include="scripts\lib\Fanex.Multiselect\images\ui-icons_2e83ff_256x240.png" />
     <Content Include="scripts\lib\InputCombobox\jquery.combobox-ext.js" />
     <Content Include="scripts\lib\jquery.blockUI.js" />
     <Content Include="scripts\lib\chosen\chosen-sprite.png" />
@@ -736,8 +749,8 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="wwwroot\nap-auth\auth.css" />
     <Content Include="wwwroot\nap-auth\auth-sample.css" />
+    <Content Include="wwwroot\nap-auth\auth.css" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="themes\assets\font\fontawesome-webfont.eot" />
@@ -937,6 +950,9 @@
     <Content Include="Areas\MailStation\ManageMail\MailActionLog\Index.cshtml" />
     <Content Include="Areas\MailStation\ManageMail\MailActionLog\Styles\MailActionLog.less" />
     <None Include="app.config" />
+    <Content Include="Areas\ManageLetstalkMessage\Index.cshtml" />
+    <Content Include="Areas\ManageLetstalkMessage\Web.config" />
+    <Content Include="Areas\ManageLetstalkMessage\CreateLetstalkMessage.cshtml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="scripts\lib\Fanex.Grid\Fanex.Grid.less" />
     <Content Include="scripts\lib\InputCombobox\colors.less" />
@@ -967,6 +983,7 @@
     <Content Include="Views\TempVariable\ParlayLocking.cshtml" />
     <Content Include="Views\TempVariable\SystemSettings.cshtml" />
     <Content Include="Views\TempVariable\SettlementLock.cshtml" />
+    <Content Include="themes\manage\ManageLetstalkMessage.less" />
     <Content Include="Views\Auth\Offline.cshtml" />
     <Content Include="Views\Auth\NotFound.cshtml" />
     <Content Include="Views\Auth\Index.cshtml" />
