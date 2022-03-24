@@ -5,7 +5,7 @@ namespace Fanex.Letstalk.Notification.Criteria
 {
     public class InsertNotificationCriteria : CriteriaBase
     {
-        public int NotificationID { get; set; }
+        //public int NotificationID { get; set; }
 
         public string Title { get; set; }
 
@@ -13,16 +13,12 @@ namespace Fanex.Letstalk.Notification.Criteria
 
         public string LstRecipientID { get; set; }
 
-        public DateTime ConfigSendTime { get; set; }
+        public DateTime? ConfigSendTime { get; set; }
 
-        public override bool IsValid()
-        {
-            return true;
-        }
+        public int CreatedBy { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return "Notif_InsertNewNotification";
-        }
+        public override bool IsValid() => true;
+
+        public override string GetSettingKey() => "Notif_InsertNewNotification";
     }
 }

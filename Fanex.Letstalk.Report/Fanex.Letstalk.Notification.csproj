@@ -107,7 +107,6 @@
     <Compile Include="LetstalkReportAreaRegistration.cs" />
     <Compile Include="Model\FilterGroup.cs" />
     <Compile Include="Model\FilterTarget.cs" />
-    <Compile Include="Model\CreateNotificationModel.cs" />
     <Compile Include="Model\LetstalkRecord.cs" />
     <Compile Include="Model\NotificationModel.cs" />
     <Compile Include="Model\RecipientModel.cs" />
@@ -128,6 +127,10 @@
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
       <Project>{e7173cdd-8ecb-4fb6-b585-41bfe941745e}</Project>
       <Name>Fanex.Maintenance.Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj">
+      <Project>{60bc3fa8-df7c-4024-b469-4ed110420143}</Project>
+      <Name>Fanex.Maintenance.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Maintenance.Repository\Fanex.Maintenance.Repository.csproj">
       <Project>{8858DC31-A292-4388-8E07-9B2E345A3FE6}</Project>

@@ -2,8 +2,8 @@
 using Fanex.Letstalk.Notification.Model;
 using Fanex.Letstalk.Notification.Services;
 using Fanex.Maintenance.Controller;
+using Fanex.Maintenance.Repository.Command;
 using Fanex.NAP.Core.Business;
-using Fanex.NAP.Core.Command;
 using Fanex.NAP.Core.Web.Attribute;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -39,15 +39,15 @@ namespace Fanex.Letstalk.Notification.Controllers
 
         public ActionResult CreateLetstalkMessage()
         {
-            return View("~/Areas/ManageLetstalkMessage/CreateLetstalkMessage.cshtml", new CreateNotificationModel());
+            return View("~/Areas/ManageLetstalkMessage/CreateLetstalkMessage.cshtml");
         }
 
         [HttpPost]
         public JsonResult InsertNotification(FormCollection formValues, IEnumerable<HttpPostedFileBase> files)
         {
             var insertNotificationCriteria = JsonConvert.DeserializeObject<InsertNotificationCriteria>(formValues["insertNotificationCriteria"]);
-            //var result = letstalkComposeService.InsertNotification(insertNotificationCriteria, files);
-            var result = new CommandResult { Code = 0, Message = "" };
+            insertNotificationCriteria.CreatedBy = CurrentSession.UserId;
+            var result = manageLetstalkMessageService.InsertNotification(insertNotificationCriteria, files);
             return Json(result);
         }
 

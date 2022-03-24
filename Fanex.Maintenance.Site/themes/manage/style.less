@@ -273,7 +273,7 @@ h2 .title {
 	.box_shadow(1px 1px 2px 1px rgba(0, 0, 0, 0.1));
 	padding: 20px;
 	float: left;
-	width:95%;
+	width: 95%;
 
 	.form-row {
 		float: left;
@@ -306,19 +306,24 @@ h2 .title {
 				border: 1px solid @form_border;
 				font-family: Tahoma;
 			}
+
 			select {
 				width: 292px;
 			}
+
 			input[type=submit], input[type=reset], input[type=button] {
 				.g-button();
 			}
+
 			.cancel {
 				.g-button(@cancel_bg);
 			}
 
 			input[type=text].input-validation-error,
 			input[type=password].input-validation-error,
-			select.input-validation-error {
+			select.input-validation-error,
+			a.input-validation-error,
+			textarea.input-validation-error {
 				border: solid 1px @msg_err_border;
 				background-color: @msg_err_bg + #444;
 			}
@@ -356,14 +361,17 @@ h2 .title {
 			.border_radius;
 			.box_shadow(1px 1px 3px rgba(0, 0, 0, 0.6));
 		}
+
 		.err {
 			background-color: @msg_err_bg;
 			border: solid 1px @msg_err_border;
 		}
-		.warn {			
+
+		.warn {
 			background-color: @msg_warn_bg;
 			border: solid 1px @msg_warn_border;
 		}
+
 		.info {
 			background-color: @msg_info_bg;
 			border: solid 1px @msg_info_border;

@@ -49,7 +49,7 @@ namespace Fanex.Letstalk.Notification.Services
             return new CommandResult
             {
                 Code = 0,
-                Message = string.Empty
+                Message = "Message has been created successfully!"
             };
         }
 
@@ -89,7 +89,7 @@ namespace Fanex.Letstalk.Notification.Services
                 {
                     result.Add(new SelectListItem
                     {
-                        Selected = true,
+                        Selected = false,
                         Value = recipient.RecipientID.ToString(),
                         Text = recipient.ConversationID + " - " + recipient.RecipientName
                     });

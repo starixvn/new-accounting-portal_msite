@@ -17,66 +17,72 @@
         @Html.ActionLink("← Back To List", "Index", "ManageLetstalkMessage", new { @class = "lnk" })
     </h1>
 }
-<section id="filter-bar" class="compose-letstalk">
-    <div class="filter-form">
-        <div class="filter-row">
-            <div class="lbl-field width-100">
+<section id="filter-bar" class="manage-letstalk-message">
+    <div class="form">
+        <div id="validation-summary-row" class="form-row display-none">
+            <div class="lbl-field width-120">
+            </div>
+            <div class="edit-field">
+                <div id="validationSummary" style="width: 100%;"></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field width-120">
                 Letstalk Group
             </div>
             <div class="edit-field ddl-group">
-                <select id="group"></select>
+                <select id="CreatedLetstalkGroup"></select>
             </div>
         </div>
-        <div class="filter-row">
-            <div class="lbl-field width-100">
+        <div class="form-row">
+            <div class="lbl-field width-120">
                 Title
             </div>
-            <div class="edit-field width-60">
-                <input type="text" class="width-290" id="title" value="" />
+            <div class="edit-field">
+                <input type="text" maxlength="256" class="width-290" id="AddedTitle" value="" />
             </div>
         </div>
-        <div class="filter-row">
-            <div class="lbl-field width-100">
+        <div class="form-row">
+            <div class="lbl-field width-120">
                 Message
             </div>
             <div class="edit-field lt-content">
-                <textarea id="message" style="width: 402px; height: 152px;" placeholder="Input your message"></textarea>
+                <textarea id="AddedMessage" maxlength="1024" style="width: 402px; height: 152px;"></textarea>
             </div>
         </div>
-        @*<div class="filter-row">
+        @*<div class="form-row">
+            <div class="lbl-field width-100">
+                Attched file(s)
+            </div>
+            <div class="edit-field width-auto">
+                <input type="file" id="myFile" name="myFile" multiple onchange="letstalkComposeController.getFiles()" class="width-95"> (Maximum size: 15MB)
+                <div id="fileList" class="inline-flex"></div>
+            </div>
+        </div>*@
+        <div class="form-row">
+            <div class="lbl-field width-120">
+                Scheduled Time
+            </div>
+            <div class="edit-field width-20">
+                <input type="checkbox" id="chkScheduledTime" />
+            </div>
+            <div id="divScheduledTime" class="float-left">
                 <div class="lbl-field width-100">
-                    Attched file(s)
+                    Date Time
                 </div>
-                <div class="edit-field width-auto">
-                    <input type="file" id="myFile" name="myFile" multiple onchange="letstalkComposeController.getFiles()" class="width-95"> (Maximum size: 15MB)
-                    <div id="fileList" class="inline-flex"></div>
+                <div class="edit-field">
+                    @Html.TextBox("ConfigSendTime", "ConfigSendTime", new { @Value = DateTime.Now.ToString("MMM dd,yyyy HH:mm"), style = "width: 110px", autocomplete = "off" })
                 </div>
-            </div>*@
-        <div class="filter-row">
-            <div class="lbl-field width-100">
-
-            </div>
-            <div class="edit-field">
-                @Html.TextBox("ConfigSendTime", "ConfigSendTime", new { @Value = DateTime.Now.ToString("MMM dd,yyyy HH:mm"), style = "width: 100px", autocomplete = "off" })
-            </div>
-            <div class="lbl-field width-20">
-                HH:
-            </div>
-            <div class="edit-field width-60">
-                <input type="text" class="width-60 input-number" id="hh" value="" />
-            </div>
-            <div class="lbl-field width-20">
-                MM:
-            </div>
-            <div class="edit-field">
-                <input type="text" class="width-60 input-number" id="mm" value="" />
             </div>
         </div>
-        <div class="filter-row">
-            <div class="lbl-field width-100">
+        <div class="form-row">
+            <div class="lbl-field width-120">
             </div>
-            <div class="submit">
-                <input id="button-create" type="submit" value="Create" />
+            <div class="edit-field">
+                <input id="btnCreate" type="submit" value="Send Now" />
+            </div>
+            <div class="edit-field">
+                <input id="btnClear" type="submit" value="CLEAR" />
             </div>
         </div>
     </div>
