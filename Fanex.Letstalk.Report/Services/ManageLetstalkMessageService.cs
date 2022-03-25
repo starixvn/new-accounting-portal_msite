@@ -11,6 +11,8 @@ using Fanex.Data;
 using Fanex.Letstalk.Notification.Criteria;
 using Fanex.Letstalk.Notification.Model;
 using Fanex.Maintenance.Repository.Command;
+using Fanex.NAP.Core.Service.Impl;
+using Fanex.NAP.Core.Service.Interface;
 
 namespace Fanex.Letstalk.Notification.Services
 {
@@ -27,10 +29,24 @@ namespace Fanex.Letstalk.Notification.Services
         IEnumerable<SelectListItem> GetStatusList();
 
         IEnumerable<NotificationModel> GetNotificationList(GetNotificationListCriteria criteria);
+
+        IEnumerable<NotificationModel> GetNotificationById(GetNotificationListCriteria criteria);
+
+        CommandResult EditNotification(EditNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files);
+
+        CommandResult DeleteNotification(DeleteNotificationCriteria criteria);
     }
 
     public class LetstalkComposeServiceImp : ManageLetstalkMessageService
     {
+
+        private readonly IUserService userService;
+
+        public LetstalkComposeServiceImp()
+        {
+            userService = new UserService();
+        }
+
         public CommandResult InsertNotification(InsertNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files)
         {
             Hashtable hash = criteria.GetSpParams();
@@ -134,7 +150,6 @@ namespace Fanex.Letstalk.Notification.Services
         {
             return new List<SelectListItem>
             {
-                new SelectListItem { Text = "All" , Value = "" },
                 new SelectListItem { Text = "Waiting" , Value = "0" },
                 new SelectListItem { Text = "Sending" , Value = "1" },
                 new SelectListItem { Text = "Successful" , Value = "2" },
@@ -144,6 +159,56 @@ namespace Fanex.Letstalk.Notification.Services
 
         public IEnumerable<NotificationModel> GetNotificationList(GetNotificationListCriteria criteria)
         {
+            List<NotificationModel> notificationList;
+            List<NotificationRecipientModel> notificationRecipientList;
+            var param = criteria.GetSpParams();
+            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var multi = db.QueryMultiple(param);
+                notificationList = multi.Read<NotificationModel>().ToList();
+                notificationRecipientList = multi.Read<NotificationRecipientModel>().ToList();
+            }
+            var result = UpdateModelView(notificationList, notificationRecipientList);
+            return result;
+        }
+
+        private IEnumerable<NotificationModel> UpdateModelView(IEnumerable<NotificationModel> notificationList, IEnumerable<NotificationRecipientModel> notificationRecipientList)
+        {
+            var result = new List<NotificationModel>();
+            foreach (var item in notificationList)
+            {
+                item.Creator = GetUserName(item.CreatedBy);
+                item.LatestEditor = GetUserName(item.LastModifiedBy);
+                foreach(var notificationRecipient in notificationRecipientList)
+                {
+                    if (notificationRecipient.NotificationID == item.NotificationID)
+                    {
+                        var temp = item;
+                        temp.RecipientID = notificationRecipient.RecipientID;
+                        temp.RecipientName = notificationRecipient.RecipientName;
+                        temp.ConversationID = notificationRecipient.ConversationID;
+                        temp.Status = notificationRecipient.Status;
+                        result.Add(temp);
+                    }    
+                }    
+            }
+            return result;
+        }
+
+        private string GetUserName(int userId)
+        {
+            try
+            {
+                return userService.Get(userId)?.Username;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        public IEnumerable<NotificationModel> GetNotificationById(GetNotificationListCriteria criteria)
+        {
             List<NotificationModel> result;
             var param = criteria.GetSpParams();
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
@@ -151,6 +216,58 @@ namespace Fanex.Letstalk.Notification.Services
                 result = db.Query<NotificationModel>(param).ToList();
             }
             return result;
+        }
+
+        public CommandResult EditNotification(EditNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files)
+        {
+            try
+            {
+                Hashtable hash = criteria.GetSpParams();
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    db.ExecuteNonQuery(hash);
+                }
+
+                return new CommandResult
+                {
+                    Code = 0,
+                    Message = "Message has been edited successfully!"
+                };
+            }
+            catch
+            {
+                return new CommandResult
+                {
+                    Code = 1,
+                    Message = "You are not allowed to update in-progress messages. All changes will be discarded."
+                };
+            }
+        }
+
+        public CommandResult DeleteNotification(DeleteNotificationCriteria criteria)
+        {
+            try
+            {
+                Hashtable hash = criteria.GetSpParams();
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    db.ExecuteNonQuery(hash);
+                }
+
+                return new CommandResult
+                {
+                    Code = 0,
+                    Message = "Message has been deleted successfully!"
+                };
+            }
+            catch
+            {
+                return new CommandResult
+                {
+                    Code = 1,
+                    Message = "You are not allowed to delete in-progress messages. All changes will be discarded."
+                };
+            }
         }
     }
 }

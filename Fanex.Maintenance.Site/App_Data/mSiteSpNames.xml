@@ -40,5 +40,7 @@
 		<Setting Key="Notif_InsertNewAttachment" SpName="Notif_InsertNewAttachment" DbName="DBWH.bodb_Notification.bodbAdminNet" />
 		<Setting Key="Notif_CancelNotification" SpName="Notif_CancelNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
 		<Setting Key="Notif_UpdateNotificationRepientStatus" SpName="Notif_UpdateNotificationRepientStatus" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+		<Setting Key="Notif_EditNotification" SpName="Notif_EditNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+		<Setting Key="Notif_DeleteNotification" SpName="Notif_DeleteNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
 	</Function>
 </Functions>

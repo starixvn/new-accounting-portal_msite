@@ -5,9 +5,9 @@ namespace Fanex.Letstalk.Notification.Criteria
 {
     public class GetNotificationListCriteria : CriteriaBase
     {
-        public DateTime FromDate { get; set; }
+        public DateTime? FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+        public DateTime? ToDate { get; set; }
 
         public int? RecipientID { get; set; }
 

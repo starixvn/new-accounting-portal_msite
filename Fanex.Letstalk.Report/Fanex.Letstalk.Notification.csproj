@@ -98,6 +98,8 @@
     <Compile Include="Controllers\ManageLetstalkMessageController.cs" />
     <Compile Include="Controllers\LetstalkReportController.cs" />
     <Compile Include="Criteria\CancelNotificationCriteria.cs" />
+    <Compile Include="Criteria\DeleteNotificationCriteria.cs" />
+    <Compile Include="Criteria\EditNotificationCriteria.cs" />
     <Compile Include="Criteria\GetGroupCriteria.cs" />
     <Compile Include="Criteria\GetNotificationListCriteria.cs" />
     <Compile Include="Criteria\GetUnsentNotificationCriteria.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Model\FilterTarget.cs" />
     <Compile Include="Model\LetstalkRecord.cs" />
     <Compile Include="Model\NotificationModel.cs" />
+    <Compile Include="Model\NotificationRecipientModel.cs" />
     <Compile Include="Model\RecipientModel.cs" />
     <Compile Include="Params\GetLogParams.cs" />
     <Compile Include="Params\HttpGetLogParams.cs" />

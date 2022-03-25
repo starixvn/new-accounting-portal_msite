@@ -9,7 +9,6 @@
     <link href="~/scripts/lib/Fanex.Multiselect/fanex.multiSelect.css" rel="stylesheet" type="text/css" />
     <link href="~/scripts/lib/DatetimePicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
     <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
-    <link href="~/themes/manage/LetstalkReport.less" rel="stylesheet" type="text/css" />
 }
 @section Headline {
     <h1>
@@ -28,26 +27,26 @@
         </div>
         <div class="form-row">
             <div class="lbl-field width-120">
-                Letstalk Group
+                <b>Letstalk Group</b>
             </div>
             <div class="edit-field ddl-group">
-                <select id="CreatedLetstalkGroup"></select>
+                @Html.DropDownList("LetstalkGroup", (List<SelectListItem>)ViewBag.LetstalkGroupList, "Select an option", new { @class = "width-250" })
             </div>
         </div>
         <div class="form-row">
             <div class="lbl-field width-120">
-                Title
+                <b>Subject</b>
             </div>
             <div class="edit-field">
-                <input type="text" maxlength="256" class="width-290" id="AddedTitle" value="" />
+                <input type="text" maxlength="256" class="width-290" id="Subject" value="" />
             </div>
         </div>
         <div class="form-row">
             <div class="lbl-field width-120">
-                Message
+                <b>Message</b>
             </div>
             <div class="edit-field lt-content">
-                <textarea id="AddedMessage" maxlength="1024" style="width: 402px; height: 152px;"></textarea>
+                <textarea id="Message" maxlength="1024" style="width: 402px; height: 152px;"></textarea>
             </div>
         </div>
         @*<div class="form-row">
@@ -61,14 +60,14 @@
         </div>*@
         <div class="form-row">
             <div class="lbl-field width-120">
-                Scheduled Time
+                <b>Scheduled Time</b>
             </div>
             <div class="edit-field width-20">
                 <input type="checkbox" id="chkScheduledTime" />
             </div>
             <div id="divScheduledTime" class="float-left">
-                <div class="lbl-field width-100">
-                    Date Time
+                <div class="lbl-field width-120">
+                    Date Time (GMT -4)
                 </div>
                 <div class="edit-field">
                     @Html.TextBox("ConfigSendTime", "ConfigSendTime", new { @Value = DateTime.Now.ToString("MMM dd,yyyy HH:mm"), style = "width: 110px", autocomplete = "off" })
@@ -79,7 +78,7 @@
             <div class="lbl-field width-120">
             </div>
             <div class="edit-field">
-                <input id="btnCreate" type="submit" value="Send Now" />
+                <input id="btnCreate" type="submit" value="Send Now" class="mr-5" />
             </div>
             <div class="edit-field">
                 <input id="btnClear" type="submit" value="CLEAR" />
@@ -102,7 +101,7 @@
     <script src="~/scripts/lib/custom-datepicker.js" type="text/javascript"></script>
     <script src="~/scripts/lib/DatetimePicker/jquery.datetimepicker.js" type="text/javascript"></script>
     <script src="~/scripts/lib/Popup/dialogbox.js" type="text/javascript"></script>
-    <script src="~/Areas/ManageLetstalkMessage/Scripts/ManageLetstalkMessage.js" type="text/javascript"></script>
+    <script src="~/Areas/ManageLetstalkMessage/Scripts/CreateLetstalkMessage.js" type="text/javascript"></script>
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~")';
         var viewResources = {

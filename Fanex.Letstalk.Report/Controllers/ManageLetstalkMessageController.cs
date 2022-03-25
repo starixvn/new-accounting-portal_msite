@@ -7,6 +7,7 @@ using Fanex.NAP.Core.Business;
 using Fanex.NAP.Core.Web.Attribute;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -31,23 +32,56 @@ namespace Fanex.Letstalk.Notification.Controllers
         {
             ViewBag.HasEdit = HasRight(SiteFunctionKeys.ManageServers, Constant.Policy.Host);
             ViewBag.StatusList = manageLetstalkMessageService.GetStatusList();
-            var groupList = new List<SelectListItem> { new SelectListItem { Text = "All", Value = "", Selected = true } };
-            groupList.AddRange(manageLetstalkMessageService.GetGroups());
-            ViewBag.LetstalkGroupList = groupList;
+            ViewBag.LetstalkGroupList = manageLetstalkMessageService.GetGroups();
             return View("~/Areas/ManageLetstalkMessage/Index.cshtml");
         }
 
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Host)]
         public ActionResult CreateLetstalkMessage()
         {
+            ViewBag.LetstalkGroupList = manageLetstalkMessageService.GetGroups();
             return View("~/Areas/ManageLetstalkMessage/CreateLetstalkMessage.cshtml");
         }
 
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Host)]
+        public ActionResult EditLetstalkMessage(int notificationID, int recipientID)
+        {
+            var criteria = new GetNotificationListCriteria
+            {
+                RecipientID = recipientID,
+                NotificationId = notificationID
+            };
+            ViewBag.LetstalkGroupList = manageLetstalkMessageService.GetGroups();
+            var model = manageLetstalkMessageService.GetNotificationById(criteria).FirstOrDefault();
+            return View("~/Areas/ManageLetstalkMessage/EditLetstalkMessage.cshtml", model);
+        }
+
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Host)]
         [HttpPost]
         public JsonResult InsertNotification(FormCollection formValues, IEnumerable<HttpPostedFileBase> files)
         {
             var insertNotificationCriteria = JsonConvert.DeserializeObject<InsertNotificationCriteria>(formValues["insertNotificationCriteria"]);
             insertNotificationCriteria.CreatedBy = CurrentSession.UserId;
             var result = manageLetstalkMessageService.InsertNotification(insertNotificationCriteria, files);
+            return Json(result);
+        }
+
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Host)]
+        [HttpPost]
+        public JsonResult EditNotification(FormCollection formValues, IEnumerable<HttpPostedFileBase> files)
+        {
+            var editNotificationCriteria = JsonConvert.DeserializeObject<EditNotificationCriteria>(formValues["editNotificationCriteria"]);
+            editNotificationCriteria.LastModifiedBy = CurrentSession.UserId;
+            var result = manageLetstalkMessageService.EditNotification(editNotificationCriteria, files);
+            return Json(result);
+        }
+
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Host)]
+        [HttpPost]
+        public JsonResult DeleteNotification(DeleteNotificationCriteria criteria)
+        {
+            criteria.LastModifiedBy = CurrentSession.UserId;
+            var result = manageLetstalkMessageService.DeleteNotification(criteria);
             return Json(result);
         }
 
