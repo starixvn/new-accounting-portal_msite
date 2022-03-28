@@ -10,6 +10,7 @@ var CreateLetstalkMessageController = function () {
         ConfigSendTime: null,
         LetstalkGroup: null,
         Create: null,
+        Cancel: null,
         ChkScheduledTime: null,
         Subject: null,
         Message: null
@@ -27,6 +28,7 @@ var CreateLetstalkMessageController = function () {
         DOMElements.ConfigSendTime = $('#ConfigSendTime');
         DOMElements.LetstalkGroup = $('#LetstalkGroup');
         DOMElements.Create = $('#btnCreate');
+        DOMElements.Cancel = $('#btnCancel');
         DOMElements.Clear = $('#btnClear');
         DOMElements.ChkScheduledTime = $('#chkScheduledTime');
         DOMElements.Subject = $('#Subject');
@@ -44,6 +46,7 @@ var CreateLetstalkMessageController = function () {
             timeFormat: 'HH:mm',
             controlType: 'select',
             oneLine: true,
+            timezone: "-0400"
         });
     };
 
@@ -75,6 +78,12 @@ var CreateLetstalkMessageController = function () {
                 DOMElements.Create.attr('value', 'SEND NOW')
             }
         });
+
+        DOMElements.Cancel.click(function () {
+            NAP.confirm("Cancel Notification", "Are you sure you want to leave this page?", function () {
+                window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index"));
+            })
+        })
     }
 
     self.resetForm = function () {
@@ -138,8 +147,8 @@ var CreateLetstalkMessageController = function () {
             //});
             var insertNotificationParams = {
                 ConfigSendTime: DOMElements.ChkScheduledTime.is(":checked") ? DOMElements.ConfigSendTime.val() : null,
-                Title: DOMElements.Subject.val(),
-                Content: DOMElements.Message.val(),
+                Title: DOMElements.Subject.val().trim(),
+                Content: DOMElements.Message.val().trim(),
                 LstRecipientID: DOMElements.LetstalkGroup.val()
             };
             data.append("insertNotificationCriteria", JSON.stringify(insertNotificationParams));

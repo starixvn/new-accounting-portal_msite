@@ -31,26 +31,28 @@
         </div>
         <div class="form-row">
             <div class="lbl-field width-120">
-                Letstalk Group
+                <b>Letstalk Group</b>
             </div>
             <div class="edit-field ddl-group">
-                @Html.DropDownList("LetstalkGroup", (List<SelectListItem>)ViewBag.LetstalkGroupList, "All", new { @class = "width-250" })
+                @Html.DropDownList("LetstalkGroup", (List<SelectListItem>)ViewBag.LetstalkGroupList, new { @class = "width-250" })
             </div>
         </div>
         <div class="form-row">
             <div class="lbl-field width-120">
-                Subject
+                <b>Subject</b>
             </div>
             <div class="edit-field">
-                <input type="text" maxlength="256" class="width-290" id="Subject" value="" />
+                <input type="text" maxlength="256" style="width: 397px;" id="Subject" value="" /><br />
+                <span class="red-color">Max Lenght: 256 characters</span>
             </div>
         </div>
         <div class="form-row">
             <div class="lbl-field width-120">
-                Message
+                <b>Message</b>
             </div>
             <div class="edit-field lt-content">
-                <textarea id="Message" maxlength="1024" style="width: 402px; height: 152px;"></textarea>
+                <textarea id="Message" maxlength="1024" style="width: 402px; height: 152px;"></textarea><br />
+                <span class="red-color">Max Lenght: 1024 characters</span>
             </div>
         </div>
         @*<div class="form-row">
@@ -64,14 +66,14 @@
             </div>*@
         <div class="form-row">
             <div class="lbl-field width-120">
-                Scheduled Time
+                <b>Scheduled Time</b>
             </div>
             <div class="edit-field width-20">
                 <input type="checkbox" id="chkScheduledTime" />
             </div>
             <div id="divScheduledTime" class="float-left">
-                <div class="lbl-field width-100">
-                    Date Time
+                <div class="lbl-field width-120">
+                    Date Time (GMT -4)
                 </div>
                 <div class="edit-field">
                     @Html.TextBox("ConfigSendTime", "ConfigSendTime", new { @Value = Model.ConfigSendTime.Value.ToString("MMM dd,yyyy HH:mm"), style = "width: 110px", autocomplete = "off" })

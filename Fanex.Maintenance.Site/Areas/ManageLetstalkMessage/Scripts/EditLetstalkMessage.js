@@ -9,7 +9,8 @@ var EditLetstalkMessageController = function () {
         DivScheduledTime: null,
         ConfigSendTime: null,
         LetstalkGroup: null,
-        Create: null,
+        Save: null,
+        Cancel: null,
         ChkScheduledTime: null,
         Subject: null,
         Message: null,
@@ -52,6 +53,7 @@ var EditLetstalkMessageController = function () {
             timeFormat: 'HH:mm',
             controlType: 'select',
             oneLine: true,
+            timezone: "-0400"
         });
     };
 
@@ -61,7 +63,9 @@ var EditLetstalkMessageController = function () {
         });
 
         DOMElements.Cancel.click(function () {
-            window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index"));
+            NAP.confirm("Cancel Notification", "Are you sure you want to leave this page?", function () {
+                window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index"));
+            })
         })
     }
 
@@ -95,8 +99,8 @@ var EditLetstalkMessageController = function () {
             var data = new FormData();
             var editNotificationParams = {
                 ConfigSendTime: DOMElements.ChkScheduledTime.is(":checked") ? DOMElements.ConfigSendTime.val() : null,
-                Title: DOMElements.Subject.val(),
-                Content: DOMElements.Message.val(),
+                Title: DOMElements.Subject.val().trim(),
+                Content: DOMElements.Message.val().trim(),
                 LstRecipientID: DOMElements.LetstalkGroup.val(),
                 NotificationID: DOMElements.NotificationID.val()
             };

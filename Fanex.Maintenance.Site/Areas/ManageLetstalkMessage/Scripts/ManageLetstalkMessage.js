@@ -15,6 +15,7 @@ var ManageLetstalkMessageController = function () {
         self.cacheDOMElement();
         self.initDatePicker();
         self.bindEvents();
+        self.GetNotificationList();
     };
 
     self.cacheDOMElement = function () {

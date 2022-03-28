@@ -118,7 +118,7 @@ namespace Fanex.Letstalk.Notification.Services
             {
                 new SelectListItem { Text = "Waiting" , Value = "0" },
                 new SelectListItem { Text = "Sending" , Value = "1" },
-                new SelectListItem { Text = "Successful" , Value = "2" },
+                new SelectListItem { Text = "Sent" , Value = "2" },
                 new SelectListItem { Text = "Failed" , Value = "3" }
             };
         }

@@ -5,8 +5,8 @@
 }
 @section Head {
     @Styles.Render("~/css/manage")
-    @Styles.Render("~/css/manage-letstalk-message")
     @Styles.Render("~/themes/fanexgridstyles")
+    @Styles.Render("~/css/manage-letstalk-message")
     <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
 }
 @section Headline {
@@ -14,7 +14,7 @@
         <span class="title"><span class="black-text">Letstalk Notification </span> / Manage Letstalk Message</span>
         @if (hasEditRight)
         {
-            @Html.ActionLink("+ Create New", "CreateLetstalkMessage", "ManageLetstalkMessage", null, new { @class = "lnk" })
+            @Html.ActionLink("+ Create Message", "CreateLetstalkMessage", "ManageLetstalkMessage", null, new { @class = "lnk" })
         }
     </h1>
 }
@@ -48,7 +48,7 @@
                 @Html.DropDownList("Status", (List<SelectListItem>)ViewBag.StatusList, "All")
             </div>
             <div class="submit">
-                <input id="btnSubmit" type="submit" value="Submit" />
+                <input id="btnSubmit" type="submit" value="Submit" style="background: -webkit-linear-gradient(#609fbd, #549cba) #549cba" />
             </div>
         </div>
     </div>
