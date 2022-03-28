@@ -85,6 +85,14 @@ namespace Fanex.Letstalk.Notification.Controllers
             return Json(result);
         }
 
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Host)]
+        [HttpPost]
+        public JsonResult ResendNotification(ResendNotificationCriteria criteria)
+        {
+            var result = manageLetstalkMessageService.ResendNotification(criteria);
+            return Json(result);
+        }
+
         [HttpPost]
         public JsonResult GetGroups()
         {
@@ -92,24 +100,11 @@ namespace Fanex.Letstalk.Notification.Controllers
             return Json(result);
         }
 
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
         [HttpPost]
         public JsonResult GetNotificationList(GetNotificationListCriteria criteria)
         {
             var result = manageLetstalkMessageService.GetNotificationList(criteria);
-            return Json(result);
-        }
-
-        [HttpPost]
-        public JsonResult CancelNotification(int notificationId)
-        {
-            var result = manageLetstalkMessageService.CancelNotificationId(notificationId);
-            return Json(result);
-        }
-
-        [HttpPost]
-        public JsonResult UpdateNotificationStatus(UpdateNotificationStatusCriteria criteria)
-        {
-            var result = manageLetstalkMessageService.UpdateNotificationStatus(criteria);
             return Json(result);
         }
     }

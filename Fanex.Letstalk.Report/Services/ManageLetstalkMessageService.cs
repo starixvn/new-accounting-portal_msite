@@ -1,4 +1,10 @@
-﻿using System;
+﻿using Fanex.Data;
+using Fanex.Letstalk.Notification.Criteria;
+using Fanex.Letstalk.Notification.Model;
+using Fanex.Maintenance.Repository.Command;
+using Fanex.NAP.Core.Service.Impl;
+using Fanex.NAP.Core.Service.Interface;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
@@ -6,13 +12,6 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Fanex.Common;
-using Fanex.Data;
-using Fanex.Letstalk.Notification.Criteria;
-using Fanex.Letstalk.Notification.Model;
-using Fanex.Maintenance.Repository.Command;
-using Fanex.NAP.Core.Service.Impl;
-using Fanex.NAP.Core.Service.Interface;
 
 namespace Fanex.Letstalk.Notification.Services
 {
@@ -21,10 +20,6 @@ namespace Fanex.Letstalk.Notification.Services
         CommandResult InsertNotification(InsertNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files);
 
         IEnumerable<SelectListItem> GetGroups();
-
-        CommandResult CancelNotificationId(int notificationId);
-
-        CommandResult UpdateNotificationStatus(UpdateNotificationStatusCriteria criteria);
 
         IEnumerable<SelectListItem> GetStatusList();
 
@@ -35,6 +30,8 @@ namespace Fanex.Letstalk.Notification.Services
         CommandResult EditNotification(EditNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files);
 
         CommandResult DeleteNotification(DeleteNotificationCriteria criteria);
+
+        CommandResult ResendNotification(ResendNotificationCriteria criteria);
     }
 
     public class LetstalkComposeServiceImp : ManageLetstalkMessageService
@@ -113,37 +110,6 @@ namespace Fanex.Letstalk.Notification.Services
 
             }
             return result;
-        }
-
-        public CommandResult CancelNotificationId(int notificationId)
-        {
-            var criteria = new CancelNotificationCriteria { LstNotificationID = notificationId.ToString() };
-            Hashtable hash = criteria.GetSpParams();
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.ExecuteNonQuery(hash);
-            }
-
-            return new CommandResult
-            {
-                Code = 0,
-                Message = string.Empty
-            };
-        }
-
-        public CommandResult UpdateNotificationStatus(UpdateNotificationStatusCriteria criteria)
-        {
-            Hashtable hash = criteria.GetSpParams();
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.ExecuteNonQuery(hash);
-            }
-
-            return new CommandResult
-            {
-                Code = 0,
-                Message = string.Empty
-            };
         }
 
         public IEnumerable<SelectListItem> GetStatusList()
@@ -266,6 +232,32 @@ namespace Fanex.Letstalk.Notification.Services
                 {
                     Code = 1,
                     Message = "You are not allowed to delete in-progress messages. All changes will be discarded."
+                };
+            }
+        }
+
+        public CommandResult ResendNotification(ResendNotificationCriteria criteria)
+        {
+            try
+            {
+                Hashtable hash = criteria.GetSpParams();
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    db.ExecuteNonQuery(hash);
+                }
+
+                return new CommandResult
+                {
+                    Code = 0,
+                    Message = "Message has been resent successfully!"
+                };
+            }
+            catch
+            {
+                return new CommandResult
+                {
+                    Code = 1,
+                    Message = "You are not allowed to resend in-progress messages. All changes will be discarded."
                 };
             }
         }

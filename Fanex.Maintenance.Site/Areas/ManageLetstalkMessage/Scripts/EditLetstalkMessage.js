@@ -89,21 +89,6 @@ var EditLetstalkMessageController = function () {
         return true;
     };
 
-    self.cancelNotification = function (notificationId) {
-        NAP.modal("Cancel Notification", "Do you want to cancel this notification?", function () {
-            sharedScriptManager.blockUI();
-            sharedScriptManager.callAjax(self,
-                window.rootUrl + "LetstalkNotification/ManageLetstalkMessage/CancelNotification",
-                { NotificationId: notificationId },
-                function (result) {
-                    var message = result.IsSuccessful ? "Notification has been cancelled successfully" : "Failed to cancel notification!!!";
-                    NAP.alert("Notify", message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
-                },
-                null,
-                sharedScriptManager.unblockUI);
-        })
-    }
-
     self.editNotification = function () {
         NAP.modal("Edit Notification", "Are you sure you want to save the information above?", function () {
             sharedScriptManager.blockUI();
@@ -124,9 +109,9 @@ var EditLetstalkMessageController = function () {
                 data: data,
                 success: function (result) {
                     if (result.IsSuccessful) {
-                        NAP.alert("Notify", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
+                        NAP.alert("Information", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
                     } else {
-                        NAP.confirm("Notify", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
+                        NAP.confirm("Information", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
                     }
                     
                 },

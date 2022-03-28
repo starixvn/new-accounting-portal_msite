@@ -65,7 +65,7 @@ var ManageLetstalkMessageController = function () {
         for (var i = 0; i < reportLength; i++) {
             var dataRow = data[i];
             var rowColumns = [];
-            var actionResend = "<div class='pointer-cursor' onclick='manageLetstalkMessageController.updatelNotificationStatus(" + dataRow.Id + ", 0)'>Resend</div>";
+            var actionResend = "<div class='pointer-cursor resend' onclick='manageLetstalkMessageController.resendNotification(" + dataRow.NotificationID + "," + dataRow.RecipientID + ")'>Resend</div>";
             var editIcon = dataRow.IsEdit == 1 ? "<div class='inline-flex'><div class='edit-icon pointer-cursor mr-5' onclick='manageLetstalkMessageController.editNotification(" + dataRow.NotificationID + "," + dataRow.RecipientID + ")'></div>" : "";
             var deleteIcon = dataRow.IsDelete == 1 ? "<div class='delete-icon pointer-cursor' onclick='manageLetstalkMessageController.deleteNotification(" + dataRow.NotificationID + "," + dataRow.RecipientID + ")'></div></div >" : "";
             rowColumns.push({ Name: "No", Value: i + 1 });
@@ -157,7 +157,7 @@ var ManageLetstalkMessageController = function () {
     }
 
     self.deleteNotification = function (notificationId, recipientId) {
-        NAP.modal("Delete Notification", "Are you sure you want to delete this message?", function () {
+        NAP.confirm("Delete Notification", "Are you sure you want to delete this message?", function () {
             var params = {
                 NotificationID: notificationId,
                 RecipientID: recipientId,
@@ -168,14 +168,36 @@ var ManageLetstalkMessageController = function () {
                 params,
                 function (result) {
                     if (result.IsSuccessful) {
-                        NAP.alert("Notify", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
+                        NAP.alert("Information", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
                     } else {
-                        NAP.confirm("Notify", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
+                        NAP.alert("Information", result.Message, null);
                     }
                 },
                 null,
                 sharedScriptManager.unblockUI);
         })   
+    }
+
+    self.resendNotification = function (notificationId, recipientId) {
+        NAP.confirm("Resend Notification", "Are you sure you want to resend this message?", function () {
+            var params = {
+                NotificationID: notificationId,
+                RecipientID: recipientId,
+            };
+            sharedScriptManager.blockUI();
+            sharedScriptManager.callAjax(self,
+                window.rootUrl + "LetstalkNotification/ManageLetstalkMessage/ResendNotification",
+                params,
+                function (result) {
+                    if (result.IsSuccessful) {
+                        NAP.alert("Information", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
+                    } else {
+                        NAP.alert("Information", result.Message, null);
+                    }
+                },
+                null,
+                sharedScriptManager.unblockUI);
+        })
     }
 
     self.editNotification = function (notificationId, recipientId) {

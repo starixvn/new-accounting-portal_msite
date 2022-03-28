@@ -38,7 +38,8 @@
                 <b>Subject</b>
             </div>
             <div class="edit-field">
-                <input type="text" maxlength="256" class="width-290" id="Subject" value="" />
+                <input type="text" maxlength="256" style="width: 397px;" id="Subject" value="" /><br />
+                <span class="red-color">Max Lenght: 256 characters</span>
             </div>
         </div>
         <div class="form-row">
@@ -46,7 +47,8 @@
                 <b>Message</b>
             </div>
             <div class="edit-field lt-content">
-                <textarea id="Message" maxlength="1024" style="width: 402px; height: 152px;"></textarea>
+                <textarea id="Message" maxlength="1024" style="width: 402px; height: 152px;"></textarea><br/>
+                <span class="red-color">Max Lenght: 1024 characters</span>
             </div>
         </div>
         @*<div class="form-row">
@@ -70,7 +72,7 @@
                     Date Time (GMT -4)
                 </div>
                 <div class="edit-field">
-                    @Html.TextBox("ConfigSendTime", "ConfigSendTime", new { @Value = DateTime.Now.ToString("MMM dd,yyyy HH:mm"), style = "width: 110px", autocomplete = "off" })
+                    @Html.TextBox("ConfigSendTime", "ConfigSendTime", new { @Value = DateTime.UtcNow.AddHours(-4).ToString("MMM dd,yyyy HH:mm"), style = "width: 110px", autocomplete = "off" })
                 </div>
             </div>
         </div>

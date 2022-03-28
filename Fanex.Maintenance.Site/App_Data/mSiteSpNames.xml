@@ -33,14 +33,13 @@
     <Setting Key="GET_CreditDataToValidate_DW" SpName="GET_CreditDataToValidate_DW" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
     <Setting Key="Lrf_SelBalanceUpDay" SpName="Lrf_SelBalanceUpDay" DbName="DBEXT.bodb02.bodbLicenseeNet" />
   </Function>
-	<Function Name="ManageLetstalkMessage">
-		<Setting Key="Notif_GetListNotification" SpName="Notif_GetListNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
-		<Setting Key="Notif_InsertNewNotification" SpName="Notif_InsertNewNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
-		<Setting Key="Notif_GetListRecipients" SpName="Notif_GetListRecipients" DbName="DBWH.bodb_Notification.bodbAdminNet" />
-		<Setting Key="Notif_InsertNewAttachment" SpName="Notif_InsertNewAttachment" DbName="DBWH.bodb_Notification.bodbAdminNet" />
-		<Setting Key="Notif_CancelNotification" SpName="Notif_CancelNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
-		<Setting Key="Notif_UpdateNotificationRepientStatus" SpName="Notif_UpdateNotificationRepientStatus" DbName="DBWH.bodb_Notification.bodbAdminNet" />
-		<Setting Key="Notif_EditNotification" SpName="Notif_EditNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
-		<Setting Key="Notif_DeleteNotification" SpName="Notif_DeleteNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
-	</Function>
+    <Function Name="ManageLetstalkMessage">
+	    <Setting Key="Notif_GetListNotification" SpName="Notif_GetListNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+	    <Setting Key="Notif_InsertNewNotification" SpName="Notif_InsertNewNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+	    <Setting Key="Notif_GetListRecipients" SpName="Notif_GetListRecipients" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+	    <Setting Key="Notif_InsertNewAttachment" SpName="Notif_InsertNewAttachment" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+	    <Setting Key="Notif_EditNotification" SpName="Notif_EditNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+	    <Setting Key="Notif_DeleteNotification" SpName="Notif_DeleteNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+	    <Setting Key="Notif_ResendNotification" SpName="Notif_ResendNotification" DbName="DBWH.bodb_Notification.bodbAdminNet" />
+    </Function>
 </Functions>
