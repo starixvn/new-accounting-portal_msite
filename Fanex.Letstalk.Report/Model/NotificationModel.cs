@@ -20,13 +20,37 @@ namespace Fanex.Letstalk.Notification.Model
 
         public byte NotificationType { get; set; }
 
-        public DateTime? ConfigSendTime { get; set; }
+        public DateTime ConfigSendTime { get; set; }
+
+        public string ConfigSendTimeString
+        {
+            get
+            {
+                return ConfigSendTime.ToString("MMM dd, yyyy HH:mm:ss");
+            }
+        }
 
         public string Status { get; set; }
 
-        public DateTime? LastUpdTime { get; set; }
+        public DateTime LastUpdTime { get; set; }
 
-        public DateTime? CreatedTime { get; set; }
+        public string LastUpdTimeString
+        {
+            get
+            {
+                return LastUpdTime.ToString("MMM dd, yyyy HH:mm:ss");
+            }
+        }
+
+        public DateTime CreatedTime { get; set; }
+
+        public string CreatedTimeString
+        {
+            get
+            {
+                return CreatedTime.ToString("MMM dd, yyyy HH:mm:ss");
+            }
+        }
 
         public int CreatedBy { get; set; }
 
