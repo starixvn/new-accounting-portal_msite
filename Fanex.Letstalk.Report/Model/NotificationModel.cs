@@ -30,6 +30,20 @@ namespace Fanex.Letstalk.Notification.Model
             }
         }
 
+        public DateTime? LastSentTime { get; set; }
+
+        public string LastSentTimeString
+        {
+            get
+            {
+                if (!LastSentTime.HasValue)
+                {
+                    return "";
+                }
+                return LastSentTime.Value.ToString("MMM dd, yyyy HH:mm:ss");
+            }
+        }
+
         public string Status { get; set; }
 
         public DateTime LastUpdTime { get; set; }

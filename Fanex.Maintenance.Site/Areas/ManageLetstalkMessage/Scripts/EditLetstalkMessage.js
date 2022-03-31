@@ -66,7 +66,15 @@ var EditLetstalkMessageController = function () {
             NAP.confirm("Cancel Notification", "Are you sure you want to leave this page?", function () {
                 window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index"));
             })
-        })
+        });
+
+        DOMElements.ChkScheduledTime.change(function () {
+            if ($(this).is(":checked")) {
+                DOMElements.DivScheduledTime.show();
+            } else {
+                DOMElements.DivScheduledTime.hide();
+            }
+        });
     }
 
     self.validateForm = function () {
@@ -94,36 +102,40 @@ var EditLetstalkMessageController = function () {
     };
 
     self.editNotification = function () {
-        NAP.modal("Edit Notification", "Are you sure you want to save the information above?", function () {
-            sharedScriptManager.blockUI();
-            var data = new FormData();
-            var editNotificationParams = {
-                ConfigSendTime: DOMElements.ChkScheduledTime.is(":checked") ? DOMElements.ConfigSendTime.val() : null,
-                Title: DOMElements.Subject.val().trim(),
-                Content: DOMElements.Message.val().trim(),
-                LstRecipientID: DOMElements.LetstalkGroup.val(),
-                NotificationID: DOMElements.NotificationID.val()
-            };
-            data.append("editNotificationCriteria", JSON.stringify(editNotificationParams));
-            $.ajax({
-                type: 'POST',
-                url: window.rootUrl + "LetstalkNotification/ManageLetstalkMessage/EditNotification",
-                contentType: false,
-                processData: false,
-                data: data,
-                success: function (result) {
-                    if (result.IsSuccessful) {
-                        NAP.alert("Information", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
-                    } else {
-                        NAP.confirm("Information", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
+        if (self.validateForm()) {
+            NAP.modal("Edit Notification", "Are you sure you want to save the information above?", function () {
+                sharedScriptManager.blockUI();
+                var data = new FormData();
+                var editNotificationParams = {
+                    ConfigSendTime: DOMElements.ChkScheduledTime.is(":checked") ? DOMElements.ConfigSendTime.val() : null,
+                    Title: DOMElements.Subject.val().trim(),
+                    Content: DOMElements.Message.val().trim(),
+                    LstRecipientID: DOMElements.LetstalkGroup.val(),
+                    NotificationID: DOMElements.NotificationID.val()
+                };
+                data.append("editNotificationCriteria", JSON.stringify(editNotificationParams));
+                $.ajax({
+                    type: 'POST',
+                    url: window.rootUrl + "LetstalkNotification/ManageLetstalkMessage/EditNotification",
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        if (result.IsSuccessful) {
+                            result.Message = viewResources.UpdateMessageSuccessMsg;
+                            sharedScriptManager.showNonQueryResult(result, "LetstalkNotification/ManageLetstalkMessage/Index", 6000);
+                        } else {
+                            NAP.confirm("Information", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
+                        }
+
+                    },
+                    complete: function () {
+                        sharedScriptManager.unblockUI();
                     }
-                    
-                },
-                complete: function () {
-                    sharedScriptManager.unblockUI();
-                }
+                })
             })
-        })
+        }
+        
     }
 
 };

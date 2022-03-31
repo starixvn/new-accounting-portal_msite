@@ -76,6 +76,7 @@ var ManageLetstalkMessageController = function () {
             //rowColumns.push({ Name: "AttachesFile", Value: dataRow.NumberAttachment + " file(s) | <a href='#' class='link-color'>Download All</a>" });
             rowColumns.push({ Name: "SendType", Value: dataRow.NotificationType == 1 ? "Instant" : "Scheduled" });
             rowColumns.push({ Name: "SendTime", Value: dataRow.ConfigSendTimeString });
+            rowColumns.push({ Name: "LastSentTime", Value: dataRow.LastSentTimeString });
             rowColumns.push({ Name: "Status", Value: dataRow.Status.toLowerCase().trim() == "failed" ? "<div class='red-color upper-case'>" + dataRow.Status + "</div>" : "<div class='upper-case'>" + dataRow.Status + "</div>"});
             rowColumns.push({ Name: "CreatedDate", Value: dataRow.CreatedTimeString });
             rowColumns.push({ Name: "Creator", Value: dataRow.Creator });
@@ -95,12 +96,13 @@ var ManageLetstalkMessageController = function () {
             { HeaderText: "Letstalk Group", Width: 200, Name: "LetstalkGroup", HeaderAlign: "center", CellAlign: "left" },
             //{ HeaderText: "Attaches file(s)", Width: 150, Name: "AttachesFile", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Send Type", Width: 80, Name: "SendType", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Send Time <br/>(GMT-4)", Width: 120, Name: "SendTime", HeaderAlign: "center", CellAlign: "right"},
+            { HeaderText: "Scheduled Time", Width: 120, Name: "SendTime", HeaderAlign: "center", CellAlign: "right" },
+            { HeaderText: "Last Run", Width: 120, Name: "LastSentTime", HeaderAlign: "center", CellAlign: "right" },
             { HeaderText: "Status", Width: 80, Name: "Status", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Created Date <br/>(GMT-4)", Width: 120, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "right"},
+            { HeaderText: "Created Date", Width: 120, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "right"},
             { HeaderText: "Creator", Width: 100, Name: "Creator", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Latest Update Time <br/>(GMT-4)", Width: 120, Name: "LatestUpdateTime", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Latest Editor", Width: 100, Name: "LatestEditor", HeaderAlign: "center", CellAlign: "left" },
+            { HeaderText: "Modified", Width: 120, Name: "LatestUpdateTime", HeaderAlign: "center", CellAlign: "right" },
+            { HeaderText: "Modified By", Width: 100, Name: "LatestEditor", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Resend", Width: 100, Name: "Resend", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Action", Width: 100, Name: "Action", HeaderAlign: "center", CellAlign: "center" },
             ];

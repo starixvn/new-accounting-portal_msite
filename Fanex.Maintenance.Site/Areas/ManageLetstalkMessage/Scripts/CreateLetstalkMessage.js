@@ -159,7 +159,8 @@ var CreateLetstalkMessageController = function () {
                 processData: false,
                 data: data,
                 success: function (result) {
-                    sharedScriptManager.showNonQueryResult(result, null, null);
+                    result.Message = viewResources.CreateMessageSuccessMsg;
+                    sharedScriptManager.showNonQueryResult(result, "LetstalkNotification/ManageLetstalkMessage/Index", 6000);
                     self.resetForm();
                 },
                 complete: function () {

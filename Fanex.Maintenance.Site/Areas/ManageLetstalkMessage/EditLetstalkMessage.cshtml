@@ -11,7 +11,6 @@
     <link href="~/scripts/lib/Fanex.Multiselect/fanex.multiSelect.css" rel="stylesheet" type="text/css" />
     <link href="~/scripts/lib/DatetimePicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
     <link href="~/themes/shared/contextmenu.less" rel="stylesheet" type="text/css" />
-    <link href="~/themes/manage/LetstalkReport.less" rel="stylesheet" type="text/css" />
 }
 @section Headline {
     <h1>
@@ -43,7 +42,7 @@
             </div>
             <div class="edit-field">
                 <input type="text" maxlength="256" style="width: 397px;" id="Subject" value="" /><br />
-                <span class="red-color">Max Lenght: 256 characters</span>
+                <span class="red-color">Max Length: 256 characters</span>
             </div>
         </div>
         <div class="form-row">
@@ -52,7 +51,7 @@
             </div>
             <div class="edit-field lt-content">
                 <textarea id="Message" maxlength="1024" style="width: 402px; height: 152px;"></textarea><br />
-                <span class="red-color">Max Lenght: 1024 characters</span>
+                <span class="red-color">Max Length: 1024 characters</span>
             </div>
         </div>
         @*<div class="form-row">
@@ -109,9 +108,8 @@
     <script src="~/scripts/lib/Popup/dialogbox.js" type="text/javascript"></script>
     <script src="~/Areas/ManageLetstalkMessage/Scripts/EditLetstalkMessage.js" type="text/javascript"></script>
     <script type="text/javascript">
-        window.rootUrl = '@Url.Content("~")';
         var viewResources = {
-            CreateMailSuccessMsg: '@string.Format(ViewResource.AddSuccessMsg, "Letstalk", 5)'
+            UpdateMessageSuccessMsg: '@string.Format(ViewResource.UpSuccessMsg, "Message", 5)',
         };
     </script>
 }

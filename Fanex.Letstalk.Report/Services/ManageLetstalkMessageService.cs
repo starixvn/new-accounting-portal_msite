@@ -62,7 +62,7 @@ namespace Fanex.Letstalk.Notification.Services
             return new CommandResult
             {
                 Code = 0,
-                Message = "Message has been created successfully!"
+                Message = ""
             };
         }
 
@@ -154,6 +154,7 @@ namespace Fanex.Letstalk.Notification.Services
                         temp.RecipientName = notificationRecipient.RecipientName;
                         temp.ConversationID = notificationRecipient.ConversationID;
                         temp.Status = notificationRecipient.Status;
+                        temp.LastSentTime = notificationRecipient.LastSentTime;
                         result.Add(temp);
                     }    
                 }    
@@ -197,7 +198,7 @@ namespace Fanex.Letstalk.Notification.Services
                 return new CommandResult
                 {
                     Code = 0,
-                    Message = "Message has been edited successfully!"
+                    Message = ""
                 };
             }
             catch

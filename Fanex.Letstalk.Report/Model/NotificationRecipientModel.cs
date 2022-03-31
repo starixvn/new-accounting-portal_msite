@@ -17,5 +17,7 @@ namespace Fanex.Letstalk.Notification.Model
         public string RecipientName { get; set; }
 
         public string Status { get; set; }
+
+        public DateTime? LastSentTime { get; set; }
     }
 }
