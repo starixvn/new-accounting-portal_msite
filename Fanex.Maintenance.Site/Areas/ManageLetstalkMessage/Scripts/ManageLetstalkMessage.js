@@ -171,7 +171,7 @@ var ManageLetstalkMessageController = function () {
                 params,
                 function (result) {
                     if (result.IsSuccessful) {
-                        NAP.alert("Information", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
+                        NAP.alert("Information", result.Message, function () { NAP.closeDialog(); self.GetNotificationList(); });
                     } else {
                         NAP.alert("Information", result.Message, null);
                     }
@@ -193,7 +193,7 @@ var ManageLetstalkMessageController = function () {
                 params,
                 function (result) {
                     if (result.IsSuccessful) {
-                        NAP.alert("Information", result.Message, function () { window.location.replace(NAP.resolveClientUrl("LetstalkNotification/ManageLetstalkMessage/Index")); });
+                        NAP.alert("Information", result.Message, function () { NAP.closeDialog(); self.GetNotificationList(); });
                     } else {
                         NAP.alert("Information", result.Message, null);
                     }
