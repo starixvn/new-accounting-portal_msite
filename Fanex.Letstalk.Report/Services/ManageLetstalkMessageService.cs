@@ -34,18 +34,26 @@ namespace Fanex.Letstalk.Notification.Services
         CommandResult ResendNotification(ResendNotificationCriteria criteria);
     }
 
-    public class LetstalkComposeServiceImp : ManageLetstalkMessageService
+    public class ManageLetstalkMessageServiceImp : ManageLetstalkMessageService
     {
 
         private readonly IUserService userService;
 
-        public LetstalkComposeServiceImp()
+        private readonly string environment = ConfigurationManager.AppSettings["Environment"];
+
+        private readonly string uatEnvironment = "UAT";
+
+        public ManageLetstalkMessageServiceImp()
         {
             userService = new UserService();
         }
 
         public CommandResult InsertNotification(InsertNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files)
         {
+            if (environment == uatEnvironment)
+            {
+                criteria.IsTest = true;
+            }
             Hashtable hash = criteria.GetSpParams();
             //int notificationID = 0;
             using (var db = new ObjectDb(criteria.GetSettingKey()))
@@ -91,7 +99,6 @@ namespace Fanex.Letstalk.Notification.Services
             GetGroupCriteria criteria = new GetGroupCriteria();
             List<RecipientModel> recipientList;
             List<SelectListItem> result = new List<SelectListItem>();
-            var environment = ConfigurationManager.AppSettings["Environment"];
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
                 recipientList = db.Query<RecipientModel>().ToList();
@@ -127,6 +134,10 @@ namespace Fanex.Letstalk.Notification.Services
         {
             List<NotificationModel> notificationList;
             List<NotificationRecipientModel> notificationRecipientList;
+            if (environment == uatEnvironment)
+            {
+                criteria.IsTest = true;
+            }    
             var param = criteria.GetSpParams();
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
@@ -177,6 +188,10 @@ namespace Fanex.Letstalk.Notification.Services
         public IEnumerable<NotificationModel> GetNotificationById(GetNotificationListCriteria criteria)
         {
             List<NotificationModel> result;
+            if (environment == uatEnvironment)
+            {
+                criteria.IsTest = true;
+            }
             var param = criteria.GetSpParams();
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {

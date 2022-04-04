@@ -68,7 +68,7 @@ var ManageLetstalkMessageController = function () {
             var rowColumns = [];
             var actionResend = "<div class='pointer-cursor resend' onclick='manageLetstalkMessageController.resendNotification(" + dataRow.NotificationID + "," + dataRow.RecipientID + ")'>Resend</div>";
             var editIcon = dataRow.IsEdit == 1 ? "<div class='inline-flex'><div class='edit-icon pointer-cursor mr-5' onclick='manageLetstalkMessageController.editNotification(" + dataRow.NotificationID + "," + dataRow.RecipientID + ")'></div>" : "";
-            var deleteIcon = dataRow.IsDelete == 1 ? "<div class='delete-icon pointer-cursor' onclick='manageLetstalkMessageController.deleteNotification(" + dataRow.NotificationID + "," + dataRow.RecipientID + ")'></div></div >" : "";
+            var deleteIcon = dataRow.IsDelete == 1 ? "<div class='delete-icon pointer-cursor' onclick='manageLetstalkMessageController.deleteNotification(" + dataRow.NotificationID + ")'></div></div >" : "";
             rowColumns.push({ Name: "No", Value: i + 1 });
             rowColumns.push({ Name: "Subject", Value: dataRow.Title });
             rowColumns.push({ Name: "Message", Value: dataRow.Content });
@@ -159,11 +159,10 @@ var ManageLetstalkMessageController = function () {
             sharedScriptManager.unblockUI);
     }
 
-    self.deleteNotification = function (notificationId, recipientId) {
+    self.deleteNotification = function (notificationId) {
         NAP.confirm("Delete Notification", "Are you sure you want to delete this message?", function () {
             var params = {
-                NotificationID: notificationId,
-                RecipientID: recipientId,
+                NotificationID: notificationId
             };
             sharedScriptManager.blockUI();
             sharedScriptManager.callAjax(self,

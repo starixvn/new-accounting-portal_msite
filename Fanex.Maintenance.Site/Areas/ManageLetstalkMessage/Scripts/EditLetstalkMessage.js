@@ -99,7 +99,7 @@ var EditLetstalkMessageController = function () {
         }
 
         var isBefore = moment(DOMElements.ConfigSendTime.val()).isBefore(moment(new Date()).zone("-04:00").format("MMM DD,YYYY HH:mm"));
-        if (isBefore) {
+        if (DOMElements.ChkScheduledTime.is(":checked") && isBefore) {
             $('#ConfigSendTime').addClass('input-validation-error');
             sharedScriptManager.createValidationSummary(['The scheduled date time should not be in the past!'], false);
             return false;

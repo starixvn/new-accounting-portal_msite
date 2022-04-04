@@ -24,26 +24,26 @@ namespace Fanex.Letstalk.Notification.Controllers
 
         public ManageLetstalkMessageController(ILetstalkReportRestClientService service)
         {
-            manageLetstalkMessageService = new LetstalkComposeServiceImp();
+            manageLetstalkMessageService = new ManageLetstalkMessageServiceImp();
         }
 
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
-            ViewBag.HasEdit = HasRight(SiteFunctionKeys.ManageServers, Constant.Policy.Host);
+            ViewBag.HasEdit = HasRight(SiteFunctionKeys.ManageLetstalkMessage, Constant.Policy.Read);
             ViewBag.StatusList = manageLetstalkMessageService.GetStatusList();
             ViewBag.LetstalkGroupList = manageLetstalkMessageService.GetGroups();
             return View("~/Areas/ManageLetstalkMessage/Index.cshtml");
         }
 
-        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
         public ActionResult CreateLetstalkMessage()
         {
             ViewBag.LetstalkGroupList = manageLetstalkMessageService.GetGroups();
             return View("~/Areas/ManageLetstalkMessage/CreateLetstalkMessage.cshtml");
         }
 
-        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
         public ActionResult EditLetstalkMessage(int notificationID, int recipientID)
         {
             var criteria = new GetNotificationListCriteria
@@ -56,7 +56,7 @@ namespace Fanex.Letstalk.Notification.Controllers
             return View("~/Areas/ManageLetstalkMessage/EditLetstalkMessage.cshtml", model);
         }
 
-        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
         [HttpPost]
         public JsonResult InsertNotification(FormCollection formValues, IEnumerable<HttpPostedFileBase> files)
         {
@@ -66,7 +66,7 @@ namespace Fanex.Letstalk.Notification.Controllers
             return Json(result);
         }
 
-        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
         [HttpPost]
         public JsonResult EditNotification(FormCollection formValues, IEnumerable<HttpPostedFileBase> files)
         {
@@ -76,7 +76,7 @@ namespace Fanex.Letstalk.Notification.Controllers
             return Json(result);
         }
 
-        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
         [HttpPost]
         public JsonResult DeleteNotification(DeleteNotificationCriteria criteria)
         {
@@ -85,7 +85,7 @@ namespace Fanex.Letstalk.Notification.Controllers
             return Json(result);
         }
 
-        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
         [HttpPost]
         public JsonResult ResendNotification(ResendNotificationCriteria criteria)
         {
