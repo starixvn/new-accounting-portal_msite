@@ -366,6 +366,9 @@
     <Content Include="Areas\MailStation\ManageMail\MailActionLog\Scripts\MailActionLogController.js" />
     <Content Include="Areas\MailStation\Report\MailReport\Styles\Images\trigger.png" />
     <Content Include="Areas\TracingSp\AppData\backupMNL\DBServerList.xml" />
+    <Content Include="Areas\TracingSp\AppData\SIT\DBServerList.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Areas\TracingSp\AppData\LOCAL\DBServerList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
