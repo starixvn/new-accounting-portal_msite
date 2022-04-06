@@ -5,15 +5,17 @@ namespace Fanex.Letstalk.Notification.Criteria
 {
     public class GetNotificationListCriteria : CriteriaBase
     {
-        public DateTime FromDate { get; set; }
+        public DateTime? FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+        public DateTime? ToDate { get; set; }
 
         public int? RecipientID { get; set; }
 
         public byte? StatusId { get; set; }
 
         public int? NotificationId { get; set; }
+
+        public bool IsTest { get; set; }
 
         public override bool IsValid() => true;
 

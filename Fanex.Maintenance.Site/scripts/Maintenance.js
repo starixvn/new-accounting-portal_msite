@@ -111,7 +111,7 @@ var NAP = (function ($) {
 		modal: function (title, content, callback) {
 			NAP.dialogMsg.html(content).dialog({
 				buttons: {
-					Save: function () {
+					Ok: function () {
 						if (typeof callback === 'function') {
 							callback();
 							$(this).dialog("close");
