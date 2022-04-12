@@ -117,10 +117,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.NAP.Core.Client, Version=1.2.1.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.15-beta2\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
+      <HintPath>..\packages\Fanex.NAP.Core.Client.2.0.0\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core.SignIn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.SignIn.1.0.1.2-beta1\lib\net461\Fanex.NAP.Core.SignIn.dll</HintPath>
+      <HintPath>..\packages\Fanex.NAP.Core.SignIn.2.0.0\lib\net461\Fanex.NAP.Core.SignIn.dll</HintPath>
     </Reference>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
