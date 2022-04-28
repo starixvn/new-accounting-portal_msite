@@ -19,10 +19,11 @@
     @Scripts.Render("~/scripts/sharedscripts")
     @Scripts.Render("~/scripts/fanexgridscripts")
     @Scripts.Render("~/scripts/get-mail-config-logs")
-    <script type="text/javascript">
+<script type="text/javascript">
         window.rootUrl = '@Url.Content("~")';
         var mailConfigLog= @Html.Raw(mailConfigLog);
         var viewResources = {
+            SymbolNo: '@ViewResource.SymbolNo',
             Name: '@ViewResource.Name',
             Description: '@ViewResource.Description',
             SmtpServers: '@ViewResource.Mail_Setting',
@@ -32,6 +33,6 @@
             UserID: '@ViewResource.User_ID',
             Username: '@ViewResource.Username'
         };
-    </script>
+</script>
 </body>
 </html>

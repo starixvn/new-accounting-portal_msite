@@ -879,4 +879,7 @@
   <data name="LogTime" xml:space="preserve">
     <value>Log Time</value>
   </data>
+  <data name="SymbolNo" xml:space="preserve">
+    <value>#</value>
+  </data>
 </root>

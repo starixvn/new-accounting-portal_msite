@@ -12,7 +12,7 @@ $(document).ready(function () {
                 appId: appId
             }),
             'Log > ' + appName,
-            980,
+            1000,
             500,
             true,
             false,
