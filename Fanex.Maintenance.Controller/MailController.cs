@@ -2,6 +2,8 @@
 {
     using Fanex.MailDeliver.Model;
     using Fanex.Maintenance.Repository.Criteria.MailService;
+    using Fanex.Maintenance.Repository.Impl.Mail;
+    using Fanex.Maintenance.Repository.Interface.Mail;
     using Fanex.Maintenance.Service.Impl.Mail;
     using Fanex.Maintenance.Service.Interface.Mail;
     using Fanex.NAP.Core.Business;
@@ -31,19 +33,22 @@
 
         private readonly IUserService _userService;
 
+        private readonly IMailRepository _mailRepository;
+
         #endregion Member
 
         #region Ctor
 
         public MailController()
-            : this(null, null)
+            : this(null, null, null)
         {
         }
 
-        public MailController(IMailService mailService, IUserService userService)
+        public MailController(IMailService mailService, IUserService userService, IMailRepository mailRepository)
         {
             this._mailServer = mailService ?? MailService.Create();
             this._userService = userService ?? new UserService();
+            this._mailRepository = mailRepository ?? new MailRepository();
         }
 
         #endregion Ctor
@@ -346,6 +351,15 @@
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Read)]
+        public ActionResult GetMailConfigLogs(int appId)
+        {
+            var listMailConfig = _mailRepository.GetMailConfigLogs(appId);
+
+            return View(listMailConfig);
         }
 
         #endregion MailConfig

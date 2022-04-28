@@ -19,7 +19,7 @@ namespace Fanex.Maintenance.Core {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ViewResource {
@@ -1105,6 +1105,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log.
+        /// </summary>
+        public static string Log {
+            get {
+                return ResourceManager.GetString("Log", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log Date.
         /// </summary>
         public static string Log_Date {
@@ -1164,6 +1173,15 @@ namespace Fanex.Maintenance.Core {
         public static string LogStatus_Unmonitored {
             get {
                 return ResourceManager.GetString("LogStatus_Unmonitored", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log Time.
+        /// </summary>
+        public static string LogTime {
+            get {
+                return ResourceManager.GetString("LogTime", resourceCulture);
             }
         }
         
@@ -2100,6 +2118,15 @@ namespace Fanex.Maintenance.Core {
         public static string SwitchConnection {
             get {
                 return ResourceManager.GetString("SwitchConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #.
+        /// </summary>
+        public static string SymbolNo {
+            get {
+                return ResourceManager.GetString("SymbolNo", resourceCulture);
             }
         }
         

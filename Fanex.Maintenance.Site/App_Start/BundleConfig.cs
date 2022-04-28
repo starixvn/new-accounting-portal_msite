@@ -84,6 +84,12 @@
                 "~/css/manage-letstalk-message",
                 "~/themes/manage/ManageLetstalkMessage.less");
 
+            bundles.AddAndInclude(
+                "~/css/mail-config-log",
+                "~/themes/manage/log/mail-config.less",
+                "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css");
+
             // js
             bundles.Add(new ScriptBundle("~/scripts/common").Include(
                 "~/scripts/lib/jquery-1.8.0.min.js",
@@ -98,6 +104,12 @@
                 "~/scripts/lib/Fanex.Grid/moment.min.js",
                 "~/scripts/lib/moment/moment-timezone-with-data.js",
                 "~/scripts/lib/RefreshCountDown.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/mail-config").Include(
+                "~/scripts/Mail/MailConfig.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/get-mail-config-logs").Include(
+                "~/scripts/Mail/GetMailConfigLogs.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/add-mail-config").Include(
                 "~/scripts/Mail/AddMailConfig.js"));

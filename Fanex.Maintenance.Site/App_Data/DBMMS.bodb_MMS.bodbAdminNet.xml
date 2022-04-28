@@ -61,8 +61,4 @@
     <Setting Key="MailStation_Group_DeleteMailGroup" SpName="Mail_Group_DeleteGroup" DbName="DBMMS.bodb_MMS.bodbAdminNet" />
     <Setting Key="MailStation_Group_GetMailGroupByID" SpName="Mail_Group_GetMailGroupByID" DbName="DBMMS.bodb_MMS.bodbAdminNet" />
   </Function>
-
-  <Function Name="MailDeliver">
-    <Setting Key="StoreMail" SpName="MailRecorder_InsRecord" DbName="DBMA.bodb_Maintenance.bodbAdminNet" />
-  </Function>
 </Functions>

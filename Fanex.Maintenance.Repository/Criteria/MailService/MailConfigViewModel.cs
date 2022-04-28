@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using Fanex.Maintenance.Core;
+    using Fanex.NAP.Core.Web.Session;
     using MailDeliver.Model;
 
     /// <summary>
@@ -64,7 +65,8 @@
                 Setting = new MailSetting
                 {
                     SettingID = this.SettingId
-                }
+                },
+                UserId = new CurrentSession().UserId
             };
 
             return mailConfig;

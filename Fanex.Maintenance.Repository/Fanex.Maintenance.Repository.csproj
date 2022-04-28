@@ -43,7 +43,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailDeliver.MailClient.2.0.5\lib\net461\Fanex.MailDeliver.MailClient.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailDeliver.MailClient.2.0.7\lib\net461\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDeliver.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.MailDeliver.Utility.1.0.3\lib\net461\Fanex.MailDeliver.Utility.dll</HintPath>
@@ -97,6 +97,8 @@
     <Compile Include="Criteria\Log\UpdateMachineCriteria.cs" />
     <Compile Include="Criteria\LrfDomain\ActiveDomainCriteria.cs" />
     <Compile Include="Criteria\LrfDomain\GetAllLrfDomainCriteria.cs" />
+    <Compile Include="Criteria\MailService\GetMailConfigLogsCriteria.cs" />
+    <Compile Include="Criteria\MailService\MailConfigLogModel.cs" />
     <Compile Include="Criteria\MailService\MailConfigViewModel.cs" />
     <Compile Include="Criteria\MailService\MailFunctionViewModel.cs" />
     <Compile Include="Criteria\MailService\MailSettingViewModel.cs" />
@@ -107,9 +109,11 @@
     <Compile Include="Impl\AppLog\LogRepository.cs" />
     <Compile Include="Impl\LicenseeSetting\LicenseeSettingRepository.cs" />
     <Compile Include="Impl\AppLog\MachineRepository.cs" />
+    <Compile Include="Impl\Mail\MailRepository.cs" />
     <Compile Include="Impl\ServiceMonitoring\UserManagementRepository.cs" />
     <Compile Include="Impl\ServiceMonitoring\ServiceManagementRepository.cs" />
     <Compile Include="Interface\LicenseeSetting\ILicenseeSettingRepository.cs" />
+    <Compile Include="Interface\Mail\IMailRepository.cs" />
     <Compile Include="Interface\ServiceMonitoring\IServiceManagementRepository.cs" />
     <Compile Include="Interface\ServiceMonitoring\IUserManagementRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
