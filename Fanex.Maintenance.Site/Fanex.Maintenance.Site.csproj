@@ -107,7 +107,7 @@
       <HintPath>..\packages\Fanex.Logging.Sentry.RavenClient.1.0.1\lib\net461\Fanex.Logging.Sentry.RavenClient.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailDeliver.MailClient.2.0.5\lib\net461\Fanex.MailDeliver.MailClient.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailDeliver.MailClient.2.0.7\lib\net461\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDeliver.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.MailDeliver.Utility.1.0.3\lib\net461\Fanex.MailDeliver.Utility.dll</HintPath>
@@ -507,6 +507,8 @@
     <Content Include="scripts\Mail\AddMailFunction.js" />
     <Content Include="scripts\Mail\AddMailConfigPopUp.js" />
     <Content Include="scripts\Mail\AddMailConfig.js" />
+    <Content Include="scripts\Mail\GetMailConfigLogs.js" />
+    <Content Include="scripts\Mail\MailConfig.js" />
     <Content Include="scripts\Mail\MailList.js" />
     <Content Include="scripts\Maintenance.js" />
     <Content Include="scripts\lib\Fanex.Grid\Fanex.Grid.Convert.js" />
@@ -953,6 +955,7 @@
     <Content Include="Areas\ManageLetstalkMessage\Web.config" />
     <Content Include="Areas\ManageLetstalkMessage\CreateLetstalkMessage.cshtml" />
     <Content Include="Areas\ManageLetstalkMessage\EditLetstalkMessage.cshtml" />
+    <Content Include="App_Data\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="scripts\lib\Fanex.Grid\Fanex.Grid.less" />
     <Content Include="scripts\lib\InputCombobox\colors.less" />
@@ -990,6 +993,8 @@
     <Content Include="Views\Auth\Error.cshtml" />
     <Content Include="Views\Auth\ChangePassword.cshtml" />
     <Content Include="Views\Auth\AccessDenied.cshtml" />
+    <Content Include="Views\Mail\GetMailConfigLogs.cshtml" />
+    <Content Include="themes\manage\log\mail-config.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

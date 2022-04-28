@@ -8,6 +8,11 @@
 }
 @section Head {
     @Styles.Render("~/css/manage")
+    <style>
+        iframe {
+            position: initial !important;
+        }
+    </style>
 }
 @section Headline {
     <h1>
@@ -56,6 +61,9 @@
                 @ViewResource.IsEncrypt
             </th>
             <th>
+                @ViewResource.Log
+            </th>
+            <th>
                 @ViewResource.View_Report
             </th>
             @if (hasEditRight)
@@ -95,6 +103,9 @@
                     @Html.CheckBox("chbConfig-" + mailItem.AppID.ToString(), mailItem.IsEncrypt, new { @disabled = "disabled" })
                 </td>
                 <td class="align-center">
+                    <div class="icon-view-log" data-appname="@mailItem.AppName" data-appid="@mailItem.AppID"></div>
+                </td>
+                <td class="align-center">
                     <div class="action-wrp">
                         @Html.ActionLink(" ", "MailList", new { id = mailItem.AppID }, new { @class = "icon-link" })
                     </div>
@@ -121,3 +132,8 @@
         }
     </tbody>
 </table>
+@section Foot
+{
+    <script src="~/scripts/lib/Popup/dialogbox.js" type="text/javascript"></script>
+    @Scripts.Render("~/scripts/mail-config")
+}

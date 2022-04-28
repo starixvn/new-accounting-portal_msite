@@ -873,4 +873,10 @@
   <data name="SearchText" xml:space="preserve">
     <value>Search Text</value>
   </data>
+  <data name="Log" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="LogTime" xml:space="preserve">
+    <value>Log Time</value>
+  </data>
 </root>

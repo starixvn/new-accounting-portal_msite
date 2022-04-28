@@ -1,0 +1,37 @@
+﻿@using Newtonsoft.Json;
+@using Fanex.Maintenance.Core;
+@using Fanex.Maintenance.Repository.Criteria.MailService;
+@model IEnumerable<MailConfigLogModel>
+@{
+    var mailConfigLog = JsonConvert.SerializeObject(Model);
+}
+<!DOCTYPE html>
+<html lang="en" class="linen">
+<head>
+    @Styles.Render("~/css/mail-config-log")
+</head>
+<body id="body">
+    <div id="mail-config-log-container" class="mail-config-log-container">
+        <div id="mail-config-log" class="freegrid display-none">
+        </div>
+    </div>
+    @Scripts.Render("~/scripts/common")
+    @Scripts.Render("~/scripts/sharedscripts")
+    @Scripts.Render("~/scripts/fanexgridscripts")
+    @Scripts.Render("~/scripts/get-mail-config-logs")
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~")';
+        var mailConfigLog= @Html.Raw(mailConfigLog);
+        var viewResources = {
+            Name: '@ViewResource.Name',
+            Description: '@ViewResource.Description',
+            SmtpServers: '@ViewResource.Mail_Setting',
+            MailFrom: '@ViewResource.FromMail',
+            Encrypt: '@ViewResource.IsEncrypt',
+            LogTime: '@ViewResource.LogTime',
+            UserID: '@ViewResource.User_ID',
+            Username: '@ViewResource.Username'
+        };
+    </script>
+</body>
+</html>
