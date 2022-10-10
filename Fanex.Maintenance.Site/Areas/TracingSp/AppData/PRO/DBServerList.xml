@@ -88,4 +88,29 @@
     <Ip>10.40.40.50</Ip>
     <Name>DBBAK2</Name>
   </Server>
+  <Server>
+    <Ip>10.40.40.108</Ip>
+    <Name>DBGRP01L</Name>
+  </Server>
+  <Server>
+    <Ip>10.40.40.171</Ip>
+    <Name>DBGRP01N1</Name>
+  </Server>
+  <Server>
+    <Ip>10.40.40.172</Ip>
+    <Name>DBGRP01N2</Name>
+  </Server>
+
+  <Server>
+    <Ip>10.40.40.143</Ip>
+    <Name>DBGRP02L</Name>
+  </Server>
+  <Server>
+    <Ip>10.40.40.177</Ip>
+    <Name>DBGRP02N1</Name>
+  </Server>
+  <Server>
+    <Ip>10.40.40.178</Ip>
+    <Name>DBGRP02N2</Name>
+  </Server>
 </DBServers>
