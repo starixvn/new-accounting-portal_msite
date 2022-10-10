@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31005.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.Site", "Fanex.Maintenance.Site\Fanex.Maintenance.Site.csproj", "{D4312B0D-CC74-4AA1-979A-AF26702808A1}"
 EndProject
@@ -22,8 +22,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Letstalk.Notification", "Fanex.Letstalk.Report\Fanex.Letstalk.Notification.csproj", "{E8348BB1-1C03-4852-AEA3-CCBAB083764A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Tool.TraceSP", "Fanex.Tool.TraceSP\Fanex.Tool.TraceSP.csproj", "{0305D905-08CC-40A8-9160-145F0CAF5DE7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.DeleteTempVariable", "Fanex.DeleteTempVariable\Fanex.DeleteTempVariable.csproj", "{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -139,18 +137,6 @@ Global
 		{0305D905-08CC-40A8-9160-145F0CAF5DE7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0305D905-08CC-40A8-9160-145F0CAF5DE7}.Release|x86.ActiveCfg = Release|Any CPU
 		{0305D905-08CC-40A8-9160-145F0CAF5DE7}.Release|x86.Build.0 = Release|Any CPU
-		{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}.Debug|x86.Build.0 = Debug|Any CPU
-		{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}.Release|x86.ActiveCfg = Release|Any CPU
-		{FF142E89-2DC8-4DD8-8A88-98E7A2350B00}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

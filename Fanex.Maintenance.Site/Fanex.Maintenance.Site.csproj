@@ -349,8 +349,6 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="App_Data\DBTXN.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\SBSETTLE.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\TracingSpToolSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -559,7 +557,6 @@
     <Content Include="scripts\LetstalkNotification\LetstalkNotification.js" />
     <Content Include="scripts\ServiceMonitoring\ServiceMonitoring.js" />
     <Content Include="scripts\ShareScripts\SharedScriptManager.js" />
-    <Content Include="scripts\TempVariable\ParlayLocking.js" />
     <Content Include="themes\assets\css\font-awesome-ie7.css" />
     <Content Include="themes\assets\css\font-awesome.css" />
     <Content Include="themes\assets\css\prettify.css" />
@@ -839,10 +836,6 @@
     <Content Include="Views\ConnectionString\LogAction\LogAction405.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.DeleteTempVariable\Fanex.DeleteTempVariable.csproj">
-      <Project>{ff142e89-2dc8-4dd8-8a88-98e7a2350b00}</Project>
-      <Name>Fanex.DeleteTempVariable</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fanex.Letstalk.Report\Fanex.Letstalk.Notification.csproj">
       <Project>{e8348bb1-1c03-4852-aea3-ccbab083764a}</Project>
       <Name>Fanex.Letstalk.Notification</Name>
@@ -981,11 +974,6 @@
     <Content Include="Web.aws.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\TempVariable\Detail.cshtml" />
-    <Content Include="Views\TempVariable\Index.cshtml" />
-    <Content Include="Views\TempVariable\ParlayLocking.cshtml" />
-    <Content Include="Views\TempVariable\SystemSettings.cshtml" />
-    <Content Include="Views\TempVariable\SettlementLock.cshtml" />
     <Content Include="themes\manage\ManageLetstalkMessage.less" />
     <Content Include="Views\Auth\Offline.cshtml" />
     <Content Include="Views\Auth\NotFound.cshtml" />
