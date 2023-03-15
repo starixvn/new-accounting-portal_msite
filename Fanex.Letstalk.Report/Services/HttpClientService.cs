@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using Newtonsoft.Json;
 
 namespace Fanex.Letstalk.Notification.Services
 {
@@ -23,7 +23,7 @@ namespace Fanex.Letstalk.Notification.Services
         {
             using (HttpClient client = new HttpClient())
             {
-                string letstalkApiUrl = $"{service.LetstalkApiUrl}/Api/Letstalk/";
+                string letstalkApiUrl = $"{service.LetstalkApiUrl}Letstalk/";
                 client.BaseAddress = new Uri(letstalkApiUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
