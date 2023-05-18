@@ -29,8 +29,8 @@
     <Name>DB061</Name>
   </Server>
   <Server>
-    <Ip>10.40.40.110</Ip>
-    <Name>DB07</Name>
+    <Ip>10.40.40.50</Ip>
+    <Name>DBMESSAGE</Name>
   </Server>
   <Server>
     <Ip>10.40.40.191</Ip>
