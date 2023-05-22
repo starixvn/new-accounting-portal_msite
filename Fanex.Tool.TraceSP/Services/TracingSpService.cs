@@ -1,22 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Fanex.Data;
+﻿using Fanex.Data;
+using Fanex.Logging;
 using Fanex.Tool.TraceSP.Criteria;
 using Fanex.Tool.TraceSP.Models;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace Fanex.Tool.TraceSP.Services
 {
-    interface ITracingSpService
+    internal interface ITracingSpService
     {
         List<TracingSpViewModel> GetTracingSpData(ref TracingSp model);
     }
 
-    class TracingSpService : ITracingSpService
+    internal class TracingSpService : ITracingSpService
     {
+        private bool IsExistedError(IDbSetting dbSetting, Hashtable param, ref TracingSp model)
+        {
+            using (var objectDb = new ObjectDb(dbSetting))
+            {
+                objectDb.ExecuteNonQuery(param);
+                model.HasError = Convert.ToBoolean(param["haserror"]);
+                model.ErrorMsg = param["errormsg"].ToString();
+            }
+
+            return model.HasError;
+        }
+
         public List<TracingSpViewModel> GetTracingSpData(ref TracingSp model)
         {
             var criteria = new TracingSpCriteria
@@ -34,13 +45,13 @@ namespace Fanex.Tool.TraceSP.Services
 
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                var param = criteria.GetSpParams();
-
                 var dbSetting = db.DbSetting;
-                var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbSetting.ConnectionString);
-
-                sqlConnectionStringBuilder.DataSource = model.Server;
-                sqlConnectionStringBuilder.ConnectTimeout = 125;
+                var param = criteria.GetSpParams();
+                var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbSetting.ConnectionString)
+                {
+                    DataSource = model.Server,
+                    ConnectTimeout = 125
+                };
 
                 if (criteria.Site.Equals("FPS", StringComparison.CurrentCultureIgnoreCase))
                 {
@@ -49,14 +60,45 @@ namespace Fanex.Tool.TraceSP.Services
 
                 dbSetting.ConnectionString = sqlConnectionStringBuilder.ToString();
 
+                if (IsExistedError(dbSetting, param, ref model))
+                {
+                    return new List<TracingSpViewModel>();
+                }
+
                 using (var objectDb = new ObjectDb(dbSetting))
                 {
-                    var result = objectDb.Query<TracingSpViewModel>(param).ToList();
+                    try
+                    {
+                        var list = new List<TracingSpViewModel>();
+                        using (var reader = objectDb.ExecuteReader(param))
+                        {
+                            while (reader.Read())
+                            {
+                                var viewModel = new TracingSpViewModel
+                                {
+                                    CPU = Convert.ToInt32(reader["CPU"].ToString()),
+                                    DatabaseName = reader["DatabaseName"].ToString(),
+                                    Duration = Convert.ToInt32(reader["Duration"].ToString()),
+                                    EndTime = Convert.ToDateTime(reader["EndTime"].ToString()),
+                                    Event = reader["Event"].ToString(),
+                                    LoginName = reader["LoginName"].ToString(),
+                                    Reads = Convert.ToInt32(reader["Reads"].ToString()),
+                                    SPID = Convert.ToInt32(reader["SPID"].ToString()),
+                                    StartTime = Convert.ToDateTime(reader["StartTime"].ToString()),
+                                    TextData = reader["TextData"].ToString(),
+                                    Writes = Convert.ToInt32(reader["Writes"].ToString())
+                                };
+                                list.Add(viewModel);
+                            }
+                        }
 
-                    model.HasError = Convert.ToBoolean(param["haserror"]);
-                    model.ErrorMsg = param["errormsg"].ToString();
-
-                    return result;
+                        return list;
+                    }
+                    catch (Exception e)
+                    {
+                        Logger.Log.Error(e.Message);
+                        throw;
+                    }
                 }
             }
         }

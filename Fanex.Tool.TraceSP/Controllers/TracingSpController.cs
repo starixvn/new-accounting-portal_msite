@@ -1,13 +1,11 @@
 ﻿namespace Fanex.Tool.TraceSP.Controllers
 {
+    using Fanex.Maintenance.Controller;
+    using Models;
+    using Services;
     using System.Linq;
     using System.Web.Hosting;
     using System.Web.Mvc;
-    using Fanex.Maintenance.Controller;
-    using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Web.Attribute;
-    using Models;
-    using Services;
 
     public class TracingSpController : BaseController
     {
@@ -26,7 +24,7 @@
             _siteService = new SiteService();
         }
 
-        [NapAuth(FunctionKey = SiteFunctionKeys.TracingSP, Policy = Constant.Policy.Read)]
+        //[NapAuth(FunctionKey = SiteFunctionKeys.TracingSP, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             var servers = _dbServerService.GetDbServerList(_dbServerXmlPath);
@@ -41,7 +39,7 @@
         }
 
         [HttpPost]
-        [NapAuth(FunctionKey = SiteFunctionKeys.TracingSP, Policy = Constant.Policy.Read)]
+        //[NapAuth(FunctionKey = SiteFunctionKeys.TracingSP, Policy = Constant.Policy.Read)]
         public ActionResult GetTracingSpData(TracingSp criteria)
         {
             var model = new TracingSp
