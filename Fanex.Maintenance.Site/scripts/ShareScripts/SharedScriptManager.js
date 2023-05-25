@@ -9,7 +9,7 @@ var SharedScriptManager = function () {
     self.cachedData = {
         pagingOptions: [50, 100, 200, 500],
         defaultItemsPerPage: 50,
-        alertSuccessTime: 3000
+        alertSuccessTime: 60000
     };
 
     self.callAjax = function (currentHandler,
@@ -42,7 +42,6 @@ var SharedScriptManager = function () {
                 }
             }
         });
-
     };
 
     self.blockUI = function () {
@@ -113,7 +112,6 @@ var SharedScriptManager = function () {
             }
         }
     }
-
 };
 
 sharedScriptManager = new SharedScriptManager();
