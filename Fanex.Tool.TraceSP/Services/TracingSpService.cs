@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Web;
 
 namespace Fanex.Tool.TraceSP.Services
 {
@@ -76,17 +77,17 @@ namespace Fanex.Tool.TraceSP.Services
                             {
                                 var viewModel = new TracingSpViewModel
                                 {
-                                    CPU = Convert.ToInt32(reader["CPU"].ToString()),
+                                    CPU = reader["CPU"].ToString(),
                                     DatabaseName = reader["DatabaseName"].ToString(),
-                                    Duration = Convert.ToInt32(reader["Duration"].ToString()),
-                                    EndTime = Convert.ToDateTime(reader["EndTime"].ToString()),
+                                    Duration = reader["Duration"].ToString(),
+                                    EndTime = reader["EndTime"].ToString(),
                                     Event = reader["Event"].ToString(),
                                     LoginName = reader["LoginName"].ToString(),
-                                    Reads = Convert.ToInt32(reader["Reads"].ToString()),
-                                    SPID = Convert.ToInt32(reader["SPID"].ToString()),
-                                    StartTime = Convert.ToDateTime(reader["StartTime"].ToString()),
+                                    Reads = reader["Reads"].ToString(),
+                                    SPID = reader["SPID"].ToString(),
+                                    StartTime = reader["StartTime"].ToString(),
                                     TextData = reader["TextData"].ToString(),
-                                    Writes = Convert.ToInt32(reader["Writes"].ToString())
+                                    Writes = reader["Writes"].ToString()
                                 };
                                 list.Add(viewModel);
                             }
@@ -96,7 +97,15 @@ namespace Fanex.Tool.TraceSP.Services
                     }
                     catch (Exception e)
                     {
-                        Logger.Log.Error(e.Message);
+                        var message = "SOURCE: " + e.Source +
+                                      "\r\nDOMAIN: " + HttpContext.Current.Request.Headers["Host"] +
+                                      "\r\nREFERRER: " + HttpContext.Current.Request.UrlReferrer +
+                                      "\r\nFORM: " + HttpContext.Current.Request.Form +
+                                      "\r\nQUERYSTRING: " + HttpContext.Current.Request.QueryString +
+                                      "\r\nTARGETSITE: " + e.TargetSite +
+                                      "\r\nSTACKTRACE: " + e.StackTrace;
+
+                        Logger.Log.Warn(message);
                         throw;
                     }
                 }

@@ -1,14 +1,13 @@
 ﻿namespace Fanex.Tool.TraceSP.Models
 {
-    using System;
     using System.Web;
-    using System.Xml;
-    class TracingSpViewModel
+
+    internal class TracingSpViewModel
     {
         private string _textData;
         public string Event { get; set; }
 
-        public int SPID { get; set; }
+        public string SPID { get; set; }
 
         public string TextData
         {
@@ -24,18 +23,18 @@
 
         public string LoginName { get; set; }
 
-        public int Duration { get; set; }
+        public string Duration { get; set; }
 
-        public int Reads { get; set; }
+        public string Reads { get; set; }
 
-        public int Writes { get; set; }
+        public string Writes { get; set; }
 
-        public int CPU { get; set; }
+        public string CPU { get; set; }
 
         public string DatabaseName { get; set; }
 
-        public DateTime StartTime { get; set; }
+        public string StartTime { get; set; }
 
-        public DateTime EndTime { get; set; }
+        public string EndTime { get; set; }
     }
 }
