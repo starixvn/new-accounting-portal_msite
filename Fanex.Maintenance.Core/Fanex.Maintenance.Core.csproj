@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Fanex.Maintenance.Core</RootNamespace>
     <AssemblyName>Fanex.Maintenance.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
     </SccProjectName>
@@ -44,7 +44,6 @@
   <ItemGroup>
     <Reference Include="MvcPager, Version=1.5.0.28157, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvcPager.1.5.0.28157\lib\net40\MvcPager.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -77,8 +76,8 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SiteFunctionKeys.cs</LastGenOutput>
     </None>
-    <None Include="packages.config" />
     <Compile Include="Web\HtmlHelperExtensions.cs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ViewResource.resx">

@@ -8,7 +8,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 5/8/2018 10:29:53 AM
+// Lasted generated date: 11/16/2023 4:01:41 PM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
@@ -41,11 +41,11 @@ public static class SiteFunctionKeys
 
     public const string DataIntegrity = "DataIntegrity";
 
+    public const string DeleteTempVariable = "DeleteTempVariable";
+
     public const string EncryptApplicationEmail = "EncryptApplicationEmail";
 
     public const string LetstalkNotification = "LetstalkNotification";
-
-    public const string ManageLetstalkMessage = "ManageLetstalkMessage";
 
     public const string LetstalkReport = "LetstalkReport";
 
@@ -70,6 +70,8 @@ public static class SiteFunctionKeys
     public const string ManageFunction = "ManageFunction";
 
     public const string ManageGroup = "ManageGroup";
+
+    public const string ManageLetstalkMessage = "ManageLetstalkMessage";
 
     public const string ManageMail = "ManageMail";
 
@@ -128,7 +130,5 @@ public static class SiteFunctionKeys
     public const string ViewMailDetails = "ViewMailDetails";
 
     public const string ViewMailReport = "ViewMailReport";
-
-    public const string DeleteTempVariable = "DeleteTempVariable";
 
 }
