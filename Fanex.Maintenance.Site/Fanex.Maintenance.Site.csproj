@@ -741,7 +741,6 @@
     <Content Include="themes\shared\img\setting.png" />
     <Content Include="themes\style.css" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -825,7 +824,6 @@
     <Content Include="Views\Machine\EditMachine.cshtml" />
     <Content Include="Views\Machine\InsertMachine.cshtml" />
     <Content Include="themes\manage\RefreshCountDown.less" />
-    <Content Include="Views\LicenseeSetting\LrfDomain.cshtml" />
     <Content Include="Views\ConnectionString\Database.cshtml" />
     <Content Include="Views\ConnectionString\CreateDatabase.cshtml" />
     <Content Include="Views\ConnectionString\EditDatabase.cshtml" />

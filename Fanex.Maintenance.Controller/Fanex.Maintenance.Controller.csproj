@@ -145,7 +145,6 @@
     <Compile Include="ServiceMonitoringController.cs" />
     <Compile Include="DatabaseReportController.cs" />
     <Compile Include="HomeController.cs" />
-    <Compile Include="LicenseeSettingController.cs" />
     <Compile Include="LogController.cs" />
     <Compile Include="MachineController.cs" />
     <Compile Include="MailController.cs" />

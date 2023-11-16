@@ -96,13 +96,11 @@
   <ItemGroup>
     <Compile Include="Impl\AppLog\LogCategoryService.cs" />
     <Compile Include="Impl\AppLog\LogService.cs" />
-    <Compile Include="Impl\LicenseeSetting\LicenseeSettingService.cs" />
     <Compile Include="Impl\AppLog\MachineService.cs" />
     <Compile Include="Impl\Mail\MailService.cs" />
     <Compile Include="Impl\Testing\NotificationService.cs" />
     <Compile Include="Impl\ServiceMonitoring\UserManagement.cs" />
     <Compile Include="Impl\ServiceMonitoring\ServiceManagement.cs" />
-    <Compile Include="Interface\LicenseeSetting\ILicenseeSettingService.cs" />
     <Compile Include="Interface\AppLog\ILogCategoryService.cs" />
     <Compile Include="Interface\AppLog\ILogService.cs" />
     <Compile Include="Interface\Mail\IMailService.cs" />

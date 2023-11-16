@@ -109,12 +109,10 @@
     <Compile Include="Criteria\ServiceMonitoring\ServiceMonitoringCriteria.cs" />
     <Compile Include="Impl\BaseRepository.cs" />
     <Compile Include="Impl\AppLog\LogRepository.cs" />
-    <Compile Include="Impl\LicenseeSetting\LicenseeSettingRepository.cs" />
     <Compile Include="Impl\AppLog\MachineRepository.cs" />
     <Compile Include="Impl\Mail\MailRepository.cs" />
     <Compile Include="Impl\ServiceMonitoring\UserManagementRepository.cs" />
     <Compile Include="Impl\ServiceMonitoring\ServiceManagementRepository.cs" />
-    <Compile Include="Interface\LicenseeSetting\ILicenseeSettingRepository.cs" />
     <Compile Include="Interface\Mail\IMailRepository.cs" />
     <Compile Include="Interface\ServiceMonitoring\IServiceManagementRepository.cs" />
     <Compile Include="Interface\ServiceMonitoring\IUserManagementRepository.cs" />
