@@ -792,7 +792,6 @@
     <Content Include="Views\Mail\AddMailConfigPopUp.cshtml" />
     <Content Include="Views\Mail\AddMailSettingPopUp.cshtml" />
     <Content Include="Views\Mail\GetMessage.cshtml" />
-    <Content Include="Views\DatabaseReport\DataIntegrity.cshtml" />
     <Content Include="WebConnectionString.aws.config">
       <DependentUpon>WebConnectionString.config</DependentUpon>
     </Content>

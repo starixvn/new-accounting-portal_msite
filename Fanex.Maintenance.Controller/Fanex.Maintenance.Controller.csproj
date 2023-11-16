@@ -142,7 +142,6 @@
     <Compile Include="CommonErrorController.cs" />
     <Compile Include="RemotingRefController.cs" />
     <Compile Include="TestingController.cs" />
-    <Compile Include="DatabaseReportController.cs" />
     <Compile Include="HomeController.cs" />
     <Compile Include="MailController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,5 +164,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
