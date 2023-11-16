@@ -90,15 +90,6 @@
   <ItemGroup>
     <Compile Include="Command\CommandResult.cs" />
     <Compile Include="Criteria\DatabaseReport\DataIntegrityViewModel.cs" />
-    <Compile Include="Criteria\Log\GetAllCategoryCriteria.cs" />
-    <Compile Include="Criteria\Log\GetAllMachinesCriteria.cs" />
-    <Compile Include="Criteria\Log\GetLogCriteria.cs" />
-    <Compile Include="Criteria\Log\GetMachineByIdCriteria.cs" />
-    <Compile Include="Criteria\Log\GetMachinesByTypeCriteria.cs" />
-    <Compile Include="Criteria\Log\InsertMachineCriteria.cs" />
-    <Compile Include="Criteria\Log\UpdateMachineCriteria.cs" />
-    <Compile Include="Criteria\LrfDomain\ActiveDomainCriteria.cs" />
-    <Compile Include="Criteria\LrfDomain\GetAllLrfDomainCriteria.cs" />
     <Compile Include="Criteria\MailService\GetMailConfigLogsCriteria.cs" />
     <Compile Include="Criteria\MailService\MailConfigLogModel.cs" />
     <Compile Include="Criteria\MailService\MailConfigViewModel.cs" />
@@ -106,26 +97,15 @@
     <Compile Include="Criteria\MailService\MailSettingViewModel.cs" />
     <Compile Include="Criteria\Misc\LogExecSpCriteria.cs" />
     <Compile Include="Criteria\Misc\ResultCriteria.cs" />
-    <Compile Include="Criteria\ServiceMonitoring\ServiceMonitoringCriteria.cs" />
     <Compile Include="Impl\BaseRepository.cs" />
-    <Compile Include="Impl\AppLog\LogRepository.cs" />
-    <Compile Include="Impl\AppLog\MachineRepository.cs" />
     <Compile Include="Impl\Mail\MailRepository.cs" />
-    <Compile Include="Impl\ServiceMonitoring\UserManagementRepository.cs" />
-    <Compile Include="Impl\ServiceMonitoring\ServiceManagementRepository.cs" />
     <Compile Include="Interface\Mail\IMailRepository.cs" />
-    <Compile Include="Interface\ServiceMonitoring\IServiceManagementRepository.cs" />
-    <Compile Include="Interface\ServiceMonitoring\IUserManagementRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj">
       <Project>{60BC3FA8-DF7C-4024-B469-4ED110420143}</Project>
       <Name>Fanex.Maintenance.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.ServiceManagement\Fanex.ServiceManagement.csproj">
-      <Project>{1F903078-36B9-40AE-9FF2-67F7DC5E058B}</Project>
-      <Name>Fanex.ServiceManagement</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

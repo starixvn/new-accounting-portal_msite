@@ -409,12 +409,6 @@
     <Content Include="images\sprite_v.png" />
     <Content Include="images\Stop.png" />
     <Content Include="images\Stop_disable.png" />
-    <Content Include="scripts\Connection\Connection.js" />
-    <Content Include="scripts\Connection\ChangeConnection.js" />
-    <Content Include="scripts\Connection\AliasDatabase.js" />
-    <Content Include="scripts\Connection\Log.js" />
-    <Content Include="scripts\Connection\Database.js" />
-    <Content Include="scripts\Connection\Site.js" />
     <Content Include="scripts\lib\ContextMenu\ContextMenuController.js" />
     <Content Include="scripts\lib\Countdown\CountdownController.js" />
     <Content Include="scripts\lib\Countdown\Images\countdownCheck.png" />
@@ -501,7 +495,6 @@
     <Content Include="scripts\lib\XMLEditor\js\ext\jquery-color.js" />
     <Content Include="scripts\lib\XMLEditor\js\ext\jquery.js" />
     <Content Include="scripts\lib\XMLEditor\js\loc\xmlEditor.js" />
-    <Content Include="scripts\Logs\Index.js" />
     <Content Include="scripts\Mail\AddMailSettingPopUp.js" />
     <Content Include="scripts\Mail\AddMailFunction.js" />
     <Content Include="scripts\Mail\AddMailConfigPopUp.js" />
@@ -556,7 +549,6 @@
     <Content Include="scripts\lib\Select2\select2.png" />
     <Content Include="scripts\LetstalkNotification\LetstalkNotification.es5.js" />
     <Content Include="scripts\LetstalkNotification\LetstalkNotification.js" />
-    <Content Include="scripts\ServiceMonitoring\ServiceMonitoring.js" />
     <Content Include="scripts\ShareScripts\SharedScriptManager.js" />
     <Content Include="themes\assets\css\font-awesome-ie7.css" />
     <Content Include="themes\assets\css\font-awesome.css" />
@@ -787,7 +779,6 @@
     <Content Include="themes\manage\style.less" />
     <Content Include="themes\manage\themes.less" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Log\Index.cshtml" />
     <Content Include="Views\Mail\MailList.cshtml" />
     <Content Include="Views\Mail\MailSetting.cshtml" />
     <Content Include="Views\Mail\AddMailSetting.cshtml" />
@@ -808,43 +799,10 @@
     <Content Include="WebConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\ConnectionString\Connection.cshtml" />
-    <Content Include="Views\ConnectionString\CreateConnection.cshtml" />
-    <Content Include="Views\ConnectionString\Site.cshtml" />
-    <Content Include="Views\ConnectionString\CreateSite.cshtml" />
-    <Content Include="Views\ConnectionString\EditSite.cshtml" />
-    <Content Include="Views\ConnectionString\DatabaseServer.cshtml" />
-    <Content Include="Views\ConnectionString\CreateDatabaseServer.cshtml" />
-    <Content Include="Views\ConnectionString\EditDatabaseServer.cshtml" />
     <Content Include="Views\CommonError\Error.cshtml" />
     <Content Include="Views\CommonError\NotFound.cshtml" />
-    <Content Include="Views\ConnectionString\Log.cshtml" />
     <Content Include="Views\Mail\GetError.cshtml" />
-    <Content Include="Views\Machine\Index.cshtml" />
-    <Content Include="Views\Machine\EditMachine.cshtml" />
-    <Content Include="Views\Machine\InsertMachine.cshtml" />
     <Content Include="themes\manage\RefreshCountDown.less" />
-    <Content Include="Views\ConnectionString\Database.cshtml" />
-    <Content Include="Views\ConnectionString\CreateDatabase.cshtml" />
-    <Content Include="Views\ConnectionString\EditDatabase.cshtml" />
-    <Content Include="Views\ConnectionString\EditConnection.cshtml" />
-    <Content Include="Views\ConnectionString\SwitchConnection.cshtml" />
-    <Content Include="Views\ConnectionString\ConnectionAssignSite.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction102.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction101.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction100.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction200.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction202.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction201.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction300.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction301.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction302.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction400.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction401.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction402.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction403.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction404.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction405.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Letstalk.Report\Fanex.Letstalk.Notification.csproj">
@@ -863,10 +821,6 @@
       <Project>{60BC3FA8-DF7C-4024-B469-4ED110420143}</Project>
       <Name>Fanex.Maintenance.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.Maintenance.ViewModel\Fanex.Maintenance.ViewModel.csproj">
-      <Project>{1D88837B-951F-4411-ABD9-69FCA5B52C5A}</Project>
-      <Name>Fanex.Maintenance.ViewModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fanex.Tool.TraceSP\Fanex.Tool.TraceSP.csproj">
       <Project>{0305d905-08cc-40a8-9160-145f0caf5de7}</Project>
       <Name>Fanex.Tool.TraceSP</Name>
@@ -874,9 +828,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Menu.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ConnectionString\GetConnectionBySite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="themes\grid.less" />
@@ -888,15 +839,7 @@
   <ItemGroup>
     <Content Include="Views\Mail\ComposeEmail.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ServiceMonitoringCache\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ServiceMonitoring\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ServiceMonitoring\XMLEditor.cshtml" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Areas\MailStation\MailGroup\CreateMailGroup\Index.cshtml" />
     <Content Include="Areas\MailStation\MailGroup\CreateMailGroup\Styles\CreateMailGroup.less" />
