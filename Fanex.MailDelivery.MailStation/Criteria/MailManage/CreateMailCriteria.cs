@@ -4,7 +4,7 @@ using System;
 
 namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
-    public class CreateMailCriteria : CriteriaBase
+    public class CreateMailCriteria : UpdateCommandBase
     {
         public CreateMailCriteria()
         {

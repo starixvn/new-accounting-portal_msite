@@ -2,7 +2,7 @@
 
 namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
-    public class DeleteMailCriteria : CriteriaBase
+    public class DeleteMailCriteria : UpdateCommandBase
     {
         public int MailId { get; set; }
 

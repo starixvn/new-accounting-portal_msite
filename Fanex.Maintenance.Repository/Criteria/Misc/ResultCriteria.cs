@@ -1,11 +1,9 @@
 ﻿namespace Fanex.Maintenance.Repository.Criteria.Misc
 {
-    using Fanex.Data.Repository;
-
     /// <summary>
     /// Result criteria.
     /// </summary>
-    public class ResultCriteria : CriteriaBase
+    public class ResultCriteria
     {
         public ResultCriteria()
         {

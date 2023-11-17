@@ -3,10 +3,8 @@ using System;
 
 namespace Fanex.Letstalk.Notification.Criteria
 {
-    public class InsertNotificationCriteria : CriteriaBase
+    public class InsertNotificationCriteria : NonQueryCommand
     {
-        //public int NotificationID { get; set; }
-
         public string Title { get; set; }
 
         public string Content { get; set; }
@@ -18,7 +16,7 @@ namespace Fanex.Letstalk.Notification.Criteria
         public int CreatedBy { get; set; }
 
         public bool IsTest { get; set; }
-
+        
         public override bool IsValid() => true;
 
         public override string GetSettingKey() => "Notif_InsertNewNotification";

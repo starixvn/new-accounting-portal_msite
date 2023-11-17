@@ -1,8 +1,5 @@
-﻿using Fanex.Common;
-using Fanex.Data;
-using Fanex.MailDeliver.Model;
+﻿using Fanex.MailDeliver.Model;
 using Fanex.MailDelivery.Core.Models;
-using Fanex.MailDelivery.MailStation.Criteria;
 using Fanex.MailDelivery.MailStation.Criteria.MailReport;
 using Fanex.MailDelivery.MailStation.Models;
 using Fanex.Maintenance.Service.Impl.Mail;
@@ -10,16 +7,18 @@ using Fanex.Maintenance.Service.Interface.Mail;
 using Quartz;
 using Quartz.Spi;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Fanex.MailDelivery.MailStation.Services
 {
+    using Data.Repository;
+
     public class MailReportService : MailStationBaseService
     {
         private readonly IMailService mailService;
         private IJobOperationService jobOperationService;
+        private readonly IDynamicRepository dynamicRepository= new DynamicRepository();
 
         public MailReportService()
         {
@@ -28,29 +27,29 @@ namespace Fanex.MailDelivery.MailStation.Services
 
         public List<MailTaskModel> MailReport(MailReportCriteria criteria)
         {
-            int oldStatus = criteria.Status;
+            var oldStatus = criteria.Status;
             criteria.Status = -1;
-            List<MailTaskModel> mailTasks = GetMailTasks(criteria);
+            var mailTasks = GetMailTasks(criteria);
 
             if (criteria.TriggerType != (int)MailType.Function)
             {
                 criteria.Status = oldStatus;
-                GetAllScheduleCriteria getAllScheduleCriteria = new GetAllScheduleCriteria { MailName = criteria.MailName, SiteId = criteria.SiteId };
-                List<MailTaskDetailModel> mailTaskDetails = GetMailTaskDetails(getAllScheduleCriteria);
+                var getAllScheduleCriteria = new GetAllScheduleCriteria { MailName = criteria.MailName, SiteId = criteria.SiteId };
+                var mailTaskDetails = GetMailTaskDetails(getAllScheduleCriteria);
 
                 if (criteria.Status == -1 || criteria.Status == (int)JobStatus.Waiting || criteria.Status == (int)JobStatus.Missing)
                 {
-                    TimeSpan ts = new TimeSpan(23, 59, 59);
+                    var ts = new TimeSpan(23, 59, 59);
                     criteria.ToDate += ts;
 
-                    foreach (MailTaskDetailModel schedule in mailTaskDetails)
+                    foreach (var schedule in mailTaskDetails)
                     {
-                        DateTime fromDate = MaxDateTime(criteria.FromDate, schedule.StartOn).ToUniversalTime();
-                        DateTime toDate = MinDateTime(criteria.ToDate, schedule.EndOn).ToUniversalTime();
+                        var fromDate = MaxDateTime(criteria.FromDate, schedule.StartOn).ToUniversalTime();
+                        var toDate = MinDateTime(criteria.ToDate, schedule.EndOn).ToUniversalTime();
 
                         if (fromDate <= toDate)
                         {
-                            ITrigger trigger = TriggerBuilder.Create().WithCronSchedule(schedule.CronExpression).Build();
+                            var trigger = TriggerBuilder.Create().WithCronSchedule(schedule.CronExpression).Build();
                             var listtriggerdate = TriggerUtils.ComputeFireTimesBetween(
                                 (IOperableTrigger)trigger,
                                 null,
@@ -69,7 +68,7 @@ namespace Fanex.MailDelivery.MailStation.Services
 
                                 if (criteria.Status == -1 || criteria.Status == status)
                                 {
-                                    MailTaskModel waitingTask = new MailTaskModel
+                                    var waitingTask = new MailTaskModel
                                     {
                                         MailName = schedule.MailName,
                                         MailId = schedule.MailId,
@@ -110,7 +109,7 @@ namespace Fanex.MailDelivery.MailStation.Services
                 TriggerType = -1
             };
 
-            List<MailTaskModel> mailTasks = MailReport(criteria);
+            var mailTasks = MailReport(criteria);
 
             var counter = new MailTaskStatusCounterModel
             {
@@ -125,27 +124,14 @@ namespace Fanex.MailDelivery.MailStation.Services
             return counter;
         }
 
-        private static List<MailTaskDetailModel> GetMailTaskDetails(GetAllScheduleCriteria getAllScheduleCriteria)
+        private List<MailTaskDetailModel> GetMailTaskDetails(GetAllScheduleCriteria getAllScheduleCriteria)
         {
-            using (ObjectDb db = new ObjectDb(getAllScheduleCriteria.GetSettingKey()))
-            {
-                db.AssignParamValues(getAllScheduleCriteria.GetSpParams());
-                List<MailTaskDetailModel> mailTaskDetails = db.Query<MailTaskDetailModel>().ToList();
-
-                return mailTaskDetails;
-            }
+            return dynamicRepository.Fetch<MailTaskDetailModel>(getAllScheduleCriteria).ToList();
         }
 
-        private static List<MailTaskModel> GetMailTasks(MailReportCriteria criteria)
+        private List<MailTaskModel> GetMailTasks(MailReportCriteria criteria)
         {
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-
-                List<MailTaskModel> mailTasks = db.Query<MailTaskModel>().ToList();
-
-                return mailTasks;
-            }
+            return dynamicRepository.Fetch<MailTaskModel>(criteria).ToList();
         }
 
         public MailRecord MailDetail(MailDetailCriteria criteria)
@@ -163,17 +149,13 @@ namespace Fanex.MailDelivery.MailStation.Services
 
         public List<MailLogModel> MailLog(MailLogCriteria criteria)
         {
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-                return db.Query<MailLogModel>().ToList();
-            }
+            return dynamicRepository.Fetch<MailLogModel>(criteria).ToList();
         }
 
         public void RetrySendMail(RetrySendMailCriteria criteria)
         {
-            MailTaskModel mailTask = GetMailTaskByID(new GetMailTaskByIdCriteria { MailTaskId = criteria.TaskId });
-            Schedule schedule = GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailTask.MailId });
+            var mailTask = GetMailTaskByID(new GetMailTaskByIdCriteria { MailTaskId = criteria.TaskId });
+            var schedule = GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailTask.MailId });
             schedule.TaskId = mailTask.MailTaskId;
 
             UpdateRunningTask(mailTask.MailTaskId);
@@ -203,18 +185,11 @@ namespace Fanex.MailDelivery.MailStation.Services
 
         public void RetryMissingJob(RetryMissingTaskCriteria criteria)
         {
-            // Add Missing Task to DB first.
-            int mailTaskId;
-            Hashtable hash = criteria.GetSpParams();
-            hash = (new ResultCriteria()).AddSpParams(hash);
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.ExecuteNonQuery(hash);
-                mailTaskId = Converter.ToInt(db.GetParameterValue("MailTaskID"));
-            }
+            dynamicRepository.Execute(criteria);
+            int mailTaskId = criteria.MailTaskId;
 
-            MailTaskModel mailTask = GetMailTaskByID(new GetMailTaskByIdCriteria { MailTaskId = mailTaskId });
-            Schedule schedule = GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailTask.MailId });
+            var mailTask = GetMailTaskByID(new GetMailTaskByIdCriteria { MailTaskId = mailTaskId });
+            var schedule = GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailTask.MailId });
             schedule.CurrentFireTime = criteria.ScheduledTime;
             schedule.TaskId = mailTaskId;
 

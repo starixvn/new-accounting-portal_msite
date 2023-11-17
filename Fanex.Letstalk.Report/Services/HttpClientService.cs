@@ -21,14 +21,14 @@ namespace Fanex.Letstalk.Notification.Services
 
         public T PostAsync<T, P>(string action, P inputParams)
         {
-            using (HttpClient client = new HttpClient())
+            using (var client = new HttpClient())
             {
-                string letstalkApiUrl = $"{service.LetstalkApiUrl}Letstalk/";
+                var letstalkApiUrl = $"{service.LetstalkApiUrl}Letstalk/";
                 client.BaseAddress = new Uri(letstalkApiUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                StringContent content = new StringContent(JsonConvert.SerializeObject(inputParams), Encoding.UTF8, "application/json");
+                var content = new StringContent(JsonConvert.SerializeObject(inputParams), Encoding.UTF8, "application/json");
 
                 var responseResult = client.PostAsync(action, content).Result;
 

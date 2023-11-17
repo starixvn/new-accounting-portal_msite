@@ -17,15 +17,13 @@ namespace Fanex.MailDelivery.MailStation.Services
 {
     public class MailStationBaseService
     {
+        private readonly IDynamicRepository dynamicRepository = new DynamicRepository();
+
         public List<SelectListItem> Sites(bool hasAllElement = true)
         {
-            GetAllSiteCriteria criteria = new GetAllSiteCriteria();
-            List<SelectListItem> result;
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                result = db.Query<SelectListItem>().ToList();
-            }
-
+            var criteria = new GetAllSiteCriteria();
+            var result = dynamicRepository.Fetch<SelectListItem>(criteria).ToList();
+            
             if (hasAllElement)
             {
                 return MailStationConstants.AllItem.Union(result).ToList();
@@ -36,12 +34,8 @@ namespace Fanex.MailDelivery.MailStation.Services
 
         public List<SelectListItem> MailGroups(bool hasAllElement = true)
         {
-            GetAllMailGroupCriteria criteria = new GetAllMailGroupCriteria();
-            List<SelectListItem> result;
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                result = db.Query<SelectListItem>().ToList();
-            }
+            var criteria = new GetAllMailGroupCriteria();
+            var result = dynamicRepository.Fetch<SelectListItem>(criteria).ToList();
 
             if (hasAllElement)
             {
@@ -84,56 +78,23 @@ namespace Fanex.MailDelivery.MailStation.Services
         [AllowAnonymous]
         public List<SuggestMailModel> SuggestMails(SuggestMailCriteria criteria)
         {
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-                List<SuggestMailModel> result = db.Query<SuggestMailModel>().ToList();
-
-                return result;
-            }
+            return dynamicRepository.Fetch<SuggestMailModel>(criteria).ToList();
         }
 
-        public CommandResult GetCommandResult(Hashtable hash)
+        public CommandResult ExecuteNonQuery(UpdateCommandBase command)
         {
-            var errCode = hash["errcode"];
-            var errMsg = hash["errmsg"];
-            return new CommandResult
-            {
-                Code = (errCode is DBNull) ? 0 : Convert.ToInt32(errCode),
-                Message = (errMsg is DBNull) ? string.Empty : Convert.ToString(errMsg)
-            };
-        }
-
-        public CommandResult ExecuteNonQuery(CriteriaBase criteria)
-        {
-            Hashtable hash = criteria.GetSpParams();
-            hash = (new ResultCriteria()).AddSpParams(hash);
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.ExecuteNonQuery(hash);
-
-                return GetCommandResult(hash);
-            }
+            dynamicRepository.Execute(command);
+            return new CommandResult(command.ErrCode, command.ErrMsg);
         }
 
         public MailTaskModel GetMailTaskByID(GetMailTaskByIdCriteria criteria)
         {
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-
-                return db.Query<MailTaskModel>().FirstOrDefault();
-            }
+            return dynamicRepository.Get<MailTaskModel>(criteria);
         }
 
         public Schedule GetScheduleByMailId(GetScheduleByIdCriteria criteria)
         {
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-
-                return db.Query<Schedule>().FirstOrDefault();
-            }
+            return dynamicRepository.Get<Schedule>(criteria);
         }
 
         public string GetTimeZone()

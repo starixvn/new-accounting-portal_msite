@@ -2,7 +2,9 @@
 
 namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
 {
-    public class UpdateRecipientCriteria : CriteriaBase
+    using Data;
+
+    public class UpdateRecipientCriteria : NonQueryCommand
     {
         [SpParam(SqlParamName = "RecipientID")]
         public int RecipientId { get; set; }
@@ -27,9 +29,15 @@ namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
         [SpParam(SqlParamName = "IsActive")]
         public bool Status { get; set; }
 
+        public int ErrCode { get; set; } = 0;
+
+        public string ErrMsg { get; set; } = string.Empty;
+
         public override string GetSettingKey()
         {
             return "MailStation_MailReport_UpdateRecipient";
         }
+
+        public override bool IsValid() => true;
     }
 }

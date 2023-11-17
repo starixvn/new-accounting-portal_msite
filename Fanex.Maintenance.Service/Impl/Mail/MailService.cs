@@ -119,7 +119,7 @@
             using (var client = new MailDeliver())
             {
                 var dateTime = DateTime.Parse(_fromDate);
-                IEnumerable<MailRecord> data = client.GetListMail(_appId, dateTime, _page, _counter);
+                var data = client.GetListMail(_appId, dateTime, _page, _counter);
                 if (data != null)
                 {
                     mails = data.ToList();
@@ -142,7 +142,7 @@
             {
                 var dateTime = DateTime.Parse(_fromDate);
                 var dateTimeTo = DateTime.Parse(_toDate);
-                IEnumerable<MailRecord> data = client.GetListMailByDate(_appId, dateTime, dateTimeTo, ref totalRows, _page, _counter, _mailStatus);
+                var data = client.GetListMailByDate(_appId, dateTime, dateTimeTo, ref totalRows, _page, _counter, _mailStatus);
 
                 if (data != null)
                 {
@@ -187,7 +187,7 @@
 
             using (var client = new MailDeliver())
             {
-                IEnumerable<MailSetting> data = client.GetListSetting();
+                var data = client.GetListSetting();
                 if (data != null)
                 {
                     settings = data.OrderBy(x => x.Server).ToList();
@@ -207,7 +207,7 @@
 
             using (var client = new MailDeliver())
             {
-                IEnumerable<MailFunction> data = client.GetListFuntion();
+                var data = client.GetListFuntion();
                 if (data != null)
                 {
                     functions = data.ToList();
@@ -247,7 +247,7 @@
         /// <returns>Success or not.</returns>
         public bool StoreSetting(MailSetting setting)
         {
-            bool result = false;
+            var result = false;
 
             if (setting != null)
             {
@@ -268,7 +268,7 @@
         /// <returns>Success or not.</returns>
         public bool StoreConfig(MailConfig config)
         {
-            bool result = false;
+            var result = false;
 
             if (config != null)
             {
@@ -289,7 +289,7 @@
         /// <returns>Success or not.</returns>
         public bool StoreFunction(MailFunction func)
         {
-            bool result = false;
+            var result = false;
 
             if (func != null)
             {
@@ -386,7 +386,7 @@
         /// <returns>List of mail error.</returns>
         public List<MailError> GetError(int mailId)
         {
-            List<MailError> mailList = new List<MailError>();
+            var mailList = new List<MailError>();
 
             using (var client = new MailDeliver())
             {

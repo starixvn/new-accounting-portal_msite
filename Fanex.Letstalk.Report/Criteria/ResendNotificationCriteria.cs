@@ -2,7 +2,7 @@
 
 namespace Fanex.Letstalk.Notification.Criteria
 {
-    public class ResendNotificationCriteria : CriteriaBase
+    public class ResendNotificationCriteria : NonQueryCommand
     {
         public int NotificationID { get; set; }
 

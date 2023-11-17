@@ -56,7 +56,7 @@
                 HasError = false
             };
 
-            var tracingSpData = _tracingSpService.GetTracingSpData(ref model);
+            var tracingSpData = _tracingSpService.GetTracingSpData(model);
 
             return Json(new
             {

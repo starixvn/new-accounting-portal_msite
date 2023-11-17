@@ -1,14 +1,14 @@
 ﻿namespace Fanex.Maintenance.Site
 {
     using System;
+    using System.Configuration;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
     using App_Start;
-    using Data.Configuration;
+    using Data;
     using EasyNetQ.Logging;
-    using Logging.Extensions.Database;
     using Logging.Extensions.Web;
     using MailDelivery.MailStation.Logging;
 
@@ -21,11 +21,14 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            DbSettingProviderManager.Current.Start();
             FanexLogging.Register();
             MailServiceRegister.Register();
 
-            ExceptionHandler.UseGetDbExceptionInfo(DatabaseInfoGetters.GetDbExceptionInfo);
+            DbSettingProviderManager
+                .StartNewSession()
+                .Use(ConfigurationManager.AppSettings["FanexDataServiceApi"])
+                .Register(ConfigurationManager.AppSettings["StoredProcedurePath"])
+                .Run();
 
             LogProvider.SetCurrentLogProvider(new RabbitMQLogProvider());
 

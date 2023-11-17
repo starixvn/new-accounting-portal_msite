@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Fanex.Data;
 using Fanex.MailDelivery.Core.Models;
 using Fanex.MailDelivery.MailStation.Configurations;
 using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
@@ -12,27 +11,18 @@ using Fanex.Maintenance.Repository.Command;
 
 namespace Fanex.MailDelivery.MailStation.Services
 {
+    using Data.Repository;
+
     public class MailManageService : MailStationBaseService
     {
         private IJobOperationService jobOperationService;
 
-        public MailManageService()
-        {
-        }
-
+        private readonly IDynamicRepository dynamicRepository= new DynamicRepository();
+      
         public IList<MailModel> MailList(GetMailListCriteria criteria)
         {
-            List<MailModel> mailModels;
-            DateTime now;
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-                using (var multi = db.QueryMultiple())
-                {
-                    mailModels = multi.Read<MailModel>().ToList();
-                    now = multi.Read<DateTime>().FirstOrDefault();
-                }
-            }
+            var (mailModels, listdDates) = dynamicRepository.FetchMultiple<MailModel, DateTime>(criteria);
+            var now = listdDates.FirstOrDefault();
 
             mailModels.ToList().ForEach(n =>
             {
@@ -47,27 +37,17 @@ namespace Fanex.MailDelivery.MailStation.Services
                 }
             });
 
-            return mailModels;
+            return mailModels.ToList();
         }
 
         public MailModel MailById(GetMailByIdCriteria criteria)
         {
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-
-                return db.Query<MailModel>().FirstOrDefault();
-            }
+            return dynamicRepository.Get<MailModel>(criteria);
         }
 
         public IList<MailActionLogModel> MailLogById(GetMailLogByIdCriteria criteria)
         {
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-
-                return db.Query<MailActionLogModel>().ToList();
-            }
+            return dynamicRepository.Fetch<MailActionLogModel>(criteria).ToList();
         }
 
         public CommandResult CreateMail(CreateMailCriteria criteria)
@@ -77,7 +57,7 @@ namespace Fanex.MailDelivery.MailStation.Services
 
         public CommandResult UpdateMail(UpdateMailCriteria criteria)
         {
-            CommandResult result = ExecuteNonQuery(criteria);
+            var result = ExecuteNonQuery(criteria);
 
             if (result.IsSuccessful && criteria.TriggerType == (int)MailType.Schedule)
             {
@@ -113,7 +93,7 @@ namespace Fanex.MailDelivery.MailStation.Services
 
         public void RunNow(int mailId)
         {
-            Schedule schedule = GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailId });
+            var schedule = GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailId });
 
             using (jobOperationService = new JobOperationService())
             {

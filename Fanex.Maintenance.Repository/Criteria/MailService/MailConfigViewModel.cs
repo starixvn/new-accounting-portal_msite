@@ -55,7 +55,7 @@
         /// <returns>Mail config.</returns>
         public MailConfig GetMailConfig()
         {
-            MailConfig mailConfig = new MailConfig
+            var mailConfig = new MailConfig
             {
                 AppID = this.AppId,
                 AppName = this.AppName,

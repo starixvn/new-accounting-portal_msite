@@ -91,7 +91,7 @@
     </script>
     @if (success)
     {
-        string dialogMsg = string.Format(ViewResource.AddSuccessMsg, ViewResource.Mail_Config + " '" + Model.AppName, 5);
+        var dialogMsg = string.Format(ViewResource.AddSuccessMsg, ViewResource.Mail_Config + " '" + Model.AppName, 5);
 
         <script type="text/javascript">
             $(function () {

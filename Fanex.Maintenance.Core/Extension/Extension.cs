@@ -17,18 +17,18 @@
         /// </returns>
         public static string GetMd5Hash(string input)
         {
-            MD5 md5Hash = MD5.Create();
+            var md5Hash = MD5.Create();
 
             // Convert the input string to a byte array and compute the hash. 
-            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+            var data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
             // Create a new Stringbuilder to collect the bytes 
             // and create a string.
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
             // Loop through each byte of the hashed data  
             // and format each one as a hexadecimal string. 
-            for (int i = 0; i < data.Length; i++)
+            for (var i = 0; i < data.Length; i++)
             {
                 builder.Append(data[i].ToString("x2"));
             }

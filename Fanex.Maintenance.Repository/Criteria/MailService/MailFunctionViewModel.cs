@@ -47,7 +47,7 @@
         /// <returns>Mail function.</returns>
         public MailFunction GetMailFunction()
         {
-            MailFunction mailFunction = new MailFunction
+            var mailFunction = new MailFunction
             {
                 Config = new MailConfig
                 {

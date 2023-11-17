@@ -3,7 +3,7 @@ using System;
 
 namespace Fanex.Letstalk.Notification.Criteria
 {
-    public class EditNotificationCriteria : CriteriaBase
+    public class EditNotificationCriteria : NonQueryCommand
     {
         public int NotificationID { get; set; }
 

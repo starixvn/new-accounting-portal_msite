@@ -1,5 +1,6 @@
 ﻿namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
 {
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>
@@ -14,5 +15,7 @@
         {
             return "MailStation_MailReport_InsertRecipient";
         }
+
+        public override bool IsValid() => true;
     }
 }

@@ -4,7 +4,6 @@ using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
 using Fanex.MailDelivery.MailStation.Extensions;
 using Fanex.MailDelivery.MailStation.Services;
 using Fanex.Maintenance.Controller;
-using Fanex.Maintenance.Repository.Command;
 using Fanex.NAP.Core.Business;
 using Fanex.NAP.Core.Web.Attribute;
 
@@ -37,7 +36,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
         public JsonResult CreateMailGroup(CreateMailGroupCriteria criteria)
         {
-            CommandResult commandResult = mailGroupService.CreateMailGroup(criteria);
+            var commandResult = mailGroupService.CreateMailGroup(criteria);
 
             return Json(commandResult);
         }
@@ -53,7 +52,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
         public ActionResult DeleteMailGroup(DeleteMailGroupCriteria criteria)
         {
-            CommandResult commandResult = mailGroupService.DeleteMailGroup(criteria);
+            var commandResult = mailGroupService.DeleteMailGroup(criteria);
 
             return Json(commandResult);
         }
@@ -80,7 +79,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Host)]
         public JsonResult UpdateMailGroup(UpdateMailGroupCriteria criteria)
         {
-            CommandResult commandResult = mailGroupService.UpdateMailGroup(criteria);
+            var commandResult = mailGroupService.UpdateMailGroup(criteria);
 
             return Json(commandResult);
         }

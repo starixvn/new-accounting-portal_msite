@@ -1,5 +1,6 @@
 namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>
@@ -10,14 +11,11 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
         [SpParam(SqlParamName = "EmailAddress")]
         public string Query { get; set; }
 
-        public override bool IsValid()
-        {
-            return true;
-        }
-
         public override string GetSettingKey()
         {
             return "MailStation_GetAllSuggestedMails";
         }
+
+        public override bool IsValid() => true;
     }
 }

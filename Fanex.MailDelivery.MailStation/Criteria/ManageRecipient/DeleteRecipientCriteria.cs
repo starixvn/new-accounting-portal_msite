@@ -2,14 +2,22 @@
 
 namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
 {
-    public class DeleteRecipientCriteria : CriteriaBase
+    using Data;
+
+    public class DeleteRecipientCriteria : NonQueryCommand
     {
         [SpParam(SqlParamName = "RecipientID")]
         public int RecipientId { get; set; }
+
+        public int ErrCode { get; set; } = 0;
+
+        public string ErrMsg { get; set; } = string.Empty;
 
         public override string GetSettingKey()
         {
             return "MailStation_MailReport_DeleteRecipient";
         }
+
+        public override bool IsValid() => true;
     }
 }

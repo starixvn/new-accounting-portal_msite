@@ -33,7 +33,7 @@
         {
             try
             {
-                T value = (T)HttpContext.Current.Session[sessionKey];
+                var value = (T)HttpContext.Current.Session[sessionKey];
                 return value;
             }
             catch (Exception)

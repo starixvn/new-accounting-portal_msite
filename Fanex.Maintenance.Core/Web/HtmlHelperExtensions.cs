@@ -58,17 +58,17 @@
             try
             {
                 //// check format time correct HHmmss
-                string strTime = time.ToString();
+                var strTime = time.ToString();
                 if (strTime.Length < 6)
                 {
-                    int count = 6 - strTime.Length;
-                    for (int i = 0; i < count; i++)
+                    var count = 6 - strTime.Length;
+                    for (var i = 0; i < count; i++)
                     {
                         strTime = strTime.Insert(0, "0");
                     }
                 }
 
-                DateTime date = DateTime.ParseExact(
+                var date = DateTime.ParseExact(
                     value.ToString() + " " + strTime,
                     "yyyyMMdd HHmmss",
                     CultureInfo.InvariantCulture,
@@ -86,8 +86,8 @@
 
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
         {
-            HashSet<TKey> seenKeys = new HashSet<TKey>();
-            foreach (TSource element in source)
+            var seenKeys = new HashSet<TKey>();
+            foreach (var element in source)
             {
                 if (seenKeys.Add(keySelector(element)))
                 {

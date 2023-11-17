@@ -8,13 +8,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Fanex.Letstalk.Notification.Services
 {
+    using Data.Repository;
+
     public interface ManageLetstalkMessageService
     {
         CommandResult InsertNotification(InsertNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files);
@@ -37,16 +38,13 @@ namespace Fanex.Letstalk.Notification.Services
     public class ManageLetstalkMessageServiceImp : ManageLetstalkMessageService
     {
 
-        private readonly IUserService userService;
+        private readonly IUserService userService = new UserService();
 
         private readonly string environment = ConfigurationManager.AppSettings["Environment"];
 
         private readonly string uatEnvironment = "UAT";
 
-        public ManageLetstalkMessageServiceImp()
-        {
-            userService = new UserService();
-        }
+        private readonly IDynamicRepository dynamicRepository = new DynamicRepository();
 
         public CommandResult InsertNotification(InsertNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files)
         {
@@ -54,18 +52,8 @@ namespace Fanex.Letstalk.Notification.Services
             {
                 criteria.IsTest = true;
             }
-            Hashtable hash = criteria.GetSpParams();
-            //int notificationID = 0;
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.ExecuteNonQuery(hash);
-                //notificationID = Converter.ToInt(db.GetParameterValue("NotificationID"));
-            }
 
-            //foreach (var file in files)
-            //{
-            //    InsertAttachementFileData(notificationID, file);
-            //}
+            dynamicRepository.Execute(criteria);
 
             return new CommandResult
             {
@@ -74,35 +62,12 @@ namespace Fanex.Letstalk.Notification.Services
             };
         }
 
-        private void InsertAttachementFileData(int notificationId, HttpPostedFileBase file)
-        {
-            MemoryStream target = new MemoryStream();
-            file.InputStream.CopyTo(target);
-            byte[] bytes = target.ToArray();
-            var criteria = new InsertAttachmentFileCriteria
-            {
-                ContentType = file.ContentType,
-                NotificationID = notificationId,
-                FileName = file.FileName,
-                Content = bytes
-            };
-
-            Hashtable hash = criteria.GetSpParams();
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.ExecuteNonQuery(hash);
-            }
-        }
-
         public IEnumerable<SelectListItem> GetGroups()
         {
-            GetGroupCriteria criteria = new GetGroupCriteria();
-            List<RecipientModel> recipientList;
-            List<SelectListItem> result = new List<SelectListItem>();
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                recipientList = db.Query<RecipientModel>().ToList();
-            }
+            var criteria = new GetGroupCriteria();
+            var result = new List<SelectListItem>();
+            var recipientList = dynamicRepository.Fetch<RecipientModel>(criteria).ToList();
+
             foreach (var recipient in recipientList)
             {
                 if (recipient.Environment.Equals(environment, StringComparison.CurrentCultureIgnoreCase))
@@ -132,19 +97,13 @@ namespace Fanex.Letstalk.Notification.Services
 
         public IEnumerable<NotificationModel> GetNotificationList(GetNotificationListCriteria criteria)
         {
-            List<NotificationModel> notificationList;
-            List<NotificationRecipientModel> notificationRecipientList;
             if (environment == uatEnvironment)
             {
                 criteria.IsTest = true;
-            }    
-            var param = criteria.GetSpParams();
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                var multi = db.QueryMultiple(param);
-                notificationList = multi.Read<NotificationModel>().ToList();
-                notificationRecipientList = multi.Read<NotificationRecipientModel>().ToList();
             }
+
+            var (notificationList, notificationRecipientList) =dynamicRepository.FetchMultiple<NotificationModel, NotificationRecipientModel>(criteria);
+
             var result = UpdateModelView(notificationList, notificationRecipientList);
             return result;
         }
@@ -156,7 +115,7 @@ namespace Fanex.Letstalk.Notification.Services
             {
                 item.Creator = GetUserName(item.CreatedBy);
                 item.LatestEditor = GetUserName(item.LastModifiedBy);
-                foreach(var notificationRecipient in notificationRecipientList)
+                foreach (var notificationRecipient in notificationRecipientList)
                 {
                     if (notificationRecipient.NotificationID == item.NotificationID)
                     {
@@ -167,8 +126,8 @@ namespace Fanex.Letstalk.Notification.Services
                         temp.Status = notificationRecipient.Status;
                         temp.LastSentTime = notificationRecipient.LastSentTime;
                         result.Add(temp);
-                    }    
-                }    
+                    }
+                }
             }
             return result;
         }
@@ -187,28 +146,19 @@ namespace Fanex.Letstalk.Notification.Services
 
         public IEnumerable<NotificationModel> GetNotificationById(GetNotificationListCriteria criteria)
         {
-            List<NotificationModel> result;
             if (environment == uatEnvironment)
             {
                 criteria.IsTest = true;
             }
-            var param = criteria.GetSpParams();
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                result = db.Query<NotificationModel>(param).ToList();
-            }
-            return result;
+
+            return dynamicRepository.Fetch<NotificationModel>(criteria);
         }
 
         public CommandResult EditNotification(EditNotificationCriteria criteria, IEnumerable<HttpPostedFileBase> files)
         {
             try
             {
-                Hashtable hash = criteria.GetSpParams();
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    db.ExecuteNonQuery(hash);
-                }
+                dynamicRepository.Execute(criteria);
 
                 return new CommandResult
                 {
@@ -230,11 +180,7 @@ namespace Fanex.Letstalk.Notification.Services
         {
             try
             {
-                Hashtable hash = criteria.GetSpParams();
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    db.ExecuteNonQuery(hash);
-                }
+                dynamicRepository.Execute(criteria);
 
                 return new CommandResult
                 {
@@ -256,11 +202,7 @@ namespace Fanex.Letstalk.Notification.Services
         {
             try
             {
-                Hashtable hash = criteria.GetSpParams();
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    db.ExecuteNonQuery(hash);
-                }
+                dynamicRepository.Execute(criteria);
 
                 return new CommandResult
                 {

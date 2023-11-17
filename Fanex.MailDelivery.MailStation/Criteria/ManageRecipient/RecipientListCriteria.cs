@@ -2,6 +2,8 @@
 
 namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
 {
+    using Data;
+
     public class RecipientListCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "RecipientName")]
@@ -16,5 +18,7 @@ namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
         {
             return "MailStation_MailReport_GetRecipientList";
         }
+
+        public override bool IsValid() => true;
     }
 }

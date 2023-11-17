@@ -6,7 +6,7 @@
     /// <summary>
     /// Add Missing Task Criteria.
     /// </summary>
-    public class RetryMissingTaskCriteria : CriteriaBase
+    public class RetryMissingTaskCriteria : NonQueryCommand
     {
         public int MailTaskId { get; set; }
 

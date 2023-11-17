@@ -2,7 +2,7 @@
 
 namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
 {
-    public class CreateMailGroupCriteria : CriteriaBase
+    public class CreateMailGroupCriteria : UpdateCommandBase
     {
         public string MailGroupName { get; set; }
 
