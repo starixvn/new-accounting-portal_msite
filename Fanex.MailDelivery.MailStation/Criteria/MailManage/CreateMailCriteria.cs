@@ -1,5 +1,4 @@
-﻿using Fanex.Data.Repository;
-using Fanex.MailDelivery.MailStation.Models;
+﻿using Fanex.MailDelivery.MailStation.Models;
 using System;
 
 namespace Fanex.MailDelivery.MailStation.Criteria.MailManage

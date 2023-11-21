@@ -4,8 +4,7 @@
     using Core.Model.LetstalkNotification;
     using NAP.Core.Business;
     using NAP.Core.Web.Attribute;
-    using Service.Impl.Testing;
-    using Service.Interface.Testing;
+    using Service.Testing;
 
     [NapSuperAuth]
     public class TestingController : BaseController

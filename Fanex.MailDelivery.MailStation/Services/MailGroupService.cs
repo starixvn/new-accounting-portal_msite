@@ -2,11 +2,11 @@
 using System.Linq;
 using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
 using Fanex.MailDelivery.MailStation.Models;
-using Fanex.Maintenance.Repository.Command;
 
 namespace Fanex.MailDelivery.MailStation.Services
 {
     using Data.Repository;
+    using Maintenance.Service.Command;
 
     public class MailGroupService : MailStationBaseService
     {

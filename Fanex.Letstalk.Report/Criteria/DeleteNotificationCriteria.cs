@@ -2,8 +2,6 @@
 
 namespace Fanex.Letstalk.Notification.Criteria
 {
-    using System.Runtime.CompilerServices;
-
     public class DeleteNotificationCriteria : NonQueryCommand
     {
         public int NotificationID { get; set; }

@@ -45,7 +45,7 @@
       <HintPath>..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Data.ProxyClient, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Data.ProxyClient.0.0.2-alpha01\lib\net472\Fanex.Data.ProxyClient.dll</HintPath>
+      <HintPath>..\packages\Fanex.Data.ProxyClient.0.0.2-alpha02\lib\net472\Fanex.Data.ProxyClient.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Logging.2.0.1.1\lib\net461\Fanex.Logging.dll</HintPath>
@@ -188,6 +188,7 @@
     <Compile Include="Criteria\UpdateCommandBase.cs" />
     <Compile Include="Extensions\TimeZoneExtension.cs" />
     <Compile Include="Logging\RabbitMQLogProvider.cs" />
+    <Compile Include="Models\CurrentTime.cs" />
     <Compile Include="Models\CustomTimeZone.cs" />
     <Compile Include="Models\MailActionLogModel.cs" />
     <Compile Include="Models\MailGroupModel.cs" />
@@ -246,10 +247,6 @@
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
       <Project>{e7173cdd-8ecb-4fb6-b585-41bfe941745e}</Project>
       <Name>Fanex.Maintenance.Controller</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.Maintenance.Repository\Fanex.Maintenance.Repository.csproj">
-      <Project>{8858DC31-A292-4388-8E07-9B2E345A3FE6}</Project>
-      <Name>Fanex.Maintenance.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Maintenance.Service\Fanex.Maintenance.Service.csproj">
       <Project>{6F5C23B0-7EB0-4020-9664-5F904BB99BBC}</Project>

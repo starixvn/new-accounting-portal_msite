@@ -1,11 +1,8 @@
-﻿using Fanex.Data;
-using Fanex.Letstalk.Notification.Criteria;
+﻿using Fanex.Letstalk.Notification.Criteria;
 using Fanex.Letstalk.Notification.Model;
-using Fanex.Maintenance.Repository.Command;
 using Fanex.NAP.Core.Service.Impl;
 using Fanex.NAP.Core.Service.Interface;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -14,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Fanex.Letstalk.Notification.Services
 {
+    using Command;
     using Data.Repository;
 
     public interface ManageLetstalkMessageService

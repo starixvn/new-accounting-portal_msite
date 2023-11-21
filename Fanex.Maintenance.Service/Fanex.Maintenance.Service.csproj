@@ -38,7 +38,7 @@
       <HintPath>..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Data.ProxyClient, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Data.ProxyClient.0.0.2-alpha01\lib\net472\Fanex.Data.ProxyClient.dll</HintPath>
+      <HintPath>..\packages\Fanex.Data.ProxyClient.0.0.2-alpha02\lib\net472\Fanex.Data.ProxyClient.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.MailDeliver.MailClient.2.0.9\lib\net461\Fanex.MailDeliver.MailClient.dll</HintPath>
@@ -56,6 +56,7 @@
       <HintPath>..\packages\ONEbook.NotificationService.1.0.5\lib\NotificationServiceLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -92,10 +93,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Impl\Mail\MailService.cs" />
-    <Compile Include="Impl\Testing\NotificationService.cs" />
-    <Compile Include="Interface\Mail\IMailService.cs" />
-    <Compile Include="Interface\Testing\INotificationService.cs" />
+    <Compile Include="Command\CommandResult.cs" />
+    <Compile Include="Criteria\DatabaseReport\DataIntegrityViewModel.cs" />
+    <Compile Include="Criteria\MailService\GetMailConfigLogsCriteria.cs" />
+    <Compile Include="Criteria\MailService\MailConfigLogModel.cs" />
+    <Compile Include="Criteria\MailService\MailConfigViewModel.cs" />
+    <Compile Include="Criteria\MailService\MailFunctionViewModel.cs" />
+    <Compile Include="Criteria\MailService\MailSettingViewModel.cs" />
+    <Compile Include="Criteria\Misc\LogExecSpCriteria.cs" />
+    <Compile Include="Criteria\Misc\ResultCriteria.cs" />
+    <Compile Include="Mail\MailRepository.cs" />
+    <Compile Include="Mail\MailService.cs" />
+    <Compile Include="Testing\NotificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -108,5 +117,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,13 +2,13 @@
 using System.Linq;
 using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
 using Fanex.MailDelivery.MailStation.Models;
-using Fanex.Maintenance.Repository.Command;
 using Fanex.NAP.Core.Models;
 using Fanex.NAP.Core.Service.Interface;
 
 namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
 {
     using Data.Repository;
+    using Maintenance.Service.Command;
     using NAP.Core.Service.Impl;
 
     public class ManageRecipientService : MailStationBaseService

@@ -4,6 +4,19 @@ using Fanex.Letstalk.Notification.Params;
 
 namespace Fanex.Letstalk.Notification.Services
 {
+    public interface ILetstalkReportRestClientService
+    {
+        List<FilterTarget> GetTargets(GetLogParams queryParams);
+
+        List<FilterGroup> GetGroupsByTarget(GetLogParams queryParams);
+
+        List<LetstalkRecord> GetLogs(GetLogParams queryParams);
+
+        bool ReSendMail(ResendParams resendParams);
+
+        bool ReSendMessage(ResendParams resendParams);
+    }
+
     public class LetstalkReportRestClientService : ILetstalkReportRestClientService
     {
         private readonly IHttpClientService clientService;

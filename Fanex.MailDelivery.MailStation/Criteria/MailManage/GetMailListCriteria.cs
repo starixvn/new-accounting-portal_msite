@@ -4,22 +4,15 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
     public class GetMailListCriteria : CriteriaBase
     {
-        public GetMailListCriteria()
-        {
-            this.IsActive = -1;
-            this.TriggerType = -1;
-            this.SiteId = -1;
-        }
-
         public string MailName { get; set; }
 
-        public int IsActive { get; set; }
+        public int IsActive { get; set; } = -1;
 
         public string MailGroupId { get; set; }
 
-        public int SiteId { get; set; }
+        public int SiteId { get; set; } = -1;
 
-        public int TriggerType { get; set; }
+        public int TriggerType { get; set; } = -1;
 
         public string Emails { get; set; }
 

@@ -37,7 +37,7 @@
       <HintPath>..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Data.ProxyClient, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Data.ProxyClient.0.0.2-alpha01\lib\net472\Fanex.Data.ProxyClient.dll</HintPath>
+      <HintPath>..\packages\Fanex.Data.ProxyClient.0.0.2-alpha02\lib\net472\Fanex.Data.ProxyClient.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core.Client, Version=1.2.1.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.NAP.Core.Client.2.0.0.2\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
@@ -108,6 +108,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\CommandResult.cs" />
     <Compile Include="Controllers\ManageLetstalkMessageController.cs" />
     <Compile Include="Controllers\LetstalkReportController.cs" />
     <Compile Include="Criteria\DeleteNotificationCriteria.cs" />
@@ -132,9 +133,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppConfigurationService.cs" />
     <Compile Include="Services\HttpClientService.cs" />
-    <Compile Include="Services\IAppConfigurationService.cs" />
-    <Compile Include="Services\IHttpClientService.cs" />
-    <Compile Include="Services\ILetstalkReportRestClientService.cs" />
     <Compile Include="Services\ManageLetstalkMessageService.cs" />
     <Compile Include="Services\LetstalkReportRestClientService.cs" />
   </ItemGroup>
@@ -146,10 +144,6 @@
     <ProjectReference Include="..\Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj">
       <Project>{60bc3fa8-df7c-4024-b469-4ed110420143}</Project>
       <Name>Fanex.Maintenance.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.Maintenance.Repository\Fanex.Maintenance.Repository.csproj">
-      <Project>{8858DC31-A292-4388-8E07-9B2E345A3FE6}</Project>
-      <Name>Fanex.Maintenance.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

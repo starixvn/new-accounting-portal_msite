@@ -1,6 +1,4 @@
-﻿using Fanex.Data.Repository;
-
-namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
+﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
     public class DeleteMailCriteria : UpdateCommandBase
     {

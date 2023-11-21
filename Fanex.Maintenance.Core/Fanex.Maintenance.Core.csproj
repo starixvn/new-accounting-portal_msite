@@ -42,9 +42,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MvcPager, Version=1.5.0.28157, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvcPager.1.5.0.28157\lib\net40\MvcPager.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -56,9 +53,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SiteFunctionKeys.tt</DependentUpon>
     </Compile>
-    <Compile Include="Configurations\AppSettings.cs" />
-    <Compile Include="Extension\Extension.cs" />
-    <Compile Include="Helpers\PagerList.cs" />
     <Compile Include="Model\LetstalkNotification\MessageModel.cs" />
     <Compile Include="Model\LetstalkNotification\QueryModel.cs" />
     <Compile Include="Model\LetstalkNotification\Setting.cs" />
@@ -72,8 +66,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SiteFunctionKeys.cs</LastGenOutput>
     </None>
-    <Compile Include="Web\HtmlHelperExtensions.cs" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ViewResource.resx">

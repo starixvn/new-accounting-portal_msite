@@ -6,6 +6,11 @@ using System.Text;
 
 namespace Fanex.Letstalk.Notification.Services
 {
+    public interface IHttpClientService
+    {
+        T PostAsync<T, P>(string action, P inputParams);
+    }
+
     public class HttpClientService : IHttpClientService
     {
         private readonly IAppConfigurationService service;

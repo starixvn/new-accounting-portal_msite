@@ -1,8 +1,6 @@
 ﻿using Fanex.Letstalk.Notification.Criteria;
-using Fanex.Letstalk.Notification.Model;
 using Fanex.Letstalk.Notification.Services;
 using Fanex.Maintenance.Controller;
-using Fanex.Maintenance.Repository.Command;
 using Fanex.NAP.Core.Business;
 using Fanex.NAP.Core.Web.Attribute;
 using Newtonsoft.Json;

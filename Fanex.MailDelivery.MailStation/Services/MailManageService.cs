@@ -7,11 +7,11 @@ using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
 using Fanex.MailDelivery.MailStation.Criteria.MailManage;
 using Fanex.MailDelivery.MailStation.Criteria.MailReport;
 using Fanex.MailDelivery.MailStation.Models;
-using Fanex.Maintenance.Repository.Command;
 
 namespace Fanex.MailDelivery.MailStation.Services
 {
     using Data.Repository;
+    using Maintenance.Service.Command;
 
     public class MailManageService : MailStationBaseService
     {
@@ -21,8 +21,8 @@ namespace Fanex.MailDelivery.MailStation.Services
       
         public IList<MailModel> MailList(GetMailListCriteria criteria)
         {
-            var (mailModels, listdDates) = dynamicRepository.FetchMultiple<MailModel, DateTime>(criteria);
-            var now = listdDates.FirstOrDefault();
+            var (mailModels, listdDates) = dynamicRepository.FetchMultiple<MailModel, CurrentTime>(criteria);
+            var now = listdDates.FirstOrDefault().Now;
 
             mailModels.ToList().ForEach(n =>
             {

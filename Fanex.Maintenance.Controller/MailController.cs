@@ -1,11 +1,6 @@
 ﻿namespace Fanex.Maintenance.Controller
 {
     using Fanex.MailDeliver.Model;
-    using Fanex.Maintenance.Repository.Criteria.MailService;
-    using Fanex.Maintenance.Repository.Impl.Mail;
-    using Fanex.Maintenance.Repository.Interface.Mail;
-    using Fanex.Maintenance.Service.Impl.Mail;
-    using Fanex.Maintenance.Service.Interface.Mail;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
@@ -17,6 +12,8 @@
     using System.IO;
     using System.Linq;
     using System.Web.Mvc;
+    using Service.Criteria.MailService;
+    using Service.Mail;
 
     /// <summary>
     /// Mail Controller.

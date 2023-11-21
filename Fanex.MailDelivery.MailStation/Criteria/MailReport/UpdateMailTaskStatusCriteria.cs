@@ -1,5 +1,4 @@
-﻿using Fanex.Data.Repository;
-using System;
+﻿using System;
 
 namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {

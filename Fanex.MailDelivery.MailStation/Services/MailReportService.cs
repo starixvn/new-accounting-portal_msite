@@ -2,8 +2,6 @@
 using Fanex.MailDelivery.Core.Models;
 using Fanex.MailDelivery.MailStation.Criteria.MailReport;
 using Fanex.MailDelivery.MailStation.Models;
-using Fanex.Maintenance.Service.Impl.Mail;
-using Fanex.Maintenance.Service.Interface.Mail;
 using Quartz;
 using Quartz.Spi;
 using System;
@@ -13,6 +11,7 @@ using System.Linq;
 namespace Fanex.MailDelivery.MailStation.Services
 {
     using Data.Repository;
+    using Maintenance.Service.Mail;
 
     public class MailReportService : MailStationBaseService
     {
