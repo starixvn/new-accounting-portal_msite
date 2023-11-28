@@ -35,23 +35,6 @@ namespace Fanex.Maintenance.Site
                 "~/css/letstalk-notification",
                 "~/themes/manage/LetstalkNotification.less");
 
-            bundles.AddAndInclude(
-                "~/css/database-report",
-                "~/themes/manage/report/dataintegry.less");
-
-            bundles.AddAndInclude(
-                "~/css/log",
-                "~/themes/manage/log/manage.less",
-                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css",
-                "~/scripts/lib/Select2/select2.css",
-                "~/scripts/lib/DatetimePicker/jquery.datetimepicker.css",
-                "~/scripts/lib/Select2/select2-custom.css");
-
-            bundles.AddAndInclude(
-                "~/css/xml-editor",
-                "~/themes/jquery-ui/XMLEditor/smoothness/jquery-ui-1.8.23.css",
-                "~/scripts/lib/XMLEditor/css/main.css",
-                "~/scripts/lib/XMLEditor/js/ext/GLR/css/GLR.messenger.css");
 
             bundles.AddAndInclude(
                 "~/css/mail-manage",
@@ -107,18 +90,6 @@ namespace Fanex.Maintenance.Site
 
             bundles.Add(new ScriptBundle("~/scripts/add-mail-function").Include(
                 "~/scripts/Mail/AddMailFunction.js"));
-
-            bundles.Add(new ScriptBundle("~/scripts/xml-editor").Include(
-                "~/scripts/lib/jquery-1.8.0.min.js",
-                "~/scripts/lib/jquery-ui-1.8.23.min.js",
-                "~/scripts/lib/msgbox/msgbox-0.0.1.min.js",
-                "~/scripts/Maintenance.js",
-                "~/scripts/lib/XMLEditor/js/loc/xmlEditor.js",
-                "~/scripts/lib/XMLEditor/js/ext/GLR/GLR.js",
-                "~/scripts/lib/XMLEditor/js/ext/GLR/GLR.messenger.js"));
-
-            bundles.Add(new ScriptBundle("~/scripts/letstalk-notification").Include(
-                "~/scripts/LetstalkNotification/LetstalkNotification.js"));
 
             RegisterSharedBundles(bundles);
             RegisterFanexGridBundles(bundles);
