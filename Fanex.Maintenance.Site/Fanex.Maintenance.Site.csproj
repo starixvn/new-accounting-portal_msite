@@ -844,7 +844,6 @@
     <Content Include="Web.sit2.config" />
     <Content Include="Web.uat.config" />
     <Content Include="themes\manage\LetstalkReport.less" />
-    <Content Include="Views\RemotingRef\Index.cshtml" />
     <Content Include="Web.aws.config">
       <SubType>Designer</SubType>
     </Content>
