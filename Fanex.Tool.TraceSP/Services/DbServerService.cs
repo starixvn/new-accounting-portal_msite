@@ -3,12 +3,14 @@ namespace Fanex.Tool.TraceSP.Services
     using System.Collections.Generic;
     using System.IO;
     using System.Xml.Serialization;
-    using Fanex.Tool.TraceSP.Models;
-    interface IDbServerService
+    using Models;
+
+    internal interface IDbServerService
     {
         List<Server> GetDbServerList(string dbServerXmlPath);
     }
-    class DbServerService : IDbServerService
+
+    internal class DbServerService : IDbServerService
     {
         public List<Server> GetDbServerList(string dbServerXmlPath)
         {

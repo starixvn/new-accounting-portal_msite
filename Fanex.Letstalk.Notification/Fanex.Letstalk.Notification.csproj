@@ -115,8 +115,6 @@
     <Compile Include="Criteria\EditNotificationCriteria.cs" />
     <Compile Include="Criteria\GetGroupCriteria.cs" />
     <Compile Include="Criteria\GetNotificationListCriteria.cs" />
-    <Compile Include="Criteria\GetUnsentNotificationCriteria.cs" />
-    <Compile Include="Criteria\InsertAttachmentFileCriteria.cs" />
     <Compile Include="Criteria\InsertNotificationCriteria.cs" />
     <Compile Include="Criteria\ResendNotificationCriteria.cs" />
     <Compile Include="LetstalkReportAreaRegistration.cs" />

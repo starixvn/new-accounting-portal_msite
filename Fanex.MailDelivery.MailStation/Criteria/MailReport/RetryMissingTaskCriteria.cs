@@ -1,6 +1,6 @@
 namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
-    using Fanex.Data.Repository;
+    using Data.Repository;
     using System;
 
     public class RetryMissingTaskCriteria : NonQueryCommand
@@ -26,9 +26,6 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
             return true;
         }
 
-        public override string GetSettingKey()
-        {
-            return "Mail_Core_InsertMailTask";
-        }
+        public override string GetSettingKey() => "Mail_Core_InsertMailTask";
     }
 }

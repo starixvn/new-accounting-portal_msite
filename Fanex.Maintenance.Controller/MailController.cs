@@ -1,10 +1,10 @@
 namespace Fanex.Maintenance.Controller
 {
-    using Fanex.MailDeliver.Model;
-    using Fanex.NAP.Core.Business;
+    using MailDeliver.Model;
+    using NAP.Core.Business;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
-    using Fanex.NAP.Core.Web.Attribute;
+    using NAP.Core.Web.Attribute;
     using System;
     using System.Collections.Generic;
     using System.Configuration;
@@ -37,9 +37,9 @@ namespace Fanex.Maintenance.Controller
 
         public MailController(IMailService mailService, IUserService userService, IMailRepository mailRepository)
         {
-            this._mailServer = mailService ?? MailService.Create();
-            this._userService = userService ?? new UserService();
-            this._mailRepository = mailRepository ?? new MailRepository();
+            _mailServer = mailService ?? MailService.Create();
+            _userService = userService ?? new UserService();
+            _mailRepository = mailRepository ?? new MailRepository();
         }
 
         #endregion Ctor
@@ -61,7 +61,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateFrom = DateTime.Now.ToString("dd/MM/yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("dd/MM/yyyy");
 
-            var listMail = this._mailServer.WithApp(appId)
+            var listMail = _mailServer.WithApp(appId)
                 .FromDate(DateTime.Now.ToShortDateString())
                 .ToDate(DateTime.Now.ToShortDateString())
                 .WithStatus(0)
@@ -86,7 +86,7 @@ namespace Fanex.Maintenance.Controller
             var dateFrom = DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             var dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-            var listMail = this._mailServer.WithApp(applicationID)
+            var listMail = _mailServer.WithApp(applicationID)
                 .FromDate(dateFrom.ToString())
                 .ToDate(dateTo.ToString())
                 .WithStatus(mailStatus)
@@ -107,7 +107,7 @@ namespace Fanex.Maintenance.Controller
         [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Read)]
         public ActionResult MailSetting()
         {
-            var listMailSetting = this._mailServer.GetListSetting();
+            var listMailSetting = _mailServer.GetListSetting();
             ViewBag.HasEdit = HasRight(SiteFunctionKeys.SmtpServers, Constant.Policy.Host);
 
             return View(listMailSetting);
@@ -128,11 +128,11 @@ namespace Fanex.Maintenance.Controller
 
             if (ModelState.IsValid)
             {
-                model.Password = model.Password == null ? string.Empty : model.Password;
+                model.Password = model.Password ?? string.Empty;
                 model.SettingName = model.Server + ":" + model.Port + " (" + model.Username + ")";
                 var mailSetting = model.GetMailSetting();
 
-                ViewBag.Success = this._mailServer.StoreSetting(mailSetting);
+                ViewBag.Success = _mailServer.StoreSetting(mailSetting);
             }
 
             return View(model);
@@ -162,7 +162,7 @@ namespace Fanex.Maintenance.Controller
 
             if (ModelState.IsValid)
             {
-                model.Password = model.Password == null ? string.Empty : model.Password;
+                model.Password = model.Password ?? string.Empty;
                 model.SettingName = model.Server + ":" + model.Port + " (" + model.Username + ")";
                 var mailSetting = model.GetMailSetting();
                 ViewBag.Success = _mailServer.StoreSetting(mailSetting);
@@ -196,7 +196,7 @@ namespace Fanex.Maintenance.Controller
         {
             InitDataIpServer(serverIp);
 
-            var listMailConfig = this._mailServer.GetListConfig(serverIp);
+            var listMailConfig = _mailServer.GetListConfig(serverIp);
 
             ViewBag.HasEdit = HasRight(SiteFunctionKeys.ApplicationManagement, Constant.Policy.Host);
 
@@ -224,7 +224,7 @@ namespace Fanex.Maintenance.Controller
             {
                 var mailConfig = model.GetMailConfig();
 
-                ViewBag.Success = this._mailServer.StoreConfig(mailConfig);
+                ViewBag.Success = _mailServer.StoreConfig(mailConfig);
             }
 
             return View(model);
@@ -406,7 +406,7 @@ namespace Fanex.Maintenance.Controller
                 }
 
                 mailRecord.Attachments = new List<MailAttachment>();
-                var attachment = new Fanex.MailDeliver.Model.MailAttachment(mailRecord.FileAttachments, fileExtension);
+                var attachment = new MailAttachment(mailRecord.FileAttachments, fileExtension);
                 mailRecord.Attachments.Add(attachment);
             }
 
@@ -432,18 +432,18 @@ namespace Fanex.Maintenance.Controller
             int port,
             string username,
             string password,
-            bool isAutho)
+            bool isAuthor)
         {
             if (Request.IsAjaxRequest())
             {
                 var mail = new MailSetting
                 {
-                    SettingName = server + ":" + port.ToString() + " (" + username + ") ",
+                    SettingName = server + ":" + port + " (" + username + ") ",
                     Server = server,
                     Port = port,
                     Username = username,
                     Password = password,
-                    IsAuth = isAutho
+                    IsAuth = isAuthor
                 };
 
                 _mailServer.StoreSetting(mail);
@@ -557,8 +557,8 @@ namespace Fanex.Maintenance.Controller
                 .WithStatus(status)
                 .GetListMailByDate(ref totalRows);
 
-            var policyViewDetail = _userService.GetPermission(CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ViewMailDetails);
-            var policyResend = _userService.GetPermission(CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ResendMail);
+            var policyViewDetail = _userService.GetPermission(CurrentSession.UserId, SiteId, SiteFunctionKeys.ViewMailDetails);
+            var policyResend = _userService.GetPermission(CurrentSession.UserId, SiteId, SiteFunctionKeys.ResendMail);
 
             return Json(new
             {
@@ -601,54 +601,53 @@ namespace Fanex.Maintenance.Controller
 
         private void InitPageSize()
         {
-            var listPageSize = new List<SelectListItem>();
-            listPageSize.Add(new SelectListItem
+            var listPageSize = new List<SelectListItem>
             {
-                Text = "10",
-                Value = "10"
-            });
-
-            listPageSize.Add(new SelectListItem
-            {
-                Text = "30",
-                Value = "30"
-            });
-
-            listPageSize.Add(new SelectListItem
-            {
-                Text = "50",
-                Value = "50"
-            });
-
-            listPageSize.Add(new SelectListItem
-            {
-                Text = "100",
-                Value = "100"
-            });
+                new SelectListItem
+                {
+                    Text = "10",
+                    Value = "10"
+                },
+                new SelectListItem
+                {
+                    Text = "30",
+                    Value = "30"
+                },
+                new SelectListItem
+                {
+                    Text = "50",
+                    Value = "50"
+                },
+                new SelectListItem
+                {
+                    Text = "100",
+                    Value = "100"
+                }
+            };
 
             ViewBag.PageSize = listPageSize;
         }
 
         private void InitMailStatus()
         {
-            var listMailStatus = new List<SelectListItem>();
-            listMailStatus.Add(new SelectListItem
+            var listMailStatus = new List<SelectListItem>
             {
-                Text = MailStatus.All.ToString(),
-                Value = ((int)MailStatus.All).ToString()
-            });
-
-            listMailStatus.Add(new SelectListItem
-            {
-                Text = MailStatus.Fail.ToString(),
-                Value = ((int)MailStatus.Fail).ToString()
-            });
-
-            listMailStatus.Add(new SelectListItem
-            {
-                Text = MailStatus.Success.ToString(),
-                Value = ((int)MailStatus.Success).ToString()
-            });
+                new SelectListItem
+                {
+                    Text = MailStatus.All.ToString(),
+                    Value = ((int)MailStatus.All).ToString()
+                },
+                new SelectListItem
+                {
+                    Text = MailStatus.Fail.ToString(),
+                    Value = ((int)MailStatus.Fail).ToString()
+                },
+                new SelectListItem
+                {
+                    Text = MailStatus.Success.ToString(),
+                    Value = ((int)MailStatus.Success).ToString()
+                }
+            };
 
             ViewBag.MailStatus = listMailStatus;
         }
@@ -665,14 +664,14 @@ namespace Fanex.Maintenance.Controller
             {
                 var permission = itemApplicationPermission.Split(':');
                 var functionKey = permission[0];
-                var appliationId = int.Parse(permission[1]);
+                var applicationId = int.Parse(permission[1]);
 
                 var hasPermission = HasRight(functionKey, Constant.Policy.Read)
                     && CurrentSession.Level == (int)Constant.Level.User;
 
                 if (hasPermission)
                 {
-                    listConfigPermission.AddRange(listConfig.Where(x => x.AppID == appliationId));
+                    listConfigPermission.AddRange(listConfig.Where(x => x.AppID == applicationId));
                 }
             }
 
@@ -698,7 +697,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ListMailSetting = listMailSetting.Select(s => new SelectListItem
             {
                 Text = s.SettingName,
-                Value = s.SettingID.ToString(),
+                Value = s.SettingID.ToString()
             }).ToList();
         }
 

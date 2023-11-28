@@ -11,9 +11,6 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
             return MailId > 0;
         }
 
-        public override string GetSettingKey()
-        {
-            return "Mail_MailManagement_GetLog";
-        }
+        public override string GetSettingKey() => "Mail_MailManagement_GetLog";
     }
 }

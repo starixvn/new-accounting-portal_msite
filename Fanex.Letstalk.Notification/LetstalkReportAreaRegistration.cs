@@ -1,16 +1,10 @@
-using System.Web.Mvc;
-
-namespace Fanex.Letstalk.Report
+namespace Fanex.Letstalk.Notification
 {
+    using System.Web.Mvc;
+
     public class LetstalkReportAreaRegistration : AreaRegistration
     {
-        public override string AreaName
-        {
-            get
-            {
-                return "LetstalkNotification";
-            }
-        }
+        public override string AreaName => "LetstalkNotification";
 
         public override void RegisterArea(AreaRegistrationContext context)
         {

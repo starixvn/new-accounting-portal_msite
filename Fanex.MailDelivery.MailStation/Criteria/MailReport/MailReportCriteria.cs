@@ -1,6 +1,6 @@
 namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
-    using Fanex.Data.Repository;
+    using Data.Repository;
     using System;
 
     public class MailReportCriteria : CriteriaBase
@@ -17,10 +17,7 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 
         public int TriggerType { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_MailReport_GetMailTaskList";
-        }
+        public override string GetSettingKey() => "MailStation_MailReport_GetMailTaskList";
 
         public override bool IsValid() => true;
     }

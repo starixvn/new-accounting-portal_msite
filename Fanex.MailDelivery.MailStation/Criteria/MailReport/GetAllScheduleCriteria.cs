@@ -1,6 +1,6 @@
 namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
-    using Fanex.Data.Repository;
+    using Data.Repository;
 
     public class GetAllScheduleCriteria : CriteriaBase
     {
@@ -13,9 +13,6 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
             return true;
         }
 
-        public override string GetSettingKey()
-        {
-            return "Mail_Report_GetAllSchedule";
-        }
+        public override string GetSettingKey() => "Mail_Report_GetAllSchedule";
     }
 }

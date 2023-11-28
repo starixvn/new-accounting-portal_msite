@@ -1,16 +1,10 @@
-using System.Web.Mvc;
-
-namespace Fanex.Maintenance.Site
+namespace Fanex.Maintenance.Site.Areas.TracingSp
 {
+    using System.Web.Mvc;
+
     public class TracingSpAreaRegistration : AreaRegistration
     {
-        public override string AreaName
-        {
-            get
-            {
-                return "ProfilerSP";
-            }
-        }
+        public override string AreaName => "ProfilerSP";
 
         public override void RegisterArea(AreaRegistrationContext context)
         {

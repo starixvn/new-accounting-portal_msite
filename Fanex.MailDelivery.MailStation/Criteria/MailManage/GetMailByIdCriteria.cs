@@ -11,9 +11,6 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
             return true;
         }
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_GetMailByID";
-        }
+        public override string GetSettingKey() => "MailStation_GetMailByID";
     }
 }

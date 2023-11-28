@@ -21,8 +21,8 @@ namespace Fanex.Maintenance.Service.Command
 
         public CommandResult(int code, string message)
         {
-            this.Code = code;
-            this.Message = message;
+            Code = code;
+            Message = message;
         }
 
         public int Code { get; set; }

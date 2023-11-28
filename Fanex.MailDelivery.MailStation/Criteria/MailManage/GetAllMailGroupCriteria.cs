@@ -1,6 +1,6 @@
 namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
-    using Fanex.Data.Repository;
+    using Data.Repository;
 
     public class GetAllMailGroupCriteria : CriteriaBase
     {
@@ -9,9 +9,6 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
             return true;
         }
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_GetAllMailGroup";
-        }
+        public override string GetSettingKey() => "MailStation_GetAllMailGroup";
     }
 }

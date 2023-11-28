@@ -28,10 +28,7 @@ namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
 
         public string ErrMsg { get; set; } = string.Empty;
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_MailReport_InsertRecipient";
-        }
+        public override string GetSettingKey() => "MailStation_MailReport_InsertRecipient";
 
         public override bool IsValid() => true;
     }

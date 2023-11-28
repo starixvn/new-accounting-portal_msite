@@ -22,12 +22,7 @@ namespace Fanex.MailDelivery.MailStation.Services
             var criteria = new GetAllSiteCriteria();
             var result = dynamicRepository.Fetch<SelectListItem>(criteria).ToList();
             
-            if (hasAllElement)
-            {
-                return MailStationConstants.AllItem.Union(result).ToList();
-            }
-
-            return result;
+            return hasAllElement ? MailStationConstants.AllItem.Union(result).ToList() : result;
         }
 
         public List<SelectListItem> MailGroups(bool hasAllElement = true)
@@ -35,42 +30,22 @@ namespace Fanex.MailDelivery.MailStation.Services
             var criteria = new GetAllMailGroupCriteria();
             var result = dynamicRepository.Fetch<SelectListItem>(criteria).ToList();
 
-            if (hasAllElement)
-            {
-                return MailStationConstants.AllItem.Union(result).ToList();
-            }
-
-            return result;
+            return hasAllElement ? MailStationConstants.AllItem.Union(result).ToList() : result;
         }
 
         public List<SelectListItemExtra> Status(bool hasAllElement = true)
         {
-            if (hasAllElement)
-            {
-                return MailStationConstants.AllItem.Union(MailStationConstants.Active).ToList();
-            }
-
-            return MailStationConstants.Active.ToList();
+            return hasAllElement ? MailStationConstants.AllItem.Union(MailStationConstants.Active).ToList() : MailStationConstants.Active.ToList();
         }
 
         public List<SelectListItemExtra> TaskStatus(bool hasAllElement = true)
         {
-            if (hasAllElement)
-            {
-                return MailStationConstants.AllItem.Union(MailStationConstants.TaskStatus).ToList();
-            }
-
-            return MailStationConstants.TaskStatus;
+            return hasAllElement ? MailStationConstants.AllItem.Union(MailStationConstants.TaskStatus).ToList() : MailStationConstants.TaskStatus;
         }
 
         public List<SelectListItemExtra> Trigger(bool hasAllElement = true)
         {
-            if (hasAllElement)
-            {
-                return MailStationConstants.AllItem.Union(MailStationConstants.TriggerTypes).ToList();
-            }
-
-            return MailStationConstants.TriggerTypes;
+            return hasAllElement ? MailStationConstants.AllItem.Union(MailStationConstants.TriggerTypes).ToList() : MailStationConstants.TriggerTypes;
         }
 
         [AllowAnonymous]

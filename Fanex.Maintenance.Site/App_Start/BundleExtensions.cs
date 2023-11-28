@@ -1,4 +1,4 @@
-namespace Fanex.Maintenance.Site.App_Start
+namespace Fanex.Maintenance.Site
 {
     using System.Web;
     using System.Web.Optimization;
@@ -21,7 +21,7 @@ namespace Fanex.Maintenance.Site.App_Start
             var request = context.Request;
             var applicationPath = request.PhysicalApplicationPath;
             var virtualDir = request.ApplicationPath;
-            virtualDir = virtualDir == "/" ? virtualDir : (virtualDir + "/");
+            virtualDir = virtualDir == "/" ? virtualDir : virtualDir + "/";
 
             return path.Replace(applicationPath, virtualDir).Replace(@"\", "/");
         }

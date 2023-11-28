@@ -1,6 +1,6 @@
 namespace Fanex.Tool.TraceSP.Criteria
 {
-    using Fanex.Data.Repository;
+    using Data.Repository;
     public class TracingSpCriteria : NonQueryCommand
     {
         public string Site { get; set; }
@@ -23,18 +23,10 @@ namespace Fanex.Tool.TraceSP.Criteria
 
         public override bool IsValid()
         {
-            if (TraceTimer > 120 || (string.IsNullOrWhiteSpace(TextDataLike) && string.IsNullOrWhiteSpace(TextDataLike2) && string.IsNullOrWhiteSpace(TextDataLike3)))
-            {
-                return false;
-            }
-
-            return true;
+            return TraceTimer <= 120 && (!string.IsNullOrWhiteSpace(TextDataLike) || !string.IsNullOrWhiteSpace(TextDataLike2) || !string.IsNullOrWhiteSpace(TextDataLike3));
         }
 
         public string SuffixKey { get; set; } = string.Empty;
-        public override string GetSettingKey()
-        {
-            return "vndba_sp_trace_WebApp" + SuffixKey;
-        }
+        public override string GetSettingKey() => "vndba_sp_trace_WebApp" + SuffixKey;
     }
 }

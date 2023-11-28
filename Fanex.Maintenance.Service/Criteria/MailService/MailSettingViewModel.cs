@@ -2,7 +2,7 @@ namespace Fanex.Maintenance.Service.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
     using Common;
-    using Fanex.Maintenance;
+    using Maintenance;
     using MailDeliver.Model;
 
     public class MailSettingViewModel
@@ -13,13 +13,13 @@ namespace Fanex.Maintenance.Service.Criteria.MailService
 
         public MailSettingViewModel(MailSetting mailSetting)
         {
-            this.SettingName = mailSetting.SettingName;
-            this.SettingId = mailSetting.SettingID;
-            this.Server = mailSetting.Server;
-            this.Port = mailSetting.Port;
-            this.Username = mailSetting.Username;
-            this.Password = !string.IsNullOrWhiteSpace(mailSetting.Password) ? Cryptography.CfsEnCrypt(mailSetting.Password) : string.Empty;
-            this.IsAuth = mailSetting.IsAuth;
+            SettingName = mailSetting.SettingName;
+            SettingId = mailSetting.SettingID;
+            Server = mailSetting.Server;
+            Port = mailSetting.Port;
+            Username = mailSetting.Username;
+            Password = !string.IsNullOrWhiteSpace(mailSetting.Password) ? Cryptography.CfsEnCrypt(mailSetting.Password) : string.Empty;
+            IsAuth = mailSetting.IsAuth;
         }
 
         public int SettingId { get; set; }
@@ -58,13 +58,13 @@ namespace Fanex.Maintenance.Service.Criteria.MailService
         {
             var mailSetting = new MailSetting
             {
-                IsAuth = this.IsAuth,
-                Password = this.Password,
-                Port = this.Port,
-                Server = this.Server,
-                SettingID = this.SettingId,
-                SettingName = this.SettingName,
-                Username = this.Username
+                IsAuth = IsAuth,
+                Password = Password,
+                Port = Port,
+                Server = Server,
+                SettingID = SettingId,
+                SettingName = SettingName,
+                Username = Username
             };
 
             return mailSetting;

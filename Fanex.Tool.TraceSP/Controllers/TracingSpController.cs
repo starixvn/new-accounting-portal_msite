@@ -1,6 +1,6 @@
 namespace Fanex.Tool.TraceSP.Controllers
 {
-    using Fanex.Maintenance.Controller;
+    using Maintenance.Controller;
     using Models;
     using Services;
     using System.Linq;
@@ -9,20 +9,11 @@ namespace Fanex.Tool.TraceSP.Controllers
 
     public class TracingSpController : BaseController
     {
-        private readonly IDbServerService _dbServerService;
-        private readonly ITracingSpService _tracingSpService;
-        private readonly ISiteService _siteService;
-        private readonly string _dbServerXmlPath;
-        private readonly string _siteXmlPath;
-
-        public TracingSpController()
-        {
-            _dbServerService = new DbServerService();
-            _dbServerXmlPath = HostingEnvironment.MapPath(AppSettingService.DbListXMLPath);
-            _siteXmlPath = HostingEnvironment.MapPath(AppSettingService.SiteXMLPath);
-            _tracingSpService = new TracingSpService();
-            _siteService = new SiteService();
-        }
+        private readonly IDbServerService _dbServerService = new DbServerService();
+        private readonly ITracingSpService _tracingSpService = new TracingSpService();
+        private readonly ISiteService _siteService = new SiteService();
+        private readonly string _dbServerXmlPath = HostingEnvironment.MapPath(AppSettingService.DbListXMLPath);
+        private readonly string _siteXmlPath = HostingEnvironment.MapPath(AppSettingService.SiteXMLPath);
 
         //[NapAuth(FunctionKey = SiteFunctionKeys.TracingSP, Policy = Constant.Policy.Read)]
         public ActionResult Index()
@@ -61,12 +52,12 @@ namespace Fanex.Tool.TraceSP.Controllers
             return Json(new
             {
                 Data = tracingSpData,
-                HasError = model.HasError,
-                ErrorMsg = model.ErrorMsg
+                model.HasError,
+                model.ErrorMsg
             }, JsonRequestBehavior.AllowGet);
         }
 
         private static string AddPercentSign(string textLike)
-        => (!string.IsNullOrWhiteSpace(textLike) && !textLike.Contains("%")) ? $"%{textLike}%" : textLike;
+        => !string.IsNullOrWhiteSpace(textLike) && !textLike.Contains("%") ? $"%{textLike}%" : textLike;
     }
 }

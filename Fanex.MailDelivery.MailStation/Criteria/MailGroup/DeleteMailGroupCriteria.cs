@@ -9,9 +9,6 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
             return true;
         }
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_Group_DeleteMailGroup";
-        }
+        public override string GetSettingKey() => "MailStation_Group_DeleteMailGroup";
     }
 }

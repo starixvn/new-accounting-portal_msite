@@ -19,17 +19,17 @@ namespace Fanex.MailDelivery.MailStation.Services
 
         public CommandResult CreateMailGroup(CreateMailGroupCriteria criteria)
         {
-            return this.ExecuteNonQuery(criteria);
+            return ExecuteNonQuery(criteria);
         }
 
         public CommandResult UpdateMailGroup(UpdateMailGroupCriteria criteria)
         {
-            return this.ExecuteNonQuery(criteria);
+            return ExecuteNonQuery(criteria);
         }
 
         public CommandResult DeleteMailGroup(DeleteMailGroupCriteria criteria)
         {
-            return this.ExecuteNonQuery(criteria);
+            return ExecuteNonQuery(criteria);
         }
 
         public MailGroupModel GetMailGroupById(GetMailGroupByIdCriteria criteria)

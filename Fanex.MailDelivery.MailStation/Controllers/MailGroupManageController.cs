@@ -12,12 +12,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
     [NapSuperAuth]
     public class MailGroupManageController : BaseController
     {
-        private readonly MailGroupService mailGroupService;
-
-        public MailGroupManageController()
-        {
-            mailGroupService = new MailGroupService();
-        }
+        private readonly MailGroupService mailGroupService = new MailGroupService();
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMailGroup, Policy = Constant.Policy.Read)]
         public ActionResult Index(GetMailGroupCriteria criteria)

@@ -7,7 +7,7 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
     {
         public CreateMailCriteria()
         {
-            this.IsActive = true;
+            IsActive = true;
         }
 
         public CreateMailCriteria(MailModel model)
@@ -80,9 +80,6 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
             return true;
         }
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_CreateMail";
-        }
+        public override string GetSettingKey() => "MailStation_CreateMail";
     }
 }

@@ -14,12 +14,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
     [NapSuperAuth]
     public class MailReportController : BaseController
     {
-        private readonly MailReportService mailReportService;
-
-        public MailReportController()
-        {
-            mailReportService = new MailReportService();
-        }
+        private readonly MailReportService mailReportService = new MailReportService();
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
         public ActionResult Index()

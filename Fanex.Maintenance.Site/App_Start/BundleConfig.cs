@@ -1,4 +1,4 @@
-namespace Fanex.Maintenance.Site.App_Start
+namespace Fanex.Maintenance.Site
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Web.Optimization;

@@ -1,6 +1,6 @@
 namespace Fanex.MailDelivery.MailStation.Constants
 {
-    using Fanex.MailDelivery.MailStation.Models;
+    using Models;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 

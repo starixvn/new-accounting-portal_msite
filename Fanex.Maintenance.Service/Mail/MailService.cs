@@ -88,29 +88,29 @@ namespace Fanex.Maintenance.Service.Mail
 
         public IMailService WithApp(int appId)
         {
-            this._appId = appId;
+            _appId = appId;
 
             return this;
         }
 
         public IMailService FromDate(string date)
         {
-            this._fromDate = date;
+            _fromDate = date;
 
             return this;
         }
 
         public IMailService ToDate(string date)
         {
-            this._toDate = date;
+            _toDate = date;
 
             return this;
         }
 
         public IMailService WithPagination(int page, int counter)
         {
-            this._page = page;
-            this._counter = counter;
+            _page = page;
+            _counter = counter;
 
             return this;
         }
@@ -136,7 +136,7 @@ namespace Fanex.Maintenance.Service.Mail
         {
             var mails = new List<MailRecord>();
 
-            using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
+            using (var client = new MailDeliver())
             {
                 var dateTime = DateTime.Parse(_fromDate);
                 var dateTimeTo = DateTime.Parse(_toDate);
@@ -160,14 +160,10 @@ namespace Fanex.Maintenance.Service.Mail
 
         public MailRecord GetMail(int mailID)
         {
-            MailRecord mail = null;
-
             using (var client = new MailDeliver())
             {
-                mail = client.GetMail(mailID);
+                return client.GetMail(mailID);
             }
-
-            return mail;
         }
 
         public List<MailSetting> GetListSetting()
@@ -204,20 +200,12 @@ namespace Fanex.Maintenance.Service.Mail
 
         public bool SendMail(long mailID)
         {
-            try
+            using (var client = new MailDeliver())
             {
-                using (var client = new MailDeliver())
-                {
-                    client.ReSendMail(mailID);
-                }
-
-                return true;
-            }
-            catch
-            {
+                client.ReSendMail(mailID);
             }
 
-            return false;
+            return true;
         }
 
         public bool StoreSetting(MailSetting setting)
@@ -270,55 +258,41 @@ namespace Fanex.Maintenance.Service.Mail
 
         public MailSetting GetSetting(int settingId)
         {
-            MailSetting mail = null;
-
             using (var client = new MailDeliver())
             {
-                mail = client.GetSetting(settingId);
+                return client.GetSetting(settingId);
             }
-
-            return mail;
         }
 
         public MailConfig GetConfig(int configId)
         {
-            MailConfig mail = null;
-
             using (var client = new MailDeliver())
             {
-                mail = client.GetConfig(configId);
+                return client.GetConfig(configId);
             }
-
-            return mail;
         }
 
         public MailFunction GetFunction(int functionId)
         {
-            MailFunction mail = null;
-
             using (var client = new MailDeliver())
             {
-                mail = client.GetFunction(functionId);
+                return client.GetFunction(functionId);
             }
-
-            return mail;
         }
 
         public IMailService WithStatus(int status)
         {
-            if (status == 0)
+            switch (status)
             {
-                this._mailStatus = MailStatus.All;
-            }
-
-            if (status == -1)
-            {
-                this._mailStatus = MailStatus.Fail;
-            }
-
-            if (status == 1)
-            {
-                this._mailStatus = MailStatus.Success;
+                case 0:
+                    _mailStatus = MailStatus.All;
+                    break;
+                case -1:
+                    _mailStatus = MailStatus.Fail;
+                    break;
+                case 1:
+                    _mailStatus = MailStatus.Success;
+                    break;
             }
 
             return this;
@@ -326,14 +300,10 @@ namespace Fanex.Maintenance.Service.Mail
 
         public List<MailError> GetError(int mailId)
         {
-            var mailList = new List<MailError>();
-
             using (var client = new MailDeliver())
             {
-                mailList = client.GetListError(mailId).ToList();
+                return client.GetListError(mailId).ToList();
             }
-
-            return mailList;
         }
     }
 }

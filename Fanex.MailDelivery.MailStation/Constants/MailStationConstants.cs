@@ -1,30 +1,30 @@
 namespace Fanex.MailDelivery.MailStation.Constants
 {
-    using Fanex.MailDelivery.MailStation.Models;
+    using Models;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1311:StaticReadonlyFieldsMustBeginWithUpperCaseLetter", Justification = "Reviewed.")]
     public static class MailStationConstants
     {
-        private static readonly List<SelectListItemExtra> active = new List<SelectListItemExtra>
+        public static List<SelectListItemExtra> Active { get; } = new List<SelectListItemExtra>
         {
             new SelectListItemExtra { Text = "Active", Value = "1", Selected = false },
             new SelectListItemExtra { Text = "Inactive", Value = "0", Selected = false }
         };
 
-        private static readonly List<SelectListItemExtra> triggerTypes = new List<SelectListItemExtra>
+        public static List<SelectListItemExtra> TriggerTypes { get; } = new List<SelectListItemExtra>
         {
             new SelectListItemExtra { Selected = false, Text = "Function", Value = "0" },
             new SelectListItemExtra { Selected = false, Text = "Schedule", Value = "1" }
         };
 
-        private static readonly List<SelectListItemExtra> allItem = new List<SelectListItemExtra>
+        public static List<SelectListItemExtra> AllItem { get; } = new List<SelectListItemExtra>
         {
             new SelectListItemExtra { Text = "All", Value = "-1" }
         };
 
-        private static readonly List<SelectListItemExtra> taskStatus = new List<SelectListItemExtra>
+        public static List<SelectListItemExtra> TaskStatus { get; } = new List<SelectListItemExtra>
         {
             new SelectListItemExtra { Text = "Waiting".ToUpper(), Value = "0" },
             new SelectListItemExtra { Text = "Running".ToUpper(), Value = "1" },
@@ -35,37 +35,5 @@ namespace Fanex.MailDelivery.MailStation.Constants
             new SelectListItemExtra { Text = "Succeeded".ToUpper(), Value = "7" },
             new SelectListItemExtra { Text = "Missing".ToUpper(), Value = "8" }
         };
-
-        public static List<SelectListItemExtra> Active
-        {
-            get
-            {
-                return active;
-            }
-        }
-
-        public static List<SelectListItemExtra> TriggerTypes
-        {
-            get
-            {
-                return triggerTypes;
-            }
-        }
-
-        public static List<SelectListItemExtra> AllItem
-        {
-            get
-            {
-                return allItem;
-            }
-        }
-
-        public static List<SelectListItemExtra> TaskStatus
-        {
-            get
-            {
-                return taskStatus;
-            }
-        }
     }
 }

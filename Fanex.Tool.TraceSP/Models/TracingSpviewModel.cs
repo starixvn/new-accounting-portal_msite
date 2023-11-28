@@ -11,14 +11,8 @@ namespace Fanex.Tool.TraceSP.Models
 
         public string TextData
         {
-            get
-            {
-                return HttpContext.Current.Server.HtmlEncode(_textData.Replace("><", "> <").Replace(",", ", "));
-            }
-            set
-            {
-                _textData = value;
-            }
+            get => HttpContext.Current.Server.HtmlEncode(_textData.Replace("><", "> <").Replace(",", ", "));
+            set => _textData = value;
         }
 
         public string LoginName { get; set; }

@@ -35,8 +35,8 @@ namespace Fanex.Maintenance.Service.Testing
 
         public bool SendEmailByNotificationAPI(Setting setting, QueryModel model)
         {
-            var targetNameMaiing = model.IsPro ? setting.TargetNameMailing : setting.TargetNameMailing1;
-            var targetName = targetNameMaiing + "?" + setting.ITALLMail;
+            var targetNameMailing = model.IsPro ? setting.TargetNameMailing : setting.TargetNameMailing1;
+            var targetName = targetNameMailing + "?" + setting.ITALLMail;
             string[] serverUrls = { setting.NotificationService1, setting.NotificationService2 };
 
             var emailContent = model.Message + " at " + DateTime.Now;

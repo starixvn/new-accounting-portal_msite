@@ -1,15 +1,13 @@
 namespace Fanex.Maintenance.Controller
 {
-    using System;
-    using System.Configuration;
     using System.Web.Mvc;
-    using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Core.Context;
+    using NAP.Core.Business;
+    using NAP.Core.Configuration;
+    using NAP.Core.Context;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
-    using Fanex.NAP.Core.Web;
-    using Fanex.NAP.Core.Web.Session;
+    using NAP.Core.Web;
+    using NAP.Core.Web.Session;
 
     public class BaseController : Controller
     {
@@ -18,8 +16,6 @@ namespace Fanex.Maintenance.Controller
         protected readonly CurrentContext CurrentContext;
         protected readonly CurrentSession CurrentSession;
         private readonly IUserService _userService;
-        private readonly bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
-        private readonly int _showLogTimeZone;
 
         public BaseController()
         {
@@ -32,37 +28,13 @@ namespace Fanex.Maintenance.Controller
             };
 
             _userService = new UserService();
-
-            _showLogTimeZone = Convert.ToInt32(ConfigurationManager.AppSettings["GMTShowLog"]);
-        }
-
-        public bool IsSiteLogin
-        {
-            get
-            {
-                return _issiteLogin;
-            }
-        }
-
-        public int ShowLogTimeZone
-        {
-            get
-            {
-                return _showLogTimeZone;
-            }
         }
 
         protected ViewFlags ViewFlags
         {
-            get
-            {
-                return ViewBag.ViewFlags;
-            }
+            get => ViewBag.ViewFlags;
 
-            set
-            {
-                ViewBag.ViewFlags = value;
-            }
+            set => ViewBag.ViewFlags = value;
         }
 
         public PartialViewResult _Menu()
@@ -73,7 +45,7 @@ namespace Fanex.Maintenance.Controller
 
         public bool HasRight(string functionKey, Constant.Policy policy)
         {
-            var functionPolicy = _userService.GetPermission(CurrentSession.UserId, this.SiteId, functionKey);
+            var functionPolicy = _userService.GetPermission(CurrentSession.UserId, SiteId, functionKey);
 
             return functionPolicy >= (int)policy;
         }

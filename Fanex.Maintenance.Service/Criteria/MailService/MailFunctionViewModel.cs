@@ -1,7 +1,7 @@
 namespace Fanex.Maintenance.Service.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
-    using Fanex.Maintenance;
+    using Maintenance;
     using MailDeliver.Model;
 
     public class MailFunctionViewModel
@@ -12,10 +12,10 @@ namespace Fanex.Maintenance.Service.Criteria.MailService
 
         public MailFunctionViewModel(MailFunction mailFunction)
         {
-            this.ConfigId = mailFunction.Config.AppID;
-            this.SettingId = mailFunction.Setting.SettingID;
-            this.FunctionId = mailFunction.FuncID;
-            this.FunctionName = mailFunction.FuncName;
+            ConfigId = mailFunction.Config.AppID;
+            SettingId = mailFunction.Setting.SettingID;
+            FunctionId = mailFunction.FuncID;
+            FunctionName = mailFunction.FuncName;
         }
 
         public int FunctionId { get; set; }
@@ -44,14 +44,14 @@ namespace Fanex.Maintenance.Service.Criteria.MailService
             {
                 Config = new MailConfig
                 {
-                    AppID = this.ConfigId
+                    AppID = ConfigId
                 },
                 Setting = new MailSetting
                 {
-                    SettingID = this.SettingId
+                    SettingID = SettingId
                 },
-                FuncName = this.FunctionName,
-                FuncID = this.FunctionId
+                FuncName = FunctionName,
+                FuncID = FunctionId
             };
 
             return mailFunction;

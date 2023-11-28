@@ -5,7 +5,6 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
     public class UpdateMailCriteria : CreateMailCriteria
     {
         public UpdateMailCriteria()
-            : base()
         {
         }
 
@@ -14,15 +13,12 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
         {
             if (model != null)
             {
-                this.MailId = model.MailId;
+                MailId = model.MailId;
             }
         }
 
         public int MailId { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_EditMail";
-        }
+        public override string GetSettingKey() => "MailStation_EditMail";
     }
 }
