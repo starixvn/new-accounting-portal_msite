@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Configuration;
     using Fanex.Maintenance.Core.Model.LetstalkNotification;
+    using Model.LetstalkNotification;
     using ONEbook.NotificationService;
 
     public interface INotificationService

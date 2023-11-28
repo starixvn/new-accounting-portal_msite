@@ -4,6 +4,7 @@
     using Core.Model.LetstalkNotification;
     using NAP.Core.Business;
     using NAP.Core.Web.Attribute;
+    using Service.Model.LetstalkNotification;
     using Service.Testing;
 
     [NapSuperAuth]
