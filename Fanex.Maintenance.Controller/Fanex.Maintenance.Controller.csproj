@@ -136,7 +136,6 @@
   <ItemGroup>
     <Compile Include="BaseController.cs" />
     <Compile Include="CommonErrorController.cs" />
-    <Compile Include="TestingController.cs" />
     <Compile Include="HomeController.cs" />
     <Compile Include="MailController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

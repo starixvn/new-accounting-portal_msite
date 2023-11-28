@@ -834,7 +834,6 @@
     <Content Include="themes\shared\formedit.less" />
     <Content Include="Views\Shared\_LayoutWithTimer.cshtml" />
     <Content Include="Web.local.config" />
-    <Content Include="Views\Testing\LetstalkNotification.cshtml" />
     <Content Include="themes\manage\LetstalkNotification.less" />
     <Content Include="Web.backupMNL.config" />
     <Content Include="Web.pro.config">
