@@ -13,5 +13,7 @@
         {
             return "MailStation_MailReport_GetMailDetail";
         }
+
+        public override bool IsValid() => true;
     }
 }

@@ -1,75 +1,51 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Fanex.Data;
-using Fanex.MailDelivery.MailStation.Criteria;
 using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
 using Fanex.MailDelivery.MailStation.Models;
-using Fanex.Maintenance.Repository.Command;
 using Fanex.NAP.Core.Models;
-using Fanex.NAP.Core.Service.Impl;
 using Fanex.NAP.Core.Service.Interface;
 
 namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
 {
+    using Data.Repository;
+    using Maintenance.Service.Command;
+    using NAP.Core.Service.Impl;
+
     public class ManageRecipientService : MailStationBaseService
     {
-        private readonly IUserService userService;
+        private readonly IUserService userService = new UserService();
 
-        public ManageRecipientService()
-        {
-            userService = new UserService();
-        }
+        private readonly IDynamicRepository dynamicRepository= new DynamicRepository();
 
         public List<RecipientModel> RecipientList(RecipientListCriteria criteria)
         {
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-                return db.Query<RecipientModel>().ToList();
-            }
+            return dynamicRepository.Fetch<RecipientModel>(criteria).ToList();
         }
 
         public RecipientModel RecipientById(RecipientByIdCriteria criteria)
         {
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-                return db.Query<RecipientModel>().FirstOrDefault();
-            }
+            return dynamicRepository.Get<RecipientModel>(criteria);
         }
 
         public CommandResult UpdateRecipient(UpdateRecipientCriteria criteria)
         {
-            Hashtable hash = criteria.GetSpParams();
-            hash = (new ResultCriteria()).AddSpParams(hash);
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.ExecuteNonQuery(hash);
-                return GetCommandResult(hash);
-            }
+            dynamicRepository.Execute(criteria);
+
+            return new CommandResult(criteria.ErrCode, criteria.ErrMsg);
         }
 
         public CommandResult CreateRecipient(CreateRecipientCriteria criteria)
         {
-            Hashtable hash = criteria.GetSpParams();
-            hash = (new ResultCriteria()).AddSpParams(hash);
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.ExecuteNonQuery(hash);
-                return GetCommandResult(hash);
-            }
+            dynamicRepository.Execute(criteria);
+
+            return new CommandResult(criteria.ErrCode, criteria.ErrMsg);
         }
 
         public CommandResult DeleteRecipient(DeleteRecipientCriteria criteria)
         {
-            Hashtable hash = criteria.GetSpParams();
-            hash = (new ResultCriteria()).AddSpParams(hash);
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.ExecuteNonQuery(hash);
-                return GetCommandResult(hash);
-            }
+            dynamicRepository.Execute(criteria);
+
+            return new CommandResult(criteria.ErrCode, criteria.ErrMsg);
         }
 
         public User CheckRecipient(CheckRecipientInfoCriteria criteria)

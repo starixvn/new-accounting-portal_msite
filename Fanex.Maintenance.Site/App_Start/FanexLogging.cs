@@ -5,7 +5,6 @@
     using System.Web;
     using Fanex.Logging;
     using Fanex.Logging.Extensions;
-    using Fanex.Logging.Extensions.Database;
     using Fanex.Logging.Extensions.Web;
     using Fanex.Logging.Sentry.RavenClient;
     using SharpRaven;
@@ -17,8 +16,7 @@
             StartLogSetting();
             var configuration = new LoggingConfiguration()
                 .GetHttpHeaderInfo()
-                .GetHttpSessionInfo()
-                .UseGetDbExceptionInfo(DatabaseInfoGetters.GetDbExceptionInfo);
+                .GetHttpSessionInfo();
             ExceptionHandler.UseConfig(configuration);
         }
 

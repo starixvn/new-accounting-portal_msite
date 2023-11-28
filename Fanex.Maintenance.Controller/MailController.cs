@@ -1,11 +1,6 @@
 ﻿namespace Fanex.Maintenance.Controller
 {
     using Fanex.MailDeliver.Model;
-    using Fanex.Maintenance.Repository.Criteria.MailService;
-    using Fanex.Maintenance.Repository.Impl.Mail;
-    using Fanex.Maintenance.Repository.Interface.Mail;
-    using Fanex.Maintenance.Service.Impl.Mail;
-    using Fanex.Maintenance.Service.Interface.Mail;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
@@ -17,6 +12,8 @@
     using System.IO;
     using System.Linq;
     using System.Web.Mvc;
+    using Service.Criteria.MailService;
+    using Service.Mail;
 
     /// <summary>
     /// Mail Controller.
@@ -106,8 +103,8 @@
 
             var totalRows = 0;
 
-            DateTime dateFrom = DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            DateTime dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var dateFrom = DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             var listMail = this._mailServer.WithApp(applicationID)
                 .FromDate(dateFrom.ToString())
@@ -134,7 +131,7 @@
         [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Read)]
         public ActionResult MailSetting()
         {
-            List<MailSetting> listMailSetting = this._mailServer.GetListSetting();
+            var listMailSetting = this._mailServer.GetListSetting();
             ViewBag.HasEdit = HasRight(SiteFunctionKeys.SmtpServers, Constant.Policy.Host);
 
             return View(listMailSetting);
@@ -166,7 +163,7 @@
             {
                 model.Password = model.Password == null ? string.Empty : model.Password;
                 model.SettingName = model.Server + ":" + model.Port + " (" + model.Username + ")";
-                MailSetting mailSetting = model.GetMailSetting();
+                var mailSetting = model.GetMailSetting();
 
                 ViewBag.Success = this._mailServer.StoreSetting(mailSetting);
             }
@@ -193,7 +190,7 @@
         [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Host)]
         public ActionResult EditMailSetting(int id)
         {
-            MailSetting mailSetting = _mailServer.GetSetting(id);
+            var mailSetting = _mailServer.GetSetting(id);
             var model = new MailSettingViewModel(mailSetting);
 
             return View(model);
@@ -214,7 +211,7 @@
             {
                 model.Password = model.Password == null ? string.Empty : model.Password;
                 model.SettingName = model.Server + ":" + model.Port + " (" + model.Username + ")";
-                MailSetting mailSetting = model.GetMailSetting();
+                var mailSetting = model.GetMailSetting();
                 ViewBag.Success = _mailServer.StoreSetting(mailSetting);
             }
 
@@ -235,10 +232,10 @@
         public ActionResult MailConfig(int id = 0)
         {
             var mailSetting = _mailServer.GetSetting(id);
-            string serverIp = mailSetting != null ? mailSetting.Server : string.Empty;
+            var serverIp = mailSetting != null ? mailSetting.Server : string.Empty;
             InitDataIpServer(serverIp);
 
-            List<MailConfig> listMailConfig = _mailServer.GetListConfig(serverIp);
+            var listMailConfig = _mailServer.GetListConfig(serverIp);
 
             ViewBag.HasEdit = HasRight(SiteFunctionKeys.ApplicationManagement, Constant.Policy.Host);
 
@@ -256,7 +253,7 @@
         {
             InitDataIpServer(serverIp);
 
-            List<MailConfig> listMailConfig = this._mailServer.GetListConfig(serverIp);
+            var listMailConfig = this._mailServer.GetListConfig(serverIp);
 
             ViewBag.HasEdit = HasRight(SiteFunctionKeys.ApplicationManagement, Constant.Policy.Host);
 
@@ -291,7 +288,7 @@
 
             if (ModelState.IsValid)
             {
-                MailConfig mailConfig = model.GetMailConfig();
+                var mailConfig = model.GetMailConfig();
 
                 ViewBag.Success = this._mailServer.StoreConfig(mailConfig);
             }
@@ -324,7 +321,7 @@
 
             ViewBag.Success = false;
 
-            MailConfig mailConfig = _mailServer.GetConfig(id);
+            var mailConfig = _mailServer.GetConfig(id);
             var model = new MailConfigViewModel(mailConfig);
 
             return View(model);
@@ -345,7 +342,7 @@
 
             if (ModelState.IsValid)
             {
-                MailConfig mailConfig = model.GetMailConfig();
+                var mailConfig = model.GetMailConfig();
 
                 ViewBag.Success = _mailServer.StoreConfig(mailConfig);
             }
@@ -373,7 +370,7 @@
         [HttpGet]
         public ActionResult MailFunction()
         {
-            List<MailFunction> listMailFunction = _mailServer.GetListFunction();
+            var listMailFunction = _mailServer.GetListFunction();
 
             return View(listMailFunction);
         }
@@ -406,7 +403,7 @@
 
             if (ModelState.IsValid)
             {
-                MailFunction mailFunction = model.GetMailFunction();
+                var mailFunction = model.GetMailFunction();
 
                 ViewBag.Success = _mailServer.StoreFunction(mailFunction);
             }
@@ -425,7 +422,7 @@
             InitDataMailSetting();
             InitDataMailConfig();
 
-            MailFunction mailFunction = _mailServer.GetFunction(id);
+            var mailFunction = _mailServer.GetFunction(id);
 
             var model = new MailFunctionViewModel(mailFunction);
 
@@ -447,7 +444,7 @@
 
             if (ModelState.IsValid)
             {
-                MailFunction mailFunction = model.GetMailFunction();
+                var mailFunction = model.GetMailFunction();
 
                 ViewBag.Success = _mailServer.StoreFunction(mailFunction);
             }
@@ -482,7 +479,7 @@
 
             if (!string.IsNullOrWhiteSpace(mailRecord.FileAttachments))
             {
-                string extension = Path.GetExtension(mailRecord.FileAttachments);
+                var extension = Path.GetExtension(mailRecord.FileAttachments);
                 FileExtentions fileExtension;
 
                 switch (extension.ToLower())
@@ -616,7 +613,7 @@
         {
             if (Request.IsAjaxRequest())
             {
-                bool check = _mailServer.SendMail(mailId);
+                var check = _mailServer.SendMail(mailId);
                 return Json(check);
             }
 
@@ -652,7 +649,7 @@
         {
             if (Request.IsAjaxRequest())
             {
-                MailRecord mail = _mailServer.GetMail(mailId);
+                var mail = _mailServer.GetMail(mailId);
                 return View(mail);
             }
 
@@ -669,7 +666,7 @@
         {
             if (Request.IsAjaxRequest())
             {
-                List<MailError> mail = _mailServer.GetError(mailId);
+                var mail = _mailServer.GetError(mailId);
                 return View(mail);
             }
 
@@ -699,8 +696,8 @@
 
             var totalRows = 0;
 
-            DateTime dateFrom = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTime.Now;
-            DateTime dateTo = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTime.Now;
+            var dateFrom = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTime.Now;
+            var dateTo = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTime.Now;
 
             var listMail = _mailServer.WithApp(applicationID)
                 .FromDate(dateFrom.ToString())
@@ -730,7 +727,7 @@
         {
             if (Request.IsAjaxRequest())
             {
-                List<MailSetting> listMailSetting = _mailServer.GetListSetting();
+                var listMailSetting = _mailServer.GetListSetting();
 
                 return Json(listMailSetting);
             }
@@ -747,7 +744,7 @@
         {
             if (Request.IsAjaxRequest())
             {
-                List<MailConfig> listMailConfig = _mailServer.GetListConfig();
+                var listMailConfig = _mailServer.GetListConfig();
 
                 return Json(listMailConfig);
             }
@@ -825,7 +822,7 @@
         /// <param name="appId">Application ID.</param>
         private void InitDataMailConfig(int appId = 0)
         {
-            List<MailConfig> listConfig = _mailServer.GetListConfig(string.Empty);
+            var listConfig = _mailServer.GetListConfig(string.Empty);
             var listConfigPermission = new List<MailConfig>();
 
             var configPermission = ConfigurationManager.AppSettings["MailPermission:Application"];
@@ -866,7 +863,7 @@
         /// </summary>
         private void InitDataMailSetting()
         {
-            List<MailSetting> listMailSetting = _mailServer.GetListSetting();
+            var listMailSetting = _mailServer.GetListSetting();
 
             ViewBag.ListMailSetting = listMailSetting.Select(s => new SelectListItem
             {
@@ -881,7 +878,7 @@
         /// <param name="serverIp">Server IP address.</param>
         private void InitDataIpServer(string serverIp = "")
         {
-            List<MailSetting> listMailSetting = _mailServer.GetListSetting();
+            var listMailSetting = _mailServer.GetListSetting();
             listMailSetting = listMailSetting.GroupBy(s => s.Server).Select(s => s.First()).ToList();
 
             ViewBag.ListServerIp = listMailSetting.Select(s => new SelectListItem

@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Fanex.MailDelivery.MailStation.Constants;
 using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
 using Fanex.MailDelivery.MailStation.Criteria.MailManage;
 using Fanex.MailDelivery.MailStation.Extensions;
-using Fanex.MailDelivery.MailStation.Models;
 using Fanex.MailDelivery.MailStation.Resources;
 using Fanex.MailDelivery.MailStation.Services;
 using Fanex.Maintenance.Controller;
-using Fanex.Maintenance.Repository.Command;
 using Fanex.NAP.Core.Business;
 using Fanex.NAP.Core.Web.Attribute;
 
@@ -60,7 +57,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             ViewBag.ListSite = mailManageService.Sites(false);
             ViewBag.ListTriggerType = mailManageService.Trigger(false);
 
-            MailModel mailModel = mailManageService.MailById(criteria);
+            var mailModel = mailManageService.MailById(criteria);
 
             if (mailModel != null)
             {
@@ -68,7 +65,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             }
 
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
-            CreateMailCriteria model = new CreateMailCriteria(mailModel);
+            var model = new CreateMailCriteria(mailModel);
 
             return View("~/Areas/MailStation/ManageMail/CreateMail/Index.cshtml", model);
         }
@@ -93,7 +90,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
         public ActionResult MailList(GetMailListCriteria criteria)
         {
-            IList<MailModel> result = mailManageService.MailList(criteria);
+            var result = mailManageService.MailList(criteria);
 
             return Json(result);
         }
@@ -110,7 +107,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public ActionResult DeleteMail(DeleteMailCriteria criteria)
         {
-            CommandResult commandResult = mailManageService.DeleteMail(criteria);
+            var commandResult = mailManageService.DeleteMail(criteria);
 
             return Json(commandResult);
         }
@@ -123,8 +120,8 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             ViewBag.ListTriggerType = mailManageService.Trigger(false);
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
-            MailModel mailModel = mailManageService.MailById(criteria);
-            UpdateMailCriteria model = new UpdateMailCriteria(mailModel);
+            var mailModel = mailManageService.MailById(criteria);
+            var model = new UpdateMailCriteria(mailModel);
 
             return View("~/Areas/MailStation/ManageMail/UpdateMail/Index.cshtml", model);
         }
@@ -135,7 +132,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         {
             criteria.ModifiedBy = CurrentSession.Username;
 
-            CommandResult commandResult = mailManageService.UpdateMail(criteria);
+            var commandResult = mailManageService.UpdateMail(criteria);
 
             return Json(commandResult, JsonRequestBehavior.AllowGet);
         }

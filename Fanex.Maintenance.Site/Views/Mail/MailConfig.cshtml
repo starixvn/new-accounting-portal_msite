@@ -1,5 +1,4 @@
 ﻿@using Fanex.MailDeliver.Model
-@using Fanex.NAP.Core.Business
 @model List<MailConfig>
 @{
     ViewBag.Title = ViewResource.Mail_Config;
@@ -76,12 +75,12 @@
     </thead>
     <tbody>
         @{
-            int i = 1;
+            var i = 1;
             if (!ReferenceEquals(Model, null))
             {
-                foreach (MailConfig mailItem in Model)
+                foreach (var mailItem in Model)
                 {
-                    string row_class = i % 2 == 0 ? "alt" : string.Empty;
+                    var row_class = i % 2 == 0 ? "alt" : string.Empty;
 					
             <tr class="@row_class">
                 <td class="align-center">

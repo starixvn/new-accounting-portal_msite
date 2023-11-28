@@ -57,12 +57,6 @@
                 "~/scripts/lib/Select2/select2-custom.css");
 
             bundles.AddAndInclude(
-                "~/css/service-monitoring",
-                "~/themes/manage/log/manage.less",
-                "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
-                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css");
-
-            bundles.AddAndInclude(
                 "~/css/xml-editor",
                 "~/themes/jquery-ui/XMLEditor/smoothness/jquery-ui-1.8.23.css",
                 "~/scripts/lib/XMLEditor/css/main.css",
@@ -122,33 +116,6 @@
 
             bundles.Add(new ScriptBundle("~/scripts/add-mail-function").Include(
                 "~/scripts/Mail/AddMailFunction.js"));
-
-            bundles.Add(new ScriptBundle("~/scripts/log").Include(
-                "~/scripts/lib/Select2/select2.js",
-                "~/scripts/lib/Momentjs/moment.js",
-                "~/scripts/lib/custom-datepicker.js",
-                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
-                "~/scripts/lib/DatetimePicker/jquery.datetimepicker.js",
-                "~/scripts/Logs/Index.js"));
-
-
-            bundles.Add(new ScriptBundle("~/scripts/connectionstring-database").Include(
-              "~/scripts/Connection/Database.js"));
-
-            bundles.Add(new ScriptBundle("~/scripts/connectionstring-alias").Include(
-              "~/scripts/Connection/Alias.js"));
-
-            bundles.Add(new ScriptBundle("~/scripts/connectionstring-aliasdatabase").Include(
-              "~/scripts/Connection/AliasDatabase.js"));
-
-            bundles.Add(new ScriptBundle("~/scripts/connectionstring-site").Include(
-                "~/scripts/Connection/Site.js"));
-
-            bundles.Add(new ScriptBundle("~/scripts/connectionstring-connection").Include(
-                "~/scripts/Connection/Connection.js"));
-
-            bundles.Add(new ScriptBundle("~/scripts/service-monitoring").Include(
-                "~/scripts/ServiceMonitoring/ServiceMonitoring.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/xml-editor").Include(
                 "~/scripts/lib/jquery-1.8.0.min.js",

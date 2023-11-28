@@ -80,7 +80,7 @@
 
         public bool HasRight(string functionKey, Constant.Policy policy)
         {
-            int functionPolicy = _userService.GetPermission(CurrentSession.UserId, this.SiteId, functionKey);
+            var functionPolicy = _userService.GetPermission(CurrentSession.UserId, this.SiteId, functionKey);
 
             return functionPolicy >= (int)policy;
         }

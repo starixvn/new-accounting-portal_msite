@@ -5,7 +5,6 @@ using Fanex.MailDelivery.MailStation.Extensions;
 using Fanex.MailDelivery.MailStation.Models;
 using Fanex.MailDelivery.MailStation.Services.ManageRecipient;
 using Fanex.Maintenance.Controller;
-using Fanex.Maintenance.Repository.Command;
 using Fanex.NAP.Core.Business;
 using Fanex.NAP.Core.Web.Attribute;
 
@@ -50,7 +49,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         public ActionResult UpdateRecipientView(RecipientByIdCriteria criteria)
         {
             var recipient = manageRecipientService.RecipientById(criteria);
-            RecipientModel recipientModel = new RecipientModel
+            var recipientModel = new RecipientModel
             {
                 RecipientId = recipient.RecipientId,
                 RecipientName = recipient.RecipientName,
@@ -79,7 +78,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Host)]
         public JsonResult UpdateRecipient(UpdateRecipientCriteria criteria)
         {
-            CommandResult commandResult = manageRecipientService.UpdateRecipient(criteria);
+            var commandResult = manageRecipientService.UpdateRecipient(criteria);
 
             return Json(commandResult);
         }
@@ -88,7 +87,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Host)]
         public JsonResult DeleteRecipient(DeleteRecipientCriteria criteria)
         {
-            CommandResult commandResult = manageRecipientService.DeleteRecipient(criteria);
+            var commandResult = manageRecipientService.DeleteRecipient(criteria);
 
             return Json(commandResult);
         }
@@ -97,7 +96,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Host)]
         public JsonResult CreateRecipient(CreateRecipientCriteria criteria)
         {
-            CommandResult commandResult = manageRecipientService.CreateRecipient(criteria);
+            var commandResult = manageRecipientService.CreateRecipient(criteria);
 
             return Json(commandResult);
         }

@@ -10,5 +10,7 @@
         {
             return "Mail_Report_GetMailTaskByID";
         }
+
+        public override bool IsValid() => true;
     }
 }

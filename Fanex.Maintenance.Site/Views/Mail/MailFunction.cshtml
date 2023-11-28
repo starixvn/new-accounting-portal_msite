@@ -35,12 +35,12 @@
     </thead>
     <tbody>
         @{
-            int i = 0;
+            var i = 0;
             if (!ReferenceEquals(Model, null))
             {
-                foreach (MailFunction mailItem in Model)
+                foreach (var mailItem in Model)
                 {
-                    string row_class = (i++) % 2 == 0 ? "alt" : string.Empty;
+                    var row_class = (i++) % 2 == 0 ? "alt" : string.Empty;
 
             <tr class="@row_class">
                 <td class="align-center">

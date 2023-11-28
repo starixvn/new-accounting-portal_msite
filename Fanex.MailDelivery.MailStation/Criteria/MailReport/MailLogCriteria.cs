@@ -1,5 +1,6 @@
 ﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>
@@ -14,5 +15,7 @@
         {
             return "MailStation_MailReport_GetLogDetail";
         }
+
+        public override bool IsValid() => true;
     }
 }

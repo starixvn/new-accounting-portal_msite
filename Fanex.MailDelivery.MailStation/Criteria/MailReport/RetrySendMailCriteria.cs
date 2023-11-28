@@ -13,5 +13,7 @@
         {
             return "MailStation_MailReport_GetMailTaskList";
         }
+
+        public override bool IsValid() => true;
     }
 }

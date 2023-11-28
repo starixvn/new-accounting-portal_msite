@@ -1,9 +1,8 @@
-﻿using Fanex.Data.Repository;
-using System;
+﻿using System;
 
 namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
-    public class AddMailLogCriteria : CriteriaBase
+    public class AddMailLogCriteria : UpdateCommandBase
     {
         public int TaskId { get; set; }
 

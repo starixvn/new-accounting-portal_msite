@@ -1,11 +1,10 @@
 ﻿namespace Fanex.Maintenance.Controller
 {
     using System.Web.Mvc;
-    using Core.Model.LetstalkNotification;
     using NAP.Core.Business;
     using NAP.Core.Web.Attribute;
-    using Service.Impl.Testing;
-    using Service.Interface.Testing;
+    using Service.Model.LetstalkNotification;
+    using Service.Testing;
 
     [NapSuperAuth]
     public class TestingController : BaseController

@@ -1,25 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Fanex.Data;
 using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
 using Fanex.MailDelivery.MailStation.Models;
-using Fanex.Maintenance.Repository.Command;
 
 namespace Fanex.MailDelivery.MailStation.Services
 {
+    using Data.Repository;
+    using Maintenance.Service.Command;
+
     public class MailGroupService : MailStationBaseService
     {
-        public MailGroupService()
-        {
-        }
+      private readonly IDynamicRepository dynamicRepository = new DynamicRepository();
 
         public List<MailGroupModel> GetMailGroups(GetMailGroupCriteria criteria)
         {
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-                return db.Query<MailGroupModel>().ToList();
-            }
+            return dynamicRepository.Fetch<MailGroupModel>(criteria).ToList();
         }
 
         public CommandResult CreateMailGroup(CreateMailGroupCriteria criteria)
@@ -39,11 +34,7 @@ namespace Fanex.MailDelivery.MailStation.Services
 
         public MailGroupModel GetMailGroupById(GetMailGroupByIdCriteria criteria)
         {
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                db.AssignParamValues(criteria.GetSpParams());
-                return db.Query<MailGroupModel>().FirstOrDefault();
-            }
+            return dynamicRepository.Get<MailGroupModel>(criteria);
         }
     }
 }

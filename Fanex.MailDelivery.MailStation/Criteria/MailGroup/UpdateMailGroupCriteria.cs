@@ -1,8 +1,6 @@
-﻿using Fanex.Data.Repository;
-
-namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
+﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
 {
-    public class UpdateMailGroupCriteria : CriteriaBase
+    public class UpdateMailGroupCriteria : UpdateCommandBase
     {
         public int MailGroupId { get; set; }
 

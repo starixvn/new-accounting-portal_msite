@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Tool.TraceSP.Services
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Xml.Serialization;
@@ -19,7 +18,7 @@
             {
                 var deserializer = new XmlSerializer(typeof(List<Server>), new XmlRootAttribute("DBServers"));
 
-                using (FileStream stream = File.OpenRead(dbServerXmlPath))
+                using (var stream = File.OpenRead(dbServerXmlPath))
                 {
                     Servers = deserializer.Deserialize(stream) as List<Server>;
                 }
