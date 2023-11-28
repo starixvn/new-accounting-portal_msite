@@ -1,11 +1,8 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
+namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Mail Log Criteria.
-    /// </summary>
     public class MailLogCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "TaskID")]

@@ -1,4 +1,4 @@
-﻿namespace Fanex.Tool.TraceSP.Controllers
+namespace Fanex.Tool.TraceSP.Controllers
 {
     using Fanex.Maintenance.Controller;
     using Models;

@@ -1,4 +1,4 @@
-﻿using EasyNetQ.Logging;
+using EasyNetQ.Logging;
 using Fanex.Logging;
 using System;
 using System.Collections.Generic;

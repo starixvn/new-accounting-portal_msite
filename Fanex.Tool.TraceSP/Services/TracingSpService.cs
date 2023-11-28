@@ -1,4 +1,4 @@
-﻿using Fanex.Logging;
+using Fanex.Logging;
 using Fanex.Tool.TraceSP.Criteria;
 using Fanex.Tool.TraceSP.Models;
 using System;

@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="ServiceMonitoringController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -18,9 +18,6 @@ namespace Fanex.Maintenance.Controller
     using Fanex.NAP.Core.Web.Attribute;
     using Fanex.ServiceManagement.Model;
 
-    /// <summary>
-    /// Log controller.
-    /// </summary>
     [NapSuperAuth]
     public class ServiceMonitoringController : BaseController
     {
@@ -28,10 +25,6 @@ namespace Fanex.Maintenance.Controller
         {
         }
 
-        /// <summary>
-        /// Log list page.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ServiceMonitoring, Policy = Constant.Policy.Read)]
         public ActionResult Index()

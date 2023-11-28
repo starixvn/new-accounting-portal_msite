@@ -1,4 +1,4 @@
-﻿using Fanex.Letstalk.Notification.Criteria;
+using Fanex.Letstalk.Notification.Criteria;
 using Fanex.Letstalk.Notification.Services;
 using Fanex.Maintenance.Controller;
 using Fanex.NAP.Core.Business;

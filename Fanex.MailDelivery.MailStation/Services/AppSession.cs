@@ -1,4 +1,4 @@
-﻿namespace Fanex.MailDelivery.MailStation.Services
+namespace Fanex.MailDelivery.MailStation.Services
 {
     using Fanex.NAP.Core.Models;
 

@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Service.Criteria.MailService
+namespace Fanex.Maintenance.Service.Criteria.MailService
 {
     using System;
 

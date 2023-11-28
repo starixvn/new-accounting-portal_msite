@@ -1,4 +1,4 @@
-﻿namespace Fanex.MailDelivery.MailStation.Models
+namespace Fanex.MailDelivery.MailStation.Models
 {
     using System.Web.Mvc;
 

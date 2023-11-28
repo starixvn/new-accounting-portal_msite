@@ -1,10 +1,7 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
+namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Mail Detail Criteria.
-    /// </summary>
     public class MailDetailCriteria : CriteriaBase
     {
         public int MailId { get; set; }

@@ -1,4 +1,4 @@
-﻿using Fanex.MailDeliver.MailClient;
+using Fanex.MailDeliver.MailClient;
 using System.Configuration;
 
 namespace Fanex.Maintenance.Site.App_Start

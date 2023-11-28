@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Service.Mail
+namespace Fanex.Maintenance.Service.Mail
 {
     using System;
     using System.Collections.Generic;
@@ -65,20 +65,11 @@
         {
         }
 
-        /// <summary>
-        /// Create mail service.
-        /// </summary>
-        /// <returns>Mail service.</returns>
         public static MailService Create()
         {
             return new MailService();
         }
 
-        /// <summary>
-        /// Get list mail config filter by server IP.
-        /// </summary>
-        /// <param name="ip">IP address.</param>
-        /// <returns>List of mail config.</returns>
         public List<MailConfig> GetListConfig(string ip = "")
         {
             var configs = new List<MailConfig>();
@@ -95,11 +86,6 @@
             return configs;
         }
 
-        /// <summary>
-        /// By application id.
-        /// </summary>
-        /// <param name="appId">Application ID.</param>
-        /// <returns>Mail service.</returns>
         public IMailService WithApp(int appId)
         {
             this._appId = appId;
@@ -107,11 +93,6 @@
             return this;
         }
 
-        /// <summary>
-        /// Update from date.
-        /// </summary>
-        /// <param name="fromDate">From date.</param>
-        /// <returns>Mail service.</returns>
         public IMailService FromDate(string date)
         {
             this._fromDate = date;
@@ -119,11 +100,6 @@
             return this;
         }
 
-        /// <summary>
-        /// Update to date.
-        /// </summary>
-        /// <param name="toDate">To date string.</param>
-        /// <returns>Mail service.</returns>
         public IMailService ToDate(string date)
         {
             this._toDate = date;
@@ -131,12 +107,6 @@
             return this;
         }
 
-        /// <summary>
-        /// Pagination items.
-        /// </summary>
-        /// <param name="page">Page index.</param>
-        /// <param name="counter">Counter value.</param>
-        /// <returns>Mail service.</returns>
         public IMailService WithPagination(int page, int counter)
         {
             this._page = page;
@@ -145,10 +115,6 @@
             return this;
         }
 
-        /// <summary>
-        /// Get list mail.
-        /// </summary>
-        /// <returns>List of mail record.</returns>
         public List<MailRecord> GetListMail()
         {
             var mails = new List<MailRecord>();
@@ -166,11 +132,6 @@
             return mails;
         }
 
-        /// <summary>
-        /// Get list mail from date to date.
-        /// </summary>
-        /// <param name="totalRows">Number of rows.</param>
-        /// <returns>List of mail record.</returns>
         public List<MailRecord> GetListMailByDate(ref int totalRows)
         {
             var mails = new List<MailRecord>();
@@ -197,11 +158,6 @@
             return mails;
         }
 
-        /// <summary>
-        /// Get detail mail by mail id.
-        /// </summary>
-        /// <param name="mailID">Mail object ID.</param>
-        /// <returns>Mail record.</returns>
         public MailRecord GetMail(int mailID)
         {
             MailRecord mail = null;
@@ -214,10 +170,6 @@
             return mail;
         }
 
-        /// <summary>
-        /// Get list mail setting.
-        /// </summary>
-        /// <returns>List of mail setting.</returns>
         public List<MailSetting> GetListSetting()
         {
             var settings = new List<MailSetting>();
@@ -234,10 +186,6 @@
             return settings;
         }
 
-        /// <summary>
-        /// Get list mail function.
-        /// </summary>
-        /// <returns>List of mail function.</returns>
         public List<MailFunction> GetListFunction()
         {
             var functions = new List<MailFunction>();
@@ -254,11 +202,6 @@
             return functions;
         }
 
-        /// <summary>
-        /// ReSend mail.
-        /// </summary>
-        /// <param name="mailID">Mail object ID.</param>
-        /// <returns>Send result.</returns>
         public bool SendMail(long mailID)
         {
             try
@@ -277,11 +220,6 @@
             return false;
         }
 
-        /// <summary>
-        /// Insert new mail setting.
-        /// </summary>
-        /// <param name="setting">Mail setting.</param>
-        /// <returns>Success or not.</returns>
         public bool StoreSetting(MailSetting setting)
         {
             var result = false;
@@ -298,11 +236,6 @@
             return result;
         }
 
-        /// <summary>
-        /// Insert new mail config.
-        /// </summary>
-        /// <param name="config">Mail config.</param>
-        /// <returns>Success or not.</returns>
         public bool StoreConfig(MailConfig config)
         {
             var result = false;
@@ -319,11 +252,6 @@
             return result;
         }
 
-        /// <summary>
-        /// Insert new mail function.
-        /// </summary>
-        /// <param name="func">Mail function.</param>
-        /// <returns>Success or not.</returns>
         public bool StoreFunction(MailFunction func)
         {
             var result = false;
@@ -340,11 +268,6 @@
             return result;
         }
 
-        /// <summary>
-        /// Get mail setting by setting id.
-        /// </summary>
-        /// <param name="settingId">Setting ID.</param>
-        /// <returns>Mail setting.</returns>
         public MailSetting GetSetting(int settingId)
         {
             MailSetting mail = null;
@@ -357,11 +280,6 @@
             return mail;
         }
 
-        /// <summary>
-        /// Get mail config by config id.
-        /// </summary>
-        /// <param name="configId">Configuration ID.</param>
-        /// <returns>Mail config.</returns>
         public MailConfig GetConfig(int configId)
         {
             MailConfig mail = null;
@@ -374,11 +292,6 @@
             return mail;
         }
 
-        /// <summary>
-        /// Get mail function by function id.
-        /// </summary>
-        /// <param name="functionId">Function ID.</param>
-        /// <returns>Mail function.</returns>
         public MailFunction GetFunction(int functionId)
         {
             MailFunction mail = null;
@@ -391,11 +304,6 @@
             return mail;
         }
 
-        /// <summary>
-        /// By Status mail.
-        /// </summary>
-        /// <param name="status">Mail status.</param>
-        /// <returns>Mail service.</returns>
         public IMailService WithStatus(int status)
         {
             if (status == 0)
@@ -416,11 +324,6 @@
             return this;
         }
 
-        /// <summary>
-        /// Get error.
-        /// </summary>
-        /// <param name="mailId">Mail object ID.</param>
-        /// <returns>List of mail error.</returns>
         public List<MailError> GetError(int mailId)
         {
             var mailList = new List<MailError>();

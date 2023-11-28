@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Site
+namespace Fanex.Maintenance.Site
 {
     using System.Web.Mvc;
     using Fanex.Caching;

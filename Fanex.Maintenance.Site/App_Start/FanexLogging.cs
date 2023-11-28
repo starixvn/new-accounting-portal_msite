@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Site.App_Start
+namespace Fanex.Maintenance.Site.App_Start
 {
     using System.Collections.Generic;
     using System.Configuration;

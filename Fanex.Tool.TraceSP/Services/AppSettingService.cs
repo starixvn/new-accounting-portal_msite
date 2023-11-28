@@ -1,4 +1,4 @@
-﻿namespace Fanex.Tool.TraceSP.Services
+namespace Fanex.Tool.TraceSP.Services
 {
     using System.Configuration;
     static class AppSettingService

@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Controller
+namespace Fanex.Maintenance.Controller
 {
     using Fanex.MailDeliver.Model;
     using Fanex.NAP.Core.Business;
@@ -15,17 +15,11 @@
     using Service.Criteria.MailService;
     using Service.Mail;
 
-    /// <summary>
-    /// Mail Controller.
-    /// </summary>
     [NapSuperAuth]
     public class MailController : BaseController
     {
         #region Member
 
-        /// <summary>
-        /// Mail Service.
-        /// </summary>
         private readonly IMailService _mailServer;
 
         private readonly IUserService _userService;
@@ -54,11 +48,6 @@
 
         #region MailList
 
-        /// <summary>
-        /// Get mail list.
-        /// </summary>
-        /// <param name="appId">Application ID.</param>
-        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ViewMailReport, Policy = Constant.Policy.Read)]
         public ActionResult MailList(int appId = 0)
@@ -82,15 +71,6 @@
             return View(listMail);
         }
 
-        /// <summary>
-        /// Get mail list.
-        /// </summary>
-        /// <param name="from">From DateTime string.</param>
-        /// <param name="to">To DateTime string.</param>
-        /// <param name="applicationID">If application id = 0 get all.</param>
-        /// <param name="mailStatus">Mail status.</param>
-        /// <param name="size">Number of items.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ViewMailReport, Policy = Constant.Policy.Read)]
         public ActionResult MailList(string from, string to, int applicationID = 0, int mailStatus = 0, int size = 10)
@@ -123,10 +103,6 @@
 
         #region MailSetting
 
-        /// <summary>
-        /// Get all mail setting.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Read)]
         public ActionResult MailSetting()
@@ -137,10 +113,6 @@
             return View(listMailSetting);
         }
 
-        /// <summary>
-        /// Add mail setting.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Host)]
         public ActionResult AddMailSetting()
@@ -148,11 +120,6 @@
             return View(new MailSettingViewModel());
         }
 
-        /// <summary>
-        /// Add mail setting.
-        /// </summary>
-        /// <param name="model">Mail setting view model.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Host)]
         public ActionResult AddMailSetting(MailSettingViewModel model)
@@ -171,21 +138,12 @@
             return View(model);
         }
 
-        /// <summary>
-        /// Add mail setting popup.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult AddMailSettingPopUp()
         {
             return View(new MailSetting());
         }
 
-        /// <summary>
-        /// Edit mail setting.
-        /// </summary>
-        /// <param name="id">Setting ID.</param>
-        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Host)]
         public ActionResult EditMailSetting(int id)
@@ -196,11 +154,6 @@
             return View(model);
         }
 
-        /// <summary>
-        /// Edit mail setting.
-        /// </summary>
-        /// <param name="model">Mail setting view model.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.SmtpServers, Policy = Constant.Policy.Host)]
         public ActionResult EditMailSetting(MailSettingViewModel model)
@@ -222,11 +175,6 @@
 
         #region MailConfig
 
-        /// <summary>
-        /// Get all mail config.
-        /// </summary>
-        /// <param name="id">Setting ID.</param>
-        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Read)]
         public ActionResult MailConfig(int id = 0)
@@ -242,11 +190,6 @@
             return View(listMailConfig);
         }
 
-        /// <summary>
-        /// Get mail config filter by server IP.
-        /// </summary>
-        /// <param name="serverIp">Server IP address.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Read)]
         public ActionResult MailConfig(string serverIp = "")
@@ -260,10 +203,6 @@
             return View(listMailConfig);
         }
 
-        /// <summary>
-        /// Add new mail config.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult AddMailConfig()
@@ -273,11 +212,6 @@
             return View(new MailConfigViewModel());
         }
 
-        /// <summary>
-        /// Add new mail config.
-        /// </summary>
-        /// <param name="model">Mail config view model.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult AddMailConfig(MailConfigViewModel model)
@@ -296,10 +230,6 @@
             return View(model);
         }
 
-        /// <summary>
-        /// Add new mail config popup.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult AddMailConfigPopUp()
         {
@@ -308,11 +238,6 @@
             return View(new MailConfig());
         }
 
-        /// <summary>
-        /// Edit mail config by config id.
-        /// </summary>
-        /// <param name="id">Mail config ID.</param>
-        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult EditMailConfig(int id)
@@ -327,11 +252,6 @@
             return View(model);
         }
 
-        /// <summary>
-        /// Edit mail configuration.
-        /// </summary>
-        /// <param name="model">Mail configuration view model.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult EditMailConfig(MailConfigViewModel model)
@@ -363,10 +283,6 @@
 
         #region MailFunction
 
-        /// <summary>
-        /// Get all mail function.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult MailFunction()
         {
@@ -375,10 +291,6 @@
             return View(listMailFunction);
         }
 
-        /// <summary>
-        /// Add new mail function.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult AddMailFunction()
         {
@@ -388,11 +300,6 @@
             return View(new MailFunctionViewModel());
         }
 
-        /// <summary>
-        /// Add new mail function.
-        /// </summary>
-        /// <param name="model">Mail function view model.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailFunction(MailFunctionViewModel model)
         {
@@ -411,11 +318,6 @@
             return View(model);
         }
 
-        /// <summary>
-        /// Edit mail function.
-        /// </summary>
-        /// <param name="id">Mail function ID.</param>
-        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditMailFunction(int id)
         {
@@ -429,11 +331,6 @@
             return View(model);
         }
 
-        /// <summary>
-        /// Edit mail function.
-        /// </summary>
-        /// <param name="model">Mail function view model.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditMailFunction(MailFunctionViewModel model)
         {
@@ -464,11 +361,6 @@
             return View(new MailRecord());
         }
 
-        /// <summary>
-        /// Composes the email.
-        /// </summary>
-        /// <param name="mailRecord">The mail record.</param>
-        /// <returns>Return view.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ComposeEmail, Policy = Constant.Policy.Read)]
         public ActionResult ComposeEmail(MailRecord mailRecord)
@@ -534,15 +426,6 @@
 
         #region Ajax
 
-        /// <summary>
-        /// Add mail setting for popup view.
-        /// </summary>
-        /// <param name="server">Server IP address.</param>
-        /// <param name="port">Pot number.</param>
-        /// <param name="username">Current username.</param>
-        /// <param name="password">Current password.</param>
-        /// <param name="isAutho">Is authorized or not.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailSettingPopUp(
             string server,
@@ -570,13 +453,6 @@
             return Json(false);
         }
 
-        /// <summary>
-        /// Add mail config for popup view.
-        /// </summary>
-        /// <param name="appName">Application name.</param>
-        /// <param name="description">Mail config description.</param>
-        /// <param name="settingId">Setting ID.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailConfigPopUp(string appName, string description, int settingId)
         {
@@ -602,11 +478,6 @@
             return Json(mailConfig);
         }
 
-        /// <summary>
-        /// Resend mail.
-        /// </summary>
-        /// <param name="mailId">Mail object ID.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ResendMail, Policy = Constant.Policy.Host)]
         public ActionResult ResendMail(int mailId)
@@ -638,11 +509,6 @@
             return new EmptyResult();
         }
 
-        /// <summary>
-        /// Get message detail of mail.
-        /// </summary>
-        /// <param name="mailId">Mail object ID.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ViewMailDetails, Policy = Constant.Policy.Read)]
         public ActionResult GetMessage(int mailId)
@@ -656,11 +522,6 @@
             return View(new MailRecord());
         }
 
-        /// <summary>
-        /// Get mail error.
-        /// </summary>
-        /// <param name="mailId">Mail object ID.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetError(int mailId)
         {
@@ -673,16 +534,6 @@
             return View(new List<MailError>());
         }
 
-        /// <summary>
-        /// Get list mail pagination.
-        /// </summary>
-        /// <param name="status">Mail status.</param>
-        /// <param name="from">From DateTime string.</param>
-        /// <param name="to">To DateTime string.</param>
-        /// <param name="page">Page index.</param>
-        /// <param name="size">Page size.</param>
-        /// <param name="applicationID">Application ID.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult MailListPagi(
             int status,
@@ -718,10 +569,6 @@
             });
         }
 
-        /// <summary>
-        /// Get list mail setting.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetMailSetting()
         {
@@ -735,10 +582,6 @@
             return Json(null);
         }
 
-        /// <summary>
-        /// Get list mail config.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetMailConfig()
         {
@@ -756,9 +599,6 @@
 
         #region InitData
 
-        /// <summary>
-        /// Initialize Page Size.
-        /// </summary>
         private void InitPageSize()
         {
             var listPageSize = new List<SelectListItem>();
@@ -789,9 +629,6 @@
             ViewBag.PageSize = listPageSize;
         }
 
-        /// <summary>
-        /// Initialize list mail status for view.
-        /// </summary>
         private void InitMailStatus()
         {
             var listMailStatus = new List<SelectListItem>();
@@ -816,10 +653,6 @@
             ViewBag.MailStatus = listMailStatus;
         }
 
-        /// <summary>
-        /// Initialize list mail config for view.
-        /// </summary>
-        /// <param name="appId">Application ID.</param>
         private void InitDataMailConfig(int appId = 0)
         {
             var listConfig = _mailServer.GetListConfig(string.Empty);
@@ -858,9 +691,6 @@
             }).ToList();
         }
 
-        /// <summary>
-        /// Initialize list mail setting for view.
-        /// </summary>
         private void InitDataMailSetting()
         {
             var listMailSetting = _mailServer.GetListSetting();
@@ -872,10 +702,6 @@
             }).ToList();
         }
 
-        /// <summary>
-        /// Initialize list server IP for view.
-        /// </summary>
-        /// <param name="serverIp">Server IP address.</param>
         private void InitDataIpServer(string serverIp = "")
         {
             var listMailSetting = _mailServer.GetListSetting();

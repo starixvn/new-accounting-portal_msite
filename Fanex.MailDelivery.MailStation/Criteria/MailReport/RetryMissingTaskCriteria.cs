@@ -1,11 +1,8 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
+namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
     using Fanex.Data.Repository;
     using System;
 
-    /// <summary>
-    /// Add Missing Task Criteria.
-    /// </summary>
     public class RetryMissingTaskCriteria : NonQueryCommand
     {
         public int MailTaskId { get; set; }

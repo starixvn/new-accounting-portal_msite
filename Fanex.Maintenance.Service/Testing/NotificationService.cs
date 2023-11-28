@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Service.Testing
+namespace Fanex.Maintenance.Service.Testing
 {
     using System;
     using System.Collections.Generic;

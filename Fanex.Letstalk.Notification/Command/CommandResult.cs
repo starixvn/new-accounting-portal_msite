@@ -1,4 +1,4 @@
-﻿namespace Fanex.Letstalk.Notification.Command
+namespace Fanex.Letstalk.Notification.Command
 {
     public interface ICommandResult
     {

@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Controller
+namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Configuration;
@@ -11,9 +11,6 @@
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Session;
 
-    /// <summary>
-    /// Base controller.
-    /// </summary>
     public class BaseController : Controller
     {
         protected readonly string Environment = NapSettings.Settings.Environment;
@@ -39,10 +36,6 @@
             _showLogTimeZone = Convert.ToInt32(ConfigurationManager.AppSettings["GMTShowLog"]);
         }
 
-        /// <summary>
-        /// Gets a value indicating whether the current site allows users login directly.
-        /// </summary>
-        /// <value>0 : users must login through NAP Hub.</value>
         public bool IsSiteLogin
         {
             get

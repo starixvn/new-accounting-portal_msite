@@ -1,12 +1,9 @@
-﻿namespace Fanex.Maintenance.Service.Criteria.MailService
+namespace Fanex.Maintenance.Service.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
     using Fanex.Maintenance;
     using MailDeliver.Model;
 
-    /// <summary>
-    /// The mail function view model class.
-    /// </summary>
     public class MailFunctionViewModel
     {
         public MailFunctionViewModel()
@@ -41,10 +38,6 @@
             ErrorMessageResourceType = typeof(ViewResource))]
         public string FunctionName { get; set; }
 
-        /// <summary>
-        /// Get mail function.
-        /// </summary>
-        /// <returns>Mail function.</returns>
         public MailFunction GetMailFunction()
         {
             var mailFunction = new MailFunction

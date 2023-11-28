@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Service.Command
+namespace Fanex.Maintenance.Service.Command
 {
     public interface ICommandResult
     {

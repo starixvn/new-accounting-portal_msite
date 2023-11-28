@@ -1,13 +1,10 @@
-﻿namespace Fanex.Maintenance.Service.Criteria.MailService
+namespace Fanex.Maintenance.Service.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
     using Fanex.Maintenance;
     using MailDeliver.Model;
     using NAP.Core.Web.Session;
 
-    /// <summary>
-    /// The mail config view model class.
-    /// </summary>
     public class MailConfigViewModel
     {
         public MailConfigViewModel()
@@ -49,10 +46,6 @@
         [Display(Name = "IsEncrypt", ResourceType = typeof(ViewResource))]
         public bool IsEncrypt { get; set; }
 
-        /// <summary>
-        /// Get mail config.
-        /// </summary>
-        /// <returns>Mail config.</returns>
         public MailConfig GetMailConfig()
         {
             var mailConfig = new MailConfig

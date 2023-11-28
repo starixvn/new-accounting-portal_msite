@@ -1,4 +1,4 @@
-﻿using Fanex.MailDeliver.Model;
+using Fanex.MailDeliver.Model;
 using Fanex.MailDelivery.Core.Models;
 using Fanex.MailDelivery.MailStation.Criteria.MailReport;
 using Fanex.MailDelivery.MailStation.Models;

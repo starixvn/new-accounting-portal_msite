@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Controller
+namespace Fanex.Maintenance.Controller
 {
     using System.Web.Mvc;
     using NAP.Core.Business;

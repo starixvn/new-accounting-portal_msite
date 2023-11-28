@@ -1,4 +1,4 @@
-﻿using Fanex.Data.Repository;
+using Fanex.Data.Repository;
 
 namespace Fanex.Letstalk.Notification.Criteria
 {

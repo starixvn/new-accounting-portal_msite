@@ -1,8 +1,5 @@
-﻿namespace Fanex.Maintenance.Service.Criteria.Misc
+namespace Fanex.Maintenance.Service.Criteria.Misc
 {
-    /// <summary>
-    /// Result criteria.
-    /// </summary>
     public class ResultCriteria
     {
         public ResultCriteria()

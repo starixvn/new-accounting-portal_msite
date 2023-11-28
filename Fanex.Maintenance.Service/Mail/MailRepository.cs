@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Service.Mail
+namespace Fanex.Maintenance.Service.Mail
 {
     using System.Collections.Generic;
     using System.Linq;

@@ -1,4 +1,4 @@
-﻿namespace Fanex.Tool.TraceSP.Criteria
+namespace Fanex.Tool.TraceSP.Criteria
 {
     using Fanex.Data.Repository;
     public class TracingSpCriteria : NonQueryCommand

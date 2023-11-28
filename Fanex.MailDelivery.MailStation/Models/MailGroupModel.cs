@@ -1,8 +1,5 @@
-﻿namespace Fanex.MailDelivery.MailStation.Models
+namespace Fanex.MailDelivery.MailStation.Models
 {
-    /// <summary>
-    /// Mail Log Model.
-    /// </summary>
     public class MailGroupModel
     {
         public int MailGroupId { get; set; }

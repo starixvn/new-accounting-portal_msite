@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="ConnectionStringController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -23,9 +23,6 @@ namespace Fanex.Maintenance.Controller
     using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.Core.Command;
 
-    /// <summary>
-    /// Connection string controller.
-    /// </summary>
     [NapSuperAuth]
     public class ConnectionStringController : BaseController
     {
@@ -64,11 +61,6 @@ namespace Fanex.Maintenance.Controller
 
         #region Connection String
 
-        /// <summary>
-        /// Connections view.
-        /// </summary>
-        /// <param name="model">The search connection view model.</param>
-        /// <returns>Connections list view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Read)]
         public ActionResult Connection(SearchConnectionViewModel model)
@@ -82,10 +74,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Creates the connection.
-        /// </summary>
-        /// <returns>Create the connection view with default value.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult CreateConnection()
@@ -105,11 +93,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Creates the connection.
-        /// </summary>
-        /// <param name="model">The connection view model.</param>
-        /// <returns>Connection list view.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult CreateConnection(ConnectionViewModel model)
@@ -151,11 +134,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Edits the connection.
-        /// </summary>
-        /// <param name="id">The connection identifier.</param>
-        /// <returns>Edit connection view with current value.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult EditConnection(int id)
@@ -179,11 +157,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Edits the connection.
-        /// </summary>
-        /// <param name="model">The connection view model.</param>
-        /// <returns>Connection list view.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult EditConnection(ConnectionViewModel model)
@@ -240,11 +213,6 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
-        /// <summary>
-        /// Switches the database server of list connection.
-        /// </summary>
-        /// <param name="model">The switch database server model.</param>
-        /// <returns>Connection list view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.SwitchConnection, Policy = Constant.Policy.Host)]
         public ActionResult SwitchConnection(SwitchConnectionViewModel model)
@@ -268,12 +236,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Switch the connection database server.
-        /// </summary>
-        /// <param name="connectionIds">The connection ids.</param>
-        /// <param name="toDbServerId">To database server identifier.</param>
-        /// <returns>Connection list view.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.SwitchConnection, Policy = Constant.Policy.Host)]
         public ActionResult SwitchConnectionDbServer(string connectionIds, int toDbServerId)
@@ -305,11 +267,6 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
-        /// <summary>
-        /// Connections the assign site.
-        /// </summary>
-        /// <param name="id">The connection identifier.</param>
-        /// <returns>Site list view.</returns>
         [HttpGet]
         public ActionResult ConnectionAssignSite(int id)
         {
@@ -386,11 +343,6 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
-        /// <summary>
-        /// Creates the site.
-        /// </summary>
-        /// <param name="model">The site view model.</param>
-        /// <returns>Site list view.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageSite, Policy = Constant.Policy.Host)]
         public ActionResult CreateSite(SiteViewModel model)
@@ -421,11 +373,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Edits the site.
-        /// </summary>
-        /// <param name="id">The site identifier.</param>
-        /// <returns>Site edit view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageSite, Policy = Constant.Policy.Host)]
         public ActionResult EditSite(int id)
@@ -443,11 +390,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Edits the site.
-        /// </summary>
-        /// <param name="model">The site view model.</param>
-        /// <returns>Site list view.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageSite, Policy = Constant.Policy.Host)]
         public ActionResult EditSite(SiteViewModel model)
@@ -516,11 +458,6 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
-        /// <summary>
-        /// Creates the database server.
-        /// </summary>
-        /// <param name="model">The database server model.</param>
-        /// <returns>Database server list view.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabaseServer, Policy = Constant.Policy.Host)]
         public ActionResult CreateDatabaseServer(DatabaseServerViewModel model)
@@ -553,11 +490,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Edits the database server.
-        /// </summary>
-        /// <param name="id">The database server identifier.</param>
-        /// <returns>Database server edit view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabaseServer, Policy = Constant.Policy.Host)]
         public ActionResult EditDatabaseServer(int id)
@@ -576,11 +508,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Edits the database server.
-        /// </summary>
-        /// <param name="model">The database server view model.</param>
-        /// <returns>Database server list view.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabaseServer, Policy = Constant.Policy.Host)]
         public ActionResult EditDatabaseServer(DatabaseServerViewModel model)
@@ -632,11 +559,6 @@ namespace Fanex.Maintenance.Controller
 
         #region Database
 
-        /// <summary>
-        /// The database list view.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns>Database list view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Read)]
         public ActionResult Database(SearchDatabaseViewModel model)
@@ -649,11 +571,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Creates the database.
-        /// </summary>
-        /// <param name="databaseId">The database identifier.</param>
-        /// <returns>Database create new view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult CreateDatabase(int databaseId)
@@ -667,11 +584,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Creates the database.
-        /// </summary>
-        /// <param name="model">The database view model.</param>
-        /// <returns>Database list view.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult CreateDatabase(DatabaseViewModel model)
@@ -708,11 +620,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Edits the database.
-        /// </summary>
-        /// <param name="id">The database identifier.</param>
-        /// <returns>Database edit view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult EditDatabase(int id)
@@ -732,11 +639,6 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Edits the database.
-        /// </summary>
-        /// <param name="model">The database view model.</param>
-        /// <returns>Database list view.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult EditDatabase(DatabaseViewModel model)
@@ -790,11 +692,6 @@ namespace Fanex.Maintenance.Controller
 
         #region Log management
 
-        /// <summary>
-        /// The view execute stored procedure log.
-        /// </summary>
-        /// <param name="model">The log view model.</param>
-        /// <returns>The log view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ConnectionStringLog, Policy = Constant.Policy.Read)]
         public ActionResult Log(SearchLogViewModel model)

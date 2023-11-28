@@ -1,10 +1,7 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
+namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Get all log category criteria.
-    /// </summary>
     public class GetAllScheduleCriteria : CriteriaBase
     {
         public string MailName { get; set; }

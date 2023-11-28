@@ -1,10 +1,7 @@
-﻿namespace Fanex.Maintenance.Site
+namespace Fanex.Maintenance.Site
 {
     using System.Web.Mvc;
 
-    /// <summary>
-    /// User Login Area.
-    /// </summary>
     public class MailStationAreaRegistration : AreaRegistration
     {
         public override string AreaName

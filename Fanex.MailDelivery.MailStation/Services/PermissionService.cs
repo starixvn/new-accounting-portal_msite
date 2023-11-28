@@ -1,4 +1,4 @@
-﻿using Fanex.NAP.Core.Business;
+using Fanex.NAP.Core.Business;
 using Fanex.NAP.Core.Configuration;
 using Fanex.NAP.Core.Service.Impl;
 using Fanex.NAP.Core.Service.Interface;

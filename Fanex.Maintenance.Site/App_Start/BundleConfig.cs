@@ -1,19 +1,10 @@
-﻿namespace Fanex.Maintenance.Site.App_Start
+namespace Fanex.Maintenance.Site.App_Start
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Web.Optimization;
 
-    /// <summary>
-    /// Bundle config.
-    /// </summary>
     public static class BundleConfig
     {
-        /// <summary>
-        /// Register bundles.
-        /// For more information on Bundling
-        /// <see cref="http://go.microsoft.com/fwlink/?LinkId=254725"/>
-        /// </summary>
-        /// <param name="bundles">Bundle collection.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public static void RegisterBundles(BundleCollection bundles)
         {

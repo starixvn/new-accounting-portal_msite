@@ -1,13 +1,10 @@
-﻿namespace Fanex.Maintenance.Service.Criteria.MailService
+namespace Fanex.Maintenance.Service.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
     using Common;
     using Fanex.Maintenance;
     using MailDeliver.Model;
 
-    /// <summary>
-    /// The mail setting view model.
-    /// </summary>
     public class MailSettingViewModel
     {
         public MailSettingViewModel()
@@ -57,10 +54,6 @@
         [Display(Name = "IsAuth", ResourceType = typeof(ViewResource))]
         public bool IsAuth { get; set; }
 
-        /// <summary>
-        /// Get mail setting.
-        /// </summary>
-        /// <returns>Mail setting.</returns>
         public MailSetting GetMailSetting()
         {
             var mailSetting = new MailSetting

@@ -1,4 +1,4 @@
-﻿using Fanex.Logging;
+using Fanex.Logging;
 using System;
 using System.Web;
 

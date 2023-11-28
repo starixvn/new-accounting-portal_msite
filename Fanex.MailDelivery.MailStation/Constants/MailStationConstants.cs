@@ -1,12 +1,9 @@
-﻿namespace Fanex.MailDelivery.MailStation.Constants
+namespace Fanex.MailDelivery.MailStation.Constants
 {
     using Fanex.MailDelivery.MailStation.Models;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>
-    /// Mail station constants.
-    /// </summary>
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1311:StaticReadonlyFieldsMustBeginWithUpperCaseLetter", Justification = "Reviewed.")]
     public static class MailStationConstants
     {
