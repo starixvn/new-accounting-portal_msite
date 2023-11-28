@@ -35,7 +35,7 @@
     <file relUrl="themes/manage/images/icn_alert_warning.png" publishTime="02/18/2014 13:00:37" />
     <file relUrl="themes/jquery-ui/smoothness/jquery-ui-1.8.23.min.css" publishTime="10/26/2012 16:57:36" />
     <file relUrl="themes/manage/images/icn_trash.png" publishTime="02/18/2014 13:00:37" />
-    <file relUrl="bin/Fanex.Maintenance.Core.pdb" publishTime="06/27/2014 08:43:39" />
+    <file relUrl="bin/Fanex.Maintenance.pdb" publishTime="06/27/2014 08:43:39" />
     <file relUrl="Views/Mail/EditMailSetting.cshtml" publishTime="01/20/2014 16:26:11" />
     <file relUrl="Areas/UserLogin/Views/Common/Error.cshtml" publishTime="01/20/2014 16:26:09" />
     <file relUrl="Views/Mail/MailSetting.cshtml" publishTime="02/18/2014 13:14:04" />
@@ -167,7 +167,7 @@
     <file relUrl="bin/Microsoft.Web.Infrastructure.dll" publishTime="07/08/2013 15:15:08" />
     <file relUrl="themes/jquery-ui/smoothness/images/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="10/26/2012 16:57:36" />
     <file relUrl="Views/Mail/GetError.cshtml" publishTime="01/20/2014 16:26:11" />
-    <file relUrl="bin/Fanex.Maintenance.Core.dll" publishTime="06/27/2014 08:43:39" />
+    <file relUrl="bin/Fanex.Maintenance.dll" publishTime="06/27/2014 08:43:39" />
     <file relUrl="themes/manage/img/combo-pickr/openbutton.png" publishTime="02/18/2014 13:00:37" />
     <file relUrl="themes/manage/images/retry.png" publishTime="02/18/2014 13:00:37" />
     <file relUrl="bin/Microsoft.Practices.Unity.dll" publishTime="10/26/2012 16:57:36" />

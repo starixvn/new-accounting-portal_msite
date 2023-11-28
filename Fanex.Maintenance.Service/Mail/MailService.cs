@@ -5,9 +5,6 @@
     using System.Linq;
     using MailDeliver.MailClient.API;
     using MailDeliver.Model;
-    using System.Linq;
-    using Fanex.MailDeliver.MailClient.API;
-    using Fanex.MailDeliver.Model;
 
     public interface IMailService
     {

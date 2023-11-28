@@ -141,7 +141,7 @@
       <Project>{e7173cdd-8ecb-4fb6-b585-41bfe941745e}</Project>
       <Name>Fanex.Maintenance.Controller</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj">
+    <ProjectReference Include="..\Fanex.Maintenance\Fanex.Maintenance.csproj">
       <Project>{60bc3fa8-df7c-4024-b469-4ed110420143}</Project>
       <Name>Fanex.Maintenance.Core</Name>
     </ProjectReference>

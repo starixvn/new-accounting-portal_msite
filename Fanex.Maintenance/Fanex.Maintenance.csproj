@@ -8,8 +8,8 @@
     <ProjectGuid>{60BC3FA8-DF7C-4024-B469-4ED110420143}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fanex.Maintenance.Core</RootNamespace>
-    <AssemblyName>Fanex.Maintenance.Core</AssemblyName>
+    <RootNamespace>Fanex.Maintenance</RootNamespace>
+    <AssemblyName>Fanex.Maintenance</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>

@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Core.Model.LetstalkNotification
+﻿namespace Fanex.Maintenance.Service.Model.LetstalkNotification
 {
     public class MessageModel
     {

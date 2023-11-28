@@ -725,7 +725,7 @@
     <Content Include="themes\manage\RefreshCountDown.less" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.Letstalk.Report\Fanex.Letstalk.Notification.csproj">
+    <ProjectReference Include="..\Fanex.Letstalk.Notification\Fanex.Letstalk.Notification.csproj">
       <Project>{e8348bb1-1c03-4852-aea3-ccbab083764a}</Project>
       <Name>Fanex.Letstalk.Notification</Name>
     </ProjectReference>
@@ -737,9 +737,9 @@
       <Project>{E7173CDD-8ECB-4FB6-B585-41BFE941745E}</Project>
       <Name>Fanex.Maintenance.Controller</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj">
+    <ProjectReference Include="..\Fanex.Maintenance\Fanex.Maintenance.csproj">
       <Project>{60BC3FA8-DF7C-4024-B469-4ED110420143}</Project>
-      <Name>Fanex.Maintenance.Core</Name>
+      <Name>Fanex.Maintenance</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Tool.TraceSP\Fanex.Tool.TraceSP.csproj">
       <Project>{0305d905-08cc-40a8-9160-145f0caf5de7}</Project>

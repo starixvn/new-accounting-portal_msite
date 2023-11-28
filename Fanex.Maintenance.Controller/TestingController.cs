@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Maintenance.Controller
 {
     using System.Web.Mvc;
-    using Core.Model.LetstalkNotification;
     using NAP.Core.Business;
     using NAP.Core.Web.Attribute;
     using Service.Model.LetstalkNotification;

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Fanex.Maintenance.Core {
+namespace Fanex.Maintenance {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Fanex.Maintenance.Core {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.Maintenance.Core.ViewResource", typeof(ViewResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.Maintenance.ViewResource", typeof(ViewResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

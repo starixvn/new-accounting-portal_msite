@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using Common;
-    using Fanex.Maintenance.Core;
+    using Fanex.Maintenance;
     using MailDeliver.Model;
 
     /// <summary>

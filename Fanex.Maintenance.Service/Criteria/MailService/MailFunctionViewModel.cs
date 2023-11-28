@@ -1,7 +1,7 @@
 ﻿namespace Fanex.Maintenance.Service.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
-    using Fanex.Maintenance.Core;
+    using Fanex.Maintenance;
     using MailDeliver.Model;
 
     /// <summary>
