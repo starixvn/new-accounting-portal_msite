@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
-using Fanex.MailDelivery.MailStation.Models;
-using Fanex.NAP.Core.Models;
-using Fanex.NAP.Core.Service.Interface;
-
-namespace Fanex.MailDelivery.MailStation.Services.ManageRecipient
+namespace Fanex.MailDelivery.MailStation.Services
 {
-    using Data.Repository;
-    using Maintenance.Service.Command;
-    using NAP.Core.Service.Impl;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Fanex.Data.Repository;
+    using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
+    using Fanex.MailDelivery.MailStation.Models;
+    using Fanex.Maintenance.Service.Command;
+    using Fanex.NAP.Core.Models;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Service.Interface;
 
     public class ManageRecipientService : MailStationBaseService
     {

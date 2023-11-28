@@ -1,4 +1,4 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria
+namespace Fanex.MailDelivery.MailStation.Criteria
 {
     using Data.Repository;
 

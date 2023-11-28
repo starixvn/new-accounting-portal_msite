@@ -1,4 +1,4 @@
-﻿using Fanex.MailDelivery.Core;
+using Fanex.MailDelivery.Core;
 using System;
 using System.Web.Configuration;
 

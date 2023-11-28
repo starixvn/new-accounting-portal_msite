@@ -1,18 +1,9 @@
-﻿namespace Fanex.Maintenance.Service.Criteria.Misc
+namespace Fanex.Maintenance.Service.Criteria.Misc
 {
-    /// <summary>
-    /// Result criteria.
-    /// </summary>
     public class ResultCriteria
     {
-        public ResultCriteria()
-        {
-            ErrCode = 0;
-            ErrMsg = string.Empty;
-        }
+        public int ErrCode { get; set; } = 0;
 
-        public int ErrCode { get; set; }
-
-        public string ErrMsg { get; set; }
+        public string ErrMsg { get; set; } = string.Empty;
     }
 }

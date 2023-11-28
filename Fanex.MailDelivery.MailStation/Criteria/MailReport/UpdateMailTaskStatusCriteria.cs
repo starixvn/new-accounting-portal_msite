@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
@@ -15,9 +15,6 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
             return true;
         }
 
-        public override string GetSettingKey()
-        {
-            return "Mail_Core_UpdateMailStatus";
-        }
+        public override string GetSettingKey() => "Mail_Core_UpdateMailStatus";
     }
 }

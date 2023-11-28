@@ -1,7 +1,7 @@
-﻿namespace Fanex.Maintenance.Site
+namespace Fanex.Maintenance.Site
 {
     using System.Web.Mvc;
-    using Fanex.Caching;
+    using Caching;
     using ONEbook.UM;
     using ONEbook.UM.AspNetMVC.Filters;
     using ONEbook.UM.Configurations;
@@ -18,9 +18,9 @@
             var restClient = new UMRestClient(umConfig);
             var cacheService = new UMCacheService(new CacheService());
             var context = new HttpContextHelper();
-            var maintenainceService = new MaintenanceService(restClient, cacheService, umConfig, context);
+            var maintenanceService = new MaintenanceService(restClient, cacheService, umConfig, context);
 
-            var umFilter = new CheckUMFilterAttribute(maintenainceService, umConfig);
+            var umFilter = new CheckUMFilterAttribute(maintenanceService, umConfig);
 
             UMClientManager
                .UseConfig(umConfig)

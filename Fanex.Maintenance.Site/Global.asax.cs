@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Site
+namespace Fanex.Maintenance.Site
 {
     using System;
     using System.Configuration;
@@ -6,7 +6,6 @@
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
-    using App_Start;
     using Data;
     using EasyNetQ.Logging;
     using Logging.Extensions.Web;

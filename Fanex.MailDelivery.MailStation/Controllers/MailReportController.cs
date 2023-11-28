@@ -1,4 +1,4 @@
-﻿using Fanex.MailDelivery.Core.Models;
+using Fanex.MailDelivery.Core.Models;
 using Fanex.MailDelivery.MailStation.Constants;
 using Fanex.MailDelivery.MailStation.Criteria.MailReport;
 using Fanex.MailDelivery.MailStation.Extensions;
@@ -14,12 +14,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
     [NapSuperAuth]
     public class MailReportController : BaseController
     {
-        private readonly MailReportService mailReportService;
-
-        public MailReportController()
-        {
-            mailReportService = new MailReportService();
-        }
+        private readonly MailReportService mailReportService = new MailReportService();
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
         public ActionResult Index()

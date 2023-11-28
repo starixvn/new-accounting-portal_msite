@@ -9,9 +9,6 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
             return true;
         }
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_GetAllSites";
-        }
+        public override string GetSettingKey() => "MailStation_GetAllSites";
     }
 }

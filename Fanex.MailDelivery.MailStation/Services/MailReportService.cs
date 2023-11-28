@@ -1,4 +1,4 @@
-﻿using Fanex.MailDeliver.Model;
+using Fanex.MailDeliver.Model;
 using Fanex.MailDelivery.Core.Models;
 using Fanex.MailDelivery.MailStation.Criteria.MailReport;
 using Fanex.MailDelivery.MailStation.Models;
@@ -15,14 +15,9 @@ namespace Fanex.MailDelivery.MailStation.Services
 
     public class MailReportService : MailStationBaseService
     {
-        private readonly IMailService mailService;
+        private readonly IMailService mailService = MailService.Create();
         private IJobOperationService jobOperationService;
         private readonly IDynamicRepository dynamicRepository= new DynamicRepository();
-
-        public MailReportService()
-        {
-            mailService = mailService ?? MailService.Create();
-        }
 
         public List<MailTaskModel> MailReport(MailReportCriteria criteria)
         {
@@ -49,21 +44,21 @@ namespace Fanex.MailDelivery.MailStation.Services
                         if (fromDate <= toDate)
                         {
                             var trigger = TriggerBuilder.Create().WithCronSchedule(schedule.CronExpression).Build();
-                            var listtriggerdate = TriggerUtils.ComputeFireTimesBetween(
+                            var triggerTimes = TriggerUtils.ComputeFireTimesBetween(
                                 (IOperableTrigger)trigger,
                                 null,
                                 new DateTimeOffset(fromDate),
                                 new DateTimeOffset(toDate));
-                            listtriggerdate = (from trigertime in listtriggerdate
+                            triggerTimes = (from time in triggerTimes
                                                where !(from task in mailTasks
                                                        where task.MailId == schedule.MailId
                                                        select task.ScheduledTime)
-                                                   .Contains(trigertime.LocalDateTime)
-                                               select trigertime).ToList();
+                                                   .Contains(time.LocalDateTime)
+                                               select time).ToList();
 
-                            foreach (var triggertime in listtriggerdate)
+                            foreach (var time in triggerTimes)
                             {
-                                var status = triggertime.LocalDateTime.AddSeconds(5) > DateTime.Now ? (int)JobStatus.Waiting : (int)JobStatus.Missing;
+                                var status = time.LocalDateTime.AddSeconds(5) > DateTime.Now ? (int)JobStatus.Waiting : (int)JobStatus.Missing;
 
                                 if (criteria.Status == -1 || criteria.Status == status)
                                 {
@@ -73,7 +68,7 @@ namespace Fanex.MailDelivery.MailStation.Services
                                         MailId = schedule.MailId,
                                         Attempt = schedule.Attempt,
                                         LastSent = null,
-                                        ScheduledTime = triggertime.LocalDateTime,
+                                        ScheduledTime = time.LocalDateTime,
                                         SiteId = schedule.SiteId,
                                         SiteName = schedule.SiteName,
                                         Status = status,
@@ -135,15 +130,7 @@ namespace Fanex.MailDelivery.MailStation.Services
 
         public MailRecord MailDetail(MailDetailCriteria criteria)
         {
-            try
-            {
-                return mailService.GetMail(criteria.MailId);
-            }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
-                throw;
-            }
+            return mailService.GetMail(criteria.MailId);
         }
 
         public List<MailLogModel> MailLog(MailLogCriteria criteria)
@@ -185,7 +172,7 @@ namespace Fanex.MailDelivery.MailStation.Services
         public void RetryMissingJob(RetryMissingTaskCriteria criteria)
         {
             dynamicRepository.Execute(criteria);
-            int mailTaskId = criteria.MailTaskId;
+            var mailTaskId = criteria.MailTaskId;
 
             var mailTask = GetMailTaskByID(new GetMailTaskByIdCriteria { MailTaskId = mailTaskId });
             var schedule = GetScheduleByMailId(new GetScheduleByIdCriteria { MailId = mailTask.MailId });
@@ -210,30 +197,22 @@ namespace Fanex.MailDelivery.MailStation.Services
             ExecuteNonQuery(criteria);
         }
 
-        private DateTime MaxDateTime(DateTime date1, DateTime? date2)
+        private static DateTime MaxDateTime(DateTime date1, DateTime? date2)
         {
-            if (date2.HasValue)
-            {
+            return date2.HasValue
+                ?
                 // Add 5 seconds for the number ratio.
-                return date1 >= date2.Value ? date1 : date2.Value.AddSeconds(5);
-            }
-            else
-            {
-                return date1;
-            }
+                date1 >= date2.Value ? date1 : date2.Value.AddSeconds(5)
+                : date1;
         }
 
-        private DateTime MinDateTime(DateTime date1, DateTime? date2)
+        private static DateTime MinDateTime(DateTime date1, DateTime? date2)
         {
-            if (date2.HasValue)
-            {
+            return date2.HasValue
+                ?
                 // Add 5 seconds for the number ratio.
-                return date1 < date2.Value ? date1 : date2.Value.AddSeconds(5);
-            }
-            else
-            {
-                return date1;
-            }
+                date1 < date2.Value ? date1 : date2.Value.AddSeconds(5)
+                : date1;
         }
     }
 }

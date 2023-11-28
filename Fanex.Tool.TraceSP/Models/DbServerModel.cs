@@ -1,4 +1,4 @@
-﻿namespace Fanex.Tool.TraceSP.Models
+namespace Fanex.Tool.TraceSP.Models
 {
     using System.Collections.Generic;
     public class DbServerModel

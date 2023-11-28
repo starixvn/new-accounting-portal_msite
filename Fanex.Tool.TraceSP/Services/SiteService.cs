@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
@@ -6,7 +6,7 @@ using Fanex.Tool.TraceSP.Models;
 
 namespace Fanex.Tool.TraceSP.Services
 {
-    interface ISiteService
+    internal interface ISiteService
     {
         List<Site> GetSites(string siteXmlPath);
     }

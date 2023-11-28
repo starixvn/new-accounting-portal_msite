@@ -1,4 +1,4 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
+namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
 {
     public class UpdateMailGroupCriteria : UpdateCommandBase
     {
@@ -13,9 +13,6 @@
             return true;
         }
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_Group_UpdateMailGroup";
-        }
+        public override string GetSettingKey() => "MailStation_Group_UpdateMailGroup";
     }
 }

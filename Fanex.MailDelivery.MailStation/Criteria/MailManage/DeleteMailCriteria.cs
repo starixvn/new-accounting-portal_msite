@@ -1,4 +1,4 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
+namespace Fanex.MailDelivery.MailStation.Criteria.MailManage
 {
     public class DeleteMailCriteria : UpdateCommandBase
     {
@@ -9,9 +9,6 @@
             return true;
         }
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_DeleteMail";
-        }
+        public override string GetSettingKey() => "MailStation_DeleteMail";
     }
 }

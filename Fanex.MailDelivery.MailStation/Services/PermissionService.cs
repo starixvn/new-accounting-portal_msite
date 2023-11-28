@@ -1,4 +1,4 @@
-﻿using Fanex.NAP.Core.Business;
+using Fanex.NAP.Core.Business;
 using Fanex.NAP.Core.Configuration;
 using Fanex.NAP.Core.Service.Impl;
 using Fanex.NAP.Core.Service.Interface;
@@ -8,8 +8,8 @@ namespace Fanex.MailDelivery.MailStation.Services
 {
     public static class PermissionService
     {
-        private static ICurrentSession currentSession = new CurrentSession();
-        private static IUserService userService = new UserService();
+        private static readonly ICurrentSession currentSession = new CurrentSession();
+        private static readonly IUserService userService = new UserService();
 
         public static bool HasReadPermission(string functionName)
         {

@@ -1,4 +1,4 @@
-﻿namespace Fanex.Letstalk.Notification.Model
+namespace Fanex.Letstalk.Notification.Model
 {
     public class FilterGroup
     {

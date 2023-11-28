@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fanex.MailDelivery.Core.Models;
@@ -21,10 +21,11 @@ namespace Fanex.MailDelivery.MailStation.Services
       
         public IList<MailModel> MailList(GetMailListCriteria criteria)
         {
-            var (mailModels, listdDates) = dynamicRepository.FetchMultiple<MailModel, CurrentTime>(criteria);
-            var now = listdDates.FirstOrDefault().Now;
+            var (mailModels, dates) = dynamicRepository.FetchMultiple<MailModel, CurrentTime>(criteria);
+            var now = dates.FirstOrDefault().Now;
 
-            mailModels.ToList().ForEach(n =>
+            var mailModelList = mailModels.ToList();
+            mailModelList.ForEach(n =>
             {
                 if (n.TriggerType == (int)MailType.Schedule)
                 {
@@ -37,7 +38,7 @@ namespace Fanex.MailDelivery.MailStation.Services
                 }
             });
 
-            return mailModels.ToList();
+            return mailModelList;
         }
 
         public MailModel MailById(GetMailByIdCriteria criteria)

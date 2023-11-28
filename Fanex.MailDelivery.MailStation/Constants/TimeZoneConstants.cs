@@ -1,12 +1,9 @@
-﻿namespace Fanex.MailDelivery.MailStation.Constants
+namespace Fanex.MailDelivery.MailStation.Constants
 {
-    using Fanex.MailDelivery.MailStation.Models;
+    using Models;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>
-    /// Error Code Constants.
-    /// </summary>
     public static class TimeZoneConstants
     {
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]

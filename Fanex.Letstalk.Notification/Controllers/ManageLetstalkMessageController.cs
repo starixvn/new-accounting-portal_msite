@@ -1,4 +1,4 @@
-﻿using Fanex.Letstalk.Notification.Criteria;
+using Fanex.Letstalk.Notification.Criteria;
 using Fanex.Letstalk.Notification.Services;
 using Fanex.Maintenance.Controller;
 using Fanex.NAP.Core.Business;
@@ -14,16 +14,7 @@ namespace Fanex.Letstalk.Notification.Controllers
     [NapSuperAuth]
     public class ManageLetstalkMessageController : BaseController
     {
-        private readonly ManageLetstalkMessageService manageLetstalkMessageService;
-
-        public ManageLetstalkMessageController() : this(null)
-        {
-        }
-
-        public ManageLetstalkMessageController(ILetstalkReportRestClientService service)
-        {
-            manageLetstalkMessageService = new ManageLetstalkMessageServiceImp();
-        }
+        private readonly ManageLetstalkMessageService manageLetstalkMessageService = new ManageLetstalkMessageServiceImp();
 
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
         public ActionResult Index()

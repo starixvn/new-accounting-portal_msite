@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Fanex.Letstalk.Notification.Model
 {
@@ -22,49 +22,21 @@ namespace Fanex.Letstalk.Notification.Model
 
         public DateTime ConfigSendTime { get; set; }
 
-        public string ConfigSendTimeString
-        {
-            get
-            {
-                return ConfigSendTime.ToString("MMM dd, yyyy HH:mm:ss");
-            }
-        }
+        public string ConfigSendTimeString => ConfigSendTime.ToString("MMM dd, yyyy HH:mm:ss");
 
         public DateTime? LastSentTime { get; set; }
 
-        public string LastSentTimeString
-        {
-            get
-            {
-                if (!LastSentTime.HasValue)
-                {
-                    return "";
-                }
-                return LastSentTime.Value.ToString("MMM dd, yyyy HH:mm:ss");
-            }
-        }
+        public string LastSentTimeString => !LastSentTime.HasValue ? "" : LastSentTime.Value.ToString("MMM dd, yyyy HH:mm:ss");
 
         public string Status { get; set; }
 
         public DateTime LastUpdTime { get; set; }
 
-        public string LastUpdTimeString
-        {
-            get
-            {
-                return LastUpdTime.ToString("MMM dd, yyyy HH:mm:ss");
-            }
-        }
+        public string LastUpdTimeString => LastUpdTime.ToString("MMM dd, yyyy HH:mm:ss");
 
         public DateTime CreatedTime { get; set; }
 
-        public string CreatedTimeString
-        {
-            get
-            {
-                return CreatedTime.ToString("MMM dd, yyyy HH:mm:ss");
-            }
-        }
+        public string CreatedTimeString => CreatedTime.ToString("MMM dd, yyyy HH:mm:ss");
 
         public int CreatedBy { get; set; }
 

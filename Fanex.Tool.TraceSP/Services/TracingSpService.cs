@@ -1,4 +1,4 @@
-﻿using Fanex.Logging;
+using Fanex.Logging;
 using Fanex.Tool.TraceSP.Criteria;
 using Fanex.Tool.TraceSP.Models;
 using System;
@@ -65,7 +65,7 @@ namespace Fanex.Tool.TraceSP.Services
                               "\r\nREFERRER: " + HttpContext.Current.Request.UrlReferrer +
                               "\r\nFORM: " + HttpContext.Current.Request.Form +
                               "\r\nQUERYSTRING: " + HttpContext.Current.Request.QueryString +
-                              "\r\nTARGETSITE: " + e.TargetSite +
+                              "\r\nTARGET-SITE: " + e.TargetSite +
                               "\r\nSTACKTRACE: " + e.StackTrace;
 
                 Logger.Log.Warn(message);

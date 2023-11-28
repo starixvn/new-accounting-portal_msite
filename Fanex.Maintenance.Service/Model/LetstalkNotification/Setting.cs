@@ -1,4 +1,4 @@
-﻿namespace Fanex.Maintenance.Service.Model.LetstalkNotification
+namespace Fanex.Maintenance.Service.Model.LetstalkNotification
 {
     using System.Configuration;
 
@@ -17,64 +17,64 @@
         [ConfigurationProperty(__NotificationService1, IsRequired = true)]
         public string NotificationService1
         {
-            get { return this[__NotificationService1].ToString(); }
-            set { this[__NotificationService1] = value; }
+            get => this[__NotificationService1].ToString();
+            set => this[__NotificationService1] = value;
         }
 
         [ConfigurationProperty(__NotificationService2, IsRequired = true)]
         public string NotificationService2
         {
-            get { return this[__NotificationService2].ToString(); }
-            set { this[__NotificationService2] = value; }
+            get => this[__NotificationService2].ToString();
+            set => this[__NotificationService2] = value;
         }
 
         [ConfigurationProperty(__AuthenticationKey, IsRequired = true)]
         public string AuthenticationKey
         {
-            get { return this[__AuthenticationKey].ToString(); }
-            set { this[__AuthenticationKey] = value; }
+            get => this[__AuthenticationKey].ToString();
+            set => this[__AuthenticationKey] = value;
         }
 
         [ConfigurationProperty(__TargetNameAlert, IsRequired = true)]
         public string TargetNameAlert
         {
-            get { return this[__TargetNameAlert].ToString(); }
-            set { this[__TargetNameAlert] = value; }
+            get => this[__TargetNameAlert].ToString();
+            set => this[__TargetNameAlert] = value;
         }
 
         [ConfigurationProperty(__TargetNameMailing, IsRequired = true)]
         public string TargetNameMailing
         {
-            get { return this[__TargetNameMailing].ToString(); }
-            set { this[__TargetNameMailing] = value; }
+            get => this[__TargetNameMailing].ToString();
+            set => this[__TargetNameMailing] = value;
         }
 
         [ConfigurationProperty(__TargetNameAlert1, IsRequired = true)]
         public string TargetNameAlert1
         {
-            get { return this[__TargetNameAlert1].ToString(); }
-            set { this[__TargetNameAlert1] = value; }
+            get => this[__TargetNameAlert1].ToString();
+            set => this[__TargetNameAlert1] = value;
         }
 
         [ConfigurationProperty(__TargetNameMailing1, IsRequired = true)]
         public string TargetNameMailing1
         {
-            get { return this[__TargetNameMailing1].ToString(); }
-            set { this[__TargetNameMailing1] = value; }
+            get => this[__TargetNameMailing1].ToString();
+            set => this[__TargetNameMailing1] = value;
         }
 
         [ConfigurationProperty(__ITALLAlert, IsRequired = true)]
         public string ITALLAlert
         {
-            get { return this[__ITALLAlert].ToString(); }
-            set { this[__ITALLAlert] = value; }
+            get => this[__ITALLAlert].ToString();
+            set => this[__ITALLAlert] = value;
         }
 
         [ConfigurationProperty(__ITALLMail, IsRequired = true)]
         public string ITALLMail
         {
-            get { return this[__ITALLMail].ToString(); }
-            set { this[__ITALLMail] = value; }
+            get => this[__ITALLMail].ToString();
+            set => this[__ITALLMail] = value;
         }
     }
 }

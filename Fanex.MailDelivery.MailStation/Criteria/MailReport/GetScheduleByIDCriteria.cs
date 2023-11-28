@@ -1,6 +1,6 @@
-﻿namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
+namespace Fanex.MailDelivery.MailStation.Criteria.MailReport
 {
-    using Fanex.Data.Repository;
+    using Data.Repository;
 
     public class GetScheduleByIdCriteria : CriteriaBase
     {
@@ -11,9 +11,6 @@
             return true;
         }
 
-        public override string GetSettingKey()
-        {
-            return "Mail_MailManagement_GetScheduleByMailId";
-        }
+        public override string GetSettingKey() => "Mail_MailManagement_GetScheduleByMailId";
     }
 }

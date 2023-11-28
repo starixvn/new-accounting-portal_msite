@@ -1,10 +1,7 @@
-﻿namespace Fanex.Maintenance.Service.Criteria.Misc
+namespace Fanex.Maintenance.Service.Criteria.Misc
 {
     using System;
 
-    /// <summary>
-    /// Execute SP log criteria.
-    /// </summary>
     public class LogExecSpCriteria 
     {
         public int CurrentUserId { get; set; }

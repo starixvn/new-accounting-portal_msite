@@ -1,8 +1,8 @@
-﻿using Fanex.MailDeliver.MailClient;
-using System.Configuration;
-
-namespace Fanex.Maintenance.Site.App_Start
+namespace Fanex.Maintenance.Site
 {
+    using System.Configuration;
+    using Fanex.MailDeliver.MailClient;
+
     public static class MailServiceRegister
     {
         public static void Register()

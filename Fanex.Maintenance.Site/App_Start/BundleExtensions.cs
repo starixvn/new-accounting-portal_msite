@@ -1,13 +1,10 @@
-﻿namespace Fanex.Maintenance.Site.App_Start
+namespace Fanex.Maintenance.Site
 {
     using System.Web;
     using System.Web.Optimization;
     using BundleTransformer.Core.Orderers;
     using BundleTransformer.Core.Transformers;
 
-    /// <summary>
-    /// Bundle extensions.
-    /// </summary>
     internal static class BundleExtensions
     {
         public static void AddAndInclude(this BundleCollection bundles, string bundleVirtualPath, params string[] virtualPaths)
@@ -24,7 +21,7 @@
             var request = context.Request;
             var applicationPath = request.PhysicalApplicationPath;
             var virtualDir = request.ApplicationPath;
-            virtualDir = virtualDir == "/" ? virtualDir : (virtualDir + "/");
+            virtualDir = virtualDir == "/" ? virtualDir : virtualDir + "/";
 
             return path.Replace(applicationPath, virtualDir).Replace(@"\", "/");
         }

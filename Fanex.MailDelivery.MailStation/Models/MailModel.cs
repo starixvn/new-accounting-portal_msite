@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Fanex.MailDelivery.MailStation.Models
 {
@@ -22,14 +22,14 @@ namespace Fanex.MailDelivery.MailStation.Models
         {
             get
             {
-                switch (this.TriggerType)
+                switch (TriggerType)
                 {
                     case 0:
                         return "Function";
                     case 1:
                         return "Schedule";
                     default:
-                        return "Unknow";
+                        return "Unknown";
                 }
             }
         }

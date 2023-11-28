@@ -834,7 +834,6 @@
     <Content Include="themes\shared\formedit.less" />
     <Content Include="Views\Shared\_LayoutWithTimer.cshtml" />
     <Content Include="Web.local.config" />
-    <Content Include="Views\Testing\LetstalkNotification.cshtml" />
     <Content Include="themes\manage\LetstalkNotification.less" />
     <Content Include="Web.backupMNL.config" />
     <Content Include="Web.pro.config">
@@ -844,7 +843,6 @@
     <Content Include="Web.sit2.config" />
     <Content Include="Web.uat.config" />
     <Content Include="themes\manage\LetstalkReport.less" />
-    <Content Include="Views\RemotingRef\Index.cshtml" />
     <Content Include="Web.aws.config">
       <SubType>Designer</SubType>
     </Content>

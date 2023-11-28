@@ -1,4 +1,4 @@
-﻿using Fanex.Letstalk.Notification.Criteria;
+using Fanex.Letstalk.Notification.Criteria;
 using Fanex.Letstalk.Notification.Model;
 using Fanex.NAP.Core.Service.Impl;
 using Fanex.NAP.Core.Service.Interface;
@@ -40,7 +40,7 @@ namespace Fanex.Letstalk.Notification.Services
 
         private readonly string environment = ConfigurationManager.AppSettings["Environment"];
 
-        private readonly string uatEnvironment = "UAT";
+        private const string uatEnvironment = "UAT";
 
         private readonly IDynamicRepository dynamicRepository = new DynamicRepository();
 
@@ -117,13 +117,12 @@ namespace Fanex.Letstalk.Notification.Services
                 {
                     if (notificationRecipient.NotificationID == item.NotificationID)
                     {
-                        var temp = item;
-                        temp.RecipientID = notificationRecipient.RecipientID;
-                        temp.RecipientName = notificationRecipient.RecipientName;
-                        temp.ConversationID = notificationRecipient.ConversationID;
-                        temp.Status = notificationRecipient.Status;
-                        temp.LastSentTime = notificationRecipient.LastSentTime;
-                        result.Add(temp);
+                        item.RecipientID = notificationRecipient.RecipientID;
+                        item.RecipientName = notificationRecipient.RecipientName;
+                        item.ConversationID = notificationRecipient.ConversationID;
+                        item.Status = notificationRecipient.Status;
+                        item.LastSentTime = notificationRecipient.LastSentTime;
+                        result.Add(item);
                     }
                 }
             }

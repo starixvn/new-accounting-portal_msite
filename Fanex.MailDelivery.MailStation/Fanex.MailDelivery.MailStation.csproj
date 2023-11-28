@@ -212,11 +212,8 @@
     <Compile Include="Services\MailStationBaseService.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Services\AppSession.cs" />
-    <Compile Include="Services\LoggingHandler.cs" />
     <Compile Include="Services\ManageRecipientService.cs" />
     <Compile Include="Services\PermissionService.cs" />
-    <Compile Include="Services\SessionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Labels.resx">

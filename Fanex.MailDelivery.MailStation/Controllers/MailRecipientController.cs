@@ -1,29 +1,25 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using Fanex.MailDelivery.MailStation.Constants;
 using Fanex.MailDelivery.MailStation.Criteria.ManageRecipient;
 using Fanex.MailDelivery.MailStation.Extensions;
 using Fanex.MailDelivery.MailStation.Models;
-using Fanex.MailDelivery.MailStation.Services.ManageRecipient;
 using Fanex.Maintenance.Controller;
 using Fanex.NAP.Core.Business;
 using Fanex.NAP.Core.Web.Attribute;
 
 namespace Fanex.MailDelivery.MailStation.Controllers
 {
+    using Services;
+
     [NapSuperAuth]
     public class MailRecipientController : BaseController
     {
-        private readonly ManageRecipientService manageRecipientService;
-
-        public MailRecipientController()
-        {
-            manageRecipientService = new ManageRecipientService();
-        }
+        private readonly ManageRecipientService manageRecipientService = new ManageRecipientService();
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageRecipient, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
-            ViewBag.ListStatus = manageRecipientService.Status(true);
+            ViewBag.ListStatus = manageRecipientService.Status();
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
             return View("~/Areas/MailStation/ManageRecipient/ManageRecipient/Index.cshtml");
@@ -112,7 +108,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         public ActionResult ViewRelevantMail(RecipientByIdCriteria criteria)
         {
             var recipient = manageRecipientService.RecipientById(criteria);
-            var emails = new string[] { recipient.Email1, recipient.Email2, recipient.Email3 };
+            var emails = new[] { recipient.Email1, recipient.Email2, recipient.Email3 };
 
             return RedirectToAction("Index", "MailManage", new { Emails = string.Join(",", emails).Trim(',') });
         }

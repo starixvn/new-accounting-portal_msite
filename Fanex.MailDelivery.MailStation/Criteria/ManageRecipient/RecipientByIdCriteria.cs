@@ -1,4 +1,4 @@
-﻿using Fanex.Data.Repository;
+using Fanex.Data.Repository;
 
 namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
 {
@@ -9,10 +9,7 @@ namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
         [SpParam(SqlParamName = "RecipientID")]
         public int RecipientId { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_MailReport_GetRecipientById";
-        }
+        public override string GetSettingKey() => "MailStation_MailReport_GetRecipientById";
 
         public override bool IsValid() => true;
     }

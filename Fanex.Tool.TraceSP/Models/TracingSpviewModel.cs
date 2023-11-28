@@ -1,4 +1,4 @@
-﻿namespace Fanex.Tool.TraceSP.Models
+namespace Fanex.Tool.TraceSP.Models
 {
     using System.Web;
 
@@ -11,14 +11,8 @@
 
         public string TextData
         {
-            get
-            {
-                return HttpContext.Current.Server.HtmlEncode(_textData.Replace("><", "> <").Replace(",", ", "));
-            }
-            set
-            {
-                _textData = value;
-            }
+            get => HttpContext.Current.Server.HtmlEncode(_textData.Replace("><", "> <").Replace(",", ", "));
+            set => _textData = value;
         }
 
         public string LoginName { get; set; }

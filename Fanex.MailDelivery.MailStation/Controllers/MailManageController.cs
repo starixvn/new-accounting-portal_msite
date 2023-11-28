@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using Fanex.MailDelivery.MailStation.Constants;
 using Fanex.MailDelivery.MailStation.Criteria.MailGroup;
 using Fanex.MailDelivery.MailStation.Criteria.MailManage;
@@ -11,15 +11,12 @@ using Fanex.NAP.Core.Web.Attribute;
 
 namespace Fanex.MailDelivery.MailStation.Controllers
 {
+    using System.Linq;
+
     [NapSuperAuth]
     public class MailManageController : BaseController
     {
-        private readonly MailManageService mailManageService;
-
-        public MailManageController()
-        {
-            mailManageService = new MailManageService();
-        }
+        private readonly MailManageService mailManageService = new MailManageService();
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
         public ActionResult Index(GetMailListCriteria criteria)
@@ -101,7 +98,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             var mailLog = mailManageService.MailLogById(new GetMailLogByIdCriteria { MailId = mailId });
             ViewBag.TimeZoneString = TimeZoneExtension.GetTimeZoneString();
 
-            return View("~/Areas/MailStation/ManageMail/MailActionLog/Index.cshtml", mailLog);
+            return View("~/Areas/MailStation/ManageMail/MailActionLog/Index.cshtml", mailLog.ToList());
         }
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]

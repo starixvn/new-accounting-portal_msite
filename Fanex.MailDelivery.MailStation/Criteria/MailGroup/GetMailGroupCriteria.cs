@@ -1,4 +1,4 @@
-﻿using Fanex.Data.Repository;
+using Fanex.Data.Repository;
 
 namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
 {
@@ -11,9 +11,6 @@ namespace Fanex.MailDelivery.MailStation.Criteria.MailGroup
             return true;
         }
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_Group_GetMailGroup";
-        }
+        public override string GetSettingKey() => "MailStation_Group_GetMailGroup";
     }
 }

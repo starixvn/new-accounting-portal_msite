@@ -1,19 +1,14 @@
-﻿namespace Fanex.Maintenance.Controller
+namespace Fanex.Maintenance.Controller
 {
-    using System;
-    using System.Configuration;
     using System.Web.Mvc;
-    using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Core.Context;
+    using NAP.Core.Business;
+    using NAP.Core.Configuration;
+    using NAP.Core.Context;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
-    using Fanex.NAP.Core.Web;
-    using Fanex.NAP.Core.Web.Session;
+    using NAP.Core.Web;
+    using NAP.Core.Web.Session;
 
-    /// <summary>
-    /// Base controller.
-    /// </summary>
     public class BaseController : Controller
     {
         protected readonly string Environment = NapSettings.Settings.Environment;
@@ -21,8 +16,6 @@
         protected readonly CurrentContext CurrentContext;
         protected readonly CurrentSession CurrentSession;
         private readonly IUserService _userService;
-        private readonly bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
-        private readonly int _showLogTimeZone;
 
         public BaseController()
         {
@@ -35,41 +28,13 @@
             };
 
             _userService = new UserService();
-
-            _showLogTimeZone = Convert.ToInt32(ConfigurationManager.AppSettings["GMTShowLog"]);
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the current site allows users login directly.
-        /// </summary>
-        /// <value>0 : users must login through NAP Hub.</value>
-        public bool IsSiteLogin
-        {
-            get
-            {
-                return _issiteLogin;
-            }
-        }
-
-        public int ShowLogTimeZone
-        {
-            get
-            {
-                return _showLogTimeZone;
-            }
         }
 
         protected ViewFlags ViewFlags
         {
-            get
-            {
-                return ViewBag.ViewFlags;
-            }
+            get => ViewBag.ViewFlags;
 
-            set
-            {
-                ViewBag.ViewFlags = value;
-            }
+            set => ViewBag.ViewFlags = value;
         }
 
         public PartialViewResult _Menu()
@@ -80,7 +45,7 @@
 
         public bool HasRight(string functionKey, Constant.Policy policy)
         {
-            var functionPolicy = _userService.GetPermission(CurrentSession.UserId, this.SiteId, functionKey);
+            var functionPolicy = _userService.GetPermission(CurrentSession.UserId, SiteId, functionKey);
 
             return functionPolicy >= (int)policy;
         }

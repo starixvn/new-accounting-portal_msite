@@ -1,13 +1,10 @@
-﻿namespace Fanex.Maintenance.Service.Criteria.MailService
+namespace Fanex.Maintenance.Service.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
-    using Fanex.Maintenance;
+    using Maintenance;
     using MailDeliver.Model;
     using NAP.Core.Web.Session;
 
-    /// <summary>
-    /// The mail config view model class.
-    /// </summary>
     public class MailConfigViewModel
     {
         public MailConfigViewModel()
@@ -16,12 +13,12 @@
 
         public MailConfigViewModel(MailConfig mailSetting)
         {
-            this.AppName = mailSetting.AppName;
-            this.Description = mailSetting.Description;
-            this.SettingId = mailSetting.Setting.SettingID;
-            this.AppId = mailSetting.AppID;
-            this.MailFrom = string.IsNullOrEmpty(mailSetting.MailFrom) ? mailSetting.Setting.Username : mailSetting.MailFrom;
-            this.IsEncrypt = mailSetting.IsEncrypt;
+            AppName = mailSetting.AppName;
+            Description = mailSetting.Description;
+            SettingId = mailSetting.Setting.SettingID;
+            AppId = mailSetting.AppID;
+            MailFrom = string.IsNullOrEmpty(mailSetting.MailFrom) ? mailSetting.Setting.Username : mailSetting.MailFrom;
+            IsEncrypt = mailSetting.IsEncrypt;
         }
 
         public int AppId { get; set; }
@@ -49,22 +46,18 @@
         [Display(Name = "IsEncrypt", ResourceType = typeof(ViewResource))]
         public bool IsEncrypt { get; set; }
 
-        /// <summary>
-        /// Get mail config.
-        /// </summary>
-        /// <returns>Mail config.</returns>
         public MailConfig GetMailConfig()
         {
             var mailConfig = new MailConfig
             {
-                AppID = this.AppId,
-                AppName = this.AppName,
-                Description = this.Description,
-                MailFrom = this.MailFrom,
-                IsEncrypt = this.IsEncrypt,
+                AppID = AppId,
+                AppName = AppName,
+                Description = Description,
+                MailFrom = MailFrom,
+                IsEncrypt = IsEncrypt,
                 Setting = new MailSetting
                 {
-                    SettingID = this.SettingId
+                    SettingID = SettingId
                 },
                 UserId = new CurrentSession().UserId
             };

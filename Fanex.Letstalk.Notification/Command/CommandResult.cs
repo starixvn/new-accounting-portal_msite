@@ -1,4 +1,4 @@
-﻿namespace Fanex.Letstalk.Notification.Command
+namespace Fanex.Letstalk.Notification.Command
 {
     public interface ICommandResult
     {
@@ -21,8 +21,8 @@
 
         public CommandResult(int code, string message)
         {
-            this.Code = code;
-            this.Message = message;
+            Code = code;
+            Message = message;
         }
 
         public int Code { get; set; }

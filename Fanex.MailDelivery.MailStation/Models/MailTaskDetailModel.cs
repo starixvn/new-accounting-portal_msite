@@ -1,10 +1,7 @@
-﻿namespace Fanex.MailDelivery.MailStation.Models
+namespace Fanex.MailDelivery.MailStation.Models
 {
     using System;
 
-    /// <summary>
-    /// Mail Task Detail Model.
-    /// </summary>
     public class MailTaskDetailModel
     {
         public int ScheduleID { get; set; }

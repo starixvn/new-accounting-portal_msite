@@ -1,8 +1,5 @@
-﻿namespace Fanex.MailDelivery.MailStation.Models
+namespace Fanex.MailDelivery.MailStation.Models
 {
-    /// <summary>
-    /// Recipient Model.
-    /// </summary>
     public class RecipientModel
     {
         public int RecipientId { get; set; }

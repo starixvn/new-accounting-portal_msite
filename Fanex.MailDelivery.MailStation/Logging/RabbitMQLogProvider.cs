@@ -1,4 +1,4 @@
-﻿using EasyNetQ.Logging;
+using EasyNetQ.Logging;
 using Fanex.Logging;
 using System;
 using System.Collections.Generic;
@@ -39,7 +39,7 @@ namespace Fanex.MailDelivery.MailStation.Logging
         }
     }
 
-    public class RabbitMQLogProvider : EasyNetQ.Logging.ILogProvider
+    public class RabbitMQLogProvider : ILogProvider
     {
         public EasyNetQ.Logging.Logger GetLogger(string name)
         {
@@ -104,9 +104,8 @@ namespace Fanex.MailDelivery.MailStation.Logging
             foreach (Match match in Pattern.Matches(formattedTargetMessage))
             {
                 var arg = match.Groups["arg"].Value;
-                int outValue;
 
-                if (!int.TryParse(arg, out outValue))
+                if (!int.TryParse(arg, out _))
                 {
                     processedArguments = processedArguments ?? new List<string>(formatParameters.Length);
                     var argumentIndex = processedArguments.IndexOf(arg);

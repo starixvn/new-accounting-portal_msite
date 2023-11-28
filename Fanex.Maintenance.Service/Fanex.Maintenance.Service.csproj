@@ -94,7 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command\CommandResult.cs" />
-    <Compile Include="Criteria\DatabaseReport\DataIntegrityViewModel.cs" />
     <Compile Include="Criteria\MailService\GetMailConfigLogsCriteria.cs" />
     <Compile Include="Criteria\MailService\MailConfigLogModel.cs" />
     <Compile Include="Criteria\MailService\MailConfigViewModel.cs" />

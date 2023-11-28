@@ -1,4 +1,4 @@
-﻿using Fanex.Data.Repository;
+using Fanex.Data.Repository;
 
 namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
 {
@@ -33,10 +33,7 @@ namespace Fanex.MailDelivery.MailStation.Criteria.ManageRecipient
 
         public string ErrMsg { get; set; } = string.Empty;
 
-        public override string GetSettingKey()
-        {
-            return "MailStation_MailReport_UpdateRecipient";
-        }
+        public override string GetSettingKey() => "MailStation_MailReport_UpdateRecipient";
 
         public override bool IsValid() => true;
     }
