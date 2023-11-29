@@ -15,10 +15,19 @@ namespace Fanex.Letstalk.Notification.Services
     {
         private readonly IAppConfigurationService service;
 
-        private static readonly HttpClient Client = new HttpClient();
+        private static readonly HttpClient Client = CreateHttpClient();
 
         public HttpClientService() : this(null)
         {
+        }
+
+        private static HttpClient CreateHttpClient()
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            
+            return client;
         }
 
         public HttpClientService(IAppConfigurationService service)
@@ -28,14 +37,13 @@ namespace Fanex.Letstalk.Notification.Services
 
         public T PostAsync<T, P>(string action, P inputParams)
         {
-            var letstalkApiUrl = $"{service.LetstalkApiUrl}Letstalk/";
-            Client.BaseAddress = new Uri(letstalkApiUrl);
+            var letstalkApiUrl = $"{service.LetstalkApiUrl}Letstalk/{action}";
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             var content = new StringContent(JsonConvert.SerializeObject(inputParams), Encoding.UTF8, "application/json");
 
-            var responseResult = Client.PostAsync(action, content).Result;
+            var responseResult = Client.PostAsync(letstalkApiUrl, content).Result;
 
             if (responseResult.IsSuccessStatusCode)
             {
