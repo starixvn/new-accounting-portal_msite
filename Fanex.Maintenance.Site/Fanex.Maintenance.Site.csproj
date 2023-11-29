@@ -719,8 +719,6 @@
     <Content Include="WebConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\CommonError\Error.cshtml" />
-    <Content Include="Views\CommonError\NotFound.cshtml" />
     <Content Include="Views\Mail\GetError.cshtml" />
     <Content Include="themes\manage\RefreshCountDown.less" />
   </ItemGroup>
