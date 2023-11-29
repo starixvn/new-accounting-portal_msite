@@ -91,7 +91,7 @@ var LetstalkReportController = function () {
             var letstalk = "<div title='Letstalk' class='letstalk'></div>";
             var resend = "<div class='resend'></div>";
             var linkResend = "<a title='Resend' href='#' class='resendLetstalk' data-letstak-id='" + dataRow.Id + "' data-letstak-ismessage='" + dataRow.IsMessage + "'>" + resend + "</a>";
-            var chkResend = '<input type="checkbox" class="chkResend" data-letstak-id="' + dataRow.Id + "' data-letstak-ismessage='" + dataRow.IsMessage + '">';
+            var chkResend = '<input type="checkbox" class="chkResend" data-letstak-id="' + dataRow.Id + '" data-letstak-ismessage="' + dataRow.IsMessage + '">';
 
             rowColumns.push({ Name: "ResendMultiple", Value: chkResend });
             rowColumns.push({ Name: "TargetName", Value: dataRow.TargetName });
@@ -176,6 +176,25 @@ var LetstalkReportController = function () {
             var isCheckAll = $(this).prop("checked");
             $(".freegrid .chkResend").prop("checked", isCheckAll);
         });
+
+        $(".freegrid").on("click", ".chkResend", function () {
+            var isChecked = $(this).prop("checked"),
+                $checkboxAll = $(".freegrid .chkResend-all");
+
+            if (!isChecked) {
+                $checkboxAll.prop("checked", false);
+            } else {
+                var isCheckAll = $(".freegrid .chkResend:checked").length === $(".freegrid .chkResend").length;
+
+                $checkboxAll.prop("checked", isCheckAll);
+            }
+        });
+
+        //$(".grid-pager").on("click", "ul li a", function () {
+        //    var $checkboxAll = $(".freegrid .chkResend-all");
+        //    var isCheckAll = $(".freegrid .chkResend:checked").length === $(".freegrid .chkResend").length;
+        //    $checkboxAll.prop("checked", isCheckAll);
+        //})
     };
 
     self.reSend = function (id, isMessage) {
@@ -198,7 +217,7 @@ var LetstalkReportController = function () {
     };
 
     self.resendMultiple = function () {
-        var data = $(".freegrid .chkResend:checked").map(function () { return { Id: parseInt($(this).data("letstak-id")), IsMessage: $(this).data("letstak-ismessage") == 'true' } }).get();
+        var data = $(".freegrid .chkResend:checked").map(function () { return { Id: parseInt($(this).data("letstak-id")), IsMessage: $(this).data("letstak-ismessage") } }).get();
         if (data.length > 0) {
             if (confirm("Resend the chosen letstalks ?")) {
                 var resendParams = {
