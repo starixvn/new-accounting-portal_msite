@@ -10,7 +10,7 @@ using Fanex.NAP.Core.Web.Attribute;
 namespace Fanex.MailDelivery.MailStation.Controllers
 {
     [NapSuperAuth]
-    public class MailGroupManageController : BaseController
+    public class MailGroupManageController : Controller
     {
         private readonly MailGroupService mailGroupService = new MailGroupService();
 

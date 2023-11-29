@@ -134,7 +134,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseController.cs" />
     <Compile Include="CommonErrorController.cs" />
     <Compile Include="HomeController.cs" />
     <Compile Include="MailController.cs" />

@@ -7,7 +7,7 @@ namespace Fanex.Tool.TraceSP.Controllers
     using System.Web.Hosting;
     using System.Web.Mvc;
 
-    public class TracingSpController : BaseController
+    public class TracingSpController : Controller
     {
         private readonly IDbServerService _dbServerService = new DbServerService();
         private readonly ITracingSpService _tracingSpService = new TracingSpService();

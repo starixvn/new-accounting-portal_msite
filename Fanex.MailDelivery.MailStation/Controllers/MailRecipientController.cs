@@ -12,7 +12,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
     using Services;
 
     [NapSuperAuth]
-    public class MailRecipientController : BaseController
+    public class MailRecipientController : Controller
     {
         private readonly ManageRecipientService manageRecipientService = new ManageRecipientService();
 
