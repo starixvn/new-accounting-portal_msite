@@ -235,8 +235,6 @@ var LetstalkReportController = function () {
         setTimeout(function () {
             self.getReport();
         }, 3000);
-
-        window.location.href = window.location.href;
     };
 
     self.loadTarget = function () {
