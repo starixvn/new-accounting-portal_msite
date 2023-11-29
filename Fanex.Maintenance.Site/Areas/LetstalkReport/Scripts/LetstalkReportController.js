@@ -214,7 +214,7 @@ var LetstalkReportController = function () {
                 sharedScriptManager.callAjax(self,
                     url,
                     resendParams,
-                    self.renderResend,
+                    self.renderResendMultiple,
                     null,
                     sharedScriptManager.unblockUI);
             }
@@ -229,7 +229,22 @@ var LetstalkReportController = function () {
             NAP.headlineMsgBox.showInfo("Resend Success !", { closeBtn: false });
         }
         else {
-            NAP.headlineMsgBox.showInfo("Resend Faild !", { closeBtn: false });
+            NAP.headlineMsgBox.showInfo("Resend Failed Lestalk!", { closeBtn: false });
+        }
+
+        setTimeout(function () {
+            self.getReport();
+        }, 3000);
+
+        window.location.href = window.location.href;
+    };
+
+    self.renderResendMultiple = function (result) {
+        if (result.length == 0) {
+            NAP.headlineMsgBox.showInfo("Resend Success !", { closeBtn: false });
+        }
+        else {
+            NAP.headlineMsgBox.showInfo("Resend " + result.length + " Failed Lestalk!", { closeBtn: false });
         }
 
         setTimeout(function () {
