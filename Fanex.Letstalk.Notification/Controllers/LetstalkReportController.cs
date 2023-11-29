@@ -60,7 +60,8 @@ namespace Fanex.Letstalk.Notification.Controllers
                 ToDate = httpParams.ToDate.AddDays(1),
                 TargetName = httpParams.TargetName,
                 Group = httpParams.Group,
-                Id = 0
+                Id = 0,
+                Status = httpParams.Status
             };
 
             var result = service.GetLogs(queryParams);
@@ -98,6 +99,22 @@ namespace Fanex.Letstalk.Notification.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult ResendMultiple(HttpResendMultipleParams httpParams)
+        {
+	        foreach (var item in httpParams.Data)
+            {
+	            var resendParams = new ResendParams
+	            {
+		            FromDate = httpParams.FromDate,
+		            ToDate = httpParams.ToDate,
+		            Id = item.Id
+	            };
+				_ = item.IsMessage ? service.ReSendMessage(resendParams) : service.ReSendMail(resendParams);
+			}
 
-    }
+	        return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+	}
 }

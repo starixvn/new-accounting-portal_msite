@@ -11,5 +11,7 @@ namespace Fanex.Letstalk.Notification.Params
         public string TargetName { get; set; }
 
         public string Group { get; set; }
+
+        public byte Status { get; set; }
     }
 }
