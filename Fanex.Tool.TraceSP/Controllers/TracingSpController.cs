@@ -1,6 +1,5 @@
 namespace Fanex.Tool.TraceSP.Controllers
 {
-    using Maintenance.Controller;
     using Models;
     using Services;
     using System.Linq;

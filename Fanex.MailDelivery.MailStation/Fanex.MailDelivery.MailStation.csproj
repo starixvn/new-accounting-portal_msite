@@ -232,10 +232,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
-      <Project>{e7173cdd-8ecb-4fb6-b585-41bfe941745e}</Project>
-      <Name>Fanex.Maintenance.Controller</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fanex.Maintenance.Service\Fanex.Maintenance.Service.csproj">
       <Project>{6F5C23B0-7EB0-4020-9664-5F904BB99BBC}</Project>
       <Name>Fanex.Maintenance.Service</Name>

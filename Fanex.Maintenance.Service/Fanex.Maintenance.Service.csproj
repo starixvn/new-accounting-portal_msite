@@ -106,7 +106,6 @@
     <Compile Include="Model\LetstalkNotification\MessageModel.cs" />
     <Compile Include="Model\LetstalkNotification\QueryModel.cs" />
     <Compile Include="Model\LetstalkNotification\Setting.cs" />
-    <Compile Include="Testing\NotificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
