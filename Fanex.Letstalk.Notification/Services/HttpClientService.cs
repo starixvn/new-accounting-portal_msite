@@ -44,7 +44,7 @@ namespace Fanex.Letstalk.Notification.Services
                 }
             }
 
-            return default;
+            return default(T);
         }
     }
 }
