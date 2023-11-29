@@ -1,11 +1,10 @@
 using System.Web.Mvc;
 using Fanex.Letstalk.Notification.Params;
 using Fanex.Letstalk.Notification.Services;
-using Fanex.Maintenance.Controller;
 
 namespace Fanex.Letstalk.Notification.Controllers
 {
-    public class LetstalkReportController : BaseController
+    public class LetstalkReportController : Controller
     {
         private readonly ILetstalkReportRestClientService service;
 

@@ -11,10 +11,14 @@ using System.Web.Mvc;
 
 namespace Fanex.MailDelivery.MailStation.Controllers
 {
+    using NAP.Core.Web.Session;
+
     [NapSuperAuth]
-    public class MailReportController : BaseController
+    public class MailReportController : Controller
     {
         private readonly MailReportService mailReportService = new MailReportService();
+
+        private readonly CurrentSession currentSession = new CurrentSession();
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.MailReport, Policy = Constant.Policy.Read)]
         public ActionResult Index()
@@ -64,7 +68,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
 
             mailReportService.AddMailLog(new AddMailLogCriteria
             {
-                ExceptionMessage = $"> It's aborted by \"{CurrentSession.Username}\"",
+                ExceptionMessage = $"> It's aborted by \"{currentSession.Username}\"",
                 LogTime = DateTime.Now,
                 Status = (int)JobStatus.Abort,
                 TaskId = taskId
@@ -76,7 +80,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         {
             mailReportService.AddMailLog(new AddMailLogCriteria
             {
-                ExceptionMessage = $"> It's retried by \"{CurrentSession.Username}\"",
+                ExceptionMessage = $"> It's retried by \"{currentSession.Username}\"",
                 LogTime = DateTime.Now,
                 Status = (int)JobStatus.Running,
                 TaskId = criteria.TaskId

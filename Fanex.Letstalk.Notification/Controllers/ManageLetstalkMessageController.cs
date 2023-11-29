@@ -1,6 +1,5 @@
 using Fanex.Letstalk.Notification.Criteria;
 using Fanex.Letstalk.Notification.Services;
-using Fanex.Maintenance.Controller;
 using Fanex.NAP.Core.Business;
 using Fanex.NAP.Core.Web.Attribute;
 using Newtonsoft.Json;
@@ -11,10 +10,20 @@ using System.Web.Mvc;
 
 namespace Fanex.Letstalk.Notification.Controllers
 {
+    using NAP.Core.Configuration;
+    using NAP.Core.Service.Impl;
+    using NAP.Core.Web.Session;
+
     [NapSuperAuth]
-    public class ManageLetstalkMessageController : BaseController
+    public class ManageLetstalkMessageController : Controller
     {
         private readonly ManageLetstalkMessageService manageLetstalkMessageService = new ManageLetstalkMessageServiceImp();
+
+        private readonly CurrentSession CurrentSession = new CurrentSession();
+
+        private readonly UserService userService = new UserService();
+
+        private readonly NapSettings settings = NapSettings.Settings;
 
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageLetstalkMessage, Policy = Constant.Policy.Read)]
         public ActionResult Index()
@@ -95,6 +104,13 @@ namespace Fanex.Letstalk.Notification.Controllers
         {
             var result = manageLetstalkMessageService.GetNotificationList(criteria);
             return Json(result);
+        }
+
+        public bool HasRight(string functionKey, Constant.Policy policy)
+        {
+            var functionPolicy = userService.GetPermission(CurrentSession.UserId, settings.SiteId, functionKey);
+
+            return functionPolicy >= (int)policy;
         }
     }
 }

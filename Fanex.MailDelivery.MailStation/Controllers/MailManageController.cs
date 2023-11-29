@@ -12,11 +12,14 @@ using Fanex.NAP.Core.Web.Attribute;
 namespace Fanex.MailDelivery.MailStation.Controllers
 {
     using System.Linq;
+    using NAP.Core.Web.Session;
 
     [NapSuperAuth]
-    public class MailManageController : BaseController
+    public class MailManageController : Controller
     {
         private readonly MailManageService mailManageService = new MailManageService();
+
+        private readonly CurrentSession currentSession = new CurrentSession();
 
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Read)]
         public ActionResult Index(GetMailListCriteria criteria)
@@ -79,7 +82,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
             {
                 criteria.EndOn = criteria.EndOn.Value.ToUniversalTime();
             }
-            criteria.ModifiedBy = CurrentSession.Username;
+            criteria.ModifiedBy = currentSession.Username;
 
             return Json(mailManageService.CreateMail(criteria), JsonRequestBehavior.AllowGet);
         }
@@ -127,7 +130,7 @@ namespace Fanex.MailDelivery.MailStation.Controllers
         [NapAuth(FunctionKey = MailDeliveryFunctionKeys.ManageMail, Policy = Constant.Policy.Host)]
         public JsonResult UpdateMail(UpdateMailCriteria criteria)
         {
-            criteria.ModifiedBy = CurrentSession.Username;
+            criteria.ModifiedBy = currentSession.Username;
 
             var commandResult = mailManageService.UpdateMail(criteria);
 

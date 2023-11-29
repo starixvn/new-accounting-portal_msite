@@ -1,5 +1,6 @@
 namespace Fanex.Tool.TraceSP.Criteria
 {
+    using Data;
     using Data.Repository;
     public class TracingSpCriteria : NonQueryCommand
     {
@@ -26,6 +27,7 @@ namespace Fanex.Tool.TraceSP.Criteria
             return TraceTimer <= 120 && (!string.IsNullOrWhiteSpace(TextDataLike) || !string.IsNullOrWhiteSpace(TextDataLike2) || !string.IsNullOrWhiteSpace(TextDataLike3));
         }
 
+        [SpParam(Ignored = true)]
         public string SuffixKey { get; set; } = string.Empty;
         public override string GetSettingKey() => "vndba_sp_trace_WebApp" + SuffixKey;
     }

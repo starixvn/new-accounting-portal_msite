@@ -12,11 +12,14 @@ namespace Fanex.Maintenance.Controller
     using System.IO;
     using System.Linq;
     using System.Web.Mvc;
+    using NAP.Core.Configuration;
+    using NAP.Core.Web.Session;
     using Service.Criteria.MailService;
     using Service.Mail;
+    using System.Security.Policy;
 
     [NapSuperAuth]
-    public class MailController : BaseController
+    public class MailController : Controller
     {
         #region Member
 
@@ -25,6 +28,10 @@ namespace Fanex.Maintenance.Controller
         private readonly IUserService _userService;
 
         private readonly IMailRepository _mailRepository;
+
+        private readonly CurrentSession _currentSession= new CurrentSession();
+
+        private readonly NapSettings settings = NapSettings.Settings;
 
         #endregion Member
 
@@ -557,8 +564,8 @@ namespace Fanex.Maintenance.Controller
                 .WithStatus(status)
                 .GetListMailByDate(ref totalRows);
 
-            var policyViewDetail = _userService.GetPermission(CurrentSession.UserId, SiteId, SiteFunctionKeys.ViewMailDetails);
-            var policyResend = _userService.GetPermission(CurrentSession.UserId, SiteId, SiteFunctionKeys.ResendMail);
+            var policyViewDetail = _userService.GetPermission(_currentSession.UserId, settings.SiteId, SiteFunctionKeys.ViewMailDetails);
+            var policyResend = _userService.GetPermission(_currentSession.UserId, settings.SiteId, SiteFunctionKeys.ResendMail);
 
             return Json(new
             {
@@ -667,7 +674,7 @@ namespace Fanex.Maintenance.Controller
                 var applicationId = int.Parse(permission[1]);
 
                 var hasPermission = HasRight(functionKey, Constant.Policy.Read)
-                    && CurrentSession.Level == (int)Constant.Level.User;
+                    && _currentSession.Level == (int)Constant.Level.User;
 
                 if (hasPermission)
                 {
@@ -715,5 +722,12 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion InitData
+
+        public bool HasRight(string functionKey, Constant.Policy policy)
+        {
+            var functionPolicy = _userService.GetPermission(_currentSession.UserId, settings.SiteId, functionKey);
+
+            return functionPolicy >= (int)policy;
+        }
     }
 }
