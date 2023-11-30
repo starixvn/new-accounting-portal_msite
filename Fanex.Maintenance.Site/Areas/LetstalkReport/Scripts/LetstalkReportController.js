@@ -137,7 +137,12 @@ var LetstalkReportController = function () {
                 itemsPerPage: 50,
                 currentPage: 0,
                 itemsPerPageArray: [50, 100, 200, 500],
-                showDetail: true
+                showDetail: true,
+                afterPagedFunction: function () {
+                    var $checkboxAll = $(".freegrid .chkResend-all");
+                    var isCheckAll = $(".freegrid .chkResend:checked").length === $(".freegrid .chkResend").length;
+                    $checkboxAll.prop("checked", isCheckAll);
+                }
             }
         };
 
@@ -189,12 +194,6 @@ var LetstalkReportController = function () {
                 $checkboxAll.prop("checked", isCheckAll);
             }
         });
-
-        //$(".grid-pager").on("click", "ul li a", function () {
-        //    var $checkboxAll = $(".freegrid .chkResend-all");
-        //    var isCheckAll = $(".freegrid .chkResend:checked").length === $(".freegrid .chkResend").length;
-        //    $checkboxAll.prop("checked", isCheckAll);
-        //})
     };
 
     self.reSend = function (id, isMessage) {
