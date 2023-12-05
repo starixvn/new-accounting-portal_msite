@@ -100,13 +100,11 @@
     <Compile Include="Criteria\MailService\MailFunctionViewModel.cs" />
     <Compile Include="Criteria\MailService\MailSettingViewModel.cs" />
     <Compile Include="Criteria\Misc\LogExecSpCriteria.cs" />
-    <Compile Include="Criteria\Misc\ResultCriteria.cs" />
     <Compile Include="Mail\MailRepository.cs" />
     <Compile Include="Mail\MailService.cs" />
     <Compile Include="Model\LetstalkNotification\MessageModel.cs" />
     <Compile Include="Model\LetstalkNotification\QueryModel.cs" />
     <Compile Include="Model\LetstalkNotification\Setting.cs" />
-    <Compile Include="Testing\NotificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

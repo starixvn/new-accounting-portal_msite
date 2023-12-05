@@ -28,7 +28,7 @@
                     Howdy, @HttpContext.Current.User.Identity.Name
                 </h2>
                 <ul>
-                    <li>@Html.ActionLink("Sign Out", "LogOut", "Auth")</li>
+                    <li><a href="@Url.Content("~/Auth/LogOut")">Sign Out</a></li>
                 </ul>
             </div>
         </div>

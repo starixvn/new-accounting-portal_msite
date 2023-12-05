@@ -124,8 +124,10 @@
     <Compile Include="Model\NotificationModel.cs" />
     <Compile Include="Model\NotificationRecipientModel.cs" />
     <Compile Include="Model\RecipientModel.cs" />
+    <Compile Include="Model\ResendLetstalkModel.cs" />
     <Compile Include="Params\GetLogParams.cs" />
     <Compile Include="Params\HttpGetLogParams.cs" />
+    <Compile Include="Params\HttpResendMultipleParams.cs" />
     <Compile Include="Params\HttpResendParams.cs" />
     <Compile Include="Params\ResendParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

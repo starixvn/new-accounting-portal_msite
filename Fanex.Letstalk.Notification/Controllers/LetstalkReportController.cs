@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Fanex.Letstalk.Notification.Params;
 using Fanex.Letstalk.Notification.Services;
@@ -60,7 +61,8 @@ namespace Fanex.Letstalk.Notification.Controllers
                 ToDate = httpParams.ToDate.AddDays(1),
                 TargetName = httpParams.TargetName,
                 Group = httpParams.Group,
-                Id = 0
+                Id = 0,
+                Status = httpParams.Status
             };
 
             var result = service.GetLogs(queryParams);
@@ -98,6 +100,27 @@ namespace Fanex.Letstalk.Notification.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult ResendMultiple(HttpResendMultipleParams httpParams)
+        {
+	        var result = new List<bool>();
+	        foreach (var item in httpParams.Data)
+            {
+	            var resendParams = new ResendParams
+	            {
+		            FromDate = httpParams.FromDate,
+		            ToDate = httpParams.ToDate,
+		            Id = item.Id
+	            };
+				var temp = item.IsMessage ? service.ReSendMessage(resendParams) : service.ReSendMail(resendParams);
+				if (!temp)
+				{
+                    result.Add(false);
+				}
+			}
 
-    }
+	        return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+	}
 }

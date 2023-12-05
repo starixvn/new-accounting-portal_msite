@@ -15,8 +15,19 @@ namespace Fanex.Letstalk.Notification.Services
     {
         private readonly IAppConfigurationService service;
 
+        private static readonly HttpClient Client = CreateHttpClient();
+
         public HttpClientService() : this(null)
         {
+        }
+
+        private static HttpClient CreateHttpClient()
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            
+            return client;
         }
 
         public HttpClientService(IAppConfigurationService service)
@@ -26,22 +37,18 @@ namespace Fanex.Letstalk.Notification.Services
 
         public T PostAsync<T, P>(string action, P inputParams)
         {
-            using (var client = new HttpClient())
+            var letstalkApiUrl = $"{service.LetstalkApiUrl}Letstalk/{action}";
+            Client.DefaultRequestHeaders.Accept.Clear();
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var content = new StringContent(JsonConvert.SerializeObject(inputParams), Encoding.UTF8, "application/json");
+
+            var responseResult = Client.PostAsync(letstalkApiUrl, content).Result;
+
+            if (responseResult.IsSuccessStatusCode)
             {
-                var letstalkApiUrl = $"{service.LetstalkApiUrl}Letstalk/";
-                client.BaseAddress = new Uri(letstalkApiUrl);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var content = new StringContent(JsonConvert.SerializeObject(inputParams), Encoding.UTF8, "application/json");
-
-                var responseResult = client.PostAsync(action, content).Result;
-
-                if (responseResult.IsSuccessStatusCode)
-                {
-                    var data = responseResult.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<T>(data.Result);
-                }
+                var data = responseResult.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(data.Result);
             }
 
             return default(T);

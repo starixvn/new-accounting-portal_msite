@@ -63,7 +63,8 @@ var LetstalkReportController = function () {
             FromDate: $("#FromDate").val(),
             ToDate: $("#ToDate").val(),
             TargetName: $('#Target').val(),
-            Group: $('#Group').val()
+            Group: $('#Group').val(),
+            Status: parseInt($('#Status').val())
         };
         self.cachedData.getReportParams = getReportParams;
         $.cookie('MailReport', getReportParams);
@@ -88,9 +89,11 @@ var LetstalkReportController = function () {
 
             var email = "<div title='Email' class='email'></div>";
             var letstalk = "<div title='Letstalk' class='letstalk'></div>";
-            var resend = "<div class='resend resendLetstalk'></div>";
+            var resend = "<div class='resend'></div>";
             var linkResend = "<a title='Resend' href='#' class='resendLetstalk' data-letstak-id='" + dataRow.Id + "' data-letstak-ismessage='" + dataRow.IsMessage + "'>" + resend + "</a>";
+            var chkResend = '<input type="checkbox" class="chkResend" data-letstak-id="' + dataRow.Id + '" data-letstak-ismessage="' + dataRow.IsMessage + '">';
 
+            rowColumns.push({ Name: "ResendMultiple", Value: chkResend });
             rowColumns.push({ Name: "TargetName", Value: dataRow.TargetName });
             rowColumns.push({ Name: "Subject", Value: dataRow.Subject });
             rowColumns.push({ Name: "Content", Value: dataRow.Content });
@@ -108,18 +111,18 @@ var LetstalkReportController = function () {
         }
 
         var headerColumns = [
+            { HeaderText: "<input class='chkResend-all' type='checkbox'>", Width: 40, Name: "ResendMultiple", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Target Name", Width: 125, Name: "TargetName", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Subject", Width: 195, Name: "Subject", HeaderAlign: "center", CellAlign: "left" },
             { HeaderText: "Content", Width: 500, Name: "Content", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Group", Width: 730, Name: "Group", HeaderAlign: "center", CellAlign: "center" },
+            { HeaderText: "Group", Width: 680, Name: "Group", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "Created Date<br/> (GMT +7)", Width: 70, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
             { HeaderText: "Latest Send Date<br/> (GMT +7)", Width: 70, Name: "LatestSendDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMM DD, YYYY hh:mm:ss A" },
             { HeaderText: "<div class='success'></div>", Width: 30, Name: "SendSuccess", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "<div class='fail'></div>", Width: 30, Name: "SendFail", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "<div class='type'></div>", Width: 30, Name: "IsMessage", HeaderAlign: "center", CellAlign: "center" },
-            {
-                HeaderText: "<div class='resend'></div>", Width: 30, Name: "Resend", HeaderAlign: "center", CellAlign: "center"
-            }];
+            { HeaderText: "<div class='resend'></div>", Width: 30, Name: "Resend", HeaderAlign: "center", CellAlign: "center" }
+        ];
 
         var gridOptions = {
             columns: headerColumns,
@@ -134,11 +137,17 @@ var LetstalkReportController = function () {
                 itemsPerPage: 50,
                 currentPage: 0,
                 itemsPerPageArray: [50, 100, 200, 500],
-                showDetail: true
+                showDetail: true,
+                afterPagedFunction: function () {
+                    var $checkboxAll = $(".freegrid .chkResend-all");
+                    var isCheckAll = $(".freegrid .chkResend:checked").length === $(".freegrid .chkResend").length;
+                    $checkboxAll.prop("checked", isCheckAll);
+                }
             }
         };
 
         $("#letstalk-report").removeClass("display-none").fanexGrid(gridOptions);
+        $(".btnResend").removeClass("display-none");
     };
 
     self.bindEvents = function () {
@@ -163,6 +172,28 @@ var LetstalkReportController = function () {
         $('#Target').change(function () {
             self.loadGroupsByTarget();
         });
+
+        $("#btnResendMulti").click(function () {
+            self.resendMultiple();
+        });
+
+        $(".freegrid").on("click", ".chkResend-all", function () {
+            var isCheckAll = $(this).prop("checked");
+            $(".freegrid .chkResend").prop("checked", isCheckAll);
+        });
+
+        $(".freegrid").on("click", ".chkResend", function () {
+            var isChecked = $(this).prop("checked"),
+                $checkboxAll = $(".freegrid .chkResend-all");
+
+            if (!isChecked) {
+                $checkboxAll.prop("checked", false);
+            } else {
+                var isCheckAll = $(".freegrid .chkResend:checked").length === $(".freegrid .chkResend").length;
+
+                $checkboxAll.prop("checked", isCheckAll);
+            }
+        });
     };
 
     self.reSend = function (id, isMessage) {
@@ -184,12 +215,39 @@ var LetstalkReportController = function () {
             sharedScriptManager.unblockUI);
     };
 
+    self.resendMultiple = function () {
+        var data = $(".freegrid .chkResend:checked").map(function () { return { Id: parseInt($(this).data("letstak-id")), IsMessage: $(this).data("letstak-ismessage") } }).get();
+        if (data.length > 0) {
+            if (confirm("Resend the chosen letstalks ?")) {
+                var resendParams = {
+                    FromDate: $("#FromDate").val(),
+                    ToDate: $("#ToDate").val(),
+                    Data: data
+                };
+
+                sharedScriptManager.blockUI();
+                var url = window.rootUrl + "LetstalkNotification/LetstalkReport/ResendMultiple";
+
+                self.cachedData.resendParams = resendParams;
+                sharedScriptManager.callAjax(self,
+                    url,
+                    resendParams,
+                    self.renderResendMultiple,
+                    null,
+                    sharedScriptManager.unblockUI);
+            }
+        } else {
+            NAP.headlineMsgBox.showInfo("Please choose at least one letstalk to resend!", { closeBtn: false });
+        }
+        
+    };
+
     self.renderResend = function (result) {
         if (result) {
             NAP.headlineMsgBox.showInfo("Resend Success !", { closeBtn: false });
         }
         else {
-            NAP.headlineMsgBox.showInfo("Resend Faild !", { closeBtn: false });
+            NAP.headlineMsgBox.showInfo("Resend Failed Lestalk!", { closeBtn: false });
         }
 
         setTimeout(function () {
@@ -197,6 +255,19 @@ var LetstalkReportController = function () {
         }, 3000);
 
         window.location.href = window.location.href;
+    };
+
+    self.renderResendMultiple = function (result) {
+        if (result.length == 0) {
+            NAP.headlineMsgBox.showInfo("Resend Success !", { closeBtn: false });
+        }
+        else {
+            NAP.headlineMsgBox.showInfo("Resend " + result.length + " Failed Lestalk!", { closeBtn: false });
+        }
+
+        setTimeout(function () {
+            self.getReport();
+        }, 3000);
     };
 
     self.loadTarget = function () {
