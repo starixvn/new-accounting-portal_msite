@@ -674,6 +674,7 @@
     <Content Include="wwwroot\nap-auth\otp.css" />
     <Content Include="wwwroot\nap-auth\ReCheckIn.js" />
     <Content Include="wwwroot\nap-auth\validationEngine.jquery.css" />
+    <Content Include="Web.KLDR.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="themes\assets\font\fontawesome-webfont.eot" />
@@ -714,6 +715,9 @@
     <Content Include="Views\Mail\AddMailSettingPopUp.cshtml" />
     <Content Include="Views\Mail\GetMessage.cshtml" />
     <Content Include="WebConnectionString.aws.config">
+      <DependentUpon>WebConnectionString.config</DependentUpon>
+    </Content>
+    <Content Include="WebConnectionString.KLDR.config">
       <DependentUpon>WebConnectionString.config</DependentUpon>
     </Content>
     <Content Include="WebConnectionString.config">
