@@ -5,7 +5,7 @@ namespace Fanex.Maintenance.Controller
     using NAP.Core.Web.Attribute;
     using NAP.Core.Web.Session;
 
-    [NapSuperAuth]
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly CurrentSession _session=new CurrentSession();

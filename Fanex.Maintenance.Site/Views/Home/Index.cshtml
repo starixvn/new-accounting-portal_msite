@@ -1,16 +1,40 @@
-﻿@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-@{
-    ViewBag.Title = string.Format("{0}", "Home");
-}
-@section Head{
-    @Styles.Render("~/css/manage")
-}
-@section HeadLine
-{
-    <h1>
-        <span class="title">@ViewBag.Title</span>
-    </h1>
-}
+﻿<!DOCTYPE html>
+<html lang="en" class="linen" ng-app="app">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Retired page</title>
+    <meta http-equiv="cleartype" content="on" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    @Styles.Render("~/css/common")
+
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="~/?ref=logo">mSite</a>
+        </div>
+
+    </header>
+    <section id="headline">
+    </section>
+    @{
+        var newUrl = System.Configuration.ConfigurationManager.AppSettings["NewUrl"];
+    }
+
+    <section id="body">
+        <div class="content" style="font-size:bold">
+            This page is retired. Please use <a href="@newUrl">
+                @newUrl
+            </a> instead
+        </div>
+    </section>
+    <div id="dialog-message">
+    </div>
+    <div id="dialog-popup">
+    </div>
+
+</body>
+</html>
+
